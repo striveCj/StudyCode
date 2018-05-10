@@ -17,7 +17,9 @@ namespace StudyCode
             //T3D10();
             //T3D12();
             //T3D13();
-            T3D14();
+            //T3D14();
+            PersonThree p3 = new PersonThree();
+            p3.Print("张三");
         }
         public static void T2D1()
         {
@@ -277,4 +279,134 @@ namespace StudyCode
             return $"{real}+{imaginary}i";
         }
     }
+    /// <summary>
+    /// T4D1 声明类
+    /// </summary>
+    public class Person
+    {
+        //TODO:如果使用readonly修饰字段则不需要在定义时初始化，可以在构造函数中再完成初始化，而使用const修饰则必须在定义时初始化
+        private readonly string name;
+        public const int age=18;
+        protected bool sex;
+
+    }
+    /// <summary>
+    /// T4D2 属性
+    /// </summary>
+    public class PersonTwo
+    {
+        private string _name;
+        private static string _name2;
+        private int _age;
+        private bool _sex;
+        private int _age2;
+        public string Name
+        {
+           get { return _name; }
+           set {//value是隐式参数
+                _name = value; }
+        }
+        /// <summary>
+        /// 只读属性不包含set访问器
+        /// </summary>
+        public int Age
+        {
+            get { return _age; }
+        }
+        /// <summary>
+        /// 只写属性
+        /// </summary>
+        public bool Sex
+        {
+            private get { return _sex; }
+            set { _sex = value; }
+        }
+        /// <summary>
+        /// 增加逻辑控制的属性
+        /// </summary>
+        public int Age2
+        {
+            get { return _age2; }
+            set
+            {
+                if (value<0||value>120)
+                {
+                    throw new ArgumentOutOfRangeException("AgeIntPropery", value, "年龄必须在0-120之间");
+                }
+                _age2 = value;
+            }
+        }
+        /// <summary>
+        /// 静态属性
+        /// </summary>
+        public static string Name2
+        {
+            get { return _name2; }
+            set { _name2 = value; }
+        }
+    }
+    /// <summary>
+    /// T4D3 方法重载
+    /// </summary>
+    public class PersonThree
+    {
+        public void Print(string name)
+        {
+            Console.WriteLine("输入的值为:"+name);
+        }
+        public void Print(int age)
+        {
+            Console.WriteLine("输入的值为:" + age);
+        }
+        public void Print(string name,int age)
+        {
+            Console.WriteLine($"输入的值为:{name},{age}");
+        }
+    }
+    /// <summary>
+    /// T4D4 构造函数
+    /// </summary>
+    class PersonFour
+    {
+        //TODO：构造函数可以进行方法重载，构造函数不允许有返回值，构造函数必须和类同名
+        //TODO:如果没有为类显示定义一个构造函数，C#编译器会自动生成一个函数体为空的无参实例构造函数
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+        }
+        public PersonFour()
+        {
+            _name = "Learning Hard";
+        }
+        public PersonFour(string name)
+        {
+            this._name = name;
+        }
+    }
+    /// <summary>
+    /// T4D5 私有构造函数单例模式
+    /// </summary>
+    class PersonFive
+    {
+        private string _name;
+        public static PersonFive personFive;
+        public string Name
+        {
+            get { return _name; }
+        }
+
+        private PersonFive()
+        {
+            Console.WriteLine("私有构造函数被调用");
+            this._name = "Learning Hand";
+        }
+        public static PersonFive GetInstance()
+        {
+            personFive = new PersonFive();
+            return personFive;
+        }
+
+    }
+
 }
