@@ -18,8 +18,12 @@ namespace StudyCode
             //T3D12();
             //T3D13();
             //T3D14();
-            PersonThree p3 = new PersonThree();
-            p3.Print("张三");
+            //PersonThree p3 = new PersonThree();
+            //p3.Print("张三");
+            //PersonFive p5 = PersonFive.GetInstance();
+            //Console.WriteLine($"类实例的Name属性为:{p5.Name}");
+            //Console.Read();
+            T4D8();
         }
         public static void T2D1()
         {
@@ -222,8 +226,22 @@ namespace StudyCode
                 }
                 Console.WriteLine($"当前值为{i}");
             }
-            Console.ReadKey();
             Console.WriteLine("循环退出");
+            Console.ReadKey();
+        }
+        /// <summary>
+        /// T4D8调用方法
+        /// </summary>
+        public static void T4D8()
+        {
+            PersonEight p8 = new PersonEight();
+            p8[0] = 1;
+            p8[1] = 2;
+            p8[2] = 3;
+            Console.WriteLine(p8[0]);
+            Console.WriteLine(p8[1]);
+            Console.WriteLine(p8[2]);
+            Console.ReadKey();
         }
     }
     /// <summary>
@@ -408,5 +426,73 @@ namespace StudyCode
         }
 
     }
+    /// <summary>
+    /// T4D6 静态构造函数
+    /// </summary>
+    class PersonSix
+    {
+        //TODO:静态构造函数不能使用任何访问修饰符
+        //TODO:静态构造函数不能带有任何参数
+        //TODO:静态构造函数只会执行一次
+        //TODO:不能直接调用静态构造函数
+        private static string _name;
+        /// <summary>
+        /// 静态构造函数，仅执行一次
+        /// </summary>
+        static PersonSix()
+        {
+            Console.WriteLine("调用静态构造函数");
+            _name = "Learning Hard";
+        }
+        public static string Name
+        {
+            get { return _name; }
+        }
+    }
+    /// <summary>
+    /// T4D7 析构函数
+    /// </summary>
+    class PersonSeven
+    {
+        /// <summary>
+        /// 析构函数用于在类销毁之前释放类实例所使用的托管和非托管资源
+        /// </summary>
+        ~PersonSeven()
+        {
+            Console.WriteLine("调用析构函数");
+        }
+        //TODO:析构函数会被隐式的转换成下述代码
+        //protected override void Finalize()
+        //{
+        //    try
+        //    {
+        //        Console.WriteLine("析构函数被调用");
+        //    }
+        //    finally
+        //    {
+        //        //调用Object的Finalize方法
+        //        base.Finalize();
+        //    }
+        //}
+        //TODO：不能在结构体中定义析构函数，只能对类使用析构函数
+        //TODO：一个类只能有一个析构函数
+        //TODO：无法继承或重载析构函数
+        //TODO：无法显示地调用析构函数，析构函数私有垃圾回收器自动调用的
+        //TODO：析构函数既没有修饰符也没有参数
+    }
+    /// <summary>
+    /// T4D8 索引器
+    /// </summary>
+    class PersonEight
+    {
+        private int[] _intarray = new int[10];
+
+        public int this[int index]
+        {
+            get { return _intarray[index]; }
+            set { _intarray[index] = value; }
+        }
+    }
+
 
 }
