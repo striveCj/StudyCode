@@ -11,10 +11,20 @@ namespace StudyCode
         /// <summary>
         /// 子类初始化顺序调用
         /// </summary>
-       public void T5D4()
+        public void T5D4()
         {
             ChildA child = new ChildA();
             child.Print();
+            Console.Read();
+        }
+        /// <summary>
+        /// 强制访问隐藏基类成员
+        /// </summary>
+        public void T5D5()
+        {
+            Horse horse = new Horse();
+            horse.Eat();
+            ((Animal)horse).Eat();
             Console.Read();
         }
     }
@@ -70,6 +80,10 @@ namespace StudyCode
         {
             Console.WriteLine("动物发出声音");
         }
+        public void Eat()
+        {
+            Console.WriteLine("动物吃方法");
+        }
     }
     /// <summary>
     /// T5D2 继承 马子类
@@ -84,6 +98,13 @@ namespace StudyCode
         {
             base.Voice();
             Console.WriteLine("马发出嘶.......嘶的声音");
+        }
+        /// <summary>
+        /// TODO：如果子类方法与基类方法同名，我们可以使用new关键字把基类隐藏
+        /// </summary>
+        public new void Eat()
+        {
+            Console.WriteLine("马吃方法");
         }
     }
 
@@ -108,6 +129,8 @@ namespace StudyCode
             base.Voice();
             Console.WriteLine("羊发出咩.......咩的声音");
         }
+
+
     }
     /// <summary>
     /// T5D3 密封类
