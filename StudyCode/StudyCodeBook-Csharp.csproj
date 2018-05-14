@@ -48,6 +48,7 @@
     <Compile Include="T5.cs" />
     <Compile Include="T6.cs" />
     <Compile Include="T8.cs" />
+    <Compile Include="T9.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
