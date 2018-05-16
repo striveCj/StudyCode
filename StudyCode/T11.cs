@@ -57,6 +57,34 @@ namespace StudyCode
             Console.WriteLine("是否为开放类型：" + t.ContainsGenericParameters);
             Console.Read();
         }
+
+        public void T11D4()
+        {
+            TypeWithStaticField<int>.field = "一";
+            TypeWithStaticField<string>.field = "二";
+            TypeWithStaticField<Guid>.field = "三";
+
+            NoGenericTypeWithStaticField.field = "非泛型静态类型字段一";
+            NoGenericTypeWithStaticField.field = "非泛型静态类型字段二";
+            NoGenericTypeWithStaticField.field = "非泛型静态类型字段三";
+
+            NoGenericTypeWithStaticField.OutField();
+
+            TypeWithStaticField<int>.OutField();
+            TypeWithStaticField<string>.OutField();
+            TypeWithStaticField<Guid>.OutField();
+            Console.Read();
+        }
+
+        public void T11D5()
+        {
+            GenericClass<int>.Print();
+            GenericClass<string>.Print();
+
+            NonGenericClass.Print();
+            NonGenericClass.Print();
+            Console.Read();
+        }
     }
     #region T11D1
     public class Compare
@@ -119,7 +147,31 @@ namespace StudyCode
             Console.WriteLine(field);
         }
     }
-        
+
     #endregion
 
+    #region T11D5
+    public static class GenericClass<T>
+    {
+        static GenericClass()
+        {
+            Console.WriteLine($"泛型的静态构造函数被调用，实际类型{typeof(T)}");
+        }
+        public static void Print()
+        {
+
+        }
+    }
+    public static class NonGenericClass
+    {
+        static NonGenericClass()
+        {
+            Console.WriteLine("非泛型的静态构造函数被调用");
+        }
+        public static void Print()
+        {
+
+        }
+    }
+    #endregion
 }
