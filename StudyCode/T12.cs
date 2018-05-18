@@ -62,6 +62,81 @@ namespace StudyCode
         }
         #endregion
 
+        #region T12D3
+        public void T12D3()
+        {
+            BoxedandUnboxed();
+            Console.ReadKey();
+        }
+
+        private static void BoxedandUnboxed()
+        {
+            Nullable<int> nullable = 5;
+            int? nullablewithoutvalue = null;
+
+            Console.WriteLine($"获取不为null的可空类型的类型:{nullable.GetType()}");
+
+            object obj = nullable;
+            Console.WriteLine($"装箱后obj的类型{obj.GetType()}");
+            int value = (int)obj;
+            Console.WriteLine($"拆箱成非可空变量的情况{value}");
+
+            nullable = (int?)obj;
+            Console.WriteLine($"拆箱成非可空变量的情况{nullable}");
+            obj = nullablewithoutvalue;
+            Console.WriteLine($"对null的可空类型装箱后obj是否为null：{obj == null}");
+
+            nullable = (int?)obj;
+            Console.WriteLine($"一个没有值的可空类型装箱后，拆箱成可空变量是否为null：{0}");
+        }
+        #endregion
+
+        #region T12D4
+
+        delegate void VoteDelegate(string name);
+        public void T12D4()
+        {
+            VoteDelegate votedelegate = new VoteDelegate(new Friend().Vote);
+            votedelegate("SomeBody");
+
+            VoteDelegate votedelegate2 = delegate (string nickname)
+              {
+                  Console.WriteLine($"昵称为：{nickname}也来投票了");
+              };
+            votedelegate2("EveryOne");
+            Console.ReadKey();
+        }
+        public class Friend
+        {
+            public void Vote(string nickname)
+            {
+                Console.WriteLine($"昵称为{nickname}来投票了");
+            }
+        }
+
+        #endregion
+
+        #region T12D5
+        delegate void ClosureDelegate();
+        public void T12D5()
+        {
+            closureMethod();
+            Console.ReadKey();
+        }
+        private static void closureMethod()
+        {
+            string outVariable = "外部变量";
+            string capturedVariable = "被捕获的外部变量";
+            ClosureDelegate closuredelegate = delegate
+            {
+                string localvariable = "匿名方法局部变量";
+                Console.WriteLine(capturedVariable + " " + localvariable);
+            };
+            closuredelegate();
+        }
+        #endregion
     }
+
+
 
 }
