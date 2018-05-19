@@ -135,8 +135,26 @@ namespace StudyCode
             closuredelegate();
         }
         #endregion
+
+        #region T12D6
+
+        public void T12D6()
+        {
+            ClosureDelegate test = new ClosureDelegate();
+            test();
+            Console.ReadKey();       
+        }
+        private static ClosureDelegate CreateDelegateInstance()
+        {
+            int count = 1;
+            ClosureDelegate closuredelegate = delegate
+            {
+                Console.WriteLine(count);
+                count++;
+            };
+            closuredelegate();
+            return closuredelegate;
+        }
+        #endregion
     }
-
-
-
 }
