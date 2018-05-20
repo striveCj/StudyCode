@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -106,7 +107,7 @@ namespace StudyCode
             votedelegate2("EveryOne");
             Console.ReadKey();
         }
-        public class Friend
+        public partial class Friend
         {
             public void Vote(string nickname)
             {
@@ -140,7 +141,7 @@ namespace StudyCode
 
         public void T12D6()
         {
-            ClosureDelegate test = new ClosureDelegate();
+            ClosureDelegate test = CreateDelegateInstance();
             test();
             Console.ReadKey();       
         }
@@ -154,6 +155,158 @@ namespace StudyCode
             };
             closuredelegate();
             return closuredelegate;
+        }
+        #endregion
+
+        #region T12D7
+
+        public void T12D7()
+        {
+            FriendByEnumerators firendcollection=new FriendByEnumerators();
+            foreach (FriendByEnumerator f in firendcollection)
+            {
+                Console.WriteLine(f.Name);
+            }
+
+            Console.Read();
+        }
+
+        public class FriendByEnumerator
+        {
+            private string _name;
+
+            public string Name
+            {
+                get { return _name;}
+                set { _name = value; }
+            }
+
+            public FriendByEnumerator(string name)
+            {
+                this._name = name;
+            }
+        }
+
+        public class FriendByEnumerators:IEnumerable
+        {
+            private readonly FriendByEnumerator[] _friendByEnumerator;
+
+            public FriendByEnumerators()
+            {
+               _friendByEnumerator=new FriendByEnumerator[]
+               {
+                   new FriendByEnumerator("张三"),
+                   new FriendByEnumerator("李四"),
+                   new FriendByEnumerator("王五")
+               };
+            }
+            public FriendByEnumerator this[int index]
+            {
+                get { return _friendByEnumerator[index]; }
+            }
+            public int Count
+            {
+                get { return _friendByEnumerator.Length; }
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                return new FriendByEnumeratorIterator(this);
+            }
+        }
+
+        public class FriendByEnumeratorIterator: IEnumerator
+        {
+            private readonly FriendByEnumerators _friendByEnumerators;
+            private int _index;
+            private FriendByEnumerator _current;
+
+            internal FriendByEnumeratorIterator(FriendByEnumerators friendcollection)
+            {
+                this._friendByEnumerators = friendcollection;
+                _index = 0;
+            }
+            public object Current
+            {
+                get { return this._current; }
+            }
+
+            public bool MoveNext()
+            {
+                if (_index+1>_friendByEnumerators.Count)
+                {
+                    return false;
+                }
+                else
+                {
+                    this._current = _friendByEnumerators[_index];
+                    _index++;
+                    return true;
+                }
+            }
+            public void Reset()
+            {
+                _index = 0;
+            }
+        }
+
+        #endregion
+
+        #region T12D8
+        public void T12D8()
+        {
+            Friend3S firendcollection = new Friend3S();
+            foreach (Friend3 f in firendcollection)
+            {
+                Console.WriteLine(f.Name);
+            }
+
+            Console.Read();
+        }
+        public class Friend3
+        {
+            private string _name;
+
+            public string Name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+
+            public Friend3(string name)
+            {
+                this._name = name;
+            }
+        }
+        public class Friend3S : IEnumerable
+        {
+            private readonly Friend3[] _friendByEnumerator;
+
+            public Friend3S()
+            {
+                _friendByEnumerator = new Friend3[]
+                {
+                    new Friend3("张三"),
+                    new Friend3("李四"),
+                    new Friend3("王五")
+                };
+            }
+            public Friend3 this[int index]
+            {
+                get { return _friendByEnumerator[index]; }
+            }
+            public int Count
+            {
+                get { return _friendByEnumerator.Length; }
+            }
+
+            public IEnumerator GetEnumerator()
+            {
+                for (int i = 0; i < _friendByEnumerator.Length; i++)
+                {
+                    yield return _friendByEnumerator[i];
+                }
+            }
         }
         #endregion
     }
