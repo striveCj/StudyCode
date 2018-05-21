@@ -52,6 +52,7 @@ namespace StudyCode
         #region T10D4
         /// <summary>
         /// 值类型参数的按值传递
+        /// TODO:值类型的按值传递，传递的是该值类型的一个副本，也就是说形参接收的是一个实参的副本，所以此时，方法中对参数的改变不会影响到实参的值
         /// </summary>
         public void T10D4()
         {
@@ -70,6 +71,7 @@ namespace StudyCode
         #region T10D5
         /// <summary>
         /// 引用类型参数的按值传递
+        /// TODO：当传递的参数是引用类型时，传递和操作的目标是指向对象的地址，而传递的实际内容是对地址的复制。由于地址指向的是实参的值，当方法对地址进行操作时，实际上操作了地址所指向的值，所以调用方法后原来的值就会被修改。
         /// </summary>
         public void T10D5()
         {
@@ -89,6 +91,7 @@ namespace StudyCode
         #region T10D6
         /// <summary>
         /// string引用类型参数按值传递的特殊情况(string的不可变性)
+        /// TODO：string具有不变性，一旦一个string类型被赋值，则他就是不可改变的，即不能通过代码去修改它的值。
         /// </summary>
         public void T10D6()
         {
@@ -109,6 +112,8 @@ namespace StudyCode
         #region T10D7
         /// <summary>
         /// 值类型和引用类型参数的按引用传递情况
+        /// TODO：我们可以使用ref或out关键字来实现参数的引用传递，并且在按引用进行传递时，方法的定义和调用都必须显示的使用ref或out关键字，且不能省略
+        /// TODO: 在值类型参数按引用传递的过程中，传递的是值类型变量的地址，器效果类似于引用类型的按值传递，不同的是，值类型参数按引用传递的地址是栈上值类型变量的地址，而引用类型按照传递的地址是变量所指向的托管堆中实际数据的地址。
         /// </summary>
         public void T10D7()
         {
