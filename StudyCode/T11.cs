@@ -17,16 +17,26 @@ namespace StudyCode
             Console.Read();
         }
         #region T11D2
+        /// <summary>
+        /// 测试泛型类型操作的运行时间
+        /// </summary>
         public static void testGeneric()
         {
+            //Stopwatch对象用来测量运行时间
             Stopwatch stopwatch = new Stopwatch();
+            //泛型数组
             List<int> genericList = new List<int>();
+            //开始计时
             stopwatch.Start();
+            //循环1000万次比较时间
             for (int i = 0; i < 10000000; i++)
             {
+                //泛型测试
                 genericList.Add(i);
             }
+            //结束计时
             stopwatch.Stop();
+            //输出时间
             TimeSpan ts = stopwatch.Elapsed;
             string elapsedTime = $"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}:{ts.Milliseconds/10:00}";
             Console.WriteLine("泛型类型运行时间"+elapsedTime);
@@ -87,8 +97,12 @@ namespace StudyCode
         }
     }
     #region T11D1
+    /// <summary>
+    /// 不使用泛型的情况下比较多个类型的大小
+    /// </summary>
     public class Compare
     {
+        //比较两个整数的大小返回较大的整数
         public static int compareInt(int int1,int int2)
         {
             if (int1.CompareTo(int2)>0)
@@ -100,7 +114,7 @@ namespace StudyCode
                 return int2;
             }
         }
-
+        //比较两个字符串返回较大的那个字符串
         public static string compareString(string str1,string str2)
         {
             if (str1.CompareTo(str2)>0)
@@ -113,6 +127,10 @@ namespace StudyCode
             }
         }
     }
+    /// <summary>
+    /// 使用泛型实现比较多类型大小
+    /// </summary>
+    /// <typeparam name="T">类型参数</typeparam>
     public class Compare<T>where T : IComparable
     {
         public static T compareGeneric(T t1,T t2)
