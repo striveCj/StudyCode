@@ -9,6 +9,9 @@ namespace StudyCode
     public class T13
     {
         #region T13D2
+        /// <summary>
+        /// 隐式类型
+        /// </summary>
         public void T13D2()
         {
             //用var声明局部变量
@@ -23,6 +26,41 @@ namespace StudyCode
             //stringvariable = 2;
         }
         #endregion
+
+        public void T13D3()
+        {
+            Person2 p = new Person2("LearningHard", 25);
+            p.Weight = 60;
+            p.Height = 170;
+
+            //使用对象初始化器后
+            Person2 p2 = new Person2() { Name = "LearningHard", Age = 25, Weight = 75, Height = 170 };
+        }
+
+        #region T13D4
+         public void T13D4()
+        {
+            //定义匿名对象
+            var person = new { Name = "LearningHard", Age = 25 };
+            Console.WriteLine($"{person.Name}的年龄为{person.Age}");
+            //定义匿名数组
+            var personcollection = new[]
+            {
+                new { Name = "LearningHard1", Age = 25 },
+                new { Name = "LearningHard2", Age = 26 },
+                new { Name = "LearningHard3", Age = 27 }
+            };
+            int totalAge = 0;
+            foreach (var item in personcollection)
+            {
+                //验证Age属性是强类型的int类型
+                totalAge += item.Age;
+            }
+            Console.WriteLine("所有人年龄总和为"+totalAge);
+            Console.ReadKey();
+        }
+
+        #endregion
     }
     #region T13D1
     /// <summary>
@@ -35,6 +73,41 @@ namespace StudyCode
         public string Name { get; set; }
         //定义只读属性
         public int Age { get;private set; }
+    }
+    #endregion
+
+    #region T13D3
+    public class Person2
+    {
+        public string Name { get; set; }
+        public int Age { get; set; }
+        public int Weight { get; set; }
+
+        public int Height { get; set; }
+
+        public Person2() : this("")
+        {
+
+        }
+        public Person2(string name) : this(name,0)
+        {
+
+        }
+        public Person2(string name,int age) : this(name, age,0)
+        {
+
+        }
+        public Person2(string name, int age,int weight) : this(name, age, weight, 0)
+        {
+
+        }
+        public Person2(string name, int age, int weight,int height) : this(name, age, weight, height, 0)
+        {
+            this.Name = name;
+            this.Age = age;
+            this.Weight = weight;
+            this.Height = height;
+        }
     }
     #endregion
 
