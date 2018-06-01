@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Net;
 
 namespace StudyCode
 {
-    public partial class Form1T20 : Form
+    public partial class Form1T20D2 : Form
     {
-        public Form1T20()
+        public Form1T20D2()
         {
             InitializeComponent();
             txbUrl.Text = "http://download.microsoft.com/download/7/0/3/70345ee-a747-4cc8-bd3e-98a615c3aedb/dotNetFx35setup.exe";
@@ -23,13 +23,13 @@ namespace StudyCode
         private void btnDownLoad_Click(object sender, EventArgs e)
         {
             rtbState.Text = "下载中......";
-            if (txbUrl.Text==string.Empty)
+            if (txbUrl.Text == string.Empty)
             {
                 MessageBox.Show("请先输入下载地址！");
                 return;
             }
         }
-        public void DownLoadFileSync(string url)
+        public void DownLoadFileAsync(string url)
         {
             int BufferSize = 2048;
             byte[] BufferRead = new byte[BufferSize];
@@ -44,12 +44,14 @@ namespace StudyCode
             try
             {
                 HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                if (myHttpWebRequest!=null)
+                if (myHttpWebRequest != null)
                 {
-                    myWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                    IAsyncResult result = myHttpWebRequest.BeginGetResponse(null, null);//异步请求
+                    myWebResponse = (HttpWebResponse)myHttpWebRequest.EndGetResponse(result);
+
                     Stream responseStream = myWebResponse.GetResponseStream();
                     int readSize = responseStream.Read(BufferRead, 0, BufferSize);
-                    while (readSize>0)
+                    while (readSize > 0)
                     {
                         filestream.Write(BufferRead, 0, readSize);
                         readSize = responseStream.Read(BufferRead, 0, BufferSize);
@@ -64,13 +66,13 @@ namespace StudyCode
             }
             finally
             {
-                if (myWebResponse!=null)
+                if (myWebResponse != null)
                 {
                     myWebResponse.Close();
                 }
-                if (filestream!=null)
+                if (filestream != null)
                 {
-                    filestream.Close(); `
+                    filestream.Close(); 
                 }
             }
         }
