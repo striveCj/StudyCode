@@ -25,6 +25,15 @@ namespace StudyCode
         private void Form1T20D3_Load(object sender, EventArgs e)
         {
             rtbState.Text = "下载中...";
+            btnDownLoad.Enabled = false;
+            if (txbUrl.Text==string.Empty)
+            {
+                MessageBox.Show("请先输入下载地址");
+                return;
+            }
+            sc = SynchronizationContext.Current;
+            AsyncMethodCaller methodCaller = new AsyncMethodCaller(DownLoadFileAsync);
+            methodCaller.BeginInvoke(txbUrl.Text.Trim(), GetResult, null);
         }
         private delegate string AsyncMethodCaller(string fileurl);
         SynchronizationContext sc;
