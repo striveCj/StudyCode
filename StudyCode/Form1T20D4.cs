@@ -67,17 +67,73 @@ namespace StudyCode
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
+            BackgroundWorker bgworker = sender as BackgroundWorker;
+            try
+            {
+                HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(txbUrl.Text.Trim());
+                if (DownloadSize!=0)
+                {
+                    myHttpWebRequest.AddRange(DownloadSize);
+                }
+                myWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
+                Stream responseStream = myWebResponse.GetResponseStream();
+                int readSize = 0;
+                while (true)
+                {
+                    if (bgworker.CancellationPending==true)
+                    {
+                        e.Cancel = true;
+                        break;
+                    }
+                    readSize = responseStream.Read(BufferRead, 0, BufferRead.Length);
+                    if (readSize > 0)
+                    {
+                        DownloadSize += readSize;
+                        int percentComplete= (int)((float)DownloadSize / (float)totalSize * 100);
+                        filestream.Write(BufferRead, 0, readSize);
+                        bgworker.ReportProgress(percentComplete);
+                    }
+                    else
+                    {
+                        break;
+                    }
 
+                }
+            }
+            catch
+            {
+
+                throw;
+            }
         }
 
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-
+            this.progressBar1.Value = e.ProgressPercentage;
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-
+            if (e.Error!= null)
+            {
+                MessageBox.Show(e.Error.Message);
+                myWebResponse.Close();
+            }else if (e.Cancelled)
+            {
+                MessageBox.Show($"下载暂停，下载的文件地址为：{downloadPath}，\n已下载的字节数为：{DownloadSize}");
+                myWebResponse.Close();
+                filestream.Close();
+                this.btnDownLoad.Enabled = true;
+                this.btmPause.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show($"下载已完成，下载的文件地址为：{downloadPath}，\n字节总数为：{DownloadSize}");
+                this.btnDownLoad.Enabled = false;
+                this.btmPause.Enabled = false;
+                myWebResponse.Close();
+                filestream.Close();
+            }
         }
 
         private void GetTotalSize()
