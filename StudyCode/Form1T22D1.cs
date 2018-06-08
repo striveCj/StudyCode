@@ -33,6 +33,12 @@ namespace StudyCode
         public Form1T22D1()
         {
             InitializeComponent();
+            showMessageCallback = new ShowMessage(showMessage);
+            resetMessageCallBack = new ResetMessage(resetMessage);
+            ipaddress = IPAddress.Loopback;
+            tbxserverIp.Text = ipaddress.ToString();
+            tbxPort.Text = Port.ToString();
+
         }
 
         #region 定义回调函数
@@ -100,5 +106,39 @@ namespace StudyCode
                 listBox1.Invoke(showMessageCallback, "停止监听");
             }
         }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            tcpLister = new TcpListener(ipaddress, Port);
+            tcpLister.Start();
+            Thread acceptThread = new Thread(acceptClientConect);
+            acceptThread.Start();
+        }
+
+        private void btnReceive_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                listBox1.Invoke(showMessageCallback, "等待连接");
+                tcpClient = tcpLister.AcceptTcpClient();
+                if (tcpLister!=null)
+                {
+                    listBox1.Invoke(showMessageCallback, "接收到连接");
+                    networkStream = tcpClient.GetStream();
+                    reader = new BinaryReader(networkStream);
+                    writer = new BinaryWriter(networkStream);
+                }
+            }
+            catch
+            {
+                listBox1.Invoke(showMessageCallback, "停止监听");
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+        }
+
     }
 }

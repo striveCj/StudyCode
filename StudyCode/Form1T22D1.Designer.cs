@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tbxserverIp = new System.Windows.Forms.TextBox();
+            this.tbxPort = new System.Windows.Forms.TextBox();
             this.btnStart = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
@@ -60,19 +60,19 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "端口号：";
             // 
-            // textBox1
+            // tbxserverIp
             // 
-            this.textBox1.Location = new System.Drawing.Point(71, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 2;
+            this.tbxserverIp.Location = new System.Drawing.Point(71, 13);
+            this.tbxserverIp.Name = "tbxserverIp";
+            this.tbxserverIp.Size = new System.Drawing.Size(100, 21);
+            this.tbxserverIp.TabIndex = 2;
             // 
-            // textBox2
+            // tbxPort
             // 
-            this.textBox2.Location = new System.Drawing.Point(246, 13);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 3;
+            this.tbxPort.Location = new System.Drawing.Point(246, 13);
+            this.tbxPort.Name = "tbxPort";
+            this.tbxPort.Size = new System.Drawing.Size(100, 21);
+            this.tbxPort.TabIndex = 3;
             // 
             // btnStart
             // 
@@ -82,6 +82,7 @@
             this.btnStart.TabIndex = 4;
             this.btnStart.Text = "开始监听";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // button2
             // 
@@ -108,6 +109,7 @@
             this.btnClear.TabIndex = 8;
             this.btnClear.Text = "清空消息";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnReceive
             // 
@@ -117,6 +119,7 @@
             this.btnReceive.TabIndex = 9;
             this.btnReceive.Text = "接受";
             this.btnReceive.UseVisualStyleBackColor = true;
+            this.btnReceive.Click += new System.EventHandler(this.btnReceive_Click);
             // 
             // button5
             // 
@@ -158,8 +161,8 @@
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnStart);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbxPort);
+            this.Controls.Add(this.tbxserverIp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1T22D1";
@@ -173,8 +176,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tbxserverIp;
+        private System.Windows.Forms.TextBox tbxPort;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox4;
