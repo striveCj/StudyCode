@@ -28,123 +28,122 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button6 = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.btnSend = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnReceive = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.tbxPort = new System.Windows.Forms.TextBox();
+            this.tbxserverIp = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.listView2 = new System.Windows.Forms.ListView();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // button6
+            // listBox1
             // 
-            this.button6.Location = new System.Drawing.Point(286, 361);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 23;
-            this.button6.Text = "发送";
-            this.button6.UseVisualStyleBackColor = true;
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(38, 112);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(318, 136);
+            this.listBox1.TabIndex = 24;
+            // 
+            // btnSend
+            // 
+            this.btnSend.Location = new System.Drawing.Point(281, 370);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(75, 23);
+            this.btnSend.TabIndex = 23;
+            this.btnSend.Text = "发送";
+            this.btnSend.UseVisualStyleBackColor = true;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(194, 361);
+            this.button5.Location = new System.Drawing.Point(189, 370);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 22;
             this.button5.Text = "断开连接";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnReceive
             // 
-            this.button4.Location = new System.Drawing.Point(286, 261);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 21;
-            this.button4.Text = "接受";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnReceive.Location = new System.Drawing.Point(281, 270);
+            this.btnReceive.Name = "btnReceive";
+            this.btnReceive.Size = new System.Drawing.Size(75, 23);
+            this.btnReceive.TabIndex = 21;
+            this.btnReceive.Text = "接受";
+            this.btnReceive.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnClear
             // 
-            this.button3.Location = new System.Drawing.Point(194, 261);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 20;
-            this.button3.Text = "清空消息";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnClear.Location = new System.Drawing.Point(189, 270);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 20;
+            this.btnClear.Text = "清空消息";
+            this.btnClear.UseVisualStyleBackColor = true;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(38, 313);
+            this.textBox4.Multiline = true;
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(308, 51);
+            this.textBox4.TabIndex = 19;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(233, 56);
+            this.button2.Location = new System.Drawing.Point(228, 65);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 17;
+            this.button2.TabIndex = 18;
             this.button2.Text = "关闭监听";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(91, 56);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "开始监听";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnStart.Location = new System.Drawing.Point(86, 65);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(75, 23);
+            this.btnStart.TabIndex = 17;
+            this.btnStart.Text = "开始监听";
+            this.btnStart.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // tbxPort
             // 
-            this.textBox2.Location = new System.Drawing.Point(251, 15);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 21);
-            this.textBox2.TabIndex = 15;
+            this.tbxPort.Location = new System.Drawing.Point(246, 24);
+            this.tbxPort.Name = "tbxPort";
+            this.tbxPort.Size = new System.Drawing.Size(100, 21);
+            this.tbxPort.TabIndex = 16;
             // 
-            // textBox1
+            // tbxserverIp
             // 
-            this.textBox1.Location = new System.Drawing.Point(76, 15);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 14;
+            this.tbxserverIp.Location = new System.Drawing.Point(71, 24);
+            this.tbxserverIp.Name = "tbxserverIp";
+            this.tbxserverIp.Size = new System.Drawing.Size(100, 21);
+            this.tbxserverIp.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(192, 21);
+            this.label2.Location = new System.Drawing.Point(187, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
-            this.label2.TabIndex = 13;
+            this.label2.TabIndex = 14;
             this.label2.Text = "端口号：";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 21);
+            this.label1.Location = new System.Drawing.Point(12, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
-            this.label1.TabIndex = 12;
+            this.label1.TabIndex = 13;
             this.label1.Text = "IP地址：";
-            // 
-            // listView2
-            // 
-            this.listView2.Location = new System.Drawing.Point(29, 309);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(332, 47);
-            this.listView2.TabIndex = 25;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(19, 94);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(332, 160);
-            this.listBox1.TabIndex = 26;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
             // Form1T22D2
             // 
@@ -152,15 +151,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(386, 425);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.listView2);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.btnSend);
             this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btnReceive);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnStart);
+            this.Controls.Add(this.tbxPort);
+            this.Controls.Add(this.tbxserverIp);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1T22D2";
@@ -172,17 +171,17 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button btnSend;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnReceive;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.TextBox tbxPort;
+        private System.Windows.Forms.TextBox tbxserverIp;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView listView2;
-        private System.Windows.Forms.ListBox listBox1;
     }
 }
