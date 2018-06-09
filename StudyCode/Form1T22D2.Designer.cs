@@ -34,7 +34,6 @@
             this.btnReceive = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnStart = new System.Windows.Forms.Button();
             this.tbxPort = new System.Windows.Forms.TextBox();
             this.tbxserverIp = new System.Windows.Forms.TextBox();
@@ -59,15 +58,17 @@
             this.btnSend.TabIndex = 23;
             this.btnSend.Text = "发送";
             this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(189, 370);
+            this.button5.Location = new System.Drawing.Point(255, 65);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 22;
             this.button5.Text = "断开连接";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // btnReceive
             // 
@@ -77,6 +78,7 @@
             this.btnReceive.TabIndex = 21;
             this.btnReceive.Text = "接受";
             this.btnReceive.UseVisualStyleBackColor = true;
+            this.btnReceive.Click += new System.EventHandler(this.btnReceive_Click);
             // 
             // btnClear
             // 
@@ -86,6 +88,7 @@
             this.btnClear.TabIndex = 20;
             this.btnClear.Text = "清空消息";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // textBox4
             // 
@@ -95,23 +98,15 @@
             this.textBox4.Size = new System.Drawing.Size(308, 51);
             this.textBox4.TabIndex = 19;
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(228, 65);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 18;
-            this.button2.Text = "关闭监听";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
             // btnStart
             // 
             this.btnStart.Location = new System.Drawing.Point(86, 65);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 17;
-            this.btnStart.Text = "开始监听";
+            this.btnStart.Text = "链接到服务器";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // tbxPort
             // 
@@ -156,7 +151,6 @@
             this.Controls.Add(this.btnReceive);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tbxPort);
             this.Controls.Add(this.tbxserverIp);
@@ -177,7 +171,6 @@
         private System.Windows.Forms.Button btnReceive;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.TextBox tbxPort;
         private System.Windows.Forms.TextBox tbxserverIp;

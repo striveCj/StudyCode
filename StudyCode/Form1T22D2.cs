@@ -34,6 +34,10 @@ namespace StudyCode
         {
             InitializeComponent();
             showMessageCallback = new ShowMessage(showMessage);
+            resetMessageCallBack = new ResetMessage(resetMessage);
+            ipaddress = IPAddress.Loopback;
+            tbxPort.Text = Port.ToString();
+            tbxserverIp.Text = ipaddress.ToString();
         }
         public void showMessage(string str)
         {
@@ -74,7 +78,92 @@ namespace StudyCode
         }
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            Thread connectThread = new Thread(ConnectToServer);
+            connectThread.Start();
+        }
 
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void receiveMessage() {
+            try
+            {
+                string receivemessage = reader.ReadString();
+                listBox1.Invoke(showMessageCallback, receivemessage);
+            }
+            catch 
+            {
+                if (reader!=null)
+                {
+                    reader.Close();
+                }
+                if (writer!=null)
+                {
+                    writer.Close();
+                }
+                if (tcpClient!=null)
+                {
+                    tcpClient.Close();
+                }
+            }
+        }
+        private void btnReceive_Click(object sender, EventArgs e)
+        {
+            Thread receiveThread = new Thread(receiveMessage);
+            receiveThread.Start();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (reader!=null)
+            {
+                reader.Close();
+            }
+            if (writer!=null)
+            {
+                writer.Close();
+            }
+            if (tcpClient!=null)
+            {
+                tcpClient.Close();
+            }
+        }
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void SendMessage(object state)
+        {
+            try
+            {
+                writer.Write(state.ToString());
+                Thread.Sleep(5000);
+                writer.Flush();
+                textBox4.Invoke(showMessageCallback);
+                listBox1.Invoke(showMessageCallback, state.ToString());
+            }
+            catch
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+                if (writer != null)
+                {
+                    writer.Close();
+                }
+                if (tcpClient != null)
+                {
+                    tcpClient.Close();
+                }
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
         }
     }
 }
