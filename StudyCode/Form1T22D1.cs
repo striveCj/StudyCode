@@ -82,7 +82,7 @@ namespace StudyCode
                     tcpClient.Close();
                 }
                 listBox1.Invoke(showMessageCallback, "断开连接");
-                Thread acceptThread = new Thread(acceptClientConnect);
+                Thread acceptThread = new Thread(acceptClientConect);
                 acceptThread.Start();
             }
         }

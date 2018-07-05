@@ -78,7 +78,7 @@ namespace StudyCode
             string message=(string)obj;
             byte[] sendbytes = Encoding.Unicode.GetBytes(message);
             IPAddress remoteIp = IPAddress.Parse(tbxSendToIp.Text);
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendToPort.Text);
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(remoteIp, int.Parse(tbxSendToPort.Text));
             sendUdpClient.Send(sendbytes, sendbytes.Length, remoteIpEndPoint);
             sendUdpClient.Close();
             ResetMessageText(tbxMessageSend);

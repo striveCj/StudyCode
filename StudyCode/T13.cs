@@ -101,7 +101,7 @@ namespace StudyCode
         {
 
         }
-        public Person2(string name, int age, int weight,int height) : this(name, age, weight, height, 0)
+        public Person2(string name, int age, int weight,int height) 
         {
             this.Name = name;
             this.Age = age;

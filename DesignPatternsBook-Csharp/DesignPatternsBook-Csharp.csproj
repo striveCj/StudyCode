@@ -47,7 +47,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleFactoryPattern\Operation.cs" />
     <Compile Include="SimpleFactoryPattern\OperationAdd.cs" />
-    <Compile Include="SimpleFactoryPattern\SimpleFactoryPattern.cs" />
+    <Compile Include="SimpleFactoryPattern\OperationDiv.cs" />
+    <Compile Include="SimpleFactoryPattern\OperationMul.cs" />
+    <Compile Include="SimpleFactoryPattern\OperationFactory.cs" />
+    <Compile Include="SimpleFactoryPattern\OperationSub.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
