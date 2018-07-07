@@ -51,6 +51,10 @@
     <Compile Include="SimpleFactoryPattern\OperationMul.cs" />
     <Compile Include="SimpleFactoryPattern\OperationFactory.cs" />
     <Compile Include="SimpleFactoryPattern\OperationSub.cs" />
+    <Compile Include="StrategyPattern\ConcreteStrategyC.cs" />
+    <Compile Include="StrategyPattern\ConcreteStrategyB.cs" />
+    <Compile Include="StrategyPattern\ConcreteStrategyA.cs" />
+    <Compile Include="StrategyPattern\Strategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
