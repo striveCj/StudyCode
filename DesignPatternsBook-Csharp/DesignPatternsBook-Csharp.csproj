@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DecoratorPattern\Component.cs" />
+    <Compile Include="DecoratorPattern\ConcreteComponent.cs" />
+    <Compile Include="DecoratorPattern\ConcreteDecoratorA.cs" />
+    <Compile Include="DecoratorPattern\ConcreteDecoratorB.cs" />
+    <Compile Include="DecoratorPattern\Decorator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleFactoryPattern\Operation.cs" />
@@ -54,11 +59,13 @@
     <Compile Include="StrategyPattern\ConcreteStrategyC.cs" />
     <Compile Include="StrategyPattern\ConcreteStrategyB.cs" />
     <Compile Include="StrategyPattern\ConcreteStrategyA.cs" />
+    <Compile Include="StrategyPattern\Context.cs" />
     <Compile Include="StrategyPattern\Strategy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
