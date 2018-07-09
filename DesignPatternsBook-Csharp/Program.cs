@@ -1,4 +1,5 @@
 ﻿using DesignPatternsBook_Csharp.DecoratorPattern;
+using DesignPatternsBook_Csharp.ProxyPattern;
 using DesignPatternsBook_Csharp.SimpleFactoryPattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
 using System;
@@ -19,6 +20,11 @@ namespace DesignPatternsBook_Csharp
             StrategyPattern();
             //装饰模式
             DecoratorPattern();
+            //代理模式
+            Proxy();
+
+
+
         }
 
         public static void SimpleFactoryPattern()
@@ -51,6 +57,13 @@ namespace DesignPatternsBook_Csharp
             d1.SetComponent(c);
             d2.SetComponent(d1);
             d2.Operation();
+            Console.Read();
+        }
+
+        public static void Proxy()
+        {
+            Proxy proxy = new Proxy();
+            proxy.Request();
             Console.Read();
         }
     }
