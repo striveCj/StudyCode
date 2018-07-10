@@ -35,6 +35,14 @@ namespace DesignPatternsBook_Csharp
             oper.NumberB = 2;
             double result = oper.GetResult();
             Console.WriteLine(result);
+
+            IFactory opearFactory = new AddFactory();
+            Operation opesr = opearFactory.CreateOperation();
+            opesr.NumberA = 1;
+            opesr.NumberB = 2;
+            double results = opesr.GetResult();
+
+
         }
 
         public static void StrategyPattern()
