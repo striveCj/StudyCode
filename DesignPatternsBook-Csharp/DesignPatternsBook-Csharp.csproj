@@ -53,6 +53,7 @@
     <Compile Include="ProxyPattern\Proxy.cs" />
     <Compile Include="ProxyPattern\RealSubject.cs" />
     <Compile Include="ProxyPattern\Subject.cs" />
+    <Compile Include="SimpleFactoryPattern\IFactory.cs" />
     <Compile Include="SimpleFactoryPattern\Operation.cs" />
     <Compile Include="SimpleFactoryPattern\OperationAdd.cs" />
     <Compile Include="SimpleFactoryPattern\OperationDiv.cs" />
