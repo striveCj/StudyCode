@@ -50,6 +50,8 @@
     <Compile Include="DecoratorPattern\Decorator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PrototypePattern\ConcretePrototype1.cs" />
+    <Compile Include="PrototypePattern\Prototype.cs" />
     <Compile Include="ProxyPattern\Proxy.cs" />
     <Compile Include="ProxyPattern\RealSubject.cs" />
     <Compile Include="ProxyPattern\Subject.cs" />

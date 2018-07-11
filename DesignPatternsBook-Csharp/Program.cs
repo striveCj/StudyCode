@@ -1,4 +1,5 @@
 ﻿using DesignPatternsBook_Csharp.DecoratorPattern;
+using DesignPatternsBook_Csharp.PrototypePattern;
 using DesignPatternsBook_Csharp.ProxyPattern;
 using DesignPatternsBook_Csharp.SimpleFactoryPattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
@@ -14,7 +15,7 @@ namespace DesignPatternsBook_Csharp
     {
         static void Main(string[] args)
         {
-            //简单工厂模式
+            //简单工厂模式 工厂方法模式
             SimpleFactoryPattern();
             //策略模式
             StrategyPattern();
@@ -22,6 +23,8 @@ namespace DesignPatternsBook_Csharp
             DecoratorPattern();
             //代理模式
             Proxy();
+            //原型模式
+            Prototype();
 
 
 
@@ -72,6 +75,14 @@ namespace DesignPatternsBook_Csharp
         {
             Proxy proxy = new Proxy();
             proxy.Request();
+            Console.Read();
+        }
+
+        public static void Prototype()
+        {
+            ConcretePrototype1 p1 = new ConcretePrototype1("I");
+            ConcretePrototype1 c1 = (ConcretePrototype1)p1.Clone();
+            Console.WriteLine("Cloned:{0}",c1.Id);
             Console.Read();
         }
     }
