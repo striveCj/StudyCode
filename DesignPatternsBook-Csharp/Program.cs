@@ -3,6 +3,7 @@ using DesignPatternsBook_Csharp.PrototypePattern;
 using DesignPatternsBook_Csharp.ProxyPattern;
 using DesignPatternsBook_Csharp.SimpleFactoryPattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
+using DesignPatternsBook_Csharp.TemplatePattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +26,8 @@ namespace DesignPatternsBook_Csharp
             Proxy();
             //原型模式
             Prototype();
-
-
-
+            //模板方法模式
+            TemplatePattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -83,6 +83,16 @@ namespace DesignPatternsBook_Csharp
             ConcretePrototype1 p1 = new ConcretePrototype1("I");
             ConcretePrototype1 c1 = (ConcretePrototype1)p1.Clone();
             Console.WriteLine("Cloned:{0}",c1.Id);
+            Console.Read();
+        }
+
+        public static void TemplatePattern()
+        {
+            AbstractClass c;
+            c = new ConcreteClassA();
+            c.TemplateMethod();
+            c = new ConcreteClassB();
+            c.TemplateMethod();
             Console.Read();
         }
     }

@@ -68,6 +68,9 @@
     <Compile Include="StrategyPattern\ConcreteStrategyA.cs" />
     <Compile Include="StrategyPattern\Context.cs" />
     <Compile Include="StrategyPattern\Strategy.cs" />
+    <Compile Include="TemplatePattern\AbstractClass.cs" />
+    <Compile Include="TemplatePattern\ConcreteClassB.cs" />
+    <Compile Include="TemplatePattern\ConcreteClassA.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
