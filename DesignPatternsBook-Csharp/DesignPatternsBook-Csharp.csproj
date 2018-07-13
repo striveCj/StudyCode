@@ -48,6 +48,11 @@
     <Compile Include="DecoratorPattern\ConcreteDecoratorA.cs" />
     <Compile Include="DecoratorPattern\ConcreteDecoratorB.cs" />
     <Compile Include="DecoratorPattern\Decorator.cs" />
+    <Compile Include="FacadePattern\Facade.cs" />
+    <Compile Include="FacadePattern\SubSystemFour.cs" />
+    <Compile Include="FacadePattern\SubSystemThree.cs" />
+    <Compile Include="FacadePattern\SubSystemTwo.cs" />
+    <Compile Include="FacadePattern\SubSystemOne.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PrototypePattern\ConcretePrototype1.cs" />
