@@ -1,4 +1,5 @@
 ﻿using DesignPatternsBook_Csharp.DecoratorPattern;
+using DesignPatternsBook_Csharp.FacadePattern;
 using DesignPatternsBook_Csharp.PrototypePattern;
 using DesignPatternsBook_Csharp.ProxyPattern;
 using DesignPatternsBook_Csharp.SimpleFactoryPattern;
@@ -28,6 +29,8 @@ namespace DesignPatternsBook_Csharp
             Prototype();
             //模板方法模式
             TemplatePattern();
+            //外观模式
+            FacadePattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -93,6 +96,14 @@ namespace DesignPatternsBook_Csharp
             c.TemplateMethod();
             c = new ConcreteClassB();
             c.TemplateMethod();
+            Console.Read();
+        }
+
+        public static void FacadePattern()
+        {
+            Facade facade = new Facade();
+            facade.MethodA();
+            facade.MethodB();
             Console.Read();
         }
     }
