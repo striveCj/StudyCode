@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuilderPattern\Builder.cs" />
+    <Compile Include="BuilderPattern\ConcreteBuilder2.cs" />
+    <Compile Include="BuilderPattern\ConcreteBuilder1.cs" />
+    <Compile Include="BuilderPattern\Director.cs" />
+    <Compile Include="BuilderPattern\Product.cs" />
     <Compile Include="DecoratorPattern\Component.cs" />
     <Compile Include="DecoratorPattern\ConcreteComponent.cs" />
     <Compile Include="DecoratorPattern\ConcreteDecoratorA.cs" />
