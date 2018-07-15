@@ -3,6 +3,7 @@ using DesignPatternsBook_Csharp.DecoratorPattern;
 using DesignPatternsBook_Csharp.FacadePattern;
 using DesignPatternsBook_Csharp.PrototypePattern;
 using DesignPatternsBook_Csharp.ProxyPattern;
+using DesignPatternsBook_Csharp.PublishPattern;
 using DesignPatternsBook_Csharp.SimpleFactoryPattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
 using DesignPatternsBook_Csharp.TemplatePattern;
@@ -34,6 +35,8 @@ namespace DesignPatternsBook_Csharp
             FacadePattern();
             //建造者模式
             BuilderPattern();
+            //观察者模式
+            PublishPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -122,6 +125,17 @@ namespace DesignPatternsBook_Csharp
             director.Construct(b2);
             Product p2 = b2.GetResult();
             p2.Show();
+            Console.Read();
+        }
+
+        public static void PublishPattern()
+        {
+            ConcreteSubject s=new ConcreteSubject();
+            s.Attach(new ConcreteObserver(s, "X"));
+            s.Attach(new ConcreteObserver(s, "Y"));
+            s.Attach(new ConcreteObserver(s, "Z"));
+            s.SubjectState = "ABC";
+            s.Notify();
             Console.Read();
         }
     }

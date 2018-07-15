@@ -65,6 +65,10 @@
     <Compile Include="ProxyPattern\Proxy.cs" />
     <Compile Include="ProxyPattern\RealSubject.cs" />
     <Compile Include="ProxyPattern\Subject.cs" />
+    <Compile Include="PublishPattern\ConcreteObserver.cs" />
+    <Compile Include="PublishPattern\ConcreteSubject.cs" />
+    <Compile Include="PublishPattern\Observer.cs" />
+    <Compile Include="PublishPattern\Subject.cs" />
     <Compile Include="SimpleFactoryPattern\AddFactory.cs" />
     <Compile Include="SimpleFactoryPattern\IFactory.cs" />
     <Compile Include="SimpleFactoryPattern\Operation.cs" />
