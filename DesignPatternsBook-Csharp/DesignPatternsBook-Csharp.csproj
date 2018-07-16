@@ -43,6 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractFactoryPattern\Department.cs" />
+    <Compile Include="AbstractFactoryPattern\IDepartment.cs" />
+    <Compile Include="AbstractFactoryPattern\AccessDepartment.cs" />
+    <Compile Include="AbstractFactoryPattern\IFactory.cs" />
+    <Compile Include="AbstractFactoryPattern\IUser.cs" />
+    <Compile Include="AbstractFactoryPattern\SqlServerDepartment.cs" />
+    <Compile Include="AbstractFactoryPattern\AccessFactory.cs" />
+    <Compile Include="AbstractFactoryPattern\SqlServerFactory.cs" />
+    <Compile Include="AbstractFactoryPattern\AccessUser.cs" />
+    <Compile Include="AbstractFactoryPattern\SqlserverUser.cs" />
+    <Compile Include="AbstractFactoryPattern\User.cs" />
     <Compile Include="BuilderPattern\Builder.cs" />
     <Compile Include="BuilderPattern\ConcreteBuilder2.cs" />
     <Compile Include="BuilderPattern\ConcreteBuilder1.cs" />

@@ -1,4 +1,5 @@
-﻿using DesignPatternsBook_Csharp.BuilderPattern;
+﻿using DesignPatternsBook_Csharp.AbstractFactoryPattern;
+using DesignPatternsBook_Csharp.BuilderPattern;
 using DesignPatternsBook_Csharp.DecoratorPattern;
 using DesignPatternsBook_Csharp.FacadePattern;
 using DesignPatternsBook_Csharp.PrototypePattern;
@@ -37,6 +38,8 @@ namespace DesignPatternsBook_Csharp
             BuilderPattern();
             //观察者模式
             PublishPattern();
+            //抽象工厂模式
+            AbstractFactoryPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -136,6 +139,21 @@ namespace DesignPatternsBook_Csharp
             s.Attach(new ConcreteObserver(s, "Z"));
             s.SubjectState = "ABC";
             s.Notify();
+            Console.Read();
+        }
+
+        public static void AbstractFactoryPattern()
+        {
+            User user = new User();
+            Department dept = new Department();
+            AbstractFactoryPattern.IFactory factory = new AccessFactory();
+            IUser iu = factory.CreateUser();
+            iu.Insert(user);
+            iu.GetUser(1);
+
+            IDepartment id = factory.createDepartment();
+            id.Insert(dept);
+            id.GetDepartment(1);
             Console.Read();
         }
     }
