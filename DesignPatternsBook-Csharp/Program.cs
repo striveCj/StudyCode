@@ -6,6 +6,7 @@ using DesignPatternsBook_Csharp.PrototypePattern;
 using DesignPatternsBook_Csharp.ProxyPattern;
 using DesignPatternsBook_Csharp.PublishPattern;
 using DesignPatternsBook_Csharp.SimpleFactoryPattern;
+using DesignPatternsBook_Csharp.StatePattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
 using DesignPatternsBook_Csharp.TemplatePattern;
 using System;
@@ -40,6 +41,8 @@ namespace DesignPatternsBook_Csharp
             PublishPattern();
             //抽象工厂模式
             AbstractFactoryPattern();
+            //状态模式
+            StatePattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -51,7 +54,7 @@ namespace DesignPatternsBook_Csharp
             double result = oper.GetResult();
             Console.WriteLine(result);
 
-            IFactory opearFactory = new AddFactory();
+            SimpleFactoryPattern.IFactory opearFactory = new AddFactory();
             Operation opesr = opearFactory.CreateOperation();
             opesr.NumberA = 1;
             opesr.NumberB = 2;
@@ -62,12 +65,12 @@ namespace DesignPatternsBook_Csharp
 
         public static void StrategyPattern()
         {
-            Context context;
-            context = new Context(new ConcreteStrategyA());
+            StrategyPattern.Context context;
+            context = new StrategyPattern.Context(new ConcreteStrategyA());
             context.ContextInterface();
-            context = new Context(new ConcreteStrategyB());
+            context = new StrategyPattern.Context(new ConcreteStrategyB());
             context.ContextInterface();
-            context = new Context(new ConcreteStrategyC());
+            context = new StrategyPattern.Context(new ConcreteStrategyC());
             context.ContextInterface();
             Console.Read();
         }
@@ -154,6 +157,16 @@ namespace DesignPatternsBook_Csharp
             IDepartment id = factory.createDepartment();
             id.Insert(dept);
             id.GetDepartment(1);
+            Console.Read();
+        }
+
+        public static void StatePattern()
+        {
+            StatePattern.Context c = new StatePattern.Context(new ConcreteStateA());
+            c.Request();
+            c.Request();
+            c.Request();
+            c.Request();
             Console.Read();
         }
     }

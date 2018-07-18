@@ -88,6 +88,10 @@
     <Compile Include="SimpleFactoryPattern\OperationMul.cs" />
     <Compile Include="SimpleFactoryPattern\OperationFactory.cs" />
     <Compile Include="SimpleFactoryPattern\OperationSub.cs" />
+    <Compile Include="StatePattern\ConcreteStateA.cs" />
+    <Compile Include="StatePattern\ConcreteStateB.cs" />
+    <Compile Include="StatePattern\Context.cs" />
+    <Compile Include="StatePattern\State.cs" />
     <Compile Include="StrategyPattern\ConcreteStrategyC.cs" />
     <Compile Include="StrategyPattern\ConcreteStrategyB.cs" />
     <Compile Include="StrategyPattern\ConcreteStrategyA.cs" />
