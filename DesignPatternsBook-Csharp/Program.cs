@@ -1,4 +1,5 @@
 ﻿using DesignPatternsBook_Csharp.AbstractFactoryPattern;
+using DesignPatternsBook_Csharp.AdapterPattern;
 using DesignPatternsBook_Csharp.BuilderPattern;
 using DesignPatternsBook_Csharp.DecoratorPattern;
 using DesignPatternsBook_Csharp.FacadePattern;
@@ -43,6 +44,8 @@ namespace DesignPatternsBook_Csharp
             AbstractFactoryPattern();
             //状态模式
             StatePattern();
+            //适配器模式
+            AdapterPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -167,6 +170,13 @@ namespace DesignPatternsBook_Csharp
             c.Request();
             c.Request();
             c.Request();
+            Console.Read();
+        }
+
+        public static void AdapterPattern()
+        {
+            Target target = new Adapter();
+            target.Request();
             Console.Read();
         }
     }

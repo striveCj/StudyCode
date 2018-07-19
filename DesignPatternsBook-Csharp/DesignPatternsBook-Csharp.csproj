@@ -54,6 +54,9 @@
     <Compile Include="AbstractFactoryPattern\AccessUser.cs" />
     <Compile Include="AbstractFactoryPattern\SqlserverUser.cs" />
     <Compile Include="AbstractFactoryPattern\User.cs" />
+    <Compile Include="AdapterPattern\Adaptee.cs" />
+    <Compile Include="AdapterPattern\Adapter.cs" />
+    <Compile Include="AdapterPattern\Target.cs" />
     <Compile Include="BuilderPattern\Builder.cs" />
     <Compile Include="BuilderPattern\ConcreteBuilder2.cs" />
     <Compile Include="BuilderPattern\ConcreteBuilder1.cs" />
