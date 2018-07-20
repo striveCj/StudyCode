@@ -8,7 +8,11 @@ namespace DesignPatternsBook_Csharp.MementoPattern
 {
     class Caretaker
     {
-        private string state;
-        public string State { get { return state; } set { state = value; } }
+        private Memento memento;
+        public Memento Memento
+        {
+            get { return memento; }
+            set { memento = value; }
+        }
     }
 }

@@ -3,6 +3,7 @@ using DesignPatternsBook_Csharp.AdapterPattern;
 using DesignPatternsBook_Csharp.BuilderPattern;
 using DesignPatternsBook_Csharp.DecoratorPattern;
 using DesignPatternsBook_Csharp.FacadePattern;
+using DesignPatternsBook_Csharp.MementoPattern;
 using DesignPatternsBook_Csharp.PrototypePattern;
 using DesignPatternsBook_Csharp.ProxyPattern;
 using DesignPatternsBook_Csharp.PublishPattern;
@@ -46,6 +47,8 @@ namespace DesignPatternsBook_Csharp
             StatePattern();
             //适配器模式
             AdapterPattern();
+            //备忘录模式
+            MementoPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -177,6 +180,24 @@ namespace DesignPatternsBook_Csharp
         {
             Target target = new Adapter();
             target.Request();
+            Console.Read();
+        }
+
+        public static void MementoPattern()
+        {
+            Originator o = new Originator();
+            o.State = "On";
+            o.Show();
+
+            Caretaker c = new Caretaker();
+            c.Memento = o.CreateMemento();
+
+            o.State = "Off";
+            o.Show();
+
+            o.SetMemento(c.Memento);
+            o.Show();
+
             Console.Read();
         }
     }
