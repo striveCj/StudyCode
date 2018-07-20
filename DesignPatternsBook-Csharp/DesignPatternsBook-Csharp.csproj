@@ -72,6 +72,9 @@
     <Compile Include="FacadePattern\SubSystemThree.cs" />
     <Compile Include="FacadePattern\SubSystemTwo.cs" />
     <Compile Include="FacadePattern\SubSystemOne.cs" />
+    <Compile Include="MementoPattern\Caretaker.cs" />
+    <Compile Include="MementoPattern\Memento.cs" />
+    <Compile Include="MementoPattern\Originator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PrototypePattern\ConcretePrototype1.cs" />
