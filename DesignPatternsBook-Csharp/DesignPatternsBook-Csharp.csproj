@@ -62,6 +62,9 @@
     <Compile Include="BuilderPattern\ConcreteBuilder1.cs" />
     <Compile Include="BuilderPattern\Director.cs" />
     <Compile Include="BuilderPattern\Product.cs" />
+    <Compile Include="CompositePattern\Component.cs" />
+    <Compile Include="CompositePattern\Composite.cs" />
+    <Compile Include="CompositePattern\Leaf.cs" />
     <Compile Include="DecoratorPattern\Component.cs" />
     <Compile Include="DecoratorPattern\ConcreteComponent.cs" />
     <Compile Include="DecoratorPattern\ConcreteDecoratorA.cs" />

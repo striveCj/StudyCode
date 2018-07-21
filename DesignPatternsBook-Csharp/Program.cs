@@ -1,6 +1,7 @@
 ﻿using DesignPatternsBook_Csharp.AbstractFactoryPattern;
 using DesignPatternsBook_Csharp.AdapterPattern;
 using DesignPatternsBook_Csharp.BuilderPattern;
+using DesignPatternsBook_Csharp.CompositePattern;
 using DesignPatternsBook_Csharp.DecoratorPattern;
 using DesignPatternsBook_Csharp.FacadePattern;
 using DesignPatternsBook_Csharp.MementoPattern;
@@ -49,6 +50,8 @@ namespace DesignPatternsBook_Csharp
             AdapterPattern();
             //备忘录模式
             MementoPattern();
+            //组合模式
+            CompositePattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -198,6 +201,33 @@ namespace DesignPatternsBook_Csharp
             o.SetMemento(c.Memento);
             o.Show();
 
+            Console.Read();
+        }
+
+        public static void CompositePattern()
+        {
+            Composite root = new Composite("root");
+            root.Add(new Leaf("Leaf A"));
+            root.Add(new Leaf("Leaf B"));
+
+            Composite comp = new Composite("Composite X");
+            root.Add(new Leaf("Leaf xa"));
+            root.Add(new Leaf("Leaf xb"));
+
+            root.Add(comp);
+            Composite comp2 = new Composite("Composite X");
+            comp2.Add(new Leaf("Leaf xya"));
+            comp2.Add(new Leaf("Leaf xyb"));
+            comp.Add(comp2);
+
+            root.Add(comp2);
+            root.Add(new Leaf("Leaf C"));
+
+            Leaf leaf = new Leaf("Leaf D");
+
+            root.Add(leaf);
+            root.Remove(leaf);
+            root.Display(1);
             Console.Read();
         }
     }
