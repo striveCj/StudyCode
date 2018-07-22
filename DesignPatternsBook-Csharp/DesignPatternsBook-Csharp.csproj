@@ -75,6 +75,10 @@
     <Compile Include="FacadePattern\SubSystemThree.cs" />
     <Compile Include="FacadePattern\SubSystemTwo.cs" />
     <Compile Include="FacadePattern\SubSystemOne.cs" />
+    <Compile Include="IteratorPattern\Aggregate.cs" />
+    <Compile Include="IteratorPattern\ConcreteAggregate.cs" />
+    <Compile Include="IteratorPattern\ConcreteIterator.cs" />
+    <Compile Include="IteratorPattern\Iterator.cs" />
     <Compile Include="MementoPattern\Caretaker.cs" />
     <Compile Include="MementoPattern\Memento.cs" />
     <Compile Include="MementoPattern\Originator.cs" />

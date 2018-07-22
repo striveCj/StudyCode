@@ -12,6 +12,7 @@ using DesignPatternsBook_Csharp.SimpleFactoryPattern;
 using DesignPatternsBook_Csharp.StatePattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
 using DesignPatternsBook_Csharp.TemplatePattern;
+using DesignPatternsBook_Csharp.Iterator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,9 @@ namespace DesignPatternsBook_Csharp
             MementoPattern();
             //组合模式
             CompositePattern();
+            //迭代器模式
+            IteratorPattern();
+
         }
 
         public static void SimpleFactoryPattern()
@@ -230,5 +234,23 @@ namespace DesignPatternsBook_Csharp
             root.Display(1);
             Console.Read();
         }
+
+        public static void IteratorPattern()
+        {
+            ConcreteAggregate a = new ConcreteAggregate();
+            a[0] = "张三";
+            a[1] = "李四";
+            a[2] = "王五";
+            a[3] = "赵六";
+            ConcreteIterator i = new ConcreteIterator(a);
+            object item = i.First();
+            while (!i.IsDone())
+            {
+                Console.WriteLine($"{i.CurrentItem()}请先买票");
+                i.Next();
+            }
+            Console.Read();
+        }
+
     }
 }
