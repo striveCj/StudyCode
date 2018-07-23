@@ -13,6 +13,7 @@ using DesignPatternsBook_Csharp.StatePattern;
 using DesignPatternsBook_Csharp.StrategyPattern;
 using DesignPatternsBook_Csharp.TemplatePattern;
 using DesignPatternsBook_Csharp.Iterator;
+using DesignPatternsBook_Csharp.SingletonPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,8 @@ namespace DesignPatternsBook_Csharp
             CompositePattern();
             //迭代器模式
             IteratorPattern();
+            //单例模式
+            SingletonPattern();
 
         }
 
@@ -251,6 +254,15 @@ namespace DesignPatternsBook_Csharp
             }
             Console.Read();
         }
-
+        public static void SingletonPattern()
+        {
+            Singleton s1 = Singleton.GetInstance();
+            Singleton s2 = Singleton.GetInstance();
+            if (s1==s2)
+            {
+                Console.WriteLine("两个对象是相同的实例。");
+            }
+            Console.Read();
+        }
     }
 }
