@@ -14,6 +14,7 @@ using DesignPatternsBook_Csharp.StrategyPattern;
 using DesignPatternsBook_Csharp.TemplatePattern;
 using DesignPatternsBook_Csharp.Iterator;
 using DesignPatternsBook_Csharp.SingletonPattern;
+using DesignPatternsBook_Csharp.BridgePattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,6 +59,8 @@ namespace DesignPatternsBook_Csharp
             IteratorPattern();
             //单例模式
             SingletonPattern();
+            //桥接模式
+            BridgePattern();
 
         }
 
@@ -262,6 +265,17 @@ namespace DesignPatternsBook_Csharp
             {
                 Console.WriteLine("两个对象是相同的实例。");
             }
+            Console.Read();
+        }
+
+        public static void BridgePattern()
+        {
+            Abstraction ab = new RefinedAbstraction();
+            ab.SetImplementor(new ConcreteImplementorA());
+            ab.Operation();
+            ab.SetImplementor(new ConcreteImplementorB());
+            ab.Operation();
+
             Console.Read();
         }
     }
