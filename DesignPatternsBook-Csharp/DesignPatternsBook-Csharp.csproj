@@ -67,6 +67,10 @@
     <Compile Include="BuilderPattern\ConcreteBuilder1.cs" />
     <Compile Include="BuilderPattern\Director.cs" />
     <Compile Include="BuilderPattern\Product.cs" />
+    <Compile Include="CommandPattern\Command.cs" />
+    <Compile Include="CommandPattern\ConcreteCommand.cs" />
+    <Compile Include="CommandPattern\Invoker.cs" />
+    <Compile Include="CommandPattern\Receiver.cs" />
     <Compile Include="CompositePattern\Component.cs" />
     <Compile Include="CompositePattern\Composite.cs" />
     <Compile Include="CompositePattern\Leaf.cs" />

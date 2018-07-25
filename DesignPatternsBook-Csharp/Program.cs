@@ -15,6 +15,7 @@ using DesignPatternsBook_Csharp.TemplatePattern;
 using DesignPatternsBook_Csharp.Iterator;
 using DesignPatternsBook_Csharp.SingletonPattern;
 using DesignPatternsBook_Csharp.BridgePattern;
+using DesignPatternsBook_Csharp.CommandPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,6 +62,8 @@ namespace DesignPatternsBook_Csharp
             SingletonPattern();
             //桥接模式
             BridgePattern();
+            //命令模式
+            CommandPattern();
 
         }
 
@@ -276,6 +279,15 @@ namespace DesignPatternsBook_Csharp
             ab.SetImplementor(new ConcreteImplementorB());
             ab.Operation();
 
+            Console.Read();
+        }
+        public static void CommandPattern()
+        {
+            Receiver r = new Receiver();
+            Command c = new ConcreteCommand(r);
+            Invoker i = new Invoker();
+            i.SetCommand(c);
+            i.ExecuteCommand();
             Console.Read();
         }
     }
