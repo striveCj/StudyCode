@@ -67,6 +67,10 @@
     <Compile Include="BuilderPattern\ConcreteBuilder1.cs" />
     <Compile Include="BuilderPattern\Director.cs" />
     <Compile Include="BuilderPattern\Product.cs" />
+    <Compile Include="ChainOfResponsibilityPattern\ConcreteHandler1.cs" />
+    <Compile Include="ChainOfResponsibilityPattern\ConcreteHandler2.cs" />
+    <Compile Include="ChainOfResponsibilityPattern\ConcreteHandler3.cs" />
+    <Compile Include="ChainOfResponsibilityPattern\Handler.cs" />
     <Compile Include="CommandPattern\Command.cs" />
     <Compile Include="CommandPattern\ConcreteCommand.cs" />
     <Compile Include="CommandPattern\Invoker.cs" />

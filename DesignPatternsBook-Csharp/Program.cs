@@ -16,6 +16,7 @@ using DesignPatternsBook_Csharp.Iterator;
 using DesignPatternsBook_Csharp.SingletonPattern;
 using DesignPatternsBook_Csharp.BridgePattern;
 using DesignPatternsBook_Csharp.CommandPattern;
+using DesignPatternsBook_Csharp.ChainOfResponsibilityPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +65,8 @@ namespace DesignPatternsBook_Csharp
             BridgePattern();
             //命令模式
             CommandPattern();
+            //职责链模式
+            ChainOfResponsibilityPattern();
 
         }
 
@@ -288,6 +291,21 @@ namespace DesignPatternsBook_Csharp
             Invoker i = new Invoker();
             i.SetCommand(c);
             i.ExecuteCommand();
+            Console.Read();
+        }
+
+        public static void ChainOfResponsibilityPattern()
+        {
+            Handler h1 = new ConcreteHandler1();
+            Handler h2 = new ConcreteHandler1();
+            Handler h3 = new ConcreteHandler1();
+            h1.SetSuccessor(h2);
+            h2.SetSuccessor(h3);
+            int[] requests = { 2, 5, 14, 22, 18, 3, 27, 20 };
+            foreach (var request in requests)
+            {
+                h1.HandleRequest(request);
+            }
             Console.Read();
         }
     }
