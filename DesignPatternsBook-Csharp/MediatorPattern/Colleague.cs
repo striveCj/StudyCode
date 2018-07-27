@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace DesignPatternsBook_Csharp.MediatorPattern
 {
-    class Colleague
+     abstract class Colleague
     {
+        protected Mediator mediator;
+        public Colleague(Mediator mediator)
+        {
+            this.mediator = mediator;
+        }
     }
 }

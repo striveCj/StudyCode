@@ -17,6 +17,7 @@ using DesignPatternsBook_Csharp.SingletonPattern;
 using DesignPatternsBook_Csharp.BridgePattern;
 using DesignPatternsBook_Csharp.CommandPattern;
 using DesignPatternsBook_Csharp.ChainOfResponsibilityPattern;
+using DesignPatternsBook_Csharp.MediatorPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +68,8 @@ namespace DesignPatternsBook_Csharp
             CommandPattern();
             //职责链模式
             ChainOfResponsibilityPattern();
-
+            //中介者模式
+            MediatorPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -307,6 +309,19 @@ namespace DesignPatternsBook_Csharp
                 h1.HandleRequest(request);
             }
             Console.Read();
+        }
+
+        public static void MediatorPattern()
+        {
+            ConcreteMediator m = new ConcreteMediator();
+            ConcreteColleague1 c1 = new ConcreteColleague1(m);
+            ConcreteColleague2 c2 = new ConcreteColleague2(m);
+            m.Colleague1 = c1;
+            m.Colleague2 = c2;
+            c1.Send("吃过饭了么?");
+            c2.Send("没有呢，你打算请客?");
+            Console.Read();
+
         }
     }
 }

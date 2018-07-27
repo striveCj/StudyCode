@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DesignPatternsBook_Csharp.MediatorPattern
 {
-    class Mediator
+    abstract class Mediator
     {
+        public abstract void Send(string message, Colleague colleague);
     }
 }
