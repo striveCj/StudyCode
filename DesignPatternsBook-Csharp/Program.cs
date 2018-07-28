@@ -18,6 +18,7 @@ using DesignPatternsBook_Csharp.BridgePattern;
 using DesignPatternsBook_Csharp.CommandPattern;
 using DesignPatternsBook_Csharp.ChainOfResponsibilityPattern;
 using DesignPatternsBook_Csharp.MediatorPattern;
+using DesignPatternsBook_Csharp.InterpreterPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +71,8 @@ namespace DesignPatternsBook_Csharp
             ChainOfResponsibilityPattern();
             //中介者模式
             MediatorPattern();
+            //解释器模式
+            InterpreterPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -322,6 +325,21 @@ namespace DesignPatternsBook_Csharp
             c2.Send("没有呢，你打算请客?");
             Console.Read();
 
+        }
+
+        public static void InterpreterPattern()
+        {
+            InterpreterPattern.Context context = new InterpreterPattern.Context();
+            IList<AbstractExpression> list = new List<AbstractExpression>();
+            list.Add(new TerminalExpression());
+            list.Add(new NoterminalExpression());
+            list.Add(new TerminalExpression());
+            list.Add(new TerminalExpression());
+            foreach (AbstractExpression exp in list)
+            {
+                exp.Interprent(context);
+            }
+            Console.Read();
         }
     }
 }
