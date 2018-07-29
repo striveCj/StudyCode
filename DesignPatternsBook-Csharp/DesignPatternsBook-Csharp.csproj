@@ -103,6 +103,10 @@
     <Compile Include="FacadePattern\SubSystemThree.cs" />
     <Compile Include="FacadePattern\SubSystemTwo.cs" />
     <Compile Include="FacadePattern\SubSystemOne.cs" />
+    <Compile Include="FlyweightPattern\ConcreteFlyweight.cs" />
+    <Compile Include="FlyweightPattern\Flyweight.cs" />
+    <Compile Include="FlyweightPattern\FlyweightFactory.cs" />
+    <Compile Include="FlyweightPattern\UnsharedConcreteFlyweight.cs" />
     <Compile Include="InterpreterPattern\AbstractExpression.cs" />
     <Compile Include="InterpreterPattern\Context.cs" />
     <Compile Include="InterpreterPattern\NoterminalExpression.cs" />

@@ -19,6 +19,7 @@ using DesignPatternsBook_Csharp.CommandPattern;
 using DesignPatternsBook_Csharp.ChainOfResponsibilityPattern;
 using DesignPatternsBook_Csharp.MediatorPattern;
 using DesignPatternsBook_Csharp.InterpreterPattern;
+using DesignPatternsBook_Csharp.FlyweightPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -73,6 +74,8 @@ namespace DesignPatternsBook_Csharp
             MediatorPattern();
             //解释器模式
             InterpreterPattern();
+            //享元模式
+            FlyweightPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -340,6 +343,27 @@ namespace DesignPatternsBook_Csharp
                 exp.Interprent(context);
             }
             Console.Read();
+        }
+
+        public static void FlyweightPattern()
+        {
+            int extrinsicatate = 22;
+            FlyweightFactory f = new FlyweightFactory();
+
+            Flyweight fx = f.GetFlyweight("X");
+            fx.Operation(--extrinsicatate);
+            Flyweight fy = f.GetFlyweight("Y");
+            fx.Operation(--extrinsicatate);
+            Flyweight fz = f.GetFlyweight("Z");
+            fx.Operation(--extrinsicatate);
+
+            Flyweight uf = new UnsharedConcreteFlyweight();
+            uf.Operation(--extrinsicatate);
+
+            Console.Read();
+
+
+
         }
     }
 }
