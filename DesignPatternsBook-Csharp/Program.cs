@@ -20,6 +20,7 @@ using DesignPatternsBook_Csharp.ChainOfResponsibilityPattern;
 using DesignPatternsBook_Csharp.MediatorPattern;
 using DesignPatternsBook_Csharp.InterpreterPattern;
 using DesignPatternsBook_Csharp.FlyweightPattern;
+using DesignPatternsBook_Csharp.VisitorPattern;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -76,6 +77,8 @@ namespace DesignPatternsBook_Csharp
             InterpreterPattern();
             //享元模式
             FlyweightPattern();
+            //访问者模式
+            VisitorPattern();
         }
 
         public static void SimpleFactoryPattern()
@@ -361,9 +364,19 @@ namespace DesignPatternsBook_Csharp
             uf.Operation(--extrinsicatate);
 
             Console.Read();
+        }
 
+        public static void VisitorPattern()
+        {
+            ObjectStructure o = new ObjectStructure();
+            o.Attach(new ConcreteElementA());
+            o.Attach(new ConcreteElementB());
 
+            ConcreteVisittor1 v1 = new ConcreteVisittor1();
+            ConcreteVisittor2 v2 = new ConcreteVisittor2();
 
+            o.Accept(v1);
+            o.Accept(v2);
         }
     }
 }

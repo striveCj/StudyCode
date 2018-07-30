@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DesignPatternsBook_Csharp.VisitorPattern
 {
-    class Element
+    abstract class Element
     {
+        public abstract void Accept(Visitor visitor);
     }
 }
