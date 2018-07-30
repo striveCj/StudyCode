@@ -155,6 +155,13 @@
     <Compile Include="TemplatePattern\AbstractClass.cs" />
     <Compile Include="TemplatePattern\ConcreteClassB.cs" />
     <Compile Include="TemplatePattern\ConcreteClassA.cs" />
+    <Compile Include="VisitorPattern\ConcreteElementA.cs" />
+    <Compile Include="VisitorPattern\ConcreteElementB.cs" />
+    <Compile Include="VisitorPattern\ConcreteVisittor1.cs" />
+    <Compile Include="VisitorPattern\ConcreteVisittor2.cs" />
+    <Compile Include="VisitorPattern\Element.cs" />
+    <Compile Include="VisitorPattern\ObjectStructure.cs" />
+    <Compile Include="VisitorPattern\Visitor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
