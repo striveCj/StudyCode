@@ -18,7 +18,7 @@ namespace EFStudy
                     Name = "陈杰",
                     Url = "http://www.cnblogs.com/chen-jie"
                 });
-                efDbContext.SaveChanges();
+                efDbContext.SaveChanges(); 
             }
         }
     }
