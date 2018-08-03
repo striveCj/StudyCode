@@ -13,7 +13,7 @@ namespace DesignPatternsBook_Csharp.AbstractFactoryPattern
             return new AccessUser();
         }
 
-        public IDepartment CreateDepartment()
+        public IDepartment createDepartment()
         {
             return new AccessDepartment();
         }

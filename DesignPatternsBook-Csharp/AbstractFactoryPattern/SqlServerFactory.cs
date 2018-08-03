@@ -13,9 +13,10 @@ namespace DesignPatternsBook_Csharp.AbstractFactoryPattern
             return new SqlserverUser();
         }
 
-        public IDepartment CreateDepartment()
+        public IDepartment createDepartment()
         {
             return new SqlServerDepartment();
         }
+
     }
 }
