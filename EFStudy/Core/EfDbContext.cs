@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static EFStudy.Model.Order;
 
 namespace EFStudy.Core
 {
@@ -23,18 +24,21 @@ namespace EFStudy.Core
         }
         public DbSet<Blog> Blogs { get; set; }
 
-       
-    }
-    public class Department
-    {
-        public int DepartmentID { get; set; }
-        public string Name { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Order>().ToTable("Orders");
+            modelBuilder.ComplexType<Address>();
+            modelBuilder.Conventions.Add<CustomKeyConvention>();
+            //TODO: 利用Properties方法查找模型全局处理
+            modelBuilder.Properties<decimal>().Configure(config => config.HasPrecision(10, 2));
+            //TODO:对多个属性进行相同的约定配置时，最后一个约定将覆盖前面所有相同的约定
+            modelBuilder.Properties<string>().Configure(c => c.HasMaxLength(500));
+            modelBuilder.Properties<string>().Configure(c => c.HasMaxLength(250));
+        }
     }
 
-    public class StudentAddress
-    {
-        public int AddressId { get; set; }
 
-        public int StudentId { get; set; }
-    }
+
+
+
 }

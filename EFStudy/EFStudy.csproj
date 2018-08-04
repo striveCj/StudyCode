@@ -54,6 +54,11 @@
   <ItemGroup>
     <Compile Include="Core\EfDbContext.cs" />
     <Compile Include="Model\Blog.cs" />
+    <Compile Include="Model\Course.cs" />
+    <Compile Include="Model\CustomKeyConvention.cs" />
+    <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\Order.cs" />
+    <Compile Include="Model\StudentAddress.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
