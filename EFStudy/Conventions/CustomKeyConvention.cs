@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EFStudy.Model
+namespace EFStudy.Conventions
 {
     /// <summary>
     /// 自定义类约定

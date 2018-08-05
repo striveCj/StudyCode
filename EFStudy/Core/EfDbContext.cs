@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using static EFStudy.Model.Order;
 
+using EFStudy.Conventions;
+using System.Text.RegularExpressions;
+
 namespace EFStudy.Core
 {
     public class EfDbContext:DbContext
@@ -29,11 +32,24 @@ namespace EFStudy.Core
             modelBuilder.Entity<Order>().ToTable("Orders");
             modelBuilder.ComplexType<Address>();
             modelBuilder.Conventions.Add<CustomKeyConvention>();
+            modelBuilder.Conventions.Add<DateTime2Convention>();
             //TODO: 利用Properties方法查找模型全局处理
             modelBuilder.Properties<decimal>().Configure(config => config.HasPrecision(10, 2));
             //TODO:对多个属性进行相同的约定配置时，最后一个约定将覆盖前面所有相同的约定
             modelBuilder.Properties<string>().Configure(c => c.HasMaxLength(500));
             modelBuilder.Properties<string>().Configure(c => c.HasMaxLength(250));
+            //TODO:自定义类型约定
+            modelBuilder.Types().Configure(c => c.ToTable(GetTableName(c.ClrType)));
+        }
+        /// <summary>
+        /// 自定义类型约定
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        private string GetTableName(Type type)
+        {
+            var result = Regex.Replace(type.Name, ".[A-Z]", m => m.Value[0] + "_" + m.Value[1]);
+            return result.ToLower();
         }
     }
 
