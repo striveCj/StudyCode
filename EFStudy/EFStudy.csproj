@@ -52,9 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\IsUnicode.cs" />
     <Compile Include="Attributes\NonUnicode.cs" />
     <Compile Include="Conventions\DateTime2Convention.cs" />
     <Compile Include="Core\EfDbContext.cs" />
+    <Compile Include="Model\BillingDetail.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Conventions\CustomKeyConvention.cs" />

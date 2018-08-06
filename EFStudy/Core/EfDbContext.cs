@@ -9,6 +9,8 @@ using static EFStudy.Model.Order;
 
 using EFStudy.Conventions;
 using System.Text.RegularExpressions;
+using EFStudy.Attributes;
+using System.Reflection;
 
 namespace EFStudy.Core
 {
@@ -40,6 +42,9 @@ namespace EFStudy.Core
             modelBuilder.Properties<string>().Configure(c => c.HasMaxLength(250));
             //TODO:自定义类型约定
             modelBuilder.Types().Configure(c => c.ToTable(GetTableName(c.ClrType)));
+            modelBuilder.Properties().Where(x => x.GetCustomAttributes(false).OfType<IsUnicode>().Any()).Configure(c => c.IsUnicode(c.ClrPropertyInfo.GetCustomAttribute<IsUnicode>().Unicode));
+            //简化
+            modelBuilder.Properties().Having(x => x.GetCustomAttributes(false).OfType<IsUnicode>().FirstOrDefault()).Configure((config, att) => config.IsUnicode(att.Unicode));
         }
         /// <summary>
         /// 自定义类型约定
