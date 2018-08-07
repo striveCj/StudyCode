@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EFStudy.Attributes
 {
-    [AttributeUsage(AttributeTargets.Property,AllowMultiple =false]
+    [AttributeUsage(AttributeTargets.Property,AllowMultiple =false)]
     internal class IsUnicode:Attribute
     {
         public bool Unicode { get; set; }

@@ -1,4 +1,5 @@
 ﻿using EFStudy.Core;
+using EFStudy.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +14,15 @@ namespace EFStudy
         {
             using (var efDbContext=new EfDbContext())
             {
-                efDbContext.Blogs.Add(new Model.Blog()
-                {
-                    Name = "陈杰",
-                    Url = "http://www.cnblogs.com/chen-jie"
-                });
-                efDbContext.SaveChanges(); 
+                //efDbContext.Blogs.Add(new Model.Blog()
+                //{
+                //    Name = "陈杰",
+                //    Url = "http://www.cnblogs.com/chen-jie"
+                //});
+                //efDbContext.SaveChanges(); 
+                //var query = (from b in efDbContext.BullingDetails.OfType<BankAccount>() select b).ToList();
+
+            
             }
         }
     }

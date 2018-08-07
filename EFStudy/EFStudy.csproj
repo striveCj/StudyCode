@@ -56,10 +56,13 @@
     <Compile Include="Attributes\NonUnicode.cs" />
     <Compile Include="Conventions\DateTime2Convention.cs" />
     <Compile Include="Core\EfDbContext.cs" />
+    <Compile Include="Core\MyConfiguration.cs" />
+    <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BillingDetail.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Conventions\CustomKeyConvention.cs" />
+    <Compile Include="Model\CreditCard.cs" />
     <Compile Include="Model\Department.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\StudentAddress.cs" />
