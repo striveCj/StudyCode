@@ -11,6 +11,7 @@ using EFStudy.Conventions;
 using System.Text.RegularExpressions;
 using EFStudy.Attributes;
 using System.Reflection;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EFStudy.Core
 {
@@ -28,11 +29,19 @@ namespace EFStudy.Core
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EfDbContext>());
         }
         public DbSet<Blog> Blogs { get; set; }
-        public DbSet<BillingDetail> BullingDetails { get; set; }
+        //public DbSet<BillingDetail> BullingDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BillingDetail>().Map<BankAccount>(m => m.Requires("BillingDetailType").HasValue(1)).Map<CreditCard>(m => m.Requires("BillingDetailType").HasValue(2));
+            modelBuilder.Entity<Blog>().ToTable("Blogs");
+            modelBuilder.Entity<Blog>().HasKey(k => k.Id).Property(p=>p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            modelBuilder.Entity<Blog>().Property(p => p.Name).HasMaxLength(50);
+            modelBuilder.Entity<Blog>().Property(p => p.CreatedTime).IsOptional();
+            //TODO:如果要设置联合主键可以通过匿名对象实现
+            //modelBuilder.Entity<Blog>().HasKey(k => new { Id = k.Id, BlogId = k.BlogId });
+            //TODO:配置映射
+            base.OnModelCreating(modelBuilder);
+            //modelBuilder.Entity<BillingDetail>().Map<BankAccount>(m => m.Requires("BillingDetailType").HasValue(1)).Map<CreditCard>(m => m.Requires("BillingDetailType").HasValue(2));
             //modelBuilder.Entity<Order>().ToTable("Orders");
             //modelBuilder.ComplexType<Address>();
             //modelBuilder.Conventions.Add<CustomKeyConvention>();
