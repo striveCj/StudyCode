@@ -16,5 +16,7 @@ namespace EFStudy.Model
         public double Double { get; set; }
 
         public float Float { get; set; }
+
+        public string Char { get; set; }
     }
 }

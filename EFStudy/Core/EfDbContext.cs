@@ -29,6 +29,8 @@ namespace EFStudy.Core
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EfDbContext>());
         }
         public DbSet<Blog> Blogs { get; set; }
+
+        public DbSet<User> User { get; set; }
         //public DbSet<BillingDetail> BullingDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -37,6 +39,9 @@ namespace EFStudy.Core
             modelBuilder.Entity<Blog>().HasKey(k => k.Id).Property(p=>p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             modelBuilder.Entity<Blog>().Property(p => p.Name).HasMaxLength(50);
             modelBuilder.Entity<Blog>().Property(p => p.CreatedTime).IsOptional();
+            modelBuilder.Entity<Blog>().Property(p => p.Char).HasColumnType("char").HasMaxLength(11);
+            //TODO:另一种实现方式
+            modelBuilder.Entity<Blog>().Property(p => p.Char).IsFixedLength();
             //TODO:如果要设置联合主键可以通过匿名对象实现
             //modelBuilder.Entity<Blog>().HasKey(k => new { Id = k.Id, BlogId = k.BlogId });
             //TODO:配置映射
