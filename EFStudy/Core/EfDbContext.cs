@@ -38,12 +38,18 @@ namespace EFStudy.Core
             modelBuilder.Entity<Blog>().ToTable("Blogs");
             modelBuilder.Entity<Blog>().HasKey(k => k.Id).Property(p=>p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             modelBuilder.Entity<Blog>().Property(p => p.Name).HasMaxLength(50);
+            //TODO:乐观并发Token
+            modelBuilder.Entity<Blog>().Property(p => p.Name).IsConcurrencyToken();
+            //TODO:乐观并发行版本
+            //modelBuilder.Entity<Blog>().Property(p => p.Char).IsRowVersion();
             modelBuilder.Entity<Blog>().Property(p => p.CreatedTime).IsOptional();
             modelBuilder.Entity<Blog>().Property(p => p.Char).HasColumnType("char").HasMaxLength(11);
             //TODO:另一种实现方式
             modelBuilder.Entity<Blog>().Property(p => p.Char).IsFixedLength();
             //TODO:如果要设置联合主键可以通过匿名对象实现
             //modelBuilder.Entity<Blog>().HasKey(k => new { Id = k.Id, BlogId = k.BlogId });
+            //TODO:通过ComplexType显示指定复杂类型
+            modelBuilder.ComplexType<Model.Address>();
             //TODO:配置映射
             base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<BillingDetail>().Map<BankAccount>(m => m.Requires("BillingDetailType").HasValue(1)).Map<CreditCard>(m => m.Requires("BillingDetailType").HasValue(2));

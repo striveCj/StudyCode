@@ -22,17 +22,22 @@ namespace EFStudy
                 //efDbContext.SaveChanges();
                 //var query = (from b in efDbContext.BullingDetails.OfType<BankAccount>() select b).ToList();
 
-                var users = new User
-                {
-                    BirthDate = DateTime.Now,
-                    CreatedTime = DateTime.Now,
-                    ModifiedTime = DateTime.Now,
-                    Name = "chenjie",
-                    IDNumber = "46031399108274789"
-                };
-                efDbContext.User.Add(users);
-                efDbContext.SaveChanges();
+                //var users = new User
+                //{
+                //    BirthDate = DateTime.Now,
+                //    CreatedTime = DateTime.Now,
+                //    ModifiedTime = DateTime.Now,
+                //    Name = "chenjie",
+                //    IDNumber = "46031399108274789"
+                //};
+                //efDbContext.User.Add(users);
+                //efDbContext.SaveChanges();
 
+                var user = efDbContext.User.Find(1);
+                //原始值
+                var originaValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).OriginalValue;
+                //当前值
+                var currentValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).CurrentValue;
 
             }
         }
