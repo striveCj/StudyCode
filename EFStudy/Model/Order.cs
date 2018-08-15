@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace EFStudy.Model
 {
-     public class Order
+    public class Order:BaseEntity
     {
-        public int Id;
-        public string Name;
-        public class Address
-        {
-            public string Street;
-            public string Region;
-            public string Country;
-        }
+        public byte Quanatity { get; set; }
+        public int Price { get; set; }
+        public int CustomerId { get; set; }
+
+        public virtual Customer Customer  { get;set;}
     }
 }

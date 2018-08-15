@@ -65,7 +65,10 @@
     <Compile Include="Model\Course.cs" />
     <Compile Include="Conventions\CustomKeyConvention.cs" />
     <Compile Include="Model\CreditCard.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Department.cs" />
+    <Compile Include="Model\Map\CustomerMap.cs" />
+    <Compile Include="Model\Map\OrderMap.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\StudentAddress.cs" />
     <Compile Include="Model\User.cs" />
