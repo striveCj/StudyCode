@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using EFStudy.Attributes;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 
 namespace EFStudy.Core
 {
@@ -35,21 +36,28 @@ namespace EFStudy.Core
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Blog>().ToTable("Blogs");
-            modelBuilder.Entity<Blog>().HasKey(k => k.Id).Property(p=>p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-            modelBuilder.Entity<Blog>().Property(p => p.Name).HasMaxLength(50);
+            var typesToRegister = Assembly.GetExecutingAssembly().GetTypes().Where(type => !String.IsNullOrEmpty(type.Namespace)).Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
+            foreach (var type in typesToRegister)
+            {
+                dynamic configurationInstance = Activator.CreateInstance(type);
+                modelBuilder.Configurations.Add(configurationInstance);
+            }
+
+            //modelBuilder.Entity<Blog>().ToTable("Blogs");
+            //modelBuilder.Entity<Blog>().HasKey(k => k.Id).Property(p=>p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            //modelBuilder.Entity<Blog>().Property(p => p.Name).HasMaxLength(50);
             //TODO:乐观并发Token
-            modelBuilder.Entity<Blog>().Property(p => p.Name).IsConcurrencyToken();
+            //modelBuilder.Entity<Blog>().Property(p => p.Name).IsConcurrencyToken();
             //TODO:乐观并发行版本
             //modelBuilder.Entity<Blog>().Property(p => p.Char).IsRowVersion();
-            modelBuilder.Entity<Blog>().Property(p => p.CreatedTime).IsOptional();
-            modelBuilder.Entity<Blog>().Property(p => p.Char).HasColumnType("char").HasMaxLength(11);
+           // modelBuilder.Entity<Blog>().Property(p => p.CreatedTime).IsOptional();
+            //modelBuilder.Entity<Blog>().Property(p => p.Char).HasColumnType("char").HasMaxLength(11);
             //TODO:另一种实现方式
-            modelBuilder.Entity<Blog>().Property(p => p.Char).IsFixedLength();
+           // modelBuilder.Entity<Blog>().Property(p => p.Char).IsFixedLength();
             //TODO:如果要设置联合主键可以通过匿名对象实现
             //modelBuilder.Entity<Blog>().HasKey(k => new { Id = k.Id, BlogId = k.BlogId });
             //TODO:通过ComplexType显示指定复杂类型
-            modelBuilder.ComplexType<Model.Address>();
+            //modelBuilder.ComplexType<Model.Address>();
             //TODO:配置映射
             base.OnModelCreating(modelBuilder);
             //modelBuilder.Entity<BillingDetail>().Map<BankAccount>(m => m.Requires("BillingDetailType").HasValue(1)).Map<CreditCard>(m => m.Requires("BillingDetailType").HasValue(2));
