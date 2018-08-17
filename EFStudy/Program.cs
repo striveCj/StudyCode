@@ -14,6 +14,31 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
+                var customer = new Customer
+                {
+                    Name = "chenjie",
+                    Email = "530216775@q.com",
+                    CreatedTime = DateTime.Now,
+                    ModifiedTime = DateTime.Now,
+                    Orders = new List<Order>
+                {
+                    new Order
+                    {
+                        Quanatity=12,
+                        Price=1500,
+                        CreatedTime=DateTime.Now,
+                    ModifiedTime=DateTime.Now
+                    },new Order
+                    {
+                        Quanatity=10,
+                        Price=2500,
+                        CreatedTime=DateTime.Now,
+                        ModifiedTime=DateTime.Now
+                    }
+                }
+                };
+                efDbContext.Customer.Add(customer);
+                efDbContext.SaveChanges();
                 //efDbContext.Blogs.Add(new Model.Blog()
                 //{
                 //    Name = "陈杰",
@@ -33,11 +58,11 @@ namespace EFStudy
                 //efDbContext.User.Add(users);
                 //efDbContext.SaveChanges();
 
-                var user = efDbContext.User.Find(1);
-                //原始值
-                var originaValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).OriginalValue;
-                //当前值
-                var currentValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).CurrentValue;
+                //var user = efDbContext.User.Find(1);
+                ////原始值
+                //var originaValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).OriginalValue;
+                ////当前值
+                //var currentValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).CurrentValue;
 
             }
         }

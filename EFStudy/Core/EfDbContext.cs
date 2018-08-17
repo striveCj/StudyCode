@@ -29,10 +29,11 @@ namespace EFStudy.Core
             //如果EF检测到数据模型发生了改变，将更新模型
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EfDbContext>());
         }
-        public DbSet<Blog> Blogs { get; set; }
+        //public DbSet<Blog> Blogs { get; set; }
 
-        public DbSet<User> User { get; set; }
+        //public DbSet<User> User { get; set; }
         //public DbSet<BillingDetail> BullingDetails { get; set; }
+        public DbSet<Customer> Customer { get;set;}
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
