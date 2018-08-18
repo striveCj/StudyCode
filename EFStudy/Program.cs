@@ -14,31 +14,83 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-                var customer = new Customer
+                var student = new Student
                 {
-                    Name = "chenjie",
-                    Email = "530216775@q.com",
+                    Name = "Jeffcky",
+                    Age = 26,
                     CreatedTime = DateTime.Now,
                     ModifiedTime = DateTime.Now,
-                    Orders = new List<Order>
-                {
-                    new Order
+                    Courses = new List<Course>
                     {
-                        Quanatity=12,
-                        Price=1500,
-                        CreatedTime=DateTime.Now,
-                    ModifiedTime=DateTime.Now
-                    },new Order
-                    {
-                        Quanatity=10,
-                        Price=2500,
-                        CreatedTime=DateTime.Now,
-                        ModifiedTime=DateTime.Now
+                        new Course
+                        {
+                            Name="C#",
+                            MaximumStrength=12,
+                            CreatedTime=DateTime.Now,
+                            ModifiedTime=DateTime.Now
+                        },
+                        new Course
+                        {
+                            Name="EntityFrameWork6.X",
+                            MaximumStrength=12,
+                            CreatedTime=DateTime.Now,
+                            ModifiedTime=DateTime.Now
+                        }
                     }
-                }
+
                 };
-                efDbContext.Customer.Add(customer);
+                Course course = new Course
+                {
+                    Name = "WebApi",
+                    MaximumStrength = 12,
+                    CreatedTime = DateTime.Now,
+                    ModifiedTime = DateTime.Now,
+                    Students = new List<Student>
+                    {
+                        new Student
+                        {
+                            Name="Raviendra",
+                            Age=25,
+                            CreatedTime=DateTime.Now,
+                            ModifiedTime=DateTime.Now
+                        },
+                        new Student
+                        {
+                            Name="Pradeep",
+                            Age=25,
+                            CreatedTime=DateTime.Now,
+                            ModifiedTime=DateTime.Now
+                        }
+                    }
+
+                };
+                efDbContext.Student.Add(student);
                 efDbContext.SaveChanges();
+                //var customer = new Customer
+                //{
+                //    Name = "chenjie",
+                //    Email = "530216775@q.com",
+                //    CreatedTime = DateTime.Now,
+                //    ModifiedTime = DateTime.Now,
+                //    Orders = new List<Order>
+                //{
+                //    new Order
+                //    {
+                //        Quanatity=12,
+                //        Price=1500,
+                //        CreatedTime=DateTime.Now,
+                //    ModifiedTime=DateTime.Now
+                //    },new Order
+                //    {
+                //        Quanatity=10,
+                //        Price=2500,
+                //        CreatedTime=DateTime.Now,
+                //        ModifiedTime=DateTime.Now
+                //    }
+                //}
+                //};
+                //efDbContext.Customer.Add(customer);
+                //efDbContext.SaveChanges();
                 //efDbContext.Blogs.Add(new Model.Blog()
                 //{
                 //    Name = "陈杰",

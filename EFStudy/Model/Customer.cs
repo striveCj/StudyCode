@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace EFStudy.Model
 {
-    public class Customer : BaseEntity
+    public class Customer:BaseEntity
     {
-        /// <summary>
-        /// 课程名称
-        /// </summary>
         public string Name { get; set; }
-        /// <summary>
-        /// 课程时长
-        /// </summary>
-        public int MaximumStrength { get; set; }
-        public virtual ICollection<Student> Students { get; set; }
+
+        public string Email { get; set; }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace EFStudy.Model
 {
-    public class Course
+    public class Course:BaseEntity
     {
-        public int CourseID { get; set; }
-        public string Title { get; set; }
-        public int Credits { get; set; }
-        public int DepartmentID { get; set; }
-
-        public virtual Department Department { get; set; }
+        /// <summary>
+        /// 课程名称
+        /// </summary>
+        public string Name { get; set; }
+        /// <summary>
+        /// 课程时长
+        /// </summary>
+        public int MaximumStrength { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }
