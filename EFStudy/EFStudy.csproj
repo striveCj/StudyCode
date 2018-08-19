@@ -70,6 +70,8 @@
     <Compile Include="Model\Map\CourseMap.cs" />
     <Compile Include="Model\Map\CustomerMap.cs" />
     <Compile Include="Model\Map\OrderMap.cs" />
+    <Compile Include="Model\Map\StudentContactMap.cs" />
+    <Compile Include="Model\StudentContact.cs" />
     <Compile Include="Model\Map\StudentMap.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Student.cs" />

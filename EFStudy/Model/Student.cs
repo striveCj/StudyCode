@@ -11,6 +11,8 @@ namespace EFStudy.Model
         public string Name { get; set; }
         public byte Age { get; set; }
 
+        public virtual StudentContact Contact { get; set; }
+
         public virtual ICollection<Course> Courses { get; set; }
     }
 }

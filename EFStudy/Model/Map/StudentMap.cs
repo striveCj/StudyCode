@@ -19,6 +19,7 @@ namespace EFStudy.Model.Map
             Property(t => t.Age);
             Property(t => t.CreatedTime);
             Property(t => t.ModifiedTime);
+            HasOptional(x => x.Contact).WithRequired(l => l.Student);
             HasMany(t => t.Courses).WithMany(c => c.Students).Map(t => t.ToTable("StudentCourses").MapLeftKey("StudentId").MapRightKey("CourseId"));
 
         }
