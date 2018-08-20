@@ -47,7 +47,14 @@ namespace EFStudy.Core
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.Configurations.Add(configurationInstance);
             }
-
+            //TODO:私有化属性映射
+            modelBuilder.Types().Configure(d => {
+                var nonPublicProperties = d.ClrType.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance);
+                foreach (var p in nonPublicProperties)
+                {
+                    d.Property(p).HasColumnName(p.Name);
+                }
+            });
             //modelBuilder.Entity<Blog>().ToTable("Blogs");
             //modelBuilder.Entity<Blog>().HasKey(k => k.Id).Property(p=>p.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
             //modelBuilder.Entity<Blog>().Property(p => p.Name).HasMaxLength(50);
