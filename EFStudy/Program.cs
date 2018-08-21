@@ -14,58 +14,62 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-                var student = new Student
-                {
-                    Name = "Jeffcky",
-                    Age = 26,
-                    CreatedTime = DateTime.Now,
-                    ModifiedTime = DateTime.Now,
-                    Courses = new List<Course>
-                    {
-                        new Course
-                        {
-                            Name="C#",
-                            MaximumStrength=12,
-                            CreatedTime=DateTime.Now,
-                            ModifiedTime=DateTime.Now
-                        },
-                        new Course
-                        {
-                            Name="EntityFrameWork6.X",
-                            MaximumStrength=12,
-                            CreatedTime=DateTime.Now,
-                            ModifiedTime=DateTime.Now
-                        }
-                    }
+                ModelAdded(efDbContext);
+                ModelUnChanged(efDbContext);
+                ModelModified(efDbContext);
+                ModelDeleted(efDbContext);
+                //var student = new Student
+                //{
+                //    Name = "Jeffcky",
+                //    Age = 26,
+                //    CreatedTime = DateTime.Now,
+                //    ModifiedTime = DateTime.Now,
+                //    Courses = new List<Course>
+                //    {
+                //        new Course
+                //        {
+                //            Name="C#",
+                //            MaximumStrength=12,
+                //            CreatedTime=DateTime.Now,
+                //            ModifiedTime=DateTime.Now
+                //        },
+                //        new Course
+                //        {
+                //            Name="EntityFrameWork6.X",
+                //            MaximumStrength=12,
+                //            CreatedTime=DateTime.Now,
+                //            ModifiedTime=DateTime.Now
+                //        }
+                //    }
 
-                };
-                Course course = new Course
-                {
-                    Name = "WebApi",
-                    MaximumStrength = 12,
-                    CreatedTime = DateTime.Now,
-                    ModifiedTime = DateTime.Now,
-                    Students = new List<Student>
-                    {
-                        new Student
-                        {
-                            Name="Raviendra",
-                            Age=25,
-                            CreatedTime=DateTime.Now,
-                            ModifiedTime=DateTime.Now
-                        },
-                        new Student
-                        {
-                            Name="Pradeep",
-                            Age=25,
-                            CreatedTime=DateTime.Now,
-                            ModifiedTime=DateTime.Now
-                        }
-                    }
+                //};
+                //Course course = new Course
+                //{
+                //    Name = "WebApi",
+                //    MaximumStrength = 12,
+                //    CreatedTime = DateTime.Now,
+                //    ModifiedTime = DateTime.Now,
+                //    Students = new List<Student>
+                //    {
+                //        new Student
+                //        {
+                //            Name="Raviendra",
+                //            Age=25,
+                //            CreatedTime=DateTime.Now,
+                //            ModifiedTime=DateTime.Now
+                //        },
+                //        new Student
+                //        {
+                //            Name="Pradeep",
+                //            Age=25,
+                //            CreatedTime=DateTime.Now,
+                //            ModifiedTime=DateTime.Now
+                //        }
+                //    }
 
-                };
-                efDbContext.Student.Add(student);
-                efDbContext.SaveChanges();
+                //};
+                //efDbContext.Student.Add(student);
+                //efDbContext.SaveChanges();
                 //var customer = new Customer
                 //{
                 //    Name = "chenjie",
@@ -117,6 +121,70 @@ namespace EFStudy
                 //var currentValues = efDbContext.Entry(user).ComplexProperty(u => u.Address).CurrentValue;
 
             }
+        }
+        /// <summary>
+        /// 不使用Add方法去添加实体(added)
+        /// </summary>
+        /// <param name="efContext"></param>
+        public static void ModelAdded(EfDbContext efContext)
+        {
+            var customer = new Customer
+            {
+                Name = "chenjie",
+                Email = "530216775@qq.com"
+            };
+            efContext.Entry(customer).State = System.Data.Entity.EntityState.Added;
+            efContext.SaveChanges();
+        }
+        /// <summary>
+        /// 附加追踪
+        /// </summary>
+        /// <param name="efContext"></param>
+        public static void ModelUnChanged(EfDbContext efContext)
+        {
+            var customer = new Customer
+            {
+                Name = "chenjie",
+                Email = "530216775@qq.com"
+            };
+            efContext.Customer.Attach(customer);
+            efContext.Entry(customer).State= System.Data.Entity.EntityState.Unchanged;
+            efContext.SaveChanges();
+        }
+        /// <summary>
+        /// 修改操作
+        /// </summary>
+        /// <param name="efContext"></param>
+        public static void ModelModified(EfDbContext efContext)
+        {
+            var customer = new Customer()
+            {
+                Id = 1,
+                Name = "chenjie",
+                CreatedTime = DateTime.Now,
+                ModifiedTime = DateTime.Now
+            };
+            efContext.Entry(customer).State = System.Data.Entity.EntityState.Modified;
+            efContext.SaveChanges();
+
+        }
+
+        /// <summary>
+        /// 删除操作
+        /// </summary>
+        /// <param name="efContext"></param>
+        public static void ModelDeleted(EfDbContext efContext)
+        {
+            var customer = new Customer()
+            {
+                Id = 1,
+                Name = "chenjie",
+                CreatedTime = DateTime.Now,
+                ModifiedTime = DateTime.Now
+            };
+            efContext.Entry(customer).State = System.Data.Entity.EntityState.Deleted;
+            efContext.SaveChanges();
+
         }
     }
 }
