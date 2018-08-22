@@ -14,10 +14,16 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-                ModelAdded(efDbContext);
-                ModelUnChanged(efDbContext);
-                ModelModified(efDbContext);
-                ModelDeleted(efDbContext);
+                //饥饿加载
+                //var querycustomer = efDbContext.Customer.Include("Orders").FirstOrDefault();
+                var querycustomer = efDbContext.Customer.FirstOrDefault();
+                //显示加载
+                efDbContext.Entry(querycustomer).Collection(d => d.Orders).Load();
+                var queryOrders = querycustomer.Orders;
+                //ModelAdded(efDbContext);
+                //ModelUnChanged(efDbContext);
+                //ModelModified(efDbContext);
+                //ModelDeleted(efDbContext);
                 //var student = new Student
                 //{
                 //    Name = "Jeffcky",
