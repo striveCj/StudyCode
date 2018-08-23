@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace EFStudy.Model
 {
-     public class User:BaseEntity
+    public class Role:BaseEntity
     {
-        public string Name { get; set; }
-
+        public string RoleName { get; set; }
         public virtual List<UserRole> UserRoleList { get; set; }
     }
 }
