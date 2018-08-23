@@ -17,7 +17,7 @@ namespace EFStudy
                 //饥饿加载
                 //var querycustomer = efDbContext.Customer.Include("Orders").FirstOrDefault();
                 var querycustomer = efDbContext.Customer.FirstOrDefault();
-                //显示加载
+                //显示加载 
                 efDbContext.Entry(querycustomer).Collection(d => d.Orders).Load();
                 var queryOrders = querycustomer.Orders;
                 //ModelAdded(efDbContext);
@@ -191,6 +191,10 @@ namespace EFStudy
             efContext.Entry(customer).State = System.Data.Entity.EntityState.Deleted;
             efContext.SaveChanges();
 
+        }
+        public static void QuerySql(EfDbContext efContext)
+        {
+            var customers = efContext.Customer.SqlQuery("select * from dbo.customers").ToList();
         }
     }
 }
