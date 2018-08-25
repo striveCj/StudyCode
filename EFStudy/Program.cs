@@ -14,12 +14,14 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
+
+                QuerySql(efDbContext);
                 //饥饿加载
                 //var querycustomer = efDbContext.Customer.Include("Orders").FirstOrDefault();
-                var querycustomer = efDbContext.Customer.FirstOrDefault();
+                //var querycustomer = efDbContext.Customer.FirstOrDefault();
                 //显示加载 
-                efDbContext.Entry(querycustomer).Collection(d => d.Orders).Load();
-                var queryOrders = querycustomer.Orders;
+                //efDbContext.Entry(querycustomer).Collection(d => d.Orders).Load();
+                //var queryOrders = querycustomer.Orders;
                 //ModelAdded(efDbContext);
                 //ModelUnChanged(efDbContext);
                 //ModelModified(efDbContext);
@@ -192,9 +194,15 @@ namespace EFStudy
             efContext.SaveChanges();
 
         }
+
         public static void QuerySql(EfDbContext efContext)
         {
+            //TODO:此方法查询的是上下文中的实体集合中的数据，实体会被上下文跟踪
             var customers = efContext.Customer.SqlQuery("select * from dbo.customers").ToList();
+            //TODO:此方法查询的是在数据库上的实体不会被上下文跟踪
+            var customer = efContext.Database.SqlQuery<Customer>("select * from dbo.customers").ToList();
+
+            //TODO:使用SqlQuery方法查询时必须要返回所有列，否则会抛出异常
         }
     }
 }
