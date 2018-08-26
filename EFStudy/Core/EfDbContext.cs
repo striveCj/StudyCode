@@ -41,6 +41,8 @@ namespace EFStudy.Core
 
         public DbSet<Student> Student { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes().Where(type => !String.IsNullOrEmpty(type.Namespace)).Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));

@@ -14,8 +14,8 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-
-                QuerySql(efDbContext);
+                SqlWhere(efDbContext);
+                //QuerySql(efDbContext);
                 //饥饿加载
                 //var querycustomer = efDbContext.Customer.Include("Orders").FirstOrDefault();
                 //var querycustomer = efDbContext.Customer.FirstOrDefault();
@@ -203,6 +203,15 @@ namespace EFStudy
             var customer = efContext.Database.SqlQuery<Customer>("select * from dbo.customers").ToList();
 
             //TODO:使用SqlQuery方法查询时必须要返回所有列，否则会抛出异常
+        }
+
+        public static void SqlWhere(EfDbContext efContext)
+        {
+            efContext.Database.Log = Console.WriteLine;
+            //TODO:通过导航属性过滤无效
+            var orders = efContext.Orders.Where(d => d.Customer != null).ToList();
+            //TODO:当有外键属性即映射关系是，通过导航属性查询被忽略
+            var orderss = efContext.Orders.Where(d => d.CustomerId != 0).ToList();
         }
     }
 }
