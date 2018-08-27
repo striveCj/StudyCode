@@ -14,7 +14,8 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-                SqlWhere(efDbContext);
+                SqlIsNull(efDbContext);
+                //SqlWhere(efDbContext);
                 //QuerySql(efDbContext);
                 //饥饿加载
                 //var querycustomer = efDbContext.Customer.Include("Orders").FirstOrDefault();
@@ -212,6 +213,21 @@ namespace EFStudy
             var orders = efContext.Orders.Where(d => d.Customer != null).ToList();
             //TODO:当有外键属性即映射关系是，通过导航属性查询被忽略
             var orderss = efContext.Orders.Where(d => d.CustomerId != 0).ToList();
+        }
+        /// <summary>
+        /// 语义可空
+        /// </summary>
+        /// <param name="efContext"></param>
+        public static void SqlIsNull(EfDbContext efContext)
+        {
+            efContext.Database.Log = Console.WriteLine;
+            var orders = efContext.Orders.Where(d => d.Price==1);
+
+            int price = 1;
+            var orderss = efContext.Orders.Where(d => d.Price == price);
+
+            int prices = 0;
+            var ordersss = efContext.Orders.Where(d => d.Price == prices);
         }
     }
 }
