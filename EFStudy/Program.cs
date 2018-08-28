@@ -14,7 +14,7 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-                SqlIsNull(efDbContext);
+                SqlIsNull(efDbContext); 
                 //SqlWhere(efDbContext);
                 //QuerySql(efDbContext);
                 //饥饿加载
