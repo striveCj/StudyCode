@@ -7,5 +7,7 @@ namespace EFStudy.Web.Models
 {
     public class Person
     {
+        public string Name { get; set; }
+        public string EnglishName { get; set; }
     }
 }
