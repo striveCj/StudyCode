@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -45,6 +46,7 @@ namespace EFStudy.Web.Controllers
             }
             return View("Index", blogs);
         }
+
         public ActionResult UpInsert()
         {
             return View();
@@ -52,6 +54,14 @@ namespace EFStudy.Web.Controllers
         Person Transfer(string p)
         {
             return JsonConvert.DeserializeObject<Person>(p);
+        }
+
+        public async Task<ActionResult> Get(int? id)
+        {
+            if (ReferenceEquals(id,null)||id.Value<=0)
+            {
+
+            }
         }
     }
 }
