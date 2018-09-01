@@ -71,7 +71,7 @@ namespace EFStudy.Web.Controllers
                 var blog = await _context.Blogs.FindAsync(id);
                 if (ReferenceEquals(blog,null))
                 {
-                    return Content("<script type='text/javascript'>alert('改博客不存在!');location.href='/'</script>");
+                    return Content("<script type='text/javascript'>alert('该博客不存在!');location.href='/'</script>");
                 }
                 return View("UpInsert", blog);
             }
@@ -105,6 +105,40 @@ namespace EFStudy.Web.Controllers
                     return Content("<script type='text/javascript'>alert('删除失败!');location.href='/'</script>");
                 }
             }
+        }
+
+        public async Task<ActionResult> UpInsert(Blog blog)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var _context=new EFDbContext())
+                {
+                    if (blog.Id<=0)
+                    {
+                        _context.Blogs.Add(blog);
+                        blog.CreateTime = DateTime.Now;
+                        blog.ModifiedTime = DateTime.Now;
+                    }
+                    else
+                    {
+                        var dbBlog = await _context.Blogs.FindAsync(blog.Id);
+                        if (ReferenceEquals(blog,null))
+                        {
+                            return Content("<script type='text/javascript'>alert('提交参数不正确!');location.href='/'</script>");
+                        }
+                        else
+                        {
+                            dbBlog.Owner = blog.Owner;
+                            dbBlog.Tags = blog.Tags;
+                            dbBlog.Url = blog.Url;
+                            dbBlog.ModifiedTime = DateTime.Now;
+                        }
+                    }
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            return View();
         }
     }
 }
