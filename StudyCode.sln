@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFStudy", "EFStudy\EFStudy.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFStudy.Web", "EFStudy.Web\EFStudy.Web.csproj", "{FC904F1A-4F79-4E4A-BFB0-DB08E0B65833}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CShapMultithreading", "CShapMultithreading\CShapMultithreading.csproj", "{9D9B658D-FA0B-4EF5-99B2-AD61B9D0A4D6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{FC904F1A-4F79-4E4A-BFB0-DB08E0B65833}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC904F1A-4F79-4E4A-BFB0-DB08E0B65833}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC904F1A-4F79-4E4A-BFB0-DB08E0B65833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D9B658D-FA0B-4EF5-99B2-AD61B9D0A4D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D9B658D-FA0B-4EF5-99B2-AD61B9D0A4D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D9B658D-FA0B-4EF5-99B2-AD61B9D0A4D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D9B658D-FA0B-4EF5-99B2-AD61B9D0A4D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
