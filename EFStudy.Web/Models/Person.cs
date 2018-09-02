@@ -9,5 +9,7 @@ namespace EFStudy.Web.Models
     {
         public string Name { get; set; }
         public string EnglishName { get; set; }
+
+        public string Email { get; set; }
     }
 }

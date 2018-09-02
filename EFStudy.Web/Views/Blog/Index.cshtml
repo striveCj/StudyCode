@@ -19,7 +19,7 @@
         <tr>
             <td>@Html.DisplayFor(modelItem=>item.Id)</td>
             <td>@Html.DisplayFor(modelItem => item.Url)</td>
-            <td>@(item.Tags==null?string.Empty:string.Join(",",item.Tags)</td>
+            <td>@(item.Tags==null?string.Empty:string.Join(",",item.Tags))</td>
             <td>
             @Html.DisplayFor(modelItem => item.Owner.Name)
             @Html.DisplayFor(modelItem => item.Owner.EnglishName)
