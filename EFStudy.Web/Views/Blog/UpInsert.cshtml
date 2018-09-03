@@ -31,6 +31,27 @@
                 @Html.ValidationMessageFor(d => d.Tags, "", new { @class="text-danger"})
             </div>
         </div>
+        <div class="form-group">
+            @Html.LabelFor(d => d.Owner.Name, new { @class="col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(d=>d.Owner.Name,new { @class="form-control"})
+                @Html.ValidationMessageFor(d=>d.Owner.Name,"",new { @class="text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(d => d.Owner.EnglishName, new { @class="col-md-2 control-label"})
+            <div class="col-md-10">
+                @Html.TextBoxFor(d => d.Owner.EnglishName, new { @class="form-control"})
+                @Html.ValidationMessageFor(d => d.Owner.EnglishName, "", new { @class="text-danger"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(d => d.Owner.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(d => d.Owner.Email, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Owner.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
      </div>
 }
