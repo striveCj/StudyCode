@@ -3,6 +3,7 @@ using EFStudy.Web.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -17,16 +18,21 @@ namespace EFStudy.Web.Controllers
         /// 获取博客列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult Index()
+        //public ActionResult Index()
+        //{
+        //    var blogs = new List<Blog>();
+        //    using (var _context=new EFDbContext())
+        //    {
+        //        blogs = _context.Blogs.AsNoTracking().ToList();
+        //    };
+        //    return View(blogs);
+        //}
+        public async Task<ActionResult> Index()
         {
-            var blogs = new List<Blog>();
-            using (var _context=new EFDbContext())
-            {
-                blogs = _context.Blogs.AsNoTracking().ToList();
-            };
-            return View(blogs);
+            Task allTasks = MultipleAsyncQuery();
+            await allTasks;
+            return View(allTasks);
         }
-
         public ActionResult Search(string Owner)
         {
             var blogs = new List<Blog>();
@@ -107,7 +113,7 @@ namespace EFStudy.Web.Controllers
             }
         }
 
-        public async Task<ActionResult> UpInsert(Blog blog)
+        public async Task<ActionResult> UpInserts(Blog blog)
         {
             if (ModelState.IsValid)
             {
@@ -139,6 +145,19 @@ namespace EFStudy.Web.Controllers
                 }
             }
             return View();
+        }
+
+        async Task MultipleAsyncQuery()
+        {
+            using (var efDbContext=new EFDbContext())
+            {
+                List<Task> task = new List<Task>
+                {
+                    efDbContext.Blogs.ToListAsync(),
+                     efDbContext.Blogs.ToListAsync()
+                };
+                await Task.WhenAll(task);
+            }
         }
     }
 }

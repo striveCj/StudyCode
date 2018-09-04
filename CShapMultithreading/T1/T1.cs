@@ -10,7 +10,7 @@ namespace CShapMultithreading.T1
     /// <summary>
     /// 线程基础
     /// </summary>
-    public static class  T1
+    public static class T1
     {
         //TODO:正在执行中的程序实例可被称为一个进程。进程由一个或多个线程组成。这意味着当运行程序时，始终有一个执行程序代码的主线程。
 
@@ -63,6 +63,58 @@ namespace CShapMultithreading.T1
             t.Join();
             Console.WriteLine("Thread completed");
         }
+        /// <summary>
+        /// 线程终结
+        /// </summary>
+        public static void T1ThreadEnd()
+        {
+            Console.WriteLine("Starting program...");
+            Thread t = new Thread(PrintNumbersWithDelay);
+            t.Start();
+            Thread.Sleep(TimeSpan.FromSeconds(6));
+            //给线程注入ThreadAbortException方法，导致线程终结
+            t.Abort();
+            Console.WriteLine("A thread has been aborted");
+            Thread t1 = new Thread(PrintNumbers);
+            t1.Start();
+            PrintNumbers();
+        }
 
+        static void DoNothing()
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+        }
+        static void PrintNumbersWithStatus()
+        {
+            Console.WriteLine("Starting...");
+            Console.WriteLine(Thread.CurrentThread.ThreadState.ToString());
+            for (int i = 1; i < 10; i++)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(2));
+                Console.WriteLine(i);
+            }
+        }
+        /// <summary>
+        /// 检查线程状态
+        /// </summary>
+        public static void T1CheckThead()
+        {
+            //线程状态位于Thread对象的ThreadState属性中，ThreadState属性是一个C#枚举对象。
+            Console.WriteLine("Starting...");
+            Thread t = new Thread(PrintNumbersWithStatus);
+            Thread t2 = new Thread(DoNothing);
+            Console.WriteLine(t.ThreadState.ToString());
+            t2.Start();
+            t.Start();
+            for (int i = 1; i < 30; i++)
+            {
+                Console.WriteLine(t.ThreadState.ToString());
+            }
+            Thread.Sleep(TimeSpan.FromSeconds(6));
+            t.Abort();
+            Console.WriteLine("A thread has been aborted");
+            Console.WriteLine(t.ThreadState.ToString());
+            Console.WriteLine(t2.ThreadState.ToString());
+        }
     }
 }
