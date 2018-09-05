@@ -4,7 +4,7 @@
 }
 
 <h2>@ViewData["Title"]</h2>
-@using (Html.BeginForm("UpInsert","Blog",FormMethod.Post,new { @class="form-horizontal"}))
+@using (Html.BeginForm("UpInserts","Blog",FormMethod.Post,new { @class="form-horizontal"}))
 {
     @Html.HiddenFor(d => d.Id);
     @Html.AntiForgeryToken()

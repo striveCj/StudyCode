@@ -18,21 +18,21 @@ namespace EFStudy.Web.Controllers
         /// 获取博客列表
         /// </summary>
         /// <returns></returns>
-        //public ActionResult Index()
-        //{
-        //    var blogs = new List<Blog>();
-        //    using (var _context=new EFDbContext())
-        //    {
-        //        blogs = _context.Blogs.AsNoTracking().ToList();
-        //    };
-        //    return View(blogs);
-        //}
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            Task allTasks = MultipleAsyncQuery();
-            await allTasks;
-            return View(allTasks);
+            var blogs = new List<Blog>();
+            using (var _context = new EFDbContext())
+            {
+                blogs = _context.Blogs.AsNoTracking().ToList();
+            };
+            return View(blogs);
         }
+        //public async Task<ActionResult> Index()
+        //{
+        //    Task allTasks = MultipleAsyncQuery();
+        //    await allTasks;
+        //    return View(allTasks);
+        //}
         public ActionResult Search(string Owner)
         {
             var blogs = new List<Blog>();
@@ -115,8 +115,8 @@ namespace EFStudy.Web.Controllers
 
         public async Task<ActionResult> UpInserts(Blog blog)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 using (var _context=new EFDbContext())
                 {
                     if (blog.Id<=0)
@@ -143,21 +143,21 @@ namespace EFStudy.Web.Controllers
                     _context.SaveChanges();
                     return RedirectToAction("Index");
                 }
-            }
-            return View();
+            //}
+            //return View("UpInsert");
         }
 
-        async Task MultipleAsyncQuery()
-        {
-            using (var efDbContext=new EFDbContext())
-            {
-                List<Task> task = new List<Task>
-                {
-                    efDbContext.Blogs.ToListAsync(),
-                     efDbContext.Blogs.ToListAsync()
-                };
-                await Task.WhenAll(task);
-            }
-        }
+        //async Task MultipleAsyncQuery()
+        //{
+        //    using (var efDbContext=new EFDbContext())
+        //    {
+        //        List<Task> task = new List<Task>
+        //        {
+        //            efDbContext.Blogs.ToListAsync(),
+        //             efDbContext.Blogs.ToListAsync()
+        //        };
+        //        await Task.WhenAll(task);
+        //    }
+        //}
     }
 }
