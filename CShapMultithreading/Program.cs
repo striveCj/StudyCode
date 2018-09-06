@@ -15,7 +15,9 @@ namespace CShapMultithreading
             //T1.T1.T1ThreadSleep();
             //T1.T1.T1ThreadAwit();
             //T1.T1.T1ThreadEnd();
-            T1.T1.T1CheckThead();
+            //T1.T1.T1CheckThead();
+
+            T1.T1.ThreadsPriority();
         }
     }
 }

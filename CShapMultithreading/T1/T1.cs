@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -99,7 +101,7 @@ namespace CShapMultithreading.T1
         /// </summary>
         public static void T1CheckThead()
         {
-            //线程状态位于Thread对象的ThreadState属性中，ThreadState属性是一个C#枚举对象。
+            //TODO:线程状态位于Thread对象的ThreadState属性中，ThreadState属性是一个C#枚举对象。
             Console.WriteLine("Starting...");
             Thread t = new Thread(PrintNumbersWithStatus);
             Thread t2 = new Thread(DoNothing);
@@ -116,5 +118,54 @@ namespace CShapMultithreading.T1
             Console.WriteLine(t.ThreadState.ToString());
             Console.WriteLine(t2.ThreadState.ToString());
         }
+
+        public static void RunThreads()
+        {
+            var sample = new ThreadSample();
+            var threadOne=new Thread(sample.CountNumbers);
+            threadOne.Name = "ThreadOnde";
+            var threadTwo=new Thread(sample.CountNumbers);
+            threadTwo.Name = "ThreadTwo";
+            threadOne.Priority = ThreadPriority.Highest;
+            threadTwo.Priority = ThreadPriority.Lowest;
+            threadOne.Start();
+            threadTwo.Start();
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            sample.Stop();
+        }
+        /// <summary>
+        /// 线程优先级
+        /// </summary>
+        public static void ThreadsPriority()
+        {
+            Console.WriteLine("Current thread priority {0}",Thread.CurrentThread.Priority);
+            Console.WriteLine("Running on all cores available");
+            RunThreads();
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            Console.WriteLine("Running in a single core");
+            Process.GetCurrentProcess().ProcessorAffinity=new IntPtr(1);
+            RunThreads();
+        }
+    }
+
+    class ThreadSample
+    {
+        private bool _isStopped = false;
+
+        public void Stop()
+        {
+            _isStopped = true;
+        }
+
+        public void CountNumbers()
+        {
+            long counter = 0;
+            while (!_isStopped)
+            {
+                counter++;
+            }
+            Console.WriteLine("{0} with {1,11} priority has a count={2,13:N0}",Thread.CurrentThread.Name,Thread.CurrentThread.Priority, counter);
+        }
+
     }
 }
