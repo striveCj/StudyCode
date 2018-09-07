@@ -156,11 +156,12 @@ namespace CShapMultithreading.T1
             var sampleForeground=new ThreadSample2(10);
             var sampleBackground=new ThreadSample2(20);
 
-            var threadOne=new Thread(sampleBackground.CountNumbers);
-            threadOne.Name = "ForegroundThread";
-            var threadTwo=new Thread(sampleBackground.CountNumbers);
-            threadTwo.Name = "BackgroundThread";
-            threadTwo.IsBackground = true;
+            var threadOne = new Thread(sampleBackground.CountNumbers) {Name = "ForegroundThread"};
+            var threadTwo = new Thread(sampleBackground.CountNumbers)
+            {
+                Name = "BackgroundThread",
+                IsBackground = true
+            };
             threadOne.Start();
             threadTwo.Start();
         }
