@@ -146,6 +146,24 @@ namespace CShapMultithreading.T1
             Process.GetCurrentProcess().ProcessorAffinity=new IntPtr(1);
             RunThreads();
         }
+
+        /// <summary>
+        /// 前台线程和后台线程
+        /// </summary>
+
+        public static void ThreadBeforeAfter()
+        {
+            var sampleForeground=new ThreadSample2(10);
+            var sampleBackground=new ThreadSample2(20);
+
+            var threadOne=new Thread(sampleBackground.CountNumbers);
+            threadOne.Name = "ForegroundThread";
+            var threadTwo=new Thread(sampleBackground.CountNumbers);
+            threadTwo.Name = "BackgroundThread";
+            threadTwo.IsBackground = true;
+            threadOne.Start();
+            threadTwo.Start();
+        }
     }
 
     class ThreadSample
@@ -167,5 +185,24 @@ namespace CShapMultithreading.T1
             Console.WriteLine("{0} with {1,11} priority has a count={2,13:N0}",Thread.CurrentThread.Name,Thread.CurrentThread.Priority, counter);
         }
 
+    }
+
+    class ThreadSample2
+    {
+        private readonly int _iterations;
+
+        public ThreadSample2(int iterations)
+        {
+            _iterations = iterations;
+        }
+
+        public void CountNumbers()
+        {
+            for (int i = 0; i < _iterations; i++)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(0.5));
+                Console.WriteLine("{0} prints{1}",Thread.CurrentThread.Name,i);
+            }
+        }
     }
 }
