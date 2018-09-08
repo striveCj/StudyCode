@@ -122,9 +122,9 @@ namespace CShapMultithreading.T1
         public static void RunThreads()
         {
             var sample = new ThreadSample();
-            var threadOne=new Thread(sample.CountNumbers);
+            var threadOne = new Thread(sample.CountNumbers);
             threadOne.Name = "ThreadOnde";
-            var threadTwo=new Thread(sample.CountNumbers);
+            var threadTwo = new Thread(sample.CountNumbers);
             threadTwo.Name = "ThreadTwo";
             threadOne.Priority = ThreadPriority.Highest;
             threadTwo.Priority = ThreadPriority.Lowest;
@@ -138,12 +138,12 @@ namespace CShapMultithreading.T1
         /// </summary>
         public static void ThreadsPriority()
         {
-            Console.WriteLine("Current thread priority {0}",Thread.CurrentThread.Priority);
+            Console.WriteLine("Current thread priority {0}", Thread.CurrentThread.Priority);
             Console.WriteLine("Running on all cores available");
             RunThreads();
             Thread.Sleep(TimeSpan.FromSeconds(2));
             Console.WriteLine("Running in a single core");
-            Process.GetCurrentProcess().ProcessorAffinity=new IntPtr(1);
+            Process.GetCurrentProcess().ProcessorAffinity = new IntPtr(1);
             RunThreads();
         }
 
@@ -153,10 +153,10 @@ namespace CShapMultithreading.T1
 
         public static void ThreadBeforeAfter()
         {
-            var sampleForeground=new ThreadSample2(10);
-            var sampleBackground=new ThreadSample2(20);
+            var sampleForeground = new ThreadSample2(10);
+            var sampleBackground = new ThreadSample2(20);
 
-            var threadOne = new Thread(sampleBackground.CountNumbers) {Name = "ForegroundThread"};
+            var threadOne = new Thread(sampleBackground.CountNumbers) { Name = "ForegroundThread" };
             var threadTwo = new Thread(sampleBackground.CountNumbers)
             {
                 Name = "BackgroundThread",
@@ -164,6 +164,53 @@ namespace CShapMultithreading.T1
             };
             threadOne.Start();
             threadTwo.Start();
+        }
+
+        static void Count(object iterations)
+        {
+            CountNumbers((int)iterations);
+        }
+        static void CountNumbers(int iterations)
+        {
+            for (int i = 0; i < iterations; i++)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(0.5));
+                Console.WriteLine("{0} prints {1}", Thread.CurrentThread.Name, i);
+            }
+        }
+        static void PrintNumber(int number)
+        {
+            Console.WriteLine(number);
+        }
+        /// <summary>
+        /// 向线程传递参数
+        /// </summary>
+
+        public static void PassingParametersThread()
+        {
+            var sample = new ThreadSample3(10);
+            var threadOne = new Thread(sample.CountNumbers);
+            threadOne.Name = "ThreadOnde";
+            threadOne.Start();
+            threadOne.Join();
+            Console.WriteLine("-----------------------------");
+            var threadTwo = new Thread(Count);
+            threadTwo.Name = "ThreadTwo";
+            threadTwo.Start(8);
+            threadTwo.Join();
+            Console.WriteLine("---------------------");
+            var threadThree = new Thread(() => CountNumbers(12));
+            threadThree.Name = "ThreadThree";
+            threadThree.Start();
+            threadThree.Join();
+            Console.WriteLine("-------------------------------------");
+
+            int i = 10;
+            var threadFour = new Thread(() => PrintNumber(i));
+            i = 20;
+            var threadFive = new Thread(() => PrintNumber(i));
+            threadFour.Start();
+            threadFive.Start();
         }
     }
 
@@ -183,7 +230,7 @@ namespace CShapMultithreading.T1
             {
                 counter++;
             }
-            Console.WriteLine("{0} with {1,11} priority has a count={2,13:N0}",Thread.CurrentThread.Name,Thread.CurrentThread.Priority, counter);
+            Console.WriteLine("{0} with {1,11} priority has a count={2,13:N0}", Thread.CurrentThread.Name, Thread.CurrentThread.Priority, counter);
         }
 
     }
@@ -202,7 +249,24 @@ namespace CShapMultithreading.T1
             for (int i = 0; i < _iterations; i++)
             {
                 Thread.Sleep(TimeSpan.FromSeconds(0.5));
-                Console.WriteLine("{0} prints{1}",Thread.CurrentThread.Name,i);
+                Console.WriteLine("{0} prints{1}", Thread.CurrentThread.Name, i);
+            }
+        }
+    }
+
+    class ThreadSample3{
+        private readonly int _iterations;
+        public ThreadSample3(int iterations)
+        {
+            _iterations = iterations;
+        }
+        public void CountNumbers()
+        {
+            for (int i = 1; i < _iterations; i++)
+            {
+                Thread.Sleep(TimeSpan.FromSeconds(0.5));
+                Console.WriteLine("{0} prints {1}",Thread.CurrentThread.Name,i);
+                
             }
         }
     }

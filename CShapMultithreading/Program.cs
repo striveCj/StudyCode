@@ -17,7 +17,8 @@ namespace CShapMultithreading
             //T1.T1.T1ThreadEnd();
             //T1.T1.T1CheckThead();
             //T1.T1.ThreadsPriority();
-              T1.T1.ThreadBeforeAfter();
+            //T1.T1.ThreadBeforeAfter();
+              T1.T1.PassingParametersThread();
         }
     }
 }
