@@ -212,6 +212,20 @@ namespace CShapMultithreading.T1
             threadFour.Start();
             threadFive.Start();
         }
+
+        static void TestCounter(CounterBase c)
+        {
+            for (int i = 0; i < 100000; i++)
+            {
+                c.Increment();
+                c.Decrement();
+            }
+        }
+    }
+    abstract class CounterBase
+    {
+        public abstract void Increment();
+        public abstract void Decrement();
     }
 
     class ThreadSample
