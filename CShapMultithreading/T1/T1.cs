@@ -235,7 +235,7 @@ namespace CShapMultithreading.T1
             t1.Start();
             t2.Start();
             t3.Start();
-            t1.Join();
+            t1.Join(); 
             t2.Join();
             t3.Join();
 

@@ -21,7 +21,7 @@ namespace EFStudy.Core
         public EfDbContext():base("name=ConnectionString")
         {
             //禁用延迟加载
-            Configuration.LazyLoadingEnabled = false;
+            //Configuration.LazyLoadingEnabled = false;
             //禁用数据库初始化策略
             //Database.SetInitializer<EfDbContext>(null);
             //如果数据库不存在，就创建
@@ -30,6 +30,8 @@ namespace EFStudy.Core
             //Database.SetInitializer(new DropCreateDatabaseAlways<EfDbContext>());
             //如果EF检测到数据模型发生了改变，将更新模型
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EfDbContext>());
+            //是否追踪实体
+            Configuration.AutoDetectChangesEnabled = false;
         }
         //public DbSet<Blog> Blogs { get; set; }
 
