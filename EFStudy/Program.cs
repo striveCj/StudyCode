@@ -14,7 +14,7 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
-                SqlIsNull(efDbContext); 
+                //SqlIsNull(efDbContext); 
                 //SqlWhere(efDbContext);
                 //QuerySql(efDbContext);
                 //饥饿加载
@@ -228,6 +228,17 @@ namespace EFStudy
 
             int prices = 0;
             var ordersss = efContext.Orders.Where(d => d.Price == prices);
+        }
+        /// <summary>
+        /// 变更追踪原理
+        /// </summary>
+        /// <param name="efContext"></param>
+        public static void ChangeTracking(EfDbContext efContext)
+        {
+            var entity = efContext.Set<Customer>().FirstOrDefault(d => d.Name == "ChenJie");
+            Console.WriteLine(efContext.Entry(entity).State);
+            entity.Name = "ChenJie";
+            Console.WriteLine(efContext.Entry(entity).State);
         }
     }
 }
