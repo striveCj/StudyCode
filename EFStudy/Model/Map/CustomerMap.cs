@@ -18,7 +18,7 @@ namespace EFStudy.Model.Map
             Property(t => t.CreatedTime);
             Property(t => t.ModifiedTime);
             //TODO:私有化属性映射
-            Property(Customer.PrivatePropertyExtension.test_private);
+            //Property(Customer.PrivatePropertyExtension.test_private);
         }
     }
 }

@@ -9,22 +9,22 @@ namespace EFStudy.Model
 {
     public partial class Customer:BaseEntity
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
-        private string PrivateAddress { get; set; }
+        //private  string PrivateAddress { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
     }
     /// <summary>
     /// 私有化属性映射
     /// </summary>
-    public partial class Customer
-    {
-        public class PrivatePropertyExtension
-        {
-            public static readonly Expression<Func<Customer,string>> test_private =p=>p.PrivateAddress;
-        }
-    }
+    //public partial class Customer
+    //{
+    //    public class PrivatePropertyExtension
+    //    {
+    //        public static readonly Expression<Func<Customer,string>> test_private =p=>p.PrivateAddress;
+    //    }
+    //}
 }

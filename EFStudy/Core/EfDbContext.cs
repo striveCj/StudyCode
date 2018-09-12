@@ -30,8 +30,10 @@ namespace EFStudy.Core
             //Database.SetInitializer(new DropCreateDatabaseAlways<EfDbContext>());
             //如果EF检测到数据模型发生了改变，将更新模型
             Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EfDbContext>());
-            //是否追踪实体
+            //快照式变更追踪
             Configuration.AutoDetectChangesEnabled = false;
+            //代理式变更追踪
+            Configuration.ProxyCreationEnabled = false;
         }
         //public DbSet<Blog> Blogs { get; set; }
 

@@ -14,6 +14,7 @@ namespace EFStudy
          {
             using (var efDbContext=new EfDbContext())
             {
+                ChangeTracking(efDbContext);
                 //SqlIsNull(efDbContext); 
                 //SqlWhere(efDbContext);
                 //QuerySql(efDbContext);
@@ -235,6 +236,7 @@ namespace EFStudy
         /// <param name="efContext"></param>
         public static void ChangeTracking(EfDbContext efContext)
         {
+            //当我们将类中所有属性设置为virtual时，上下文中存在的就是POCO而是其派生类，此时实体总是被跟踪
             var entity = efContext.Set<Customer>().FirstOrDefault(d => d.Name == "ChenJie");
             Console.WriteLine(efContext.Entry(entity).State);
             entity.Name = "ChenJie";
