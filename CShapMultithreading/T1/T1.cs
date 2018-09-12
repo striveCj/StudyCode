@@ -256,6 +256,11 @@ namespace CShapMultithreading.T1
             t3.Join();
             Console.WriteLine("Total count:{0}", c.Count);
         }
+
+        public static void TestThead()
+        {
+
+        }
     }
     abstract class CounterBase
     {
