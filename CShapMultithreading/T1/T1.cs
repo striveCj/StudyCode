@@ -261,6 +261,20 @@ namespace CShapMultithreading.T1
         {
 
         }
+        public static  void MonitorThead()
+        {
+            object lock1 = new object();
+            object lock2 = new object();
+            new Thread(() => LockTooMuch(lock1, lock2));
+        }
+        static void LockTooMuch(object lock1,object lock2)
+        {
+            lock (lock1)
+            {
+                Thread.Sleep(1000);
+                lock (lock2) ;
+            }
+        }
     }
     abstract class CounterBase
     {
