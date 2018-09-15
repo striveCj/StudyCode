@@ -2,6 +2,7 @@
 using EFStudy.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -241,6 +242,26 @@ namespace EFStudy
             Console.WriteLine(efContext.Entry(entity).State);
             entity.Name = "ChenJie";
             Console.WriteLine(efContext.Entry(entity).State);
+        }
+
+        public static void TrackingSimple(EfDbContext efContext)
+        {
+            efContext.Database.Log = Console.WriteLine;
+            var watch = new Stopwatch();
+            watch.Start();
+            efContext.Set<SimpleClass>().ToList().ForEach(d =>
+            {
+                var pro1 = d.Property1;
+                d.Property1 = d.Property2;
+                d.Property2 = pro1;
+
+                var prop3 = d.Property3;
+                d.Property3 = d.Property4;
+                d.Property4 = prop3;
+            });
+            efContext.SaveChanges();
+            watch.Stop();
+            Console.WriteLine(watch.ElapsedMilliseconds);
         }
     }
 }
