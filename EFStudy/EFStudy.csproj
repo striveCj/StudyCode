@@ -76,6 +76,7 @@
     <Compile Include="Model\Map\UserMap.cs" />
     <Compile Include="Model\Map\UserRoleMap.cs" />
     <Compile Include="Model\Role.cs" />
+    <Compile Include="Model\SimpleClass.cs" />
     <Compile Include="Model\StudentContact.cs" />
     <Compile Include="Model\Map\StudentMap.cs" />
     <Compile Include="Model\Order.cs" />
