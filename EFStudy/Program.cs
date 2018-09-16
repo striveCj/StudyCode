@@ -3,9 +3,11 @@ using EFStudy.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace EFStudy
 {
@@ -251,17 +253,37 @@ namespace EFStudy
             watch.Start();
             efContext.Set<SimpleClass>().ToList().ForEach(d =>
             {
-                var pro1 = d.Property1;
-                d.Property1 = d.Property2;
-                d.Property2 = pro1;
+                //var pro1 = d.Property1;
+                //d.Property1 = d.Property2;
+                //d.Property2 = pro1;
 
-                var prop3 = d.Property3;
-                d.Property3 = d.Property4;
-                d.Property4 = prop3;
+                //var prop3 = d.Property3;
+                //d.Property3 = d.Property4;
+                //d.Property4 = prop3;
+                var simple = new SimpleClass
+                {
+                    Id = d.Id,
+                    Property1 = d.Property1,
+                    Property2 = d.Property2,
+                    Property3 = d.Property3,
+                    Property4 = d.Property4
+                };
+                new Program().Clone(simple);
             });
             efContext.SaveChanges();
             watch.Stop();
             Console.WriteLine(watch.ElapsedMilliseconds);
+        }
+        public object Clone<TEntity>(TEntity t)where TEntity : class
+        {
+            using (MemoryStream stream=new MemoryStream())
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(TEntity));
+                xml.Serialize(stream, t);
+                stream.Seek(0, SeekOrigin.Begin);
+                return xml.Deserialize(stream) as TEntity;
+
+            }
         }
     }
 }
