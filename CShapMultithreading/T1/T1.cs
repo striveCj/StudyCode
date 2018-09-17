@@ -261,6 +261,9 @@ namespace CShapMultithreading.T1
         {
 
         }
+        /// <summary>
+        /// 使用Monitor类锁定资源
+        /// </summary>
         public static  void MonitorThead()
         {
             object lock1 = new object();
@@ -281,6 +284,15 @@ namespace CShapMultithreading.T1
             }
             new Thread(() => LockTooMuch(lock1, lock2)).Start();
             Console.WriteLine("-—-—-—-—-—-—-—-—");
+            lock (lock2)
+            {
+                Console.WriteLine("This will be a deadlock!");
+                Thread.Sleep(1000);
+                lock (lock1)
+                {
+                    Console.WriteLine("Acquired a protected resource succesfully");
+                }
+            }
         }
         static void LockTooMuch(object lock1,object lock2)
         {
@@ -289,6 +301,12 @@ namespace CShapMultithreading.T1
                 Thread.Sleep(1000);
                 lock (lock2) ;
             }
+        }
+        static void BadFaultyThead()
+        {
+            Console.WriteLine("Starting a faulty thread...");
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            throw new Exception("Boom!");
         }
     }
     abstract class CounterBase
