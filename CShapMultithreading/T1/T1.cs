@@ -308,10 +308,30 @@ namespace CShapMultithreading.T1
             Thread.Sleep(TimeSpan.FromSeconds(2));
             throw new Exception("Boom!");
         }
+        static void FaultyThread()
+        {
+            try
+            {
+                Console.WriteLine("Starting a faulty thread?..");
+                Thread.Sleep(TimeSpan.FromSeconds(1));
+                throw new Exception("Boom");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Excepion{0}",
+                   ex.Message)     ;         
+                  
+
+                throw;
+            }
+        }
     }
+
     abstract class CounterBase
     {
-        public abstract void Increment();
+    0
+    public abstract void Increment();
         public abstract void Decrement();
     }
 
