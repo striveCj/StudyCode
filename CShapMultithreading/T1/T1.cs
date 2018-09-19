@@ -320,17 +320,32 @@ namespace CShapMultithreading.T1
             catch (Exception ex)
             {
                 Console.WriteLine("Excepion{0}",
-                   ex.Message)     ;         
-                  
-
-                throw;
+                   ex.Message) ;         
+             
             }
+        }
+
+        public static void ExceptionThead()
+        {
+            var t = new Thread(FaultyThread);
+            t.Start();
+            t.Join();
+            try
+            {
+                t = new Thread(BadFaultyThead);
+                t.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("we won't get here")
+            }
+
         }
     }
 
     abstract class CounterBase
     {
-    0
+    
     public abstract void Increment();
         public abstract void Decrement();
     }
