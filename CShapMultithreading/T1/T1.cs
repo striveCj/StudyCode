@@ -337,7 +337,7 @@ namespace CShapMultithreading.T1
             }
             catch (Exception ex)
             {
-                Console.WriteLine("we won't get here")
+                Console.WriteLine("we won't get here");
             }
 
         }
