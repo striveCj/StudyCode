@@ -48,6 +48,10 @@ namespace CShapMultithreading.T1
             t31.Join();
             Console.WriteLine("Total count :{0}", c1.Count);
         }
+        public void test()
+        {
+
+        }
     }
 
     class CounterNoLock : CounterBase
