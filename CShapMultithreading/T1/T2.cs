@@ -17,13 +17,13 @@ namespace CShapMultithreading.T1
                 c.Decrement();
             }
         }
-        
+
 
         public void YzOption()
         {
             Console.WriteLine("Incorrect counter");
             var c = new Counter();
-            var t1 = new Thread(()=>TestCounter(c));
+            var t1 = new Thread(() => TestCounter(c));
             var t2 = new Thread(() => TestCounter(c));
             var t3 = new Thread(() => TestCounter(c));
             t1.Start();
@@ -32,7 +32,7 @@ namespace CShapMultithreading.T1
             t1.Join();
             t2.Join();
             t3.Join();
-            Console.WriteLine("Total count :{0}",c.Count);
+            Console.WriteLine("Total count :{0}", c.Count);
             Console.WriteLine("-—-—-—-—-—-—-—-—-—-—");
             Console.WriteLine("Correct counter");
 
@@ -51,45 +51,60 @@ namespace CShapMultithreading.T1
         public void test()
         {
             const string MutexName = "CSharpThreadingCookbook";
-            using (var m=new Mutex(false,MutexName))
+            using (var m = new Mutex(false, MutexName))
             {
-                if (!m.WaitOne(TimeSpan.FromSeconds(5),false))
+                if (!m.WaitOne(TimeSpan.FromSeconds(5), false))
                 {
                     Console.WriteLine("Second instance is running");
                 }
-                else { Console.WriteLine("Running");
+                else
+                {
+                    Console.WriteLine("Running");
 
                     Console.ReadLine();
                     m.ReleaseMutex();
+                }
             }
-        }
         }
         static SemaphoreSlim _semaphore = new SemaphoreSlim(4);
 
-        static void AccessDatabase(string name,int seconds)
+        static void AccessDatabase(string name, int seconds)
         {
-            Console.WriteLine("{0}waits to access a database",name);
+            Console.WriteLine("{0}waits to access a database", name);
+            _semaphore.Wait();
 
+
+            Console.WriteLine("{0} was granted an access to a database ", name);
+            Thread.Sleep(TimeSpan.FromSeconds(seconds));
+            Console.WriteLine("{0} is completed", name);
+            _semaphore.Release();
         }
         public void SamaphoreSlim()
         {
-
+            for (int i = 0; i <= 6; i++)
+            {
+                string threadName = "Thread" + i;
+                int secondsToWait = 2 + 2 * i;
+                var t = new Thread(() => AccessDatabase(threadName, secondsToWait));
+                t.Start();
+            }
         }
 
         class CounterNoLock : CounterBase
-    {
-        private int _count;
-        public int Count { get { return _count; } }
-        public override void Increment()
         {
-            Interlocked.Increment(ref _count);
-        }
+            private int _count;
+            public int Count { get { return _count; } }
+            public override void Increment()
+            {
+                Interlocked.Increment(ref _count);
+            }
 
-        public override void Decrement()
-        {
-            Interlocked.Decrement(ref _count);
-        }
+            public override void Decrement()
+            {
+                Interlocked.Decrement(ref _count);
+            }
 
-      
+
+        }
     }
 }
