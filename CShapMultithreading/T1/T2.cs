@@ -63,9 +63,20 @@ namespace CShapMultithreading.T1
                     m.ReleaseMutex();
             }
         }
-    }
+        }
+        static SemaphoreSlim _semaphore = new SemaphoreSlim(4);
 
-    class CounterNoLock : CounterBase
+        static void AccessDatabase(string name,int seconds)
+        {
+            Console.WriteLine("{0}waits to access a database",name);
+
+        }
+        public void SamaphoreSlim()
+        {
+
+        }
+
+        class CounterNoLock : CounterBase
     {
         private int _count;
         public int Count { get { return _count; } }
