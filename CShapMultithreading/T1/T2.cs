@@ -90,6 +90,38 @@ namespace CShapMultithreading.T1
             }
         }
 
+        private static AutoResetEvent _workerEvent = new AutoResetEvent(false);
+        private static AutoResetEvent _mainEvent = new AutoResetEvent(false);
+
+        static void Process(int seconds)
+        {
+            Console.WriteLine("Starting a long runing work...");
+            Thread.Sleep(TimeSpan.FromSeconds(seconds));
+            Console.WriteLine("Work is done!");
+            _workerEvent.Set();
+            Console.WriteLine("Waiting for a main thread to complete");
+            _mainEvent.WaitOne();
+            Console.WriteLine("Starting second operation...");
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+            _mainEvent.Set();
+        }
+
+        public void AutoResetEventClass()
+        {
+            var t = new Thread(() => Process(10));
+            t.Start();
+            Console.WriteLine("Waiting for another thread");
+            _workerEvent.WaitOne();
+            Console.WriteLine("First operation is completed");
+            Console.WriteLine("Performing an operation on a main thread");
+            Thread.Sleep(TimeSpan.FromSeconds(5));
+            _mainEvent.Set();
+            Console.WriteLine("Now Running the secon thread");
+            _workerEvent.WaitOne();
+            Console.WriteLine("second operation is complet!");
+
+        }
+
         class CounterNoLock : CounterBase
         {
             private int _count;
