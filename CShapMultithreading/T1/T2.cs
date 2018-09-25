@@ -122,6 +122,37 @@ namespace CShapMultithreading.T1
 
         }
 
+        static ManualResetEventSlim _mainEvents = new ManualResetEventSlim(false);
+
+        static void TravelThroughGates(string threadName,int seconds)
+        {
+            Console.WriteLine("{0} falls to sleep",threadName);
+            Thread.Sleep(TimeSpan.FromSeconds(seconds));
+            Console.WriteLine($"{threadName} waits for the gates to open!");
+            _mainEvents.Wait();
+            Console.WriteLine($"{threadName} enters the gates!");
+        }
+
+        public static void ManualResetEventSlimTest()
+        {
+            var t1 = new Thread(() => TravelThroughGates("Thread 1", 5));
+            var t2 = new Thread(() => TravelThroughGates("Thread 2", 6));
+            var t3 = new Thread(() => TravelThroughGates("Thread 3", 12));
+            t1.Start();
+            t2.Start();
+            t3.Start();
+            Thread.Sleep(TimeSpan.FromSeconds(6));
+            Console.WriteLine("The gates are now open!");
+            _mainEvents.Set();
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            _mainEvents.Reset();
+            Console.WriteLine("The gates are now open for the second time!");
+            _mainEvents.Set();
+            Thread.Sleep(TimeSpan.FromSeconds(2));
+            Console.WriteLine("The gates have been closed!");
+            _mainEvents.Reset();
+        }
+
         class CounterNoLock : CounterBase
         {
             private int _count;
