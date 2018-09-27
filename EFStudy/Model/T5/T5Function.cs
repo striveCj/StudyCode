@@ -43,5 +43,14 @@ namespace EFStudy.Model.T5
                 Console.WriteLine(entry.State);
             }
         }
+        public static void T5D4()
+        {
+            using (var context = new AnotherBlogContext())
+            {
+                var post = context.Posts.First(p => p.BlogId == 1);
+                post.BlogId = 2;
+                var blog2 = context.Blogs.Find(2);
+            }
+        }
     }
 }
