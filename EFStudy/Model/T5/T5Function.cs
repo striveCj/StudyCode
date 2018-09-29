@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -124,6 +125,38 @@ namespace EFStudy.Model.T5
             using (var ctx = new EfDbContext())
             {
                 ctx.Database.Log = msg => MyLogger.Log("EFLoggingDemo", msg);
+                var cutsomer = ctx.Customer.FirstOrDefault(d => d.Id == 1);
+            }
+        }
+
+        public static void T5D8()
+        {
+            using (var ctx=new EfDbContext())
+            {
+                ctx.Database.Log = msg => MyLogger.Log("EFLoggingDemo", msg);
+                var cutsomer = ctx.Customer.FirstOrDefault(d => d.Id == 1);
+                cutsomer.Name = "Jeffcky1";
+                cutsomer.Orders.Add(new Order() {
+                    CreatedTime = DateTime.Now,
+                    ModifiedTime=DateTime.Now,
+                    Price=100,
+                    Quanatity=10
+                });
+                ctx.SaveChangesAsync().Wait();
+            }
+        }
+
+        public static void T5D9()
+        {
+            using (var ctx=new EfDbContext())
+            {
+                var sw = new StreamWriter(@"d:\Data.log") {
+                    AutoFlush=true
+                };
+                ctx.Database.Log = s =>
+                {
+                    sw.Write(s);
+                };
                 var cutsomer = ctx.Customer.FirstOrDefault(d => d.Id == 1);
             }
         }
