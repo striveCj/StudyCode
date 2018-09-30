@@ -3,10 +3,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure.Interception;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace EFStudy.Model.T5
 {
@@ -169,5 +171,32 @@ namespace EFStudy.Model.T5
             Console.WriteLine($"Application:{application},EF Message{message}");
         }
 
+    }
+
+    public class SingleLineFormatter : DatabaseLogFormatter
+    {
+        public SingleLineFormatter(DbContext context,Action<string> writeAction):base(context,writeAction)
+        {
+
+        }
+        public override void LogCommand<TResult>(DbCommand command, DbCommandInterceptionContext<TResult> interceptionContext)
+        {
+            Write(string.Format("Context '{0}' is executing command '{1}' {2}", Context.GetType().Name, command.CommandText.Replace(Environment.NewLine, ""), Environment.NewLine));
+
+            //base.LogCommand<TResult>(command, interceptionContext);
+        }
+
+        public override void LogResult<TResult>(DbCommand command, DbCommandInterceptionContext<TResult> interceptionContext)
+        {
+         
+        }
+    }
+
+    public class DbContextConfiguration : DbConfiguration
+    {
+        public DbContextConfiguration()
+        {
+            SetDatabaseLogFormatter((context,action)=>new SingleLineFormatter(context,action));
+        }
     }
 }
