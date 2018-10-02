@@ -143,7 +143,14 @@ namespace CShapMultithreading.T1
 
         public static void CountDownEvent()
         {
-
+            Console.WriteLine("Starting two operations");
+            var t1 = new Thread(() => PerformOperation("Operation 1 is completed", 4));
+var t2= new Thread(() => PerformOperation("Operation 2 is completed", 8));
+            t1.Start();
+            t2.Start();
+            _countdown.Wait();
+            Console.WriteLine("Both operations have been completed");
+            _countdown.Dispose();
         }
 
 
