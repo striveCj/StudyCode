@@ -132,6 +132,20 @@ namespace CShapMultithreading.T1
             _mainEvents.Wait();
             Console.WriteLine($"{threadName} enters the gates!");
         }
+        static CountdownEvent _countdown = new CountdownEvent(2);
+
+        static void PerformOperation(string message,int seconds)
+        {
+            Thread.Sleep(TimeSpan.FromSeconds(seconds));
+            Console.WriteLine(message);
+            _countdown.Signal();
+        }
+
+        public static void CountDownEvent()
+        {
+
+        }
+
 
         public static void ManualResetEventSlimTest()
         {
