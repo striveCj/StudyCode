@@ -13,6 +13,9 @@ using EFStudy.Attributes;
 using System.Reflection;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using EFStudy.Model.T5;
+using System.Data.Entity.Infrastructure.Interception;
+using EFStudy.Core.T5;
 
 namespace EFStudy.Core
 {
@@ -20,6 +23,7 @@ namespace EFStudy.Core
     {
         public EfDbContext():base("name=ConnectionString")
         {
+            DbInterception.Add(new DatabaseInterceptorLogger());
             //禁用延迟加载
             //Configuration.LazyLoadingEnabled = false;
             //禁用数据库初始化策略
@@ -46,6 +50,8 @@ namespace EFStudy.Core
         public DbSet<Student> Student { get; set; }
 
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Error> Errors { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
