@@ -69,7 +69,9 @@
     <Compile Include="Core\EfDbContext.cs" />
     <Compile Include="Core\MyConfiguration.cs" />
     <Compile Include="Core\NLogCommandInterceptor.cs" />
+    <Compile Include="Core\T5\CustomConfiguration.cs" />
     <Compile Include="Core\T5\DatabaseInterceptorLogger.cs" />
+    <Compile Include="Core\T5\SQLProfiler.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BaseEntity.cs" />
