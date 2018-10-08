@@ -153,7 +153,7 @@ var t2= new Thread(() => PerformOperation("Operation 2 is completed", 8));
             _countdown.Dispose();
         }
 
-        static Barrier _barrier = new Barrier(2, b => Console.WriteLine("End of phphase{0]", b.CurrentPhaseNumber+  ));
+        static Barrier _barrier = new Barrier(2, b => Console.WriteLine("End of phphase{0]", b.CurrentPhaseNumber));
 
         public static void ManualResetEventSlimTest()
         {

@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EFStudy</RootNamespace>
     <AssemblyName>EFStudy</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -71,6 +71,7 @@
     <Compile Include="Core\NLogCommandInterceptor.cs" />
     <Compile Include="Core\T5\CustomConfiguration.cs" />
     <Compile Include="Core\T5\DatabaseInterceptorLogger.cs" />
+    <Compile Include="Core\T5\EFConfiguration.cs" />
     <Compile Include="Core\T5\SQLProfiler.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\BankAccount.cs" />
