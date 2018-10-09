@@ -1,5 +1,6 @@
 ﻿using EFStudy.Core;
 using EFStudy.Model;
+using EFStudy.Model.T5;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -283,6 +284,42 @@ namespace EFStudy
                 stream.Seek(0, SeekOrigin.Begin);
                 return xml.Deserialize(stream) as TEntity;
 
+            }
+        }
+
+        public void T5Transaction()
+        {
+            using (var cts=new EfDbContext())
+            {
+                using (var transaction=cts.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        var category = new Category
+                        {
+                            CategoryName = "Clothes"
+                        };
+                        cts.Set<Category>().Add(category);
+                        cts.SaveChanges();
+                        throw new Exception("Custom Exception");
+
+                        var product = new Product
+                        {
+                            ProductName = "Blue Denim Shirt",
+                            CategoryId = category.CategoryId
+                        };
+                        cts.Set<Product>().Add(product);
+                        cts.SaveChanges();
+                        Console.WriteLine("Cateogry and Product both saved");
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine($"Transaction Roll backed due to some exception:{e.Message}");
+                        throw;
+                    }
+                }
             }
         }
     }

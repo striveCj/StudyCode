@@ -88,7 +88,9 @@
     <Compile Include="Model\Map\OrderMap.cs" />
     <Compile Include="Model\Map\RoleMap.cs" />
     <Compile Include="Model\Map\StudentContactMap.cs" />
+    <Compile Include="Model\Map\T5\CategoryMap.cs" />
     <Compile Include="Model\Map\T5\ErrorMap.cs" />
+    <Compile Include="Model\Map\T5\ProductMap.cs" />
     <Compile Include="Model\Map\UserMap.cs" />
     <Compile Include="Model\Map\UserRoleMap.cs" />
     <Compile Include="Model\Role.cs" />
@@ -100,8 +102,10 @@
     <Compile Include="Model\StudentAddress.cs" />
     <Compile Include="Model\T5\AnotherBlogContext.cs" />
     <Compile Include="Model\T5\Blog.cs" />
+    <Compile Include="Model\T5\Category.cs" />
     <Compile Include="Model\T5\Error.cs" />
     <Compile Include="Model\T5\Post.cs" />
+    <Compile Include="Model\T5\Product.cs" />
     <Compile Include="Model\T5\T5Function.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserRole.cs" />

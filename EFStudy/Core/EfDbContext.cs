@@ -38,6 +38,8 @@ namespace EFStudy.Core
             Configuration.AutoDetectChangesEnabled = false;
             //代理式变更追踪
             Configuration.ProxyCreationEnabled = false;
+            //设置函数或者命令启用事务维护
+            Configuration.EnsureTransactionsForFunctionsAndCommands = false;
         }
         //public DbSet<Blog> Blogs { get; set; }
 
