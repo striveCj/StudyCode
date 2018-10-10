@@ -16,6 +16,7 @@ using System.Data.Entity.ModelConfiguration;
 using EFStudy.Model.T5;
 using System.Data.Entity.Infrastructure.Interception;
 using EFStudy.Core.T5;
+using System.Data.Common;
 
 namespace EFStudy.Core
 {
@@ -40,6 +41,11 @@ namespace EFStudy.Core
             Configuration.ProxyCreationEnabled = false;
             //设置函数或者命令启用事务维护
             Configuration.EnsureTransactionsForFunctionsAndCommands = false;
+        }
+
+        public EfDbContext(DbConnection con) : base(con, contextOwnsConnection: false)
+        {
+
         }
         //public DbSet<Blog> Blogs { get; set; }
 

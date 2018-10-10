@@ -3,6 +3,8 @@ using EFStudy.Model;
 using EFStudy.Model.T5;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -287,7 +289,7 @@ namespace EFStudy
             }
         }
 
-        public void T5Transaction()
+        public static void T5Transaction()
         {
             using (var cts=new EfDbContext())
             {
@@ -321,6 +323,46 @@ namespace EFStudy
                     }
                 }
             }
+        }
+
+        public static void T5DbTransaction()
+        {
+            using (var con=new SqlConnection(ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString))
+            {
+                con.Open();
+                using (var trans = con.BeginTransaction())
+                {
+                    try
+                    {
+                        using (var cts=new EfDbContext(con))
+                        {
+                            cts.Database.UseTransaction(trans);
+                            cts.Customer.Add(new Customer
+                            {
+                                CreatedTime = DateTime.Now,
+                                ModifiedTime = DateTime.Now,
+                                Email = "530216775@qq.com",
+                                Name = "Jeffcky"
+                            });
+                            cts.SaveChanges();
+                        }
+                        trans.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        trans.Rollback();
+                        Console.WriteLine(e.InnerException);
+                        throw;
+                    }
+                }
+                var dataContextFetch = new EfDbContext();
+                var query = (from cust in dataContextFetch.Customer.ToList() select cust);
+                foreach (var cust in query)
+                {
+                    Console.WriteLine(cust.Id+"----"+cust.Name);
+                }
+            }
+
         }
     }
 }
