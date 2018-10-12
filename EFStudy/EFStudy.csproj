@@ -73,7 +73,12 @@
     <Compile Include="Core\T5\DatabaseInterceptorLogger.cs" />
     <Compile Include="Core\T5\EFConfiguration.cs" />
     <Compile Include="Core\T5\FlightBooking.cs" />
+    <Compile Include="Core\T5\FlightBookingMap.cs" />
+    <Compile Include="Core\T5\FlightDBContext.cs" />
+    <Compile Include="Core\T5\HotelDBContext.cs" />
+    <Compile Include="Core\T5\HotelFlightConfiguration.cs" />
     <Compile Include="Core\T5\Reservation.cs" />
+    <Compile Include="Core\T5\ReservationMap.cs" />
     <Compile Include="Core\T5\SQLProfiler.cs" />
     <Compile Include="Core\T5\TripReservation.cs" />
     <Compile Include="Model\Address.cs" />
