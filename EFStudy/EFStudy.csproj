@@ -77,6 +77,7 @@
     <Compile Include="Core\T5\FlightDBContext.cs" />
     <Compile Include="Core\T5\HotelDBContext.cs" />
     <Compile Include="Core\T5\HotelFlightConfiguration.cs" />
+    <Compile Include="Core\T5\MakeReservation.cs" />
     <Compile Include="Core\T5\Reservation.cs" />
     <Compile Include="Core\T5\ReservationMap.cs" />
     <Compile Include="Core\T5\SQLProfiler.cs" />

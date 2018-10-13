@@ -8,5 +8,13 @@ namespace EFStudy.Core.T5
 {
     public class FlightBookingMap:EntityTypeConfiguration<FlightBooking>
     {
+        public FlightBookingMap()
+        {
+            ToTable("FlightBookings");
+            HasKey(k => k.FlightId);
+            Property(p => p.FilghtName).HasMaxLength(50);
+            Property(p => p.Number);
+            Property(p => p.TravellingDate);
+        }
     }
 }
