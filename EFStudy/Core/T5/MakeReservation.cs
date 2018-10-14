@@ -20,7 +20,7 @@ namespace EFStudy.Core.T5
         public bool ReservTrip(TripReservation trip)
         {
             bool reserved = false;
-            using (var scope=new TransactionScope(TransactionScopeOption.RequiredNew))
+            using (var scope=new TransactionScope(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
