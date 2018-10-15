@@ -15,6 +15,8 @@ namespace EFStudy.Core.T5
         public EFConfiguration()
         {
             AddInterceptor(new StringTrimmerInterceptor());
+            SetExecutionStrategy()
+
         }
 
         public class StringTrimmerInterceptor : IDbCommandTreeInterceptor
