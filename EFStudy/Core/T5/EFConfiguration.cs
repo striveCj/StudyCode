@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Entity.Infrastructure.Interception;
+using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace EFStudy.Core.T5
         public EFConfiguration()
         {
             AddInterceptor(new StringTrimmerInterceptor());
-            SetExecutionStrategy()
+            SetExecutionStrategy(SqlProviderServices.ProviderInvariantName, () => new SqlServerExecutionStrategy(3, TimeSpan.FromSeconds(5));
 
         }
 
