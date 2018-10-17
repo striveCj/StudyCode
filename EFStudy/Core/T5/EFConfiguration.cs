@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Polly;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees;
@@ -13,11 +14,13 @@ namespace EFStudy.Core.T5
 {
     public class EFConfiguration:DbConfiguration
     {
+        public Policy _policy;
         public EFConfiguration()
         {
             AddInterceptor(new StringTrimmerInterceptor());
-            SetExecutionStrategy(SqlProviderServices.ProviderInvariantName, () => new SqlServerExecutionStrategy(3, TimeSpan.FromSeconds(5));
-
+            SetExecutionStrategy(SqlProviderServices.ProviderInvariantName, () => new SqlServerExecutionStrategy(3, TimeSpan.FromSeconds(60)));
+            _policy = Policy.Handle<Exception>().CircuitBreaker(3, TimeSpan.FromSeconds(60));
+            SetExecutionStrategy(SqlProviderServices.ProviderInvariantName, () => new CirtuitBreakerExecutionStrategy(_policy));
         }
 
         public class StringTrimmerInterceptor : IDbCommandTreeInterceptor
