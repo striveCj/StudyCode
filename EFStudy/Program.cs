@@ -4,6 +4,7 @@ using EFStudy.Model.T5;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.IO;
@@ -363,6 +364,31 @@ namespace EFStudy
                 }
             }
 
+        }
+
+
+        public static void T6D1()
+        {
+            using (var ctx = new EfDbContext())
+            using(var ctx1=new EfDbContext())
+            {
+                var id = 1;
+                var student = ctx.Student.FirstOrDefault(d => d.Id == id);
+                var student1 = ctx1.Student.FirstOrDefault(d => d.Id == id);
+                student.Name = "chenjie1";
+                ctx.SaveChanges();
+                student1.Name = "chenjie2";
+                try
+                {
+                    ctx1.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    ex.Entries.Single().Reload();
+                    ctx1.SaveChanges();
+                }
+             
+            }
         }
     }
 }
