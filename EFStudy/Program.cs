@@ -384,11 +384,43 @@ namespace EFStudy
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
+                    //获取并发异常被追踪的实体
+                    var tracking = ex.Entries.Single();
+                    //获取数据库原始值对象
+                    var original = tracking.OriginalValues.ToObject();
+                    //获取更新后数据库最新的值对象
+                    var database = tracking.GetDatabaseValues().ToObject();
+                    //获取当前内存中的值对象
+                    var current = tracking.CurrentValues.ToObject();
+
+                    Retry(ctx1, handleDbUpdateConcurrencyException: exception =>
+                    {
+                        exception = (ex as DbUpdateConcurrencyException).Entries;
+                        var trackings = exception.Single();
+                        trackings.OriginalValues.SetValues(tracking.GetDatabaseValues());
+                    });
+
                     ex.Entries.Single().Reload();
                     ctx1.SaveChanges();
                 }
              
             }
+        }
+
+        static int Retry(EfDbContext context,Action<IEnumerable<DbEntityEntry>> handleDbUpdateConcurrencyException,int retryCount = 3)
+        {
+            for (int retry = 1; retry < retryCount; retry++)
+            {
+                try
+                {
+                    return context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException exception)
+                {
+                    handleDbUpdateConcurrencyException(exception.Entries);
+                }
+            }
+            return context.SaveChanges();
         }
     }
 }
