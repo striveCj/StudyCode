@@ -384,24 +384,36 @@ namespace EFStudy
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
-                    //获取并发异常被追踪的实体
-                    var tracking = ex.Entries.Single();
-                    //获取数据库原始值对象
-                    var original = tracking.OriginalValues.ToObject();
-                    //获取更新后数据库最新的值对象
-                    var database = tracking.GetDatabaseValues().ToObject();
-                    //获取当前内存中的值对象
-                    var current = tracking.CurrentValues.ToObject();
-
                     Retry(ctx1, handleDbUpdateConcurrencyException: exception =>
                     {
                         exception = (ex as DbUpdateConcurrencyException).Entries;
-                        var trackings = exception.Single();
-                        trackings.OriginalValues.SetValues(tracking.GetDatabaseValues());
+                        var tracking = exception.Single();
+                        var databaseValues = tracking.GetDatabaseValues();
+                        var originalValues = tracking.OriginalValues.Clone();
+                        tracking.OriginalValues.SetValues(databaseValues);
+                        databaseValues.PropertyNames.Where(property => !object.Equals(originalValues[property], databaseValues[property])).ToList().ForEach(property => tracking.Property(property).IsModified = false);
                     });
 
-                    ex.Entries.Single().Reload();
-                    ctx1.SaveChanges();
+
+
+                    ////获取并发异常被追踪的实体
+                    //var tracking = ex.Entries.Single();
+                    ////获取数据库原始值对象
+                    //var original = tracking.OriginalValues.ToObject();
+                    ////获取更新后数据库最新的值对象
+                    //var database = tracking.GetDatabaseValues().ToObject();
+                    ////获取当前内存中的值对象
+                    //var current = tracking.CurrentValues.ToObject();
+
+                    //Retry(ctx1, handleDbUpdateConcurrencyException: exception =>
+                    //{
+                    //    exception = (ex as DbUpdateConcurrencyException).Entries;
+                    //    var trackings = exception.Single();
+                    //    trackings.OriginalValues.SetValues(tracking.GetDatabaseValues());
+                    //});
+
+                    //ex.Entries.Single().Reload();
+                    //ctx1.SaveChanges();
                 }
              
             }
