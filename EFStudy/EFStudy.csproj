@@ -193,6 +193,7 @@
     <Compile Include="Core\T5\SQLProfiler.cs" />
     <Compile Include="Core\T5\SqlServerExecutionStrategy.cs" />
     <Compile Include="Core\T5\TripReservation.cs" />
+    <Compile Include="Core\T6\DbContextExtensions.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BaseEntity.cs" />
