@@ -1,4 +1,5 @@
 ﻿using EFStudy.Core;
+using EFStudy.Core.T6;
 using EFStudy.Model;
 using EFStudy.Model.T5;
 using System;
@@ -12,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using static EFStudy.Core.T6.DbContextExtensions;
 
 namespace EFStudy
 {
@@ -417,6 +419,25 @@ namespace EFStudy
                 }
              
             }
+        }
+
+        public static void T6D2()
+        {
+            using (var ctx = new EfDbContext())
+            using (var ctx1 = new EfDbContext())
+            {
+                var id = 1;
+                var student = ctx.Student.FirstOrDefault(d => d.Id == id);
+                var student1 = ctx1.Student.FirstOrDefault(d => d.Id == id);
+                student.Name = "Jeffcky1";
+                student1.Age = 25;
+                ctx.SaveChanges();
+
+                student1.Name = "Jeffcky2";
+                student1.Age = 26;
+                ctx1.SaveChanges(RefreshConflict.ClientWins);
+            }
+            Console.ReadKey();
         }
 
         static int Retry(EfDbContext context,Action<IEnumerable<DbEntityEntry>> handleDbUpdateConcurrencyException,int retryCount = 3)

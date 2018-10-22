@@ -94,7 +94,20 @@ namespace EFStudy.Core.T6
                     }
             }
             return tracking;
+
         }
+
+        public static int SaveChanges(this DbContext context,RefreshConflict refreshMode,int retryCount=3)
+        {
+            if (retryCount<=0)
+            {
+                throw new ArgumentOutOfRangeException($"{retryCount}必须大于0",nameof(retryCount));
+            }
+            return context.SaveChanges(conflicts => conflicts.ToList().ForEach(tracking => tracking.Refresh(refreshMode)), retryCount);
+
+        }
+
+        public static int SaveChanges(this DbContext context, RefreshConflict refreshMode) => context.SaveChanges(c => c.ToList().ForEach(tracking => tracking.Refresh(refreshMode)));
         #endregion
     }
 }
