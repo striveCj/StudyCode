@@ -43,7 +43,7 @@ namespace EFStudy.Core
             Configuration.EnsureTransactionsForFunctionsAndCommands = false;
         }
 
-        public EfDbContext(DbConnection con) : base(con, contextOwnsConnection: false)
+        public EfDbContext(DbConnection conn) : base(conn, contextOwnsConnection: false)
         {
 
         }
@@ -55,7 +55,7 @@ namespace EFStudy.Core
 
         public DbSet<Course> Course { get; set; }
 
-        public DbSet<Student> Student { get; set; }
+        public DbSet<EFStudy.Model.Student> Student { get; set; }
 
         public DbSet<Order> Orders { get; set; }
 
