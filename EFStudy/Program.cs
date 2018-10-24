@@ -5,6 +5,7 @@ using EFStudy.Model.T5;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -454,6 +455,27 @@ namespace EFStudy
                 }
             }
             return context.SaveChanges();
+        }
+
+        public static void T7D1()
+        {
+            var model = new Model.T7.Model()
+            {
+                Offset = 0,
+                Limit = 10
+            };
+            var model1 = new Model.T7.Model
+            {
+                Offset = 0,
+                Limit = 10
+            };
+
+            using (var ctx=new EfDbContext())
+            {
+                var customers = ctx.Customer.OrderBy(s => s.Id).Skip(() => model.Offset).Take(()=>model.Limit).ToList();
+                var customers1 = ctx.Customer.OrderBy(s => s.Id).Skip(() => model1.Offset).Take(() => model1.Limit).ToList();
+            }
+
         }
     }
 }

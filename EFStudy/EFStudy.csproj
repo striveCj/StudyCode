@@ -244,6 +244,7 @@
     <Compile Include="Model\T5\Post.cs" />
     <Compile Include="Model\T5\Product.cs" />
     <Compile Include="Model\T5\T5Function.cs" />
+    <Compile Include="Model\T7\Model.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Model\UserRole.cs" />
     <Compile Include="Program.cs" />
