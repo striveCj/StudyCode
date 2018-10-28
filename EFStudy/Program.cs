@@ -436,7 +436,7 @@ namespace EFStudy
 
                 student1.Name = "Jeffcky2";
                 student1.Age = 26;
-                ctx1.SaveChanges(RefreshConflict.ClientWins);
+                //ctx1.SaveChanges(RefreshConflict.ClientWins);
             }
             Console.ReadKey();
         }
