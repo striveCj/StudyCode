@@ -160,6 +160,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Common\MergeFileSingleton.cs" />
+    <Compile Include="Common\SortedFile.cs" />
+    <Compile Include="Common\Utils.cs" />
     <Compile Include="Helper\PollyHelper.cs" />
     <Compile Include="Model\Book.cs" />
     <Compile Include="Helper\FileHelper.cs" />

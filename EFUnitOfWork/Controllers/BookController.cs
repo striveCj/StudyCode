@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using EF.Core.Common;
+using EF.Core.Helper;
 using EF.Core.Model;
 using EF.Data;
 using EFUnitOfWork.Models.Dto;
@@ -71,5 +74,50 @@ namespace EFUnitOfWork.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpPost,ActionName("Upload")]
+        public ActionResult Upload(Int64 id)
+        {
+            if (Request.Files.Count<=0)
+            {
+                return Json(new {status = false, msg = "请选择要上传的书籍"});
+            }
+            HandleUploadFiles(Request.Files,id);
+            return Json(new { status = true});
+        }
+
+        public void HandleUploadFiles(HttpFileCollectionBase files, Int64 id)
+        {
+            foreach (string file in Request.Files)
+            {
+                var fileDataContent = Request.Files[file];
+                var stream = fileDataContent.InputStream;
+                var fileName = Path.GetFileName(fileDataContent.FileName);
+                var uploadPath = Server.MapPath("~/App_Data/uploads");
+                if (!FileHelper.ExistDirectory(uploadPath))
+                {
+                    FileHelper.CreateDirectory(uploadPath);
+                }
+
+                var path = Path.Combine(uploadPath, fileName);
+
+                PollyHelper.WaitAndRetry<IOException>(() =>
+                {
+                    if (FileHelper.Exist(path))
+                    {
+                        FileHelper.Delete(path);
+                    }
+
+                    using (var fileStream=System.IO.File.Create(path))
+                    {
+                        stream.CopyTo(fileStream);
+                    }
+
+                    var ut = new Utils();
+                    var storeFileName = string.Empty;
+                    var result = false;
+                    
+                });
+            }
+        }
     }
 }
