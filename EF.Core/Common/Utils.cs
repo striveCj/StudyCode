@@ -39,6 +39,63 @@ namespace EF.Core.Common
                 var extensionName = FileHelper.GetExtensionName(baseFileName);
                 storeFileName = FileHelper.GetFileNameWithoutExtension(baseFileName) + extensionName;
             }
+
+            if (!MergeFileSingleton.Instance.InUse(baseFileName))
+            {
+                MergeFileSingleton.Instance.AddFile(baseFileName);
+                if (FileHelper.Exist(baseFileName))
+                {
+                    FileHelper.Delete(baseFileName);
+                }
+
+                var mergeList = new List<SortedFile>();
+                foreach (var file in filesList)
+                {
+                    var sortedFile = new SortedFile
+                    {
+                        FileName = file
+                    };
+                    baseFileName = file.Substring(0, file.IndexOf(PARTTOKEN));
+                    trailingTokens = file.Substring(file.IndexOf(PARTTOKEN) + PARTTOKEN.Length);
+                    int.TryParse(trailingTokens.Substring(0, trailingTokens.IndexOf(".")), out fileIndex);
+                    sortedFile.FileOrder = fileIndex;
+                    mergeList.Add(sortedFile);
+                }
+
+                var mergeOrder = mergeList.OrderBy(s => s.FileOrder).ToList();
+
+                using (var fileStream=new FileStream(baseFileName,FileMode.Create))
+                {
+                    try
+                    {
+                        foreach (var chunk in mergeOrder)
+                        {
+                            PollyHelper.WaitAndRetry<IOException>(() =>
+                            {
+                                using (var fileChunk=new FileStream(chunk.FileName,FileMode.Open))
+                                {
+                                    fileChunk.CopyTo(fileStream);
+                                }
+                            });
+                        }
+                    }
+                    catch (IOException e)
+                    {
+                        return false;
+                        throw e;
+                    }
+                }
+
+                result = true;
+
+                MergeFileSingleton.Instance.RemoveFile(baseFileName);
+
+                Parallel.ForEach(mergeList, (d) => { FileHelper.Delete(d.FileName); });
+
+            }
+
+            return result;
         }
+        
     }
 }

@@ -115,9 +115,78 @@ namespace EFUnitOfWork.Controllers
                     var ut = new Utils();
                     var storeFileName = string.Empty;
                     var result = false;
-                    
+                    ut.MergeFile(path, out result, out storeFileName);
+                    if (result)
+                    {
+                        var model = bookRepository.GetById(id);
+                        model.Url = storeFileName;
+                        bookRepository.Update(model);
+                        unitOfWork.Commit();
+                    }
                 });
             }
+        }
+
+        public ActionResult Download(Int64? id)
+        {
+            if (!id.HasValue)
+            {
+                return View("Index");
+            }
+
+            var book = bookRepository.GetById(id.Value);
+            if (ReferenceEquals(book,null))
+            {
+                return RedirectToAction("Index");
+            }
+
+            var fileName = book.Url;
+            if (string.IsNullOrEmpty(fileName))
+            {
+                return RedirectToAction("Index");
+            }
+
+            var uploadPath = Server.MapPath("~/App_Data/uploads");
+            var fullPath = uploadPath + Path.DirectorySeparatorChar + fileName;
+            if (!FileHelper.Exist(fullPath))
+            {
+                return Content("<script type='text/javaScript'>alert('未上传或已删除');location.href='/';</script>");
+            }
+
+            return File(new FileStream(fullPath, FileMode.Open, FileAccess.Read), "text/plain", fileName);
+        }
+
+        public ActionResult DeleteBook(int id)
+        {
+            var entity = bookRepository.GetById(id);
+            if (ReferenceEquals(entity,null))
+            {
+                return RedirectToAction("Index");
+            }
+
+            var model = Mapper.Map<Book, BookDTO>(entity);
+            return View(model);
+        }
+
+        public ActionResult ConfirmDeleteBook(int id)
+        {
+            var model = bookRepository.GetById(id);
+            bookRepository.Delete(model);
+            unitOfWork.Commit();
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult DetailBook(int id)
+        {
+            var model = bookRepository.GetById(id);
+            var bookDTO = Mapper.Map<Book, BookDTO>(model);
+            return View(bookDTO);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            unitOfWork.Dispose();
+            base.Dispose(disposing);
         }
     }
 }
