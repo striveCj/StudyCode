@@ -129,6 +129,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutofacModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +148,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EFDI.Data\EFDI.Data.csproj">
+      <Project>{51A7B760-74BD-4774-8F1B-145B9F891A65}</Project>
+      <Name>EFDI.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EFDI.Service\EFDI.Service.csproj">
+      <Project>{229C6EC5-2ED4-4457-9E54-3DFA98BD2295}</Project>
+      <Name>EFDI.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
