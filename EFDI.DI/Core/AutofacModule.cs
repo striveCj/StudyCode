@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Autofac;
+﻿using Autofac;
 using EFDI.Data;
 using EFDI.Service;
 
-namespace EFDI.DI.Models
+namespace EFDI.DI.Core
 {
     public class AutofacModule:Module
     {
