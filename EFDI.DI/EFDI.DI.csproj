@@ -172,6 +172,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\User\CreateEditUser.cshtml" />
+    <Content Include="Views\User\CreateEditUset.cshtml" />
+    <Content Include="Views\User\DetailUser.cshtml" />
+    <Content Include="Views\User\DeleteUser.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
