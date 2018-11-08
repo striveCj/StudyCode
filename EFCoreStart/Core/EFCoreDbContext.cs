@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EFCoreStart.Model;
+using EFCoreStart.ValueGenerator;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreStart.Core
@@ -22,16 +23,23 @@ namespace EFCoreStart.Core
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.ToTable("Students");
-                entity.HasKey(k => k.Id);
-                //TODO:Ö÷¼üÇÒ×ÔÔö³¤
-                entity.Property(p => p.Id).ValueGeneratedOnAdd();
-                //TODO:Ö÷¼ü·Ç×ÔÔö³¤
-                entity.Property(p => p.Id).ValueGeneratedNever();
-                //TODO:ÐÂÔö»òÐÞ¸ÄÊµÌåÊ±¾Í»á×Ô¶¯Éú³ÉÖµ£¬ÐÞ¸ÄÊµÌåÊ±¾Í»á×Ô¶¯Éú³ÉÖµ
-                entity.Property(p => p.CreateTime).HasColumnType("DATETIME").HasDefaultValueSql("GETDATE()").ValueGeneratedOnAddOrUpdate();
-                //TODO:ÐÞ¸ÄÊµÌåÊ±¾Í»á×Ô¶¯Éú³ÉÖµ
-                entity.Property(p => p.Id).ValueGeneratedOnUpdate();
+               
+                entity.HasKey(k => k.Guid);
+                //TODO:ä¸»é”®ä¸”è‡ªå¢žé•¿
+                entity.Property(p => p.Guid).HasColumnType("VARCHAR(36)").HasDefaultValueSql("NEWID()");
+                //TODO:ä¸»é”®éžè‡ªå¢žé•¿
+                //entity.Property(p => p.Id).ValueGeneratedNever();
+                //TODO:æ–°å¢žæˆ–ä¿®æ”¹å®žä½“æ—¶å°±ä¼šè‡ªåŠ¨ç”Ÿæˆå€¼ï¼Œä¿®æ”¹å®žä½“æ—¶å°±ä¼šè‡ªåŠ¨ç”Ÿæˆå€¼
+                entity.Property(p => p.CreateTime).HasColumnType("DATETIME").HasValueGenerator((d,g)=>new CreatedTimeValueGenerator()).ValueGeneratedOnAddOrUpdate();
+                entity.Property(p => p.Status).HasDefaultValue(0);
+                entity.Property(p => p.Decimal).HasColumnType("decimal(18,4)");
+                entity.Property(p => p.Name).HasColumnType("VARCHAR(50)");
+                //TODO:ä¿®æ”¹å®žä½“æ—¶å°±ä¼šè‡ªåŠ¨ç”Ÿæˆå€¼
+                //entity.Property(p => p.Id).ValueGeneratedOnUpdate();
             });
+            modelBuilder.HasSequence<int>("SQLSequence").StartsAt(1000).IncrementsBy(2);
+            modelBuilder.Entity<Customer>().Property(x => x.CustomerId).HasDefaultValueSql("Next Value For SQLSequence");
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }
     }

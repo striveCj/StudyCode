@@ -106,9 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Core\EFCoreDbContext.cs" />
+    <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValueGenerator\CreatedTimeValueGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
