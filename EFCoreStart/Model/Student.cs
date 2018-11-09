@@ -17,6 +17,7 @@ namespace EFCoreStart.Model
         public decimal Decimal { get; set; }
         public  byte Status { get; set; }
         public string Name { get; set; }
+        public string Char { get; set; }
         public DateTime CreateTime { get; set; }
     }
 }

@@ -34,6 +34,9 @@ namespace EFCoreStart.Core
                 entity.Property(p => p.Status).HasDefaultValue(0);
                 entity.Property(p => p.Decimal).HasColumnType("decimal(18,4)");
                 entity.Property(p => p.Name).HasColumnType("VARCHAR(50)");
+                entity.Property(p=>p.Char).HasColumnType("CHAR(1)");
+                //TODO:建立非唯一聚集索引
+                entity.HasIndex(p => new {Name = p.Name,Char=p.Char}).IsUnique();
                 //TODO:修改实体时就会自动生成值
                 //entity.Property(p => p.Id).ValueGeneratedOnUpdate();
             });
