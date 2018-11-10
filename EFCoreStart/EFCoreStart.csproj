@@ -105,7 +105,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\BlogConfiguration.cs" />
     <Compile Include="Core\EFCoreDbContext.cs" />
+    <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Program.cs" />
