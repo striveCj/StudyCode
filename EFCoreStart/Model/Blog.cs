@@ -23,6 +23,6 @@ namespace EFCoreStart.Model
 
         public DateTime CreatedTime { get; set; }
 
-        public DateTime ModifiedTIme { get; set; }
+        public DateTime ModifiedTime { get; set; }
     }
 }
