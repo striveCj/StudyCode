@@ -20,6 +20,8 @@ namespace EFCoreStart.Configuration
             builder.Property(p=>p.ModifiedTime).HasColumnType("DATETIME").HasDefaultValueSql("getdate()");
             builder.Property(p => p.Url).HasColumnType("VARCHAR(100)").HasField("_url");
             builder.Property(p => p.Name).IsRequired();
+            builder.Property<string>("TestBackingField").HasField("_status");
+
         }
     }
 }

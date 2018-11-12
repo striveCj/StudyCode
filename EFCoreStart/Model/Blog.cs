@@ -13,6 +13,7 @@ namespace EFCoreStart.Model
         public Blog(string url)
         {
             _url = url;
+            _status = "using";
         }
 
         private string _url;
@@ -24,5 +25,9 @@ namespace EFCoreStart.Model
         public DateTime CreatedTime { get; set; }
 
         public DateTime ModifiedTime { get; set; }
+
+        private string _status = string.Empty;
+
+        public override string ToString() => $"{Name},{Url},blog status:{_status}";
     }
 }

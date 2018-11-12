@@ -45,5 +45,7 @@ namespace EFCoreStart.Core
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }
+
+        public DbSet<Blog> Blogs { get; set; }
     }
 }

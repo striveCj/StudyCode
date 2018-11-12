@@ -41,11 +41,20 @@ namespace EFCoreStart
                 //s.Name = "chenjielove";
                 //context.SaveChanges();
 
-                context.Set<Customer>().AddRange(
-                    new Customer() { Name = "111"},
-                    new Customer() { Name = "222"}
-                    );
+                //context.Set<Customer>().AddRange(
+                //    new Customer() { Name = "111"},
+                //    new Customer() { Name = "222"}
+                //    );
+                //context.SaveChanges();
+
+
+                context.Blogs.Add(new Blog("http://www.cnblogs.com") {Name = "chenjie"});
                 context.SaveChanges();
+                foreach (var blog in context.Blogs)
+                {
+                    Console.WriteLine($"{blog.Id}{blog.Name}{blog.Url}");
+                }
+
             }
            
            
