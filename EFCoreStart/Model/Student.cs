@@ -19,5 +19,13 @@ namespace EFCoreStart.Model
         public string Name { get; set; }
         public string Char { get; set; }
         public DateTime CreateTime { get; set; }
+
+        public readonly  List<Course> _courses=new List<Course>();
+        public IEnumerable<Course> Courses { get; set; }
+
+        public void AddCourse(Course course)
+        {
+            _courses.Add(course);
+        }
     }
 }

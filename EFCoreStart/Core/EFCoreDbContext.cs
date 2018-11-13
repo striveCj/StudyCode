@@ -39,6 +39,8 @@ namespace EFCoreStart.Core
                 entity.HasIndex(p => new {Name = p.Name,Char=p.Char}).IsUnique();
                 //TODO:修改实体时就会自动生成值
                 //entity.Property(p => p.Id).ValueGeneratedOnUpdate();
+                var navigation = modelBuilder.Entity<Student>().Metadata.FindNavigation(nameof(Student.Courses));
+                navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
             });
             modelBuilder.HasSequence<int>("SQLSequence").StartsAt(1000).IncrementsBy(2);
             modelBuilder.Entity<Customer>().Property(x => x.CustomerId).HasDefaultValueSql("Next Value For SQLSequence");

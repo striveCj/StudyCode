@@ -48,12 +48,28 @@ namespace EFCoreStart
                 //context.SaveChanges();
 
 
-                context.Blogs.Add(new Blog("http://www.cnblogs.com") {Name = "chenjie"});
-                context.SaveChanges();
-                foreach (var blog in context.Blogs)
+                //context.Blogs.Add(new Blog("http://www.cnblogs.com") {Name = "chenjie"});
+                //context.SaveChanges();
+                //foreach (var blog in context.Blogs)
+                //{
+                //    Console.WriteLine($"{blog.Id}{blog.Name}{blog.Url}");
+                //}
+
+                var student=new Student()
                 {
-                    Console.WriteLine($"{blog.Id}{blog.Name}{blog.Url}");
-                }
+                    Age=1,
+                    Name = "chenjie",
+                    CreateTime = DateTime.Now
+                };
+                var course=new Course()
+                {
+                    Name = "EntityFramework Core",
+                    Introduce = "轻量级、可扩展、跨平台",
+                    CreatedTime = DateTime.Now
+                };
+                student.AddCourse(course);
+                context.Students.Add(student);
+                context.SaveChanges();
 
             }
            
