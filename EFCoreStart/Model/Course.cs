@@ -13,7 +13,7 @@ namespace EFCoreStart.Model
 
         public string Introduce { get; set; }
 
-        public DateTime CreatedTime { get; set; }
+        //public DateTime CreatedTime { get; set; }
 
         public Student Student { get; set; }
     }

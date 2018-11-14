@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EFCoreStart.Core;
 using EFCoreStart.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -55,22 +56,30 @@ namespace EFCoreStart
                 //    Console.WriteLine($"{blog.Id}{blog.Name}{blog.Url}");
                 //}
 
-                var student=new Student()
-                {
-                    Age=1,
-                    Name = "chenjie",
-                    CreateTime = DateTime.Now
-                };
-                var course=new Course()
-                {
-                    Name = "EntityFramework Core",
-                    Introduce = "轻量级、可扩展、跨平台",
-                    CreatedTime = DateTime.Now
-                };
-                student.AddCourse(course);
-                context.Students.Add(student);
-                context.SaveChanges();
+                //var student=new Student()
+                //{
+                //    Age=1,
+                //    Name = "chenjie",
+                //    CreateTime = DateTime.Now
+                //};
+                //var course=new Course()
+                //{
+                //    Name = "EntityFramework Core",
+                //    Introduce = "轻量级、可扩展、跨平台",
+                //    CreatedTime = DateTime.Now
+                //};
+                //student.AddCourse(course);
+                //context.Students.Add(student);
+                //context.SaveChanges();
 
+                //var courses = context.Set<Course>().Where(d => EF.Property<int>(d, "StudentId") == 1).ToList();
+                var course=new Course
+                {
+                    Introduce = "EntityFramework Core 2.0",
+                    Name = "EF Core"
+                };
+                context.Entry(course).Property("CreateTime").CurrentValue = DateTime.Now;
+                context.SaveChanges();
             }
            
            

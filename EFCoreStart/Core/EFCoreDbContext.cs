@@ -25,6 +25,9 @@ namespace EFCoreStart.Core
                 entity.ToTable("Students");
                
                 entity.HasKey(k => k.Guid);
+                //TODO:备用键
+                entity.HasAlternateKey(p => p.Name);
+
                 //TODO:主键且自增长
                 entity.Property(p => p.Guid).HasColumnType("VARCHAR(36)").HasDefaultValueSql("NEWID()");
                 //TODO:主键非自增长
@@ -41,6 +44,8 @@ namespace EFCoreStart.Core
                 //entity.Property(p => p.Id).ValueGeneratedOnUpdate();
                 var navigation = modelBuilder.Entity<Student>().Metadata.FindNavigation(nameof(Student.Courses));
                 navigation.SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasMany(m => m.Courses).WithOne(o => o.Student);
+                entity.Property<DateTime>("CreateTime");
             });
             modelBuilder.HasSequence<int>("SQLSequence").StartsAt(1000).IncrementsBy(2);
             modelBuilder.Entity<Customer>().Property(x => x.CustomerId).HasDefaultValueSql("Next Value For SQLSequence");
