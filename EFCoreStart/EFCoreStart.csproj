@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Configuration\BlogConfiguration.cs" />
     <Compile Include="Core\EFCoreDbContext.cs" />
+    <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Customer.cs" />

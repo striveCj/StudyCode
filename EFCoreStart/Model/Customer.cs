@@ -10,6 +10,7 @@ namespace EFCoreStart.Model
     {
         public int CustomerId { get; set; }
         public string Name { get; set; }
-
+        public Address WorkAddress { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

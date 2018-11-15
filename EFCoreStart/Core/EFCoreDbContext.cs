@@ -48,7 +48,8 @@ namespace EFCoreStart.Core
                 entity.Property<DateTime>("CreateTime");
             });
             modelBuilder.HasSequence<int>("SQLSequence").StartsAt(1000).IncrementsBy(2);
-            modelBuilder.Entity<Customer>().Property(x => x.CustomerId).HasDefaultValueSql("Next Value For SQLSequence");
+            modelBuilder.Entity<Customer>().OwnsOne(c => c.WorkAddress).ToTable("CustomerWorkAddress");
+            modelBuilder.Entity<Customer>().HasQueryFilter(d => !d.IsDeleted);
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }

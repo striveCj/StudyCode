@@ -73,13 +73,13 @@ namespace EFCoreStart
                 //context.SaveChanges();
 
                 //var courses = context.Set<Course>().Where(d => EF.Property<int>(d, "StudentId") == 1).ToList();
-                var course=new Course
-                {
-                    Introduce = "EntityFramework Core 2.0",
-                    Name = "EF Core"
-                };
-                context.Entry(course).Property("CreateTime").CurrentValue = DateTime.Now;
-                context.SaveChanges();
+                //var course=new Course
+                //{
+                //    Introduce = "EntityFramework Core 2.0",
+                //    Name = "EF Core"
+                //};
+                //context.Entry(course).Property("CreateTime").CurrentValue = DateTime.Now;
+                //context.SaveChanges();
             }
            
            
