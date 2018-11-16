@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EFCoreStart.Core;
 
 namespace EFCoreStart.Model
 {
-    public class Blog
+    public class Blog:ISoftDeleteBaseEntity
     {
         private Blog() { }
 
@@ -29,5 +30,6 @@ namespace EFCoreStart.Model
         private string _status = string.Empty;
 
         public override string ToString() => $"{Name},{Url},blog status:{_status}";
+        public bool IsDeleted { get; set; }
     }
 }
