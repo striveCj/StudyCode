@@ -18,8 +18,8 @@ namespace EFCoreStart
             using (var context = new EFCoreDbContext())
             {
                 //TODO:EFCode不知道是否要创建，所以要手动去创建   
-                context.Database.EnsureDeleted();
-                context.Database.EnsureCreated();
+                //context.Database.EnsureDeleted();
+                //context.Database.EnsureCreated();
 
                 //TODO:手动调用EntityFramework Core内置API创建
                 //RelationalDatabaseCreator databaseCreator =
@@ -80,11 +80,10 @@ namespace EFCoreStart
                 //};
                 //context.Entry(course).Property("CreateTime").CurrentValue = DateTime.Now;
                 //context.SaveChanges();
+                var blogs = context.Blogs.Include(d => d.Post).ToList();
+
+                var blog = context.Blogs.Include(d => d.Post).IgnoreQueryFilters().AsNoTracking().ToList();
             }
-           
-           
-
-
         }
     }
 }

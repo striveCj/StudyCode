@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using EFCoreStart.Model;
@@ -50,6 +51,25 @@ namespace EFCoreStart.Core
             modelBuilder.HasSequence<int>("SQLSequence").StartsAt(1000).IncrementsBy(2);
             modelBuilder.Entity<Customer>().OwnsOne(c => c.WorkAddress).ToTable("CustomerWorkAddress");
             modelBuilder.Entity<Customer>().HasQueryFilter(d => !d.IsDeleted);
+            //modelBuilder.Entity<Post>().HasQueryFilter(b => !b.IsDeleted);
+            //modelBuilder.Entity<Blog>().HasQueryFilter(b => !b.IsDeleted);
+            modelBuilder.Model.GetEntityTypes().Where(entntiyType=>typeof(ISoftDeleteBaseEntity).IsAssignableFrom(entntiyType.ClrType)).ToList().ForEach(
+                entityType =>
+                {
+                    modelBuilder.Entity(entityType.ClrType).Property<Boolean>("IsDeleted");
+                    var parameter = Expression.Parameter(entityType.ClrType, "e");
+                    var body = Expression.Equal(Expression.Call(typeof(EF), nameof(EF.Property), new[] {typeof(bool)},
+                        parameter, Expression.Constant("IsDeleted")), Expression.Constant(false));
+                    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(Expression.Lambda(body,parameter));
+                });
+
+
+            //Expression<Func<ISoftDeleteBaseEntity, bool>> expression = e => !e.IsDeleted;
+            //foreach (var entityType in modelBuilder.Model.GetEntityTypes().Where(e=>typeof(ISoftDeleteBaseEntity).IsAssignableFrom(e.ClrType)))
+            //{
+            //    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(expression);
+            //}
+
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }

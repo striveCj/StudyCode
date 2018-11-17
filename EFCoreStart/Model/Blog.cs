@@ -31,5 +31,7 @@ namespace EFCoreStart.Model
 
         public override string ToString() => $"{Name},{Url},blog status:{_status}";
         public bool IsDeleted { get; set; }
+
+        public virtual Post Post { get; set; }
     }
 }
