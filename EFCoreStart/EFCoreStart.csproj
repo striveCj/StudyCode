@@ -106,8 +106,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration\BlogConfiguration.cs" />
+    <Compile Include="Configuration\CustomerConfiguration.cs" />
+    <Compile Include="Configuration\IEntityMappingConfiguration.cs" />
     <Compile Include="Core\EFCoreDbContext.cs" />
     <Compile Include="Core\ISoftDeleteBaseEntity.cs" />
+    <Compile Include="Map\CustomerMap.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Course.cs" />

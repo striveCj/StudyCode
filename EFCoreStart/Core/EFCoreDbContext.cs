@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using EFCoreStart.Configuration;
 using EFCoreStart.Model;
 using EFCoreStart.ValueGenerator;
 using Microsoft.EntityFrameworkCore;
@@ -49,10 +51,12 @@ namespace EFCoreStart.Core
                 entity.Property<DateTime>("CreateTime");
             });
             modelBuilder.HasSequence<int>("SQLSequence").StartsAt(1000).IncrementsBy(2);
-            modelBuilder.Entity<Customer>().OwnsOne(c => c.WorkAddress).ToTable("CustomerWorkAddress");
-            modelBuilder.Entity<Customer>().HasQueryFilter(d => !d.IsDeleted);
+            //modelBuilder.Entity<Customer>().OwnsOne(c => c.WorkAddress).ToTable("CustomerWorkAddress");
+            //modelBuilder.Entity<Customer>().HasQueryFilter(d => !d.IsDeleted);
             //modelBuilder.Entity<Post>().HasQueryFilter(b => !b.IsDeleted);
             //modelBuilder.Entity<Blog>().HasQueryFilter(b => !b.IsDeleted);
+            //modelBuilder.ApplyConfiguration(new CustomerConfiguration());
+            modelBuilder.AddEntityConfigurationsFromAssembly(GetType().GetTypeInfo().Assembly);
             modelBuilder.Model.GetEntityTypes().Where(entntiyType=>typeof(ISoftDeleteBaseEntity).IsAssignableFrom(entntiyType.ClrType)).ToList().ForEach(
                 entityType =>
                 {
