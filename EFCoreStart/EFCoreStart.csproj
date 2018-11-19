@@ -108,6 +108,7 @@
     <Compile Include="Configuration\BlogConfiguration.cs" />
     <Compile Include="Configuration\CustomerConfiguration.cs" />
     <Compile Include="Configuration\IEntityMappingConfiguration.cs" />
+    <Compile Include="Configuration\PostConfiguration.cs" />
     <Compile Include="Core\EFCoreDbContext.cs" />
     <Compile Include="Core\ISoftDeleteBaseEntity.cs" />
     <Compile Include="Map\CustomerMap.cs" />

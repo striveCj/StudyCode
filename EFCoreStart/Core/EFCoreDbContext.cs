@@ -73,7 +73,8 @@ namespace EFCoreStart.Core
             //{
             //    modelBuilder.Entity(entityType.ClrType).HasQueryFilter(expression);
             //}
-
+            modelBuilder.ApplyConfiguration(new BlogConfiguration());
+            modelBuilder.ApplyConfiguration(new PostConfiguration());
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }

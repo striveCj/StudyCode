@@ -21,6 +21,7 @@ namespace EFCoreStart.Configuration
             builder.Property(p => p.Url).HasColumnType("VARCHAR(100)").HasField("_url");
             builder.Property(p => p.Name).IsRequired();
             builder.Property<string>("TestBackingField").HasField("_status");
+            builder.HasMany(m => m.Posts).WithOne(o => o.Blog).HasForeignKey(k => k.BlogId);
 
         }
     }
