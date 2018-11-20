@@ -80,9 +80,12 @@ namespace EFCoreStart
                 //};
                 //context.Entry(course).Property("CreateTime").CurrentValue = DateTime.Now;
                 //context.SaveChanges();
-                var blogs = context.Blogs.Include(d => d.Post).ToList();
+                //var blogs = context.Blogs.Include(d => d.Post).ToList();
 
-                var blog = context.Blogs.Include(d => d.Post).IgnoreQueryFilters().AsNoTracking().ToList();
+                //var blog = context.Blogs.Include(d => d.Post).IgnoreQueryFilters().AsNoTracking().ToList();
+                var blogId = 1;
+                var posts = context.DbSet<Post>.Where(d => EF.Property<int>(d, "BlogId") == blogId);
+
             }
         }
     }
