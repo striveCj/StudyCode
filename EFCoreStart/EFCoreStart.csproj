@@ -109,6 +109,7 @@
     <Compile Include="Configuration\CustomerConfiguration.cs" />
     <Compile Include="Configuration\IEntityMappingConfiguration.cs" />
     <Compile Include="Configuration\PostConfiguration.cs" />
+    <Compile Include="Configuration\PostTagConfiguration.cs" />
     <Compile Include="Core\EFCoreDbContext.cs" />
     <Compile Include="Core\ISoftDeleteBaseEntity.cs" />
     <Compile Include="Map\CustomerMap.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Post.cs" />
+    <Compile Include="Model\PostTag.cs" />
     <Compile Include="Model\Student.cs" />
     <Compile Include="Model\Tag.cs" />
     <Compile Include="Program.cs" />

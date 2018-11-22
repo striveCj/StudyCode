@@ -17,5 +17,6 @@ namespace EFCoreStart.Model
         public Blog Blog { get; set; }
         public int BlogId { get; set; }
         public bool IsDeleted { get; set; }
+        public ICollection<PostTag> PostTags { get; } = new List<PostTag>();
     }
 }
