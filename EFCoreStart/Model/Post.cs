@@ -17,6 +17,8 @@ namespace EFCoreStart.Model
         public Blog Blog { get; set; }
         public int BlogId { get; set; }
         public bool IsDeleted { get; set; }
-        public ICollection<PostTag> PostTags { get; } = new List<PostTag>();
+        private ICollection<PostTag> PostTags { get; } = new List<PostTag>();
+        [NotMapped]
+        public IEnumerable<Tag> Tags => PostTags.Select(e => e.Tags);
     }
 }

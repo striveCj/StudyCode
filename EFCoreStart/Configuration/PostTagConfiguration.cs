@@ -13,6 +13,8 @@ namespace EFCoreStart.Configuration
         {
             builder.ToTable("PostTags");
             builder.HasKey(k =>new {k.PostId,k.TagId });
+            builder.HasOne(pt => pt.Post).WithMany("PostTags");
+            builder.HasOne(pt => pt.Tag).WithMany("PostTags");
         }
     }
 }
