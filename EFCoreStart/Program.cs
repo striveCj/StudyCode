@@ -83,9 +83,31 @@ namespace EFCoreStart
                 //var blogs = context.Blogs.Include(d => d.Post).ToList();
 
                 //var blog = context.Blogs.Include(d => d.Post).IgnoreQueryFilters().AsNoTracking().ToList();
-                var blogId = 1;
-                var posts = context.DbSet<Post>.Where(d => EF.Property<int>(d, "BlogId") == blogId);
+                //var blogId = 1;
+                //var posts = context.Set<Post>().Where(d => EF.Property<int>(d, "BlogId") == blogId);
+                var tags = new[]
+                {
+                    new Tag{Text="1"},
+                    new Tag{Text="2"},
+                    new Tag{Text="3"},
+                    new Tag{Text="4"},
+                    new Tag{Text="5"},
+                };
+                var posts = new[]
+                {
+                    new Post{Name="1"},
+                    new Post{Name="2"},
+                    new Post{Name="3"},
+                    new Post{Name="4"},
+                    new Post{Name="5"},
+                };
 
+                context.AddRange(new PostTag { Posts = posts[0], Tags = tags[0] },
+                    new PostTag { Posts = posts[1], Tags = tags[1] },
+                    new PostTag { Posts = posts[2], Tags = tags[2] },
+                    new PostTag { Posts = posts[3], Tags = tags[3] },
+                    new PostTag { Posts = posts[4], Tags = tags[4] });
+                context.SaveChanges();
             }
         }
     }

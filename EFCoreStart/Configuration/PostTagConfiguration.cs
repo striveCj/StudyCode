@@ -1,4 +1,6 @@
 ﻿using EFCoreStart.Model;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +15,8 @@ namespace EFCoreStart.Configuration
         {
             builder.ToTable("PostTags");
             builder.HasKey(k =>new {k.PostId,k.TagId });
-            builder.HasOne(pt => pt.Post).WithMany("PostTags");
-            builder.HasOne(pt => pt.Tag).WithMany("PostTags");
+            builder.HasOne(pt => pt.Posts).WithMany("PostTags");
+            builder.HasOne(pt => pt.Tags).WithMany("PostTags");
         }
     }
 }
