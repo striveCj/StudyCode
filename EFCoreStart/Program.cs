@@ -108,6 +108,9 @@ namespace EFCoreStart
                     new PostTag { Posts = posts[3], Tags = tags[3] },
                     new PostTag { Posts = posts[4], Tags = tags[4] });
                 context.SaveChanges();
+
+                var postss = context.Set<Post>().Include("PostTags.Tag").ToList();
+
             }
         }
     }

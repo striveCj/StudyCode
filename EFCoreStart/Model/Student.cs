@@ -27,5 +27,6 @@ namespace EFCoreStart.Model
         {
             _courses.Add(course);
         }
+        public StudentContact StudentContact { get; set; }
     }
 }
