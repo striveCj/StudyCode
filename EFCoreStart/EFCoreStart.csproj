@@ -137,6 +137,7 @@
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Payment.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\PostTag.cs" />
     <Compile Include="Model\Student.cs" />

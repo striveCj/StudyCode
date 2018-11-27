@@ -11,5 +11,6 @@ namespace EFCoreStart.Model
         public int Id { get; set; }
         public string ContactNumber { get; set; }
         public Student Student { get; set; }
+        public long StudentId { get; set; }
     }
 }

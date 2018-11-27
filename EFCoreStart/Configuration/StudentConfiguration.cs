@@ -18,6 +18,7 @@ namespace EFCoreStart.Configuration
             builder.Property(p => p.Name).HasMaxLength(20).IsRequired();
             builder.HasOne(o => o.StudentContact).WithOne(o => o.Student).HasForeignKey<StudentContact>(k => k.ContactNumber)
                 .OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(o => o.StudentContact).WithOne(o => o.Student);
         }
     
     }
