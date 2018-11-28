@@ -135,6 +135,7 @@
     <Compile Include="Map\CustomerMap.cs" />
     <Compile Include="Model\Address.cs" />
     <Compile Include="Model\Blog.cs" />
+    <Compile Include="Model\CashPayment.cs" />
     <Compile Include="Model\Course.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Payment.cs" />

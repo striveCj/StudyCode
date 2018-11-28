@@ -80,5 +80,11 @@ namespace EFCoreStart.Core
         public DbSet<Student> Students { get; set; }
 
         public DbSet<Blog> Blogs { get; set; }
-    }
+
+        public DbSet<Payment> Payments { get; set; }
+
+        public DbSet<CashPayment> CashPayments { get; set; }
+
+        public DbSet<CreditcardPayment> creditcardPayments { get; set; }
+    } 
 }
