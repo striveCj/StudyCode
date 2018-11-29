@@ -75,6 +75,9 @@ namespace EFCoreStart.Core
             //}
             modelBuilder.ApplyConfiguration(new BlogConfiguration());
             modelBuilder.ApplyConfiguration(new PostConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CreditcardPaymentConfiguration());
+            modelBuilder.ApplyConfiguration(new CashPaymentConfiguration());
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Student> Students { get; set; }
@@ -86,5 +89,7 @@ namespace EFCoreStart.Core
         public DbSet<CashPayment> CashPayments { get; set; }
 
         public DbSet<CreditcardPayment> creditcardPayments { get; set; }
+
+        
     } 
 }
