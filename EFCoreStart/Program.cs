@@ -114,6 +114,14 @@ namespace EFCoreStart
                 context.Payments.Add(new CashPayment {Amount = 2M, Name = "Tom"});
                 context.Payments.Add(new CashPayment {Amount = 1000M, Name = "Jim"});
 
+                context.Payments.Add(new CreditcardPayment()
+                {
+                    Amount = 200000,
+                    Name = "’–…Ã“¯––",
+                    CreditcardNumber = "041647181912"
+                });
+                context.SaveChanges();
+
             }
         }
     }
