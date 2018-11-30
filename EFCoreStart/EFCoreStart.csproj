@@ -129,6 +129,7 @@
     <Compile Include="Configuration\CreditcardPaymentConfiguration.cs" />
     <Compile Include="Configuration\CustomerConfiguration.cs" />
     <Compile Include="Configuration\IEntityMappingConfiguration.cs" />
+    <Compile Include="Configuration\PaymentConfiguration.cs" />
     <Compile Include="Configuration\PostConfiguration.cs" />
     <Compile Include="Configuration\PostTagConfiguration.cs" />
     <Compile Include="Configuration\StudentConfiguration.cs" />

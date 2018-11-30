@@ -111,17 +111,29 @@ namespace EFCoreStart
 
                 //var postss = context.Set<Post>().Include("PostTags.Tag").ToList();
 
-                context.Payments.Add(new CashPayment {Amount = 2M, Name = "Tom"});
-                context.Payments.Add(new CashPayment {Amount = 1000M, Name = "Jim"});
+                //context.Payments.Add(new CashPayment {Amount = 2M, Name = "Tom"});
+                //context.Payments.Add(new CashPayment {Amount = 1000M, Name = "Jim"});
 
-                context.Payments.Add(new CreditcardPayment()
+                //context.Payments.Add(new CreditcardPayment()
+                //{
+                //    Amount = 200000,
+                //    Name = "招商银行",
+                //    CreditcardNumber = "041647181912"
+                //});
+                //context.SaveChanges();
+
+                //var payments = context.Payments.ToList();
+                //foreach (var payment in payments)
+                //{
+                //    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
+                //}
+
+                var payments = context.Payments.ToList();
+                foreach (var payment in context.Payments.OfType<CreditcardPayment>())
                 {
-                    Amount = 200000,
-                    Name = "招商银行",
-                    CreditcardNumber = "041647181912"
-                });
-                context.SaveChanges();
-
+                    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
+                }
+           
             }
         }
     }
