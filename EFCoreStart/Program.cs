@@ -128,12 +128,25 @@ namespace EFCoreStart
                 //    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
                 //}
 
-                var payments = context.Payments.ToList();
-                foreach (var payment in context.Payments.OfType<CreditcardPayment>())
+                //var payments = context.Payments.ToList();
+                //foreach (var payment in context.Payments.OfType<CreditcardPayment>())
+                //{
+                //    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
+                //}
+                //TODO: 当使用主键查询时使用Find方法性能会更好
+                var blog = context.Blogs.Find(1);
+                var blogs = context.Blogs.FirstOrDefault(d => d.Id == 1);
+                //TODO:复合主键
+                //var productCategory = context.Blogs.Find(1, 1);
+                //TODO:利用Find或者FindAsync方法不能进行饥饿加载(Include),但是我们任然能够通过上下文的Entry方法中的Navigations属性加载导航属性实现饥饿加载
+            
+                
+                var student = context.Students.Find(Convert.ToInt32(3));
+                foreach (var navigation in context.Entry(student).Navigations)
                 {
-                    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
+                    navigation.Load();
                 }
-           
+
             }
         }
     }
