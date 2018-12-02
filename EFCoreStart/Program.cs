@@ -134,18 +134,28 @@ namespace EFCoreStart
                 //    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
                 //}
                 //TODO: 当使用主键查询时使用Find方法性能会更好
-                var blog = context.Blogs.Find(1);
-                var blogs = context.Blogs.FirstOrDefault(d => d.Id == 1);
+                //var blog = context.Blogs.Find(1);
+                //var blogs = context.Blogs.FirstOrDefault(d => d.Id == 1);
                 //TODO:复合主键
                 //var productCategory = context.Blogs.Find(1, 1);
                 //TODO:利用Find或者FindAsync方法不能进行饥饿加载(Include),但是我们任然能够通过上下文的Entry方法中的Navigations属性加载导航属性实现饥饿加载
             
                 
-                var student = context.Students.Find(Convert.ToInt32(3));
-                foreach (var navigation in context.Entry(student).Navigations)
-                {
-                    navigation.Load();
-                }
+                //var student = context.Students.Find(Convert.ToInt32(3));
+                //foreach (var navigation in context.Entry(student).Navigations)
+                //{
+                //    navigation.Load();
+                //}
+
+                //TODO:在继承映射TPH模式中，可以用OfType方法转换为具体类，所以此方法与查询运算符等值条件等价
+                var patments = context.Payments.OfType<CashPayment>();
+                Console.WriteLine(patments.FirstOrDefault()?.Name);
+                //TODO:也可以用Cast进行转换与OfType的区别是，Cast将翻译成In子句
+                var payments = context.Payments.Cast<CashPayment>();
+                Console.WriteLine(payments.FirstOrDefault()?.Name);
+                //TODO:EF Code不支持使用OfType和Cast转换原始类型
+                var paymentss = context.Payments.Select(d => d.PaymentId).OfType<string>();
+                Console.WriteLine(paymentss);
 
             }
         }
