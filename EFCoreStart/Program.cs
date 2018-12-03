@@ -17,11 +17,11 @@ namespace EFCoreStart
         {
             using (var context = new EFCoreDbContext())
             {
-                //TODO:EFCode²»ÖªµÀÊÇ·ñÒª´´½¨£¬ËùÒÔÒªÊÖ¶¯È¥´´½¨   
+                //TODO:EFCodeä¸çŸ¥é“æ˜¯å¦è¦åˆ›å»ºï¼Œæ‰€ä»¥è¦æ‰‹åŠ¨å»åˆ›å»º   
                 //context.Database.EnsureDeleted();
                 //context.Database.EnsureCreated();
 
-                //TODO:ÊÖ¶¯µ÷ÓÃEntityFramework CoreÄÚÖÃAPI´´½¨
+                //TODO:æ‰‹åŠ¨è°ƒç”¨EntityFramework Coreå†…ç½®APIåˆ›å»º
                 //RelationalDatabaseCreator databaseCreator =
                 //    (RelationalDatabaseCreator) context.Database.GetService<IDatabaseCreator>();
                 //databaseCreator.CreateTables();
@@ -65,7 +65,7 @@ namespace EFCoreStart
                 //var course=new Course()
                 //{
                 //    Name = "EntityFramework Core",
-                //    Introduce = "ÇáÁ¿¼¶¡¢¿ÉÀ©Õ¹¡¢¿çÆ½Ì¨",
+                //    Introduce = "è½»é‡çº§ã€å¯æ‰©å±•ã€è·¨å¹³å°",
                 //    CreatedTime = DateTime.Now
                 //};
                 //student.AddCourse(course);
@@ -117,7 +117,7 @@ namespace EFCoreStart
                 //context.Payments.Add(new CreditcardPayment()
                 //{
                 //    Amount = 200000,
-                //    Name = "ÕĞÉÌÒøĞĞ",
+                //    Name = "æ‹›å•†é“¶è¡Œ",
                 //    CreditcardNumber = "041647181912"
                 //});
                 //context.SaveChanges();
@@ -133,12 +133,12 @@ namespace EFCoreStart
                 //{
                 //    Console.WriteLine($"{payment.Name}{payment.Amount}{payment.GetType().Name}");
                 //}
-                //TODO: µ±Ê¹ÓÃÖ÷¼ü²éÑ¯Ê±Ê¹ÓÃFind·½·¨ĞÔÄÜ»á¸üºÃ
+                //TODO: å½“ä½¿ç”¨ä¸»é”®æŸ¥è¯¢æ—¶ä½¿ç”¨Findæ–¹æ³•æ€§èƒ½ä¼šæ›´å¥½
                 //var blog = context.Blogs.Find(1);
                 //var blogs = context.Blogs.FirstOrDefault(d => d.Id == 1);
-                //TODO:¸´ºÏÖ÷¼ü
+                //TODO:å¤åˆä¸»é”®
                 //var productCategory = context.Blogs.Find(1, 1);
-                //TODO:ÀûÓÃFind»òÕßFindAsync·½·¨²»ÄÜ½øĞĞ¼¢¶ö¼ÓÔØ(Include),µ«ÊÇÎÒÃÇÈÎÈ»ÄÜ¹»Í¨¹ıÉÏÏÂÎÄµÄEntry·½·¨ÖĞµÄNavigationsÊôĞÔ¼ÓÔØµ¼º½ÊôĞÔÊµÏÖ¼¢¶ö¼ÓÔØ
+                //TODO:åˆ©ç”¨Findæˆ–è€…FindAsyncæ–¹æ³•ä¸èƒ½è¿›è¡Œé¥¥é¥¿åŠ è½½(Include),ä½†æ˜¯æˆ‘ä»¬ä»»ç„¶èƒ½å¤Ÿé€šè¿‡ä¸Šä¸‹æ–‡çš„Entryæ–¹æ³•ä¸­çš„Navigationså±æ€§åŠ è½½å¯¼èˆªå±æ€§å®ç°é¥¥é¥¿åŠ è½½
             
                 
                 //var student = context.Students.Find(Convert.ToInt32(3));
@@ -147,15 +147,22 @@ namespace EFCoreStart
                 //    navigation.Load();
                 //}
 
-                //TODO:ÔÚ¼Ì³ĞÓ³ÉäTPHÄ£Ê½ÖĞ£¬¿ÉÒÔÓÃOfType·½·¨×ª»»Îª¾ßÌåÀà£¬ËùÒÔ´Ë·½·¨Óë²éÑ¯ÔËËã·ûµÈÖµÌõ¼şµÈ¼Û
-                var patments = context.Payments.OfType<CashPayment>();
-                Console.WriteLine(patments.FirstOrDefault()?.Name);
-                //TODO:Ò²¿ÉÒÔÓÃCast½øĞĞ×ª»»ÓëOfTypeµÄÇø±ğÊÇ£¬Cast½«·­Òë³ÉIn×Ó¾ä
-                var payments = context.Payments.Cast<CashPayment>();
+                //TODO:åœ¨ç»§æ‰¿æ˜ å°„TPHæ¨¡å¼ä¸­ï¼Œå¯ä»¥ç”¨OfTypeæ–¹æ³•è½¬æ¢ä¸ºå…·ä½“ç±»ï¼Œæ‰€ä»¥æ­¤æ–¹æ³•ä¸æŸ¥è¯¢è¿ç®—ç¬¦ç­‰å€¼æ¡ä»¶ç­‰ä»·
+                //var patments = context.Payments.OfType<CashPayment>();
+                //Console.WriteLine(patments.FirstOrDefault()?.Name);
+                //TODO:ä¹Ÿå¯ä»¥ç”¨Castè¿›è¡Œè½¬æ¢ä¸OfTypeçš„åŒºåˆ«æ˜¯ï¼ŒCastå°†ç¿»è¯‘æˆInå­å¥
+                //var payments = context.Payments.Cast<CashPayment>();
+                //Console.WriteLine(payments.FirstOrDefault()?.Name);
+                //TODO:EF Codeä¸æ”¯æŒä½¿ç”¨OfTypeå’ŒCastè½¬æ¢åŸå§‹ç±»å‹
+                //var paymentss = context.Payments.Select(d => d.PaymentId).OfType<string>();
+                //Console.WriteLine(paymentss);
+                //TODO:C# ä¸­å¯ä»¥ä½¿ç”¨ifå’Œasæ¥è¿›è¡Œç±»å‹è½¬æ¢ã€‚å¦‚æœä¸€ä¸ªå¯¹è±¡æ˜¯æŸä¸ªç±»å‹æˆ–æ˜¯å…¶çˆ¶ç±»å‹ï¼Œå°±è¿”å›trueå¦åˆ™è¿”å›falseï¼ŒIsæ°¸è¿œä¸ä¼šæŠ›å‡ºå¼‚å¸¸ï¼ŒAsä¼š
+                //TODO:Isè¿›è¡Œç±»å‹è½¬æ¢ç­‰åŒäºCaståœ¨sqlä¸­éƒ½ä¼šç¿»è¯‘æˆinå­å¥
+                var payments = context.Payments.Where(d => d is CashPayment);
                 Console.WriteLine(payments.FirstOrDefault()?.Name);
-                //TODO:EF Code²»Ö§³ÖÊ¹ÓÃOfTypeºÍCast×ª»»Ô­Ê¼ÀàĞÍ
-                var paymentss = context.Payments.Select(d => d.PaymentId).OfType<string>();
-                Console.WriteLine(paymentss);
+                //TODO:è°ƒç”¨Selectä¼šç¿»è¯‘æˆSelectå­å¥ï¼ŒæŠ•å½±ä¸ä»…æ”¯æŒå®ä½“ï¼ŒåŒæ—¶æ”¯æŒåŒ¿åå‡½æ•°
+                var paymentss = context.Payments.Select(d => d.Name + " ");
+                Console.WriteLine(paymentss.FirstOrDefault());
 
             }
         }
