@@ -162,7 +162,7 @@ namespace EFCoreStart
                 Console.WriteLine(payments.FirstOrDefault()?.Name);
                 //TODO:调用Select会翻译成Select子句，投影不仅支持实体，同时支持匿名函数
                 var paymentss = context.Payments.Select(d => d.Name + " ");
-                Console.WriteLine(paymentss.FirstOrDefault());
+                Console.WriteLine(paymentss.FirstOrDefault()); 
 
             }
         }
