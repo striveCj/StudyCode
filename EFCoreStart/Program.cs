@@ -158,11 +158,18 @@ namespace EFCoreStart
                 //Console.WriteLine(paymentss);
                 //TODO:C# 中可以使用if和as来进行类型转换。如果一个对象是某个类型或是其父类型，就返回true否则返回false，Is永远不会抛出异常，As会
                 //TODO:Is进行类型转换等同于Cast在sql中都会翻译成in子句
-                var payments = context.Payments.Where(d => d is CashPayment);
-                Console.WriteLine(payments.FirstOrDefault()?.Name);
+                //var payments = context.Payments.Where(d => d is CashPayment);
+                //Console.WriteLine(payments.FirstOrDefault()?.Name);
                 //TODO:调用Select会翻译成Select子句，投影不仅支持实体，同时支持匿名函数
-                var paymentss = context.Payments.Select(d => d.Name + " ");
-                Console.WriteLine(paymentss.FirstOrDefault()); 
+                //var paymentss = context.Payments.Select(d => d.Name + " ");
+                //Console.WriteLine(paymentss.FirstOrDefault()); 
+                //TODO:DefaultIfEmpty常用于左连接，若查询序列为空，则返回实例类型默认值
+                var blogs = context.Blogs.Where(d => d.Id == 0).DefaultIfEmpty();
+                Console.WriteLine(blogs.FirstOrDefault()==default(Blog));
+                //TODO:DefaultIfEntity还有重载可接受一个指定的默认值，在EFCore中将不会翻译为SQL，而是在本地检查结果，如果没有行就会产生指定的默认值
+                var defaultBlog = new Blog(){Name = nameof(Blog)};
+                var blogss = context.Blogs.Where(d => d.Id == 0).DefaultIfEmpty(defaultBlog);
+                Console.WriteLine(blogss.FirstOrDefault()?.Name);
 
             }
         }

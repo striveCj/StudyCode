@@ -9,7 +9,7 @@ namespace EFCoreStart.Model
 {
     public class Blog:ISoftDeleteBaseEntity
     {
-        private Blog() { }
+        public Blog() { }
 
         public Blog(string url)
         {
