@@ -164,13 +164,31 @@ namespace EFCoreStart
                 //var paymentss = context.Payments.Select(d => d.Name + " ");
                 //Console.WriteLine(paymentss.FirstOrDefault()); 
                 //TODO:DefaultIfEmpty常用于左连接，若查询序列为空，则返回实例类型默认值
-                var blogs = context.Blogs.Where(d => d.Id == 0).DefaultIfEmpty();
-                Console.WriteLine(blogs.FirstOrDefault()==default(Blog));
+                //var blogs = context.Blogs.Where(d => d.Id == 0).DefaultIfEmpty();
+                //Console.WriteLine(blogs.FirstOrDefault()==default(Blog));
                 //TODO:DefaultIfEntity还有重载可接受一个指定的默认值，在EFCore中将不会翻译为SQL，而是在本地检查结果，如果没有行就会产生指定的默认值
-                var defaultBlog = new Blog(){Name = nameof(Blog)};
-                var blogss = context.Blogs.Where(d => d.Id == 0).DefaultIfEmpty(defaultBlog);
-                Console.WriteLine(blogss.FirstOrDefault()?.Name);
+                //var defaultBlog = new Blog(){Name = nameof(Blog)};
+                //var blogss = context.Blogs.Where(d => d.Id == 0).DefaultIfEmpty(defaultBlog);
+                //Console.WriteLine(blogss.FirstOrDefault()?.Name);
+                //TODO:EFCore还不支持分组，它只优化了GroupBy,将GroupBy中的OrderBy子句进行了翻译，将SQL执行结果读取到本地，逐一进行分组
+                var blogs = context.Blogs.GroupBy(d => d.Id);
+                Console.WriteLine(blogs.FirstOrDefault()?.FirstOrDefault()?.Name);
+                //TODO:会翻译为inner join
+                var outerBlogs = context.Blogs;
+                var innerPosts = context.Set<Post>();
 
+                var outerBlogQuery = outerBlogs.Join(innerPosts, b => b.Id, p => p.BlogId,
+                    ((blog, post) => new {Id = blog.Id, Name = blog.Name}));
+                Console.WriteLine(outerBlogQuery.FirstOrDefault()?.Name);
+                //TODO:使用Select和SelectMany可以实现CROSS JOIN 交叉查询(求两个表的笛卡尔积)
+                var outerBlogQuert2 = outerBlogs.Select(b => new
+                {
+                    Id = b.Id,
+                    Name = b.Name,
+                    Posts = innerPosts.Where(p => p.BlogId == b.Id)
+                }).SelectMany(collectionSelector: b => b.Posts,
+                    resultSelector: (b, p) => new {Id = b.Id, Name = b.Name});
+                Console.WriteLine(outerBlogQuert2.FirstOrDefault()?.Name);
             }
         }
     }
