@@ -189,6 +189,21 @@ namespace EFCoreStart
                 }).SelectMany(collectionSelector: b => b.Posts,
                     resultSelector: (b, p) => new {Id = b.Id, Name = b.Name});
                 Console.WriteLine(outerBlogQuert2.FirstOrDefault()?.Name);
+                //TODO:GroupJoin最终被翻译成LeftJoin
+                var outerBlogQusert3 = outerBlogs.GroupJoin(inner: innerPosts, outerKeySelector: b => b.Id, innerKeySelector: p => p.BlogId, resultSelector: (b, p) => new { Id = b.Id, Name = b.Name, Posts = b.Posts });
+                Console.WriteLine(outerBlogQusert3.FirstOrDefault()?.Name);
+                //TODO:EFCore中不支持连接翻译SQL，支持本地和合并。下面代码会抛出异常。
+                var first = context.Blogs.Where(item=>item.Id>=1);
+                var second = context.Blogs.Where(item => item.Id <= 2);
+                var blogs2 = first.Concat(second).Select(d => new { Id = d.Id, Name = d.Name });
+                Console.WriteLine(blogs2.FirstOrDefault()?.Name);
+                //TODO:下面为本地合并
+                var first1 = context.Blogs.Where(item => item.Id >= 1).Select(d=>d.Name);
+                var second1 = context.Blogs.Where(item => item.Id <= 2).Select(d=>d.Name);
+                var name = first.Concat(second);
+                Console.WriteLine(name.FirstOrDefault());
+
+
             }
         }
     }
