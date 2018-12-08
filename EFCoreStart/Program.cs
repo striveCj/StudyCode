@@ -205,12 +205,21 @@ namespace EFCoreStart
                 //TODO:Skip和Take会转换成SQL中的OFFSET和LIMIT分页关键字
                 var blogs3 = context.Blogs.Skip(1).Take(10);
                 Console.WriteLine(blogs3.DefaultIfEmpty());
-                //TODO:EFCore中会将Contains转换成SQL中的In       
+                //TODO:EFCore中会将Contains转换成SQL中的In谓词       
                 var blogs4 = context.Blogs.Select(d => d.Id).Contains(1);
                 Console.WriteLine(blogs4);
                 //TODO:EFCore中会将字符串的Contains转换成CHARINDEX
                 var blogs5 = context.Blogs.Select(d => d.Name.Contains("J"));
                 Console.WriteLine(blogs5.FirstOrDefault());
+                //TODO:EFCorez中会将数组集合的Contains翻译成In子句
+                var nameArray = new string[] { "a", "b", "c" };
+                var blogs6 = context.Blogs.Where(item => nameArray.Contains(item.Name));
+                Console.WriteLine(blogs6.FirstOrDefault()?.Name);
+                //TODO:EFCore中会将Any翻译EXISTS将All翻译成NOT EXISTS
+                var blogs7 = context.Blogs.Any(i => i.Id == 1);
+                var blogs8 = context.Blogs.All(item => item.Id == 1);
+                Console.WriteLine(blogs7);
+                Console.WriteLine(blogs8);
             }
         }
     }
