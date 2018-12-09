@@ -220,6 +220,13 @@ namespace EFCoreStart
                 var blogs8 = context.Blogs.All(item => item.Id == 1);
                 Console.WriteLine(blogs7);
                 Console.WriteLine(blogs8);
+                //TODO:在EFCore中使用Include可执饥饿加载，如果有多个导航属性，可以用Include，如果导航属性需要饥饿加载使用ThenInclude
+                var blogs9 = context.Blogs.Include(item => item.Posts);
+                //TODO:如果在Include后更改了查询结果，那么Include将会被忽略
+                var blogs10 = context.Blogs.Include(item => item.Posts).Select(b => new { ID = b.Id });
+                //TODO:EFCore1.1中添加的显示加载
+                var blogs11 = context.Blogs.FirstOrDefault();
+                context.Entry(blogs11).Collection(b=>b.Posts).Load();
             }
         }
     }
