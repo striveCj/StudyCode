@@ -227,6 +227,14 @@ namespace EFCoreStart
                 //TODO:EFCore1.1中添加的显示加载
                 var blogs11 = context.Blogs.FirstOrDefault();
                 context.Entry(blogs11).Collection(b=>b.Posts).Load();
+                //TODO:调用原生SQL
+                var blogs12 = context.Blogs.FromSql<Blog>("select * from blogs").ToList();
+                //TODO:也可以使用字符串插值
+                var blogs13 = context.Blogs.FromSql($"select * from blogs where Id={1}");
+                //TODO:使用 FormattableString可以防止SQL注入 。调用原生查询后同样可以用Include关联
+                FormattableString formattable = $"select * from blogs where Id={1}";
+                var blogs14 = context.Blogs.FromSql(formattable).Include(b => b.Posts).ToList();
+
             }
         }
     }
