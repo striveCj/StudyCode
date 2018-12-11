@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -231,9 +232,19 @@ namespace EFCoreStart
                 var blogs12 = context.Blogs.FromSql<Blog>("select * from blogs").ToList();
                 //TODO:也可以使用字符串插值
                 var blogs13 = context.Blogs.FromSql($"select * from blogs where Id={1}");
-                //TODO:使用 FormattableString可以防止SQL注入 。调用原生查询后同样可以用Include关联
+                //TODO:使用 FormattableString可以防止SQL注入 。调用原,生查询后同样可以用Include关联
                 FormattableString formattable = $"select * from blogs where Id={1}";
                 var blogs14 = context.Blogs.FromSql(formattable).Include(b => b.Posts).ToList();
+                //TODO:原生执行增删改操作
+                var commandSql = "Insert into blog(name,url) values(@name,@url)";
+                var sqlParameter = new SqlParameter[] {
+                    new SqlParameter("@name",System.Data.SqlDbType.NVarChar),
+                    new SqlParameter("@url",System.Data.SqlDbType.NVarChar)
+                };
+                sqlParameter[0].Value = "张三";
+                sqlParameter[1].Value = "www.chenjieloveyou.com";
+                context.Database.ExecuteSqlCommand(commandSql, sqlParameter);
+
 
             }
         }
