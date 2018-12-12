@@ -244,6 +244,27 @@ namespace EFCoreStart
                 sqlParameter[0].Value = "张三";
                 sqlParameter[1].Value = "www.chenjieloveyou.com";
                 context.Database.ExecuteSqlCommand(commandSql, sqlParameter);
+                //批处理声明
+                var blogs15 = new Blog
+                {
+                    CreatedTime=DateTime.Now,
+                    ModifiedTime=DateTime.Now,
+                    Name="陈杰"
+
+                };
+                context.ChangeTracker.TrackGraph(blogs15, node =>
+                {
+                    var entry = node.Entry;
+                    if ((int)entry.Property("Id").CurrentValue<0)
+                    {
+                        entry.State = EntityState.Added;
+                        entry.Property("Id").IsTemporary = true;
+                    }
+                    else
+                    {
+                        entry.State = EntityState.Modified;
+                    }
+                });
 
 
             }
