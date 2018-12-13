@@ -266,6 +266,16 @@ namespace EFCoreStart
                     }
                 });
 
+                var excetingBlogs = context.Blogs.Find(1);
+                if (excetingBlogs==null)
+                {
+                    context.Add(blogs);
+                }
+                else
+                {
+                    context.Entry(excetingBlogs).CurrentValues.SetValues(blogs);
+                }
+                context.SaveChanges();
 
             }
         }
