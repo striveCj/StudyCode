@@ -276,7 +276,16 @@ namespace EFCoreStart
                     context.Entry(excetingBlogs).CurrentValues.SetValues(blogs);
                 }
                 context.SaveChanges();
-
+                //TODO:无实体更新
+                var blogs17 = context.Blogs.Include(item => item.Posts).FirstOrDefault(item => item.Id == 2);
+                blogs17.Name = "aaa";
+                blogs17.Posts.All(p =>
+                {
+                    p.Name = "bbb";
+                    return true;
+                });
+                context.Update(blogs17);
+                var result = context.SaveChanges();
             }
         }
     }
