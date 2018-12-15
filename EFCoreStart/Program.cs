@@ -286,6 +286,31 @@ namespace EFCoreStart
                 });
                 context.Update(blogs17);
                 var result = context.SaveChanges();
+
+                //TODO:无实体更新无主键
+                var blogs18 = context.Blogs.Include(item => item.Posts).FirstOrDefault(item => item.Id == 2);
+              
+                if (blogs18==null)
+                {
+                    context.Blogs.Add(blogs17);
+                }
+                else
+                {
+                    context.Entry(blogs18).CurrentValues.SetValues(blogs17);
+                    foreach (var post in blogs17.Posts)
+                    {
+                        var nowPost= blogs18.Posts.FirstOrDefault(item => item.Id == post.Id);
+                        if (nowPost==null)
+                        {
+                            blogs18.Posts.Add(post);
+                        }
+                        else
+                        {
+                            context.Entry(nowPost).CurrentValues.SetValues(post);
+                        }
+                    }
+                }
+                context.SaveChanges();
             }
         }
     }
