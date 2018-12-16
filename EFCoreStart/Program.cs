@@ -9,6 +9,7 @@ using EFCoreStart.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
+using Blog = EFCoreStart.Model.Blog;
 
 namespace EFCoreStart
 {
@@ -311,7 +312,48 @@ namespace EFCoreStart
                     }
                 }
                 context.SaveChanges();
+
+                
             }
+        }
+        /// <summary>
+        /// 无实体链接删除添加
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="blogs"></param>
+        public static void InserUpdateOrDeleteGraph(EFCoreDbContext context, Blog blogs)
+        {
+            var existingBlog = context.Blogs.Include(p => p.Posts).FirstOrDefault(b => b.Id == blogs.Id);
+            if (existingBlog == null)
+            {
+                context.Add(blogs);
+            }
+            else
+            {
+                context.Entry(existingBlog).CurrentValues.SetValues(blogs);
+                foreach (var post in blogs.Posts)
+                {
+                    var existingPost = existingBlog.Posts.FirstOrDefault(p => p.Id == post.Id);
+                    if (existingPost==null)
+                    {
+                        existingBlog.Posts.Add(post);
+                    }
+                    else
+                    {
+                        context.Entry(existingPost).CurrentValues.SetValues(post);
+                    }
+                }
+
+                foreach (var post in existingBlog.Posts)
+                {
+                    if (!blogs.Posts.Any(p=>p.Id==post.Id))
+                    {
+                        context.Remove(post);
+                    }
+                }
+            }
+
+            context.SaveChanges();
         }
     }
 }
