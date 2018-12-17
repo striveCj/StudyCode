@@ -20,6 +20,24 @@ namespace EFCoreStart.Core
             optionsBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["EFCoreDbConnectionString"]
                 .ConnectionString);
         }
+        /// <summary>
+        /// TODO:EFCore默认使用快照式变更追踪，所以我们可以通过ChangeTracker来关闭调用DetectChanges来提高查询性能
+        /// </summary>
+        /// <param name="acceptAllChangesOnSuccess"></param>
+        /// <returns></returns>
+        public override int SaveChanges(bool acceptAllChangesOnSuccess)
+        {
+            ChangeTracker.DetectChanges();
+            foreach (var model in ChangeTracker.Entries().Where(e=>e.State==EntityState.Added))
+            {
+                this.AddRange(model.Entity);
+            }
+
+            ChangeTracker.AutoDetectChangesEnabled = false;
+            var result = base.SaveChanges(acceptAllChangesOnSuccess);
+            ChangeTracker.AutoDetectChangesEnabled = true;
+            return result;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

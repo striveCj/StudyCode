@@ -312,8 +312,16 @@ namespace EFCoreStart
                     }
                 }
                 context.SaveChanges();
+                //TODO:每个实体查询EF都会创建快照去追踪实体，如果要关闭追踪使用AsNoTracking()方法
+                var blogs19 = context.Blogs.AsNoTracking().ToList();
+                //TODO：使用我们重写的方法优化性能添加时，不需要快照追踪
+                for (int i = 0; i < 1000; i++)
+                {
+                    context.AddRange(new Blog() {Name = i.ToString()});
+                }
 
-                
+                context.SaveChanges(true);
+
             }
         }
         /// <summary>
