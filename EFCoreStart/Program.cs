@@ -322,6 +322,13 @@ namespace EFCoreStart
 
                 context.SaveChanges(true);
 
+                //TODO:在EF中我们可以用Contains，StartsWith，EndWith来做模糊查询，不过Contains转换成SQL之后是Charindex，StartsWith会生成夹带双重判断的SQL，一遍会通过通配符过滤，灵异方面会通过LEFT函数从左边截取长度等于字符串长度的条件，EndsWith不会用%通配符，而是使用Right函数从最后开始截取
+                //TODO:有了EF.Function.Like我们很方便的自定义模糊查询逻辑
+                var selectStr = "abcd";
+                var blogsStartWith = blogs19.Where(d => d.Name.StartsWith("J")).ToList();
+                var blogsEndWith = blogs19.Where(d => d.Name.EndsWith("J")).ToList();
+                var blogsLike = blogs19.Where(d => EF.Functions.Like(d.Name, "J%")).ToList();
+                var blogsLikeStr = blogs19.Where(d => EF.Functions.Like(d.Name, $"[{selectStr}]%"));
             }
         }
         /// <summary>
@@ -362,6 +369,20 @@ namespace EFCoreStart
             }
 
             context.SaveChanges();
+        }
+        /// <summary>
+        /// TODO：当我们有多个表需要关联查询的时候我们可以先直接设置其行为为AsNotracking。
+        /// </summary>
+        /// <param name="context"></param>
+        public static void Query(EFCoreDbContext context)
+        {
+            context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+            var blogs = context.Blogs;
+            var posts = context.Set<Post>();
+
+            var blog = from b in blogs
+                join p in posts on b.Id equals p.BlogId
+                select b;
         }
     }
 }
