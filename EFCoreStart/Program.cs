@@ -329,6 +329,13 @@ namespace EFCoreStart
                 var blogsEndWith = blogs19.Where(d => d.Name.EndsWith("J")).ToList();
                 var blogsLike = blogs19.Where(d => EF.Functions.Like(d.Name, "J%")).ToList();
                 var blogsLikeStr = blogs19.Where(d => EF.Functions.Like(d.Name, $"[{selectStr}]%"));
+                //TODO:我们可以用like的重载方法处理转义字符，最终会翻译成ESCAPE
+                var blogsLikeescape = blogs19.Where(d => EF.Functions.Like(d.Name, @"\J%", @"\")).ToList();
+                //TODO:EFCore重要特性之一显示编译查询
+                var query = EF.CompileQuery((EFCoreDbContext db, int id) => db.Blogs.FirstOrDefault(c => c.Id == id));
+                var queryBlog = query(context, 1);
+                var queryBlog2 = query(context, 1);
+
             }
         }
         /// <summary>
