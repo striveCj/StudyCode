@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -336,7 +337,30 @@ namespace EFCoreStart
                 var queryBlog = query(context, 1);
                 var queryBlog2 = query(context, 1);
 
+
+
             }
+
+            RunText(regularTest: (blogIds) =>
+            {
+                using (var db=new EFCoreDbContext())
+                {
+                    foreach (var id in blogIds)
+                    {
+                        var customer = db.Blogs.FirstOrDefault(c => c.Id == id);
+                    }
+                }
+            },compiledTest: (blogIds) =>
+            {
+                var query = EF.CompileQuery((EFCoreDbContext db, int id) => db.Blogs.FirstOrDefault(c => c.Id == id));
+                using (var db = new EFCoreDbContext())
+                {
+                    foreach (var id in blogIds)
+                    {
+                        var customer = query(db,id);
+                    }
+                }
+            });
         }
         /// <summary>
         /// 无实体链接删除添加
@@ -390,6 +414,35 @@ namespace EFCoreStart
             var blog = from b in blogs
                 join p in posts on b.Id equals p.BlogId
                 select b;
+        }
+
+
+        private static void RunText(Action<int[]> regularTest, Action<int[]> compiledTest)
+        {
+            var blogIds = GetBlogIds(500);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            regularTest(blogIds);
+            stopwatch.Stop();
+            var regularResult = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine($"常规查询耗时{regularResult.ToString().PadLeft(4)}ms");
+
+            stopwatch.Restart();
+            compiledTest(blogIds);
+            stopwatch.Stop();
+            var compiledResult = stopwatch.ElapsedMilliseconds;
+            Console.WriteLine($"编译查询耗时{compiledResult.ToString().PadLeft(4)}ms");
+        }
+
+        private static int[] GetBlogIds(int count)
+        {
+            var blogIds = new int[count];
+            for (int i = 0; i < count; i++)
+            {
+                blogIds[i] = i;
+            }
+
+            return blogIds;
         }
     }
 }
