@@ -39,6 +39,7 @@ namespace EFCoreStart.Core
             return result;
         }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Student>(entity =>

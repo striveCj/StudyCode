@@ -444,5 +444,16 @@ namespace EFCoreStart
 
             return blogIds;
         }
+
+        private static void BaseSelect(EFCoreDbContext context)
+        {
+            var efType = context.Model.FindEntityType(typeof(Blog).FullName);
+            //TODO:获取表名
+            var tbName = efType.Relational().TableName;
+            //TODO：获取属性
+            var properties = efType.GetProperties();
+            //TODO:获取列名
+            var columnName = efType.FindProperty(string.Empty).Relational().ColumnName;
+        }
     }
 }
