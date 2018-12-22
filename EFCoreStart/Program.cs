@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using EFCoreStart.Core;
@@ -142,8 +144,8 @@ namespace EFCoreStart
                 //TODO:复合主键
                 //var productCategory = context.Blogs.Find(1, 1);
                 //TODO:利用Find或者FindAsync方法不能进行饥饿加载(Include),但是我们任然能够通过上下文的Entry方法中的Navigations属性加载导航属性实现饥饿加载
-            
-                
+
+
                 //var student = context.Students.Find(Convert.ToInt32(3));
                 //foreach (var navigation in context.Entry(student).Navigations)
                 //{
@@ -193,16 +195,18 @@ namespace EFCoreStart
                     resultSelector: (b, p) => new {Id = b.Id, Name = b.Name});
                 Console.WriteLine(outerBlogQuert2.FirstOrDefault()?.Name);
                 //TODO:GroupJoin最终被翻译成LeftJoin
-                var outerBlogQusert3 = outerBlogs.GroupJoin(inner: innerPosts, outerKeySelector: b => b.Id, innerKeySelector: p => p.BlogId, resultSelector: (b, p) => new { Id = b.Id, Name = b.Name, Posts = b.Posts });
+                var outerBlogQusert3 = outerBlogs.GroupJoin(inner: innerPosts, outerKeySelector: b => b.Id,
+                    innerKeySelector: p => p.BlogId,
+                    resultSelector: (b, p) => new {Id = b.Id, Name = b.Name, Posts = b.Posts});
                 Console.WriteLine(outerBlogQusert3.FirstOrDefault()?.Name);
                 //TODO:EFCore中不支持连接翻译SQL，支持本地和合并。下面代码会抛出异常。
-                var first = context.Blogs.Where(item=>item.Id>=1);
+                var first = context.Blogs.Where(item => item.Id >= 1);
                 var second = context.Blogs.Where(item => item.Id <= 2);
-                var blogs2 = first.Concat(second).Select(d => new { Id = d.Id, Name = d.Name });
+                var blogs2 = first.Concat(second).Select(d => new {Id = d.Id, Name = d.Name});
                 Console.WriteLine(blogs2.FirstOrDefault()?.Name);
                 //TODO:下面为本地合并
-                var first1 = context.Blogs.Where(item => item.Id >= 1).Select(d=>d.Name);
-                var second1 = context.Blogs.Where(item => item.Id <= 2).Select(d=>d.Name);
+                var first1 = context.Blogs.Where(item => item.Id >= 1).Select(d => d.Name);
+                var second1 = context.Blogs.Where(item => item.Id <= 2).Select(d => d.Name);
                 var name = first.Concat(second);
                 Console.WriteLine(name.FirstOrDefault());
                 //TODO:Skip和Take会转换成SQL中的OFFSET和LIMIT分页关键字
@@ -215,7 +219,7 @@ namespace EFCoreStart
                 var blogs5 = context.Blogs.Select(d => d.Name.Contains("J"));
                 Console.WriteLine(blogs5.FirstOrDefault());
                 //TODO:EFCorez中会将数组集合的Contains翻译成In子句
-                var nameArray = new string[] { "a", "b", "c" };
+                var nameArray = new string[] {"a", "b", "c"};
                 var blogs6 = context.Blogs.Where(item => nameArray.Contains(item.Name));
                 Console.WriteLine(blogs6.FirstOrDefault()?.Name);
                 //TODO:EFCore中会将Any翻译EXISTS将All翻译成NOT EXISTS
@@ -226,10 +230,10 @@ namespace EFCoreStart
                 //TODO:在EFCore中使用Include可执饥饿加载，如果有多个导航属性，可以用Include，如果导航属性需要饥饿加载使用ThenInclude
                 var blogs9 = context.Blogs.Include(item => item.Posts);
                 //TODO:如果在Include后更改了查询结果，那么Include将会被忽略
-                var blogs10 = context.Blogs.Include(item => item.Posts).Select(b => new { ID = b.Id });
+                var blogs10 = context.Blogs.Include(item => item.Posts).Select(b => new {ID = b.Id});
                 //TODO:EFCore1.1中添加的显示加载
                 var blogs11 = context.Blogs.FirstOrDefault();
-                context.Entry(blogs11).Collection(b=>b.Posts).Load();
+                context.Entry(blogs11).Collection(b => b.Posts).Load();
                 //TODO:调用原生SQL
                 var blogs12 = context.Blogs.FromSql<Blog>("select * from blogs").ToList();
                 //TODO:也可以使用字符串插值
@@ -239,9 +243,10 @@ namespace EFCoreStart
                 var blogs14 = context.Blogs.FromSql(formattable).Include(b => b.Posts).ToList();
                 //TODO:原生执行增删改操作
                 var commandSql = "Insert into blog(name,url) values(@name,@url)";
-                var sqlParameter = new SqlParameter[] {
-                    new SqlParameter("@name",System.Data.SqlDbType.NVarChar),
-                    new SqlParameter("@url",System.Data.SqlDbType.NVarChar)
+                var sqlParameter = new SqlParameter[]
+                {
+                    new SqlParameter("@name", System.Data.SqlDbType.NVarChar),
+                    new SqlParameter("@url", System.Data.SqlDbType.NVarChar)
                 };
                 sqlParameter[0].Value = "张三";
                 sqlParameter[1].Value = "www.chenjieloveyou.com";
@@ -249,15 +254,15 @@ namespace EFCoreStart
                 //批处理声明
                 var blogs15 = new Blog
                 {
-                    CreatedTime=DateTime.Now,
-                    ModifiedTime=DateTime.Now,
-                    Name="陈杰"
+                    CreatedTime = DateTime.Now,
+                    ModifiedTime = DateTime.Now,
+                    Name = "陈杰"
 
                 };
                 context.ChangeTracker.TrackGraph(blogs15, node =>
                 {
                     var entry = node.Entry;
-                    if ((int)entry.Property("Id").CurrentValue<0)
+                    if ((int) entry.Property("Id").CurrentValue < 0)
                     {
                         entry.State = EntityState.Added;
                         entry.Property("Id").IsTemporary = true;
@@ -269,7 +274,7 @@ namespace EFCoreStart
                 });
 
                 var excetingBlogs = context.Blogs.Find(1);
-                if (excetingBlogs==null)
+                if (excetingBlogs == null)
                 {
                     context.Add(blogs);
                 }
@@ -277,6 +282,7 @@ namespace EFCoreStart
                 {
                     context.Entry(excetingBlogs).CurrentValues.SetValues(blogs);
                 }
+
                 context.SaveChanges();
                 //TODO:无实体更新
                 var blogs17 = context.Blogs.Include(item => item.Posts).FirstOrDefault(item => item.Id == 2);
@@ -291,8 +297,8 @@ namespace EFCoreStart
 
                 //TODO:无实体更新无主键
                 var blogs18 = context.Blogs.Include(item => item.Posts).FirstOrDefault(item => item.Id == 2);
-              
-                if (blogs18==null)
+
+                if (blogs18 == null)
                 {
                     context.Blogs.Add(blogs17);
                 }
@@ -301,8 +307,8 @@ namespace EFCoreStart
                     context.Entry(blogs18).CurrentValues.SetValues(blogs17);
                     foreach (var post in blogs17.Posts)
                     {
-                        var nowPost= blogs18.Posts.FirstOrDefault(item => item.Id == post.Id);
-                        if (nowPost==null)
+                        var nowPost = blogs18.Posts.FirstOrDefault(item => item.Id == post.Id);
+                        if (nowPost == null)
                         {
                             blogs18.Posts.Add(post);
                         }
@@ -312,6 +318,7 @@ namespace EFCoreStart
                         }
                     }
                 }
+
                 context.SaveChanges();
                 //TODO:每个实体查询EF都会创建快照去追踪实体，如果要关闭追踪使用AsNoTracking()方法
                 var blogs19 = context.Blogs.AsNoTracking().ToList();
@@ -343,25 +350,26 @@ namespace EFCoreStart
 
             RunText(regularTest: (blogIds) =>
             {
-                using (var db=new EFCoreDbContext())
+                using (var db = new EFCoreDbContext())
                 {
                     foreach (var id in blogIds)
                     {
                         var customer = db.Blogs.FirstOrDefault(c => c.Id == id);
                     }
                 }
-            },compiledTest: (blogIds) =>
+            }, compiledTest: (blogIds) =>
             {
                 var query = EF.CompileQuery((EFCoreDbContext db, int id) => db.Blogs.FirstOrDefault(c => c.Id == id));
                 using (var db = new EFCoreDbContext())
                 {
                     foreach (var id in blogIds)
                     {
-                        var customer = query(db,id);
+                        var customer = query(db, id);
                     }
                 }
             });
         }
+
         /// <summary>
         /// 无实体链接删除添加
         /// </summary>
@@ -380,7 +388,7 @@ namespace EFCoreStart
                 foreach (var post in blogs.Posts)
                 {
                     var existingPost = existingBlog.Posts.FirstOrDefault(p => p.Id == post.Id);
-                    if (existingPost==null)
+                    if (existingPost == null)
                     {
                         existingBlog.Posts.Add(post);
                     }
@@ -392,7 +400,7 @@ namespace EFCoreStart
 
                 foreach (var post in existingBlog.Posts)
                 {
-                    if (!blogs.Posts.Any(p=>p.Id==post.Id))
+                    if (!blogs.Posts.Any(p => p.Id == post.Id))
                     {
                         context.Remove(post);
                     }
@@ -401,6 +409,7 @@ namespace EFCoreStart
 
             context.SaveChanges();
         }
+
         /// <summary>
         /// TODO：当我们有多个表需要关联查询的时候我们可以先直接设置其行为为AsNotracking。
         /// </summary>
@@ -452,8 +461,23 @@ namespace EFCoreStart
             var tbName = efType.Relational().TableName;
             //TODO：获取属性
             var properties = efType.GetProperties();
-            //TODO:获取列名
-            var columnName = efType.FindProperty(string.Empty).Relational().ColumnName;
+            Expression<Func<Blog, string>> model = d => d.Name;
+            var properties2 = GetPropertyInfoFormbda(model);
+           //TODO:获取列名
+           var columnName = efType.FindProperty(string.Empty).Relational().ColumnName;
+
+        }
+
+        public static PropertyInfo GetPropertyInfoFormbda<TEntity, TProperty>(
+            Expression<Func<TEntity, TProperty>> model) where TEntity : class
+        {
+            var memberEx = (MemberExpression) model.Body;
+            if (memberEx == null)
+                throw new ArgumentNullException(nameof(model.Body), "必须通过Lambad表达式提供属性");
+            var proInfo = typeof(TEntity).GetProperty(memberEx.Member.Name);
+            if (proInfo == null)
+                throw new ArgumentNullException(nameof(model), "所给参数不是属性");
+            return proInfo;
         }
     }
 }
