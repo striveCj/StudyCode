@@ -16,8 +16,8 @@ namespace EFCoreStart.Validatior
             foreach (var entitys in db.ChangeTracker.Entries().Where(e=>e.State==EntityState.Added||e.State==EntityState.Modified))
             {
                 var entity = entitys.Entity;
-                var valProvider =new ValidationDbContextServiceProvider(db);
-                var valContext =new ValidationContext(db, valProvider,null);
+                //var valProvider =new ValidationDbContextServiceProvider(db);
+                var valContext =new ValidationContext(db, null,null);
                 var valErroes=new List<ValidationResult>();
                 if (!Validator.TryValidateObject(entity,valContext,valErroes,true))
                 {

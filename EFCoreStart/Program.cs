@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EFCoreStart.Core;
 using EFCoreStart.Model;
+using EFCoreStart.Validatior;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -343,8 +344,14 @@ namespace EFCoreStart
                 var query = EF.CompileQuery((EFCoreDbContext db, int id) => db.Blogs.FirstOrDefault(c => c.Id == id));
                 var queryBlog = query(context, 1);
                 var queryBlog2 = query(context, 1);
-
-
+                //TODO:自定义验证
+                if (context.ExecuteValidator().Any())
+                {
+                    foreach (var error in context.ExecuteValidator())
+                    {
+                        Console.WriteLine(error.ErrorMessage);
+                    }
+                }
 
             }
 
