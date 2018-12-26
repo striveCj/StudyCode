@@ -378,7 +378,7 @@ namespace EFCoreStart
             });
             //TODO:使用不依赖注入构造DbContextOptions
             _contextOptions = new DbContextOptionsBuilder().UseSqlServer(args[0]).Options;
-        }
+        } 
 
         private static DbContextOptions _contextOptions; 
         
