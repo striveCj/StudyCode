@@ -42,6 +42,9 @@ namespace EFCoreStart.Core
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Blog>().HasQueryFilter(b => !b.IsDeleted);
+            modelBuilder.Entity<Post>().HasQueryFilter(b => !b.IsDeleted);
+
             modelBuilder.Entity<Student>(entity =>
             {
                 entity.ToTable("Students");
