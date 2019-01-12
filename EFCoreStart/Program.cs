@@ -353,8 +353,9 @@ namespace EFCoreStart
                     }
                 }
 
-            }
 
+            }
+            
             RunText(regularTest: (blogIds) =>
             {
                 using (var db = new EFCoreDbContext())
@@ -375,8 +376,14 @@ namespace EFCoreStart
                     }
                 }
             });
-        }
+            //TODO:使用不依赖注入构造DbContextOptions
+            _contextOptions = new DbContextOptionsBuilder().UseSqlServer(args[0]).Options;
+        } 
 
+        private static DbContextOptions _contextOptions; 
+        
+             
+        
         /// <summary>
         /// 无实体链接删除添加
         /// </summary>
