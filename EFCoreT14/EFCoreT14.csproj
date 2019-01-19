@@ -453,6 +453,7 @@
     <Compile Include="Core\EFCoreDbContext.cs" />
     <Compile Include="Core\ExampleTenantProvider.cs" />
     <Compile Include="Core\ITenantProvider.cs" />
+    <Compile Include="Map\BlogConfiguration.cs" />
     <Compile Include="Model\BaseEntity.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Post.cs" />
