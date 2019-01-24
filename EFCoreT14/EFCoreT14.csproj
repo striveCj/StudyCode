@@ -453,8 +453,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\BlogRepository.cs" />
     <Compile Include="Core\EFCoreDbContext.cs" />
     <Compile Include="Core\ExampleTenantProvider.cs" />
+    <Compile Include="Core\IBlogRepository.cs" />
     <Compile Include="Core\ITenantProvider.cs" />
     <Compile Include="Map\BlogConfiguration.cs" />
     <Compile Include="Map\PostConfiguration.cs" />
