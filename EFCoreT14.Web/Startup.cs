@@ -1,9 +1,13 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
+using EFCoreT14.Core;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -22,6 +26,16 @@ namespace EFCoreT14.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddEntityFrameworkSqlServer();
+            services.AddAutoMapper();
+
+            var sqlStr = @"";
+            services.AddDbContext<EFCoreDbContext>(options =>
+                {
+                    options.UseSqlServer(sqlStr,
+                        d => d.MigrationsAssembly(this.GetType().GetTypeInfo().Assembly.FullName));
+                });
+            services.AddScoped<IBlogRepository, BlogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
