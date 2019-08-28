@@ -8,11 +8,20 @@ namespace ProfessionalCSharp3
 {
     public class PhoneCustomer
     {
+        private string _firstName;
         //常量
         public const string DayOfSendingBill = "Monday";
         public int CustomerID;
-        public string FirstName;
+
+        //表达式属性访问器
+        public string FirstName
+        {
+            get => _firstName;
+            set => _firstName = value;
+        }
         public string LastName;
+
+        public int Age { get; set; } = 42;
     }
 
     struct PhoneCustomerStruct
@@ -32,4 +41,25 @@ namespace ProfessionalCSharp3
             s_maxDocuments = 1;
         }
     }
+
+    public class Document
+    {
+        private readonly DateTime _createTime;
+
+        public Document()
+        {
+            _createTime=DateTime.Now;
+        }
+       
+    }
+
+    public class Person
+    {
+        public Person(string name) => Name = name;
+        public string Id { get; } = Guid.NewGuid().ToString();
+         public string Name { get; }
+    }
+
+
+
 }
