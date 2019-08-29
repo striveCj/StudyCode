@@ -60,6 +60,22 @@ namespace ProfessionalCSharp3
          public string Name { get; }
     }
 
+    public class ResultDisplayer
+    {
+        public void DisplayResult(string result)
+        {
+            
+        }
+
+        public void DisplayResult(int result)
+        {
+            
+        }
+        public void DisplayResult(int result,int y)
+        {
+
+        }
+    }
 
 
 }
