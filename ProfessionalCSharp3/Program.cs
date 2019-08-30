@@ -12,6 +12,12 @@ namespace ProfessionalCSharp3
         {
             Console.WriteLine("test");
             MathSapleText1();
+
+            AC ac=new AC{X = 1};
+            ChangeAC(ac);
+            Console.WriteLine($"ac.x:{ac.X}");
+            ChangeAC2(ref ac);
+            Console.WriteLine($"ac.x:{ac.X}");
         }
 
         void T3()
@@ -30,6 +36,19 @@ namespace ProfessionalCSharp3
             math.Value = 30;
             Console.WriteLine($"Value field of math variable contains{math.Value}");
             Console.WriteLine($"Square of 30 is {math.GetSquare()}");
+        }
+
+        public static void ChangeAC(AC a)
+        {
+            a.X = 2;
+        }
+        public static void ChangeAC2(ref AC a)
+        {
+            a.X = 3;
+        }
+        public static void ChangeAS(AS a)
+        {
+
         }
     }
 }

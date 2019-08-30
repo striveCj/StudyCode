@@ -77,5 +77,17 @@ namespace ProfessionalCSharp3
         }
     }
 
+   
+    public struct AS
+    {
+        public int X { get; set; }
+    }
+
+    public class AC
+    {
+        public  int X { get; set; }
+    }
+
+
 
 }
