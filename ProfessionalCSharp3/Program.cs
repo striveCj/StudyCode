@@ -18,6 +18,21 @@ namespace ProfessionalCSharp3
             Console.WriteLine($"ac.x:{ac.X}");
             ChangeAC2(ref ac);
             Console.WriteLine($"ac.x:{ac.X}");
+
+            //out
+            string input1 = Console.ReadLine();
+            int result1 = int.Parse(input1);
+            Console.WriteLine($"result1{result1}");
+
+            string input2 = Console.ReadLine();
+            if (int.TryParse(input2, out int result2 ))
+            {
+                Console.WriteLine($"result2{result2}");
+            }
+            else
+            {
+                Console.WriteLine("not a number");
+            }
         }
 
         void T3()
@@ -27,6 +42,10 @@ namespace ProfessionalCSharp3
             var myCustomer2=new PhoneCustomerStruct();
         }
 
+        public static void CantChange(in AValueType a)
+        {
+            Console.WriteLine(a.Data);
+        }
         public static void MathSapleText1()
         {
             Console.WriteLine($"Pi is{Math.GetPi()}");
@@ -50,5 +69,12 @@ namespace ProfessionalCSharp3
         {
 
         }
+
+        public struct AValueType
+        {
+            public int Data;
+        }
+
+      
     }
 }
