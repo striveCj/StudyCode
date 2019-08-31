@@ -44,7 +44,7 @@ namespace ProfessionalCSharp3
         }
         public static void ChangeAC2(ref AC a)
         {
-            a.X = 3;
+            a.X = 3; 
         }
         public static void ChangeAS(AS a)
         {
