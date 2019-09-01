@@ -42,7 +42,7 @@ namespace ProfessionalCSharp3
             var myCustomer2=new PhoneCustomerStruct();
         }
 
-        public static void CantChange(in AValueType a)
+        public static void CantChange(AValueType a)
         {
             Console.WriteLine(a.Data);
         }
