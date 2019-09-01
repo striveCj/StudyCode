@@ -33,6 +33,9 @@ namespace ProfessionalCSharp3
             {
                 Console.WriteLine("not a number");
             }
+
+            Color c1 = Color.Red;
+            Console.WriteLine(c1);
         }
 
         void T3()

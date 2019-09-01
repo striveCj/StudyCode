@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Color.cs" />
     <Compile Include="Math.cs" />
     <Compile Include="PhoneCustomer.cs" />
     <Compile Include="Program.cs" />
