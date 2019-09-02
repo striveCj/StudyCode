@@ -36,6 +36,24 @@ namespace ProfessionalCSharp3
 
             Color c1 = Color.Red;
             Console.WriteLine(c1);
+            Color c2 = (Color) 2;
+            short number = (short) c2;
+            Console.WriteLine(number);
+            DaysOfWeek mondayandWednesday = DaysOfWeek.Monday | DaysOfWeek.Wednesday;
+            Console.WriteLine(mondayandWednesday);
+            DaysOfWeek weekend = DaysOfWeek.Saturday | DaysOfWeek.Sunday;
+            Console.WriteLine(weekend);
+
+            Color red;
+            if (Enum.TryParse<Color>("Red",out red))
+            {
+                Console.WriteLine($"successfully parsed {red}");
+            }
+            foreach (var day in Enum.GetNames(typeof(Color)))
+            {
+                Console.WriteLine(day);
+            }
+            
         }
 
         void T3()
