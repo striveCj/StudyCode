@@ -88,6 +88,13 @@ namespace ProfessionalCSharp3
         public  int X { get; set; }
     }
 
+    partial class SampleClass
+    {
+        public void MethodTwo()
+        {
+            Console.WriteLine("方法2");
+        }
+    }
 
 
 }
