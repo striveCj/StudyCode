@@ -53,7 +53,17 @@ namespace ProfessionalCSharp3
             {
                 Console.WriteLine(day);
             }
-            
+
+            SampleClass scClass=new SampleClass();
+            scClass.MethodOne();
+            scClass.MethodTwo();
+
+
+            string fox = "1 2 3 4";
+            int wordCount = fox.GetWordCount();
+            Console.WriteLine($"{wordCount} words");
+            //后台会转换成StringExtension.GetWordCount(fox);
+
         }
 
         void T3()
