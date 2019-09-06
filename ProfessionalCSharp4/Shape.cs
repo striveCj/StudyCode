@@ -12,6 +12,17 @@ namespace ProfessionalCSharp4
         public Position Position { get; }=new Position();
         public Size Size { get; }=new Size();
         public virtual void Draw() => Console.WriteLine($"{Position}和{Size}");
+
+        public void MoveBy(int x, int y)
+        {
+        }
+
+        public virtual void Move(Position newPosition)
+        {
+            Position.X += newPosition.X;
+            Position.Y += newPosition.Y;
+            Console.WriteLine($"moves to{Position}");
+        }
     }
 
     public class Position
@@ -29,6 +40,22 @@ namespace ProfessionalCSharp4
     public class Rectangle : Shape
     {
         public override void Draw() => Console.WriteLine($"{Position}and{Size}");
-    
+
+        public override void Move(Position newPosition)
+        {
+            Console.WriteLine("Rectangle");
+            base.Move(newPosition);
+        }
+
+
+    }
+
+    public class Ellipse : Shape
+    {
+        public new void MoveBy(int x, int y)
+        {
+            Position.X += x;
+            Position.Y += y;
+        }
     }
 }

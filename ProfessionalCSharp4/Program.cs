@@ -10,6 +10,10 @@ namespace ProfessionalCSharp4
     {
         static void Main(string[] args)
         {
+            Shape r=new Shape();
+            DrawShape(r);
         }
+
+        public static void DrawShape(Shape shape) => shape.Draw();
     }
 }
