@@ -9,6 +9,16 @@ namespace ProfessionalCSharp4
 {
     public class Shape
     {
+        public Shape()
+        {
+            Position=new Position();
+            Size=new Size();
+        }
+        public Shape(int width,int height,int x,int y)
+        {
+            Position = new Position{X=x,Y=y};
+            Size = new Size{Width = width,Height = height};
+        }
         public Position Position { get; }=new Position();
         public Size Size { get; }=new Size();
         public virtual void Draw() => Console.WriteLine($"{Position}和{Size}");
@@ -52,10 +62,31 @@ namespace ProfessionalCSharp4
 
     public class Ellipse : Shape
     {
+        public Ellipse() : base()
+        {
+            
+        }
         public new void MoveBy(int x, int y)
         {
             Position.X += x;
             Position.Y += y;
+        }
+    }
+
+    public abstract class Shape1
+    {
+        public Position Position { get; } = new Position();
+        public Size Size { get; } = new Size();
+        public abstract void Resize(int width, int height);
+        public virtual void Draw() => Console.WriteLine($"{Position}和{Size}");
+    }
+
+    public class Ellipse1 : Shape1
+    {
+        public override void Resize(int width, int height)
+        {
+            Size.Height = height;
+            Size.Width = width;
         }
     }
 }

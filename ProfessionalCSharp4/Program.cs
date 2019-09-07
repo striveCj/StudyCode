@@ -12,8 +12,11 @@ namespace ProfessionalCSharp4
         {
             Shape r=new Shape();
             DrawShape(r);
+            Shape1 r1=new Ellipse1();
+            DrawShape(r1);
         }
 
         public static void DrawShape(Shape shape) => shape.Draw();
+        public static void DrawShape(Shape1 shape) => shape.Draw();
     }
 }
