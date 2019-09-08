@@ -12,4 +12,9 @@ namespace ProfessionalCSharp4
         bool Withdraw(decimal amount);
         decimal Balance { get; }
     }
+
+    public interface ITransferBankAccount : IBankAccount
+    {
+        bool TransferTo(IBankAccount destination, decimal amount);
+    }
 }
