@@ -52,9 +52,7 @@ namespace ProfessionalCSharp5
 
     public class LinkedListNode<T>
     {
-        public LinkedListNode()
-        {
-        }
+
 
         public LinkedListNode(T value)=>Value=value;
         public  T Value { get; }

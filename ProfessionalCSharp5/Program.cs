@@ -26,6 +26,14 @@ namespace ProfessionalCSharp5
                 Console.WriteLine(i2);
             }
 
+            var list3 =new LinkedList<string>();
+            list3.AddLast("2");
+            list3.AddLast("four");
+            list3.AddLast("foo");
+            foreach (var d in list3)
+            {
+                Console.WriteLine(d);
+            }
 
         }
     }
