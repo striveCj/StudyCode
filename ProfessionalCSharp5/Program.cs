@@ -35,6 +35,15 @@ namespace ProfessionalCSharp5
                 Console.WriteLine(d);
             }
 
+            var dm=new DocmentManagerT<Document>();
+            dm.AddDocument(new Document("Title A","Sample A"));
+            dm.AddDocument(new Document("Title B", "Sample B"));
+            dm.DisplayAllDocument();
+            if (dm.IsDocumentAvailable)
+            {
+                Document d = dm.GetDocment();
+                Console.WriteLine(d.Content);
+            }
         }
     }
 }
