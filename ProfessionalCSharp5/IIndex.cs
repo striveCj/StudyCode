@@ -37,7 +37,7 @@ namespace ProfessionalCSharp5
         };
 
         private static RectangleCollection _coll;
-        public static RectangleCollection GetRectangles => _coll ?? (_coll = new RectangleCollection());
+        public static RectangleCollection GetRectangles() => _coll ?? (_coll = new RectangleCollection());
 
         public Rectangle this[int index]
         {
@@ -53,5 +53,15 @@ namespace ProfessionalCSharp5
         }
 
         public int Count => data.Length;
+    }
+
+    public interface IDisplay<in T>
+    {
+        void Show(T item);
+    }
+
+    public class ShapeDisplay : IDisplay<Shape>
+    {
+        public void Show(Shape s) => Console.WriteLine($"{s.GetType().Name}Width：{s.Width},Height:{s.Height}");
     }
 }
