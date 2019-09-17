@@ -49,6 +49,7 @@
     <Compile Include="IDocument.cs" />
     <Compile Include="IIndex.cs" />
     <Compile Include="LinkedListNode.cs" />
+    <Compile Include="Nullable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

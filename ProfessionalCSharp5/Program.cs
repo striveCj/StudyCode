@@ -55,7 +55,15 @@ namespace ProfessionalCSharp5
             IDisplay<Shape> shapeDisplay=new ShapeDisplay();
             IDisplay<Rectangle> rectangleDisplay = shapeDisplay;
             rectangleDisplay.Show(rectangles[0]);
+            Nullable<int> x;
+            x = 4;
+    
+            if (x.HasValue)
+            {
+                int y = x.Value;
 
+            }
+            x = null;
         }
     }
 }
