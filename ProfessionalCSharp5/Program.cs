@@ -45,25 +45,34 @@ namespace ProfessionalCSharp5
             //    Console.WriteLine(d.Content);
             //}
 
-            IIndex<Rectangle> rectangles = RectangleCollection.GetRectangles();
-            IIndex<Shape> shapes = rectangles;
-            for (int i = 0; i < shapes.Count; i++)
-            {
-                Console.WriteLine(shapes[i]);
-            }
+            //IIndex<Rectangle> rectangles = RectangleCollection.GetRectangles();
+            //IIndex<Shape> shapes = rectangles;
+            //for (int i = 0; i < shapes.Count; i++)
+            //{
+            //    Console.WriteLine(shapes[i]);
+            //}
 
-            IDisplay<Shape> shapeDisplay=new ShapeDisplay();
-            IDisplay<Rectangle> rectangleDisplay = shapeDisplay;
-            rectangleDisplay.Show(rectangles[0]);
-            Nullable<int> x;
-            x = 4;
+            //IDisplay<Shape> shapeDisplay=new ShapeDisplay();
+            //IDisplay<Rectangle> rectangleDisplay = shapeDisplay;
+            //rectangleDisplay.Show(rectangles[0]);
+            //Nullable<int> x;
+            //x = 4;
     
-            if (x.HasValue)
-            {
-                int y = x.Value;
+            //if (x.HasValue)
+            //{
+            //    int y = x.Value;
 
-            }
-            x = null;
+            //}
+            //x = null;
+
+            var accounts=new List<Account>()
+            {
+                new Account("C",1500),
+                new Account("b",1000),
+                new Account("a",500),
+            };
+
+            decimal amount = Alogrithms.AccumulateSimple(accounts);
         }
     }
 }
