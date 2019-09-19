@@ -73,6 +73,7 @@ namespace ProfessionalCSharp5
             };
 
             decimal amount = Alogrithms.AccumulateSimple(accounts);
+            decimal amount2 = Alogrithms.Accumulate<Account>(accounts);
         }
     }
 }

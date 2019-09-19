@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace ProfessionalCSharp5
 {
-    public class Account
+    public interface IAccount
+    {
+        decimal Balance
+        {
+            get; 
+            
+        }
+        string Name { get; }
+    }
+    public class Account:IAccount
     {
         public string Name { get; }
 
@@ -30,5 +39,17 @@ namespace ProfessionalCSharp5
             }
             return sum;
         }
+
+        public static decimal Accumulate<TAccount>(IEnumerable<TAccount> source) where TAccount : IAccount
+        {
+            decimal sum = 0;
+            foreach (var a in source)
+            {
+                sum += a.Balance;
+            }
+            return sum;
+        }
     }
+
+    
 }
