@@ -65,15 +65,22 @@ namespace ProfessionalCSharp5
             //}
             //x = null;
 
-            var accounts=new List<Account>()
-            {
-                new Account("C",1500),
-                new Account("b",1000),
-                new Account("a",500),
-            };
+            //var accounts=new List<Account>()
+            //{
+            //    new Account("C",1500),
+            //    new Account("b",1000),
+            //    new Account("a",500),
+            //};
 
-            decimal amount = Alogrithms.AccumulateSimple(accounts);
-            decimal amount2 = Alogrithms.Accumulate<Account>(accounts);
+            //decimal amount = Alogrithms.AccumulateSimple(accounts);
+            //decimal amount2 = Alogrithms.Accumulate<Account>(accounts);
+
+            var text=new MethodOverloads();
+            text.Foo(33);
+            text.Foo("abc");
+            text.Foo("abc",42);
+            text.Foo(33,"abc");
+            text.Bat(44);
         }
     }
 }
