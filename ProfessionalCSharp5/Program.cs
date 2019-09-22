@@ -1,9 +1,11 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace ProfessionalCSharp5
 {
@@ -75,12 +77,14 @@ namespace ProfessionalCSharp5
             //decimal amount = Alogrithms.AccumulateSimple(accounts);
             //decimal amount2 = Alogrithms.Accumulate<Account>(accounts);
 
-            var text=new MethodOverloads();
-            text.Foo(33);
-            text.Foo("abc");
-            text.Foo("abc",42);
-            text.Foo(33,"abc");
-            text.Bat(44);
+            //var text=new MethodOverloads();
+            //text.Foo(33);
+            //text.Foo("abc");
+            //text.Foo("abc",42);
+            //text.Foo(33,"abc");
+            //text.Bat(44);
         }
+
+
     }
 }
