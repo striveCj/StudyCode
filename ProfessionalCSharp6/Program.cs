@@ -10,6 +10,13 @@ namespace ProfessionalCSharp6
     {
         static void Main(string[] args)
         {
+            Vector vect1, vect2, vect3;
+            vect1=new Vector(3,3,1);
+            vect2=new Vector(2,-4,-4);
+            vect3 = vect1 + vect2;
+            Console.WriteLine(vect1);
+            Console.WriteLine(vect2);
+            Console.WriteLine(vect3);
         }
         static void SimpleCalculations()
         {
@@ -38,5 +45,7 @@ namespace ProfessionalCSharp6
             Console.WriteLine(result.ToBinaryString().AddSeparators());
             Console.WriteLine();
         }
+
+
     }
 }
