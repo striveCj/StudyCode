@@ -17,6 +17,8 @@ namespace ProfessionalCSharp6
             Console.WriteLine(vect1);
             Console.WriteLine(vect2);
             Console.WriteLine(vect3);
+
+            SimpleCalculations();
         }
         static void SimpleCalculations()
         {
