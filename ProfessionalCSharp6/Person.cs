@@ -32,5 +32,10 @@ namespace ProfessionalCSharp6
             get => _people[index];
             set => _people[index] = value;
         }
+
+        public  IEnumerable<Person> this[DateTime birthDay]
+        {
+            get => _people.Where(p => p.Birthday == birthDay);
+        }
     }
 }

@@ -19,6 +19,17 @@ namespace ProfessionalCSharp6
             Console.WriteLine(vect3);
 
             SimpleCalculations();
+
+            var p1=new Person("","",new DateTime());
+            var p2 = new Person("", "", new DateTime());
+            var p3 = new Person("", "", new DateTime());
+            var p4 = new Person("", "", new DateTime());
+            var coll=new PersonCollection(p1,p2,p3,p4);
+            foreach (var r in coll[new DateTime(1960,3,21)])
+            {
+                Console.WriteLine(r);
+            }
+            Console.ReadLine();
         }
         static void SimpleCalculations()
         {
