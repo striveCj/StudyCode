@@ -20,10 +20,10 @@ namespace ProfessionalCSharp6
 
             SimpleCalculations();
 
-            var p1=new Person("","",new DateTime());
-            var p2 = new Person("", "", new DateTime());
-            var p3 = new Person("", "", new DateTime());
-            var p4 = new Person("", "", new DateTime());
+            var p1=new Person("a","s",new DateTime(1960,3,21));
+            var p2 = new Person("r", "p", new DateTime(1944,3,14));
+            var p3 = new Person("j", "r", new DateTime(1942,4,18));
+            var p4 = new Person("f", "c", new DateTime(1944,2,25));
             var coll=new PersonCollection(p1,p2,p3,p4);
             foreach (var r in coll[new DateTime(1960,3,21)])
             {
