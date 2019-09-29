@@ -18,5 +18,14 @@ namespace ProfessionalCSharp6
         }
 
         public override string ToString() => $"${Dollars}.{Cents,-2:00}";
+
+        public static implicit operator float(Currency value) => value.Dollars + (value.Cents / 100.0f);
+
+        public static explicit operator Currency(float value)
+        {
+            uint dollars = (uint) value;
+            ushort cents = (ushort) ((value - dollars) * 100);
+            return new Currency(dollars, cents);
+        }
     }
 }
