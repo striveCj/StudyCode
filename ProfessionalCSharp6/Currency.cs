@@ -26,6 +26,6 @@ namespace ProfessionalCSharp6
             uint dollars = (uint) value;
             ushort cents = (ushort) ((value - dollars) * 100);
             return new Currency(dollars, cents);
-        }1
+        }
     }
 }
