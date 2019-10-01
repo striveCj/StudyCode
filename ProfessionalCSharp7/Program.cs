@@ -21,6 +21,13 @@ namespace ProfessionalCSharp7
             foreach (var name in names)         {
                 Console.WriteLine(names);
             }
+
+            Person[] beatles =
+            {
+                new Person {FirstName = "a", LastName = "b"},
+                new Person {FirstName = "a", LastName = "b"}
+            };
+            Person[] batelesClone = (Person[]) beatles.Clone();
         }
     }
 }
