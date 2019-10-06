@@ -28,6 +28,19 @@ namespace ProfessionalCSharp7
                 new Person {FirstName = "a", LastName = "b"}
             };
             Person[] batelesClone = (Person[]) beatles.Clone();
+
+            Person[] persons =
+            {
+                new Person("Damon", "Hill"),
+                new Person("Niki", "Lauda"),
+                new Person("Ayrton", "Senna"),
+                new Person("Graham", "Hill"),
+            };
+            Array.Sort(persons);
+            foreach (var p in persons)
+            {
+                Console.WriteLine(p);
+            }
         }
     }
 }
