@@ -57,56 +57,47 @@ namespace ProfessionalCSharp7
     {
         public IEnumerator GetEnumerator()=>new Enumerator(0);
 
-        public IEnumerator<string> GetEnumerator()
+        public class Enumerator : IEnumerator<string>, IEnumerator, IDisposable
         {
-            yield return "Hello";
-            yield return "World";
-        }
-
-    }
-    public class Enumerator : IEnumerator<string>, IEnumerator, IDisposable {
-        public void Dispose()
-        {
-            
-        }
-
-        bool System.Collections.IEnumerator.MoveNext()
-        {
-            switch (_state)
+            private int _state;
+            private string _current;
+            public Enumerator(int state) => _state = state;
+            bool System.Collections.IEnumerator.MoveNext()
             {
-                case 0:
-                    _current = "Hello";
-                    _state = 1;
-                    return true;
-                case 1:
-                    _current = "World";
-                    _state = 2;
-                    return true;
-                case 2:
-                    break;
-                    
+                switch (_state)
+                {
+                    case 0:
+                        _current = "Hello";
+                        _state = 1;
+                        return true;
+                    case 1:
+                        _current = "World";
+                        _state = 2;
+                        return true;
+                    case 2:
+                        break;
+
+                }
+                return false;
             }
-            return false;
+            public void Dispose()
+            {
+
+            }
+
+
+
+             void System.Collections.IEnumerator.Reset() => throw new NotImplementedException();
+
+
+            string IEnumerator<string>.Current => _current;
+
+            object IEnumerator.Current => _current;
+
         }
 
-        public void Reset()
-        {
-            throw new NotImplementedException();
-        }
 
-        public string Current { get; }
-
-        private int _state;
-        private string _current;
-      
-
-        object IEnumerator.Current
-        {
-            get { return _current; }
-        }
-
-        public Enumerator(int state) => _state = state;
-       
     }
+  
 
 }
