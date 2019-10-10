@@ -98,6 +98,35 @@ namespace ProfessionalCSharp7
 
 
     }
+
+    public class MusicTitles
+    {
+        private string[] names = {"Tubular Bells", "Hergest Ridge", "Ommadawn", "Platinum"};
+
+        public IEnumerator<string> GetEnumerator()
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                yield return names[i];
+            }
+        }
+
+        public IEnumerable<string> Reverse()
+        {
+            for (int i = 3; i >=0; i--)
+            {
+                yield return names[i];
+            }
+        }
+
+        public IEnumerable<string> Subset(int index, int length)
+        {
+            for (int i = 0; i < index+length; i++)
+            {
+                yield return names[i];
+            }
+        }
+    }
   
 
 }
