@@ -40,7 +40,23 @@ namespace ProfessionalCSharp7
             //    Console.WriteLine(p);
             //}
 
-
+            var titles=new MusicTitles();
+            foreach (var title in titles)
+            {
+                Console.WriteLine(title);
+            }
+            Console.WriteLine();
+            Console.WriteLine("reverse");
+            foreach (var title in titles.Reverse())
+            {
+                Console.WriteLine(title);
+            }
+            Console.WriteLine();
+            Console.WriteLine("sunset");
+            foreach (var title in titles.Subset(2,2))
+            {
+                Console.WriteLine(title);
+            }
         }
 
         public void HelloWorld()
