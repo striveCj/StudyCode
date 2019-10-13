@@ -57,6 +57,14 @@ namespace ProfessionalCSharp7
             {
                 Console.WriteLine(title);
             }
+
+            var game=new GameMoves();
+            IEnumerator enumerator = game.Cross();
+            while (enumerator.MoveNext())
+            {
+                enumerator=enumerator.Current as IEnumerator;
+               
+            }
         }
 
         public void HelloWorld()
@@ -151,7 +159,8 @@ namespace ProfessionalCSharp7
 
         public GameMoves()
         {
-           
+            _cross = Cross();
+            _circle = Circle();
         }
 
         private int _move = 0;
@@ -170,7 +179,7 @@ namespace ProfessionalCSharp7
 
         }
 
-        public IEnumerator Cicle()
+        public IEnumerator Circle()
         {
             while (true)
             {
