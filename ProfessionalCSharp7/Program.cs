@@ -65,6 +65,23 @@ namespace ProfessionalCSharp7
                 enumerator=enumerator.Current as IEnumerator;
                
             }
+
+             var janet=new Person2(1,"Janet","Jackson");
+            Person2[] people1 =
+            {
+                new Person2(1, "2", "3"),
+                janet
+            };
+            Person2[] people2 =
+            {
+                new Person2(1, "2", "3"),
+                janet
+            };
+            if (people1!=people2)
+            {
+                Console.WriteLine("not same content");
+            }
+
         }
 
         public void HelloWorld()
