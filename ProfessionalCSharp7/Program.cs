@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Server.Kestrel.Internal.System;
 
 namespace ProfessionalCSharp7
 {
@@ -92,7 +93,19 @@ namespace ProfessionalCSharp7
                 Console.WriteLine(s);
             }
         }
+
+        private static Span<int> IntroSpans()
+        {
+            int[] arr1 = {1, 4, 5, 11, 13, 18};
+            var span1=new Span<int>(arr1);
+            span1[1] = 11;
+            Console.WriteLine($"arr1[1] is changed via span1[1]：{arr1[1]}");
+            return span1;
+        }
+    
     }
+
+
 
     public class HellCollection
     {
