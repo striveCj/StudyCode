@@ -102,6 +102,16 @@ namespace ProfessionalCSharp7
             Console.WriteLine($"arr1[1] is changed via span1[1]：{arr1[1]}");
             return span1;
         }
+
+        private static Span<int> CreateSlices(Span<int> span1)
+        {
+            Console.WriteLine(nameof(CreateSlices));
+            int[] arr2 = {3, 5, 7, 9, 11, 13, 15};
+            var span2=new Span<int>(arr2);
+            var span3=new Span<int>(arr2,start:3,length:3);
+            var span4 = span1.Slice(start: 2, length: 4);
+            return span2;
+        }
     
     }
 
