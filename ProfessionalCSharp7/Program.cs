@@ -112,6 +112,16 @@ namespace ProfessionalCSharp7
             var span4 = span1.Slice(start: 2, length: 4);
             return span2;
         }
+
+        private static void DisplaySpan(string title, ReadOnlySpan<int> spar)
+        {
+            Console.WriteLine(title);
+            for (int i = 0; i < spar.Length; i++)
+            {
+                Console.WriteLine($"{spar[i]}");
+            }
+            Console.WriteLine();
+        }
     
     }
 
