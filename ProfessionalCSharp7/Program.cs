@@ -80,7 +80,7 @@ namespace ProfessionalCSharp7
             };
             if (people1!=people2)
             {
-                Console.WriteLine("not same content");；
+                Console.WriteLine("not same content");
             }
 
         }
@@ -110,6 +110,8 @@ namespace ProfessionalCSharp7
             var span2=new Span<int>(arr2);
             var span3=new Span<int>(arr2,start:3,length:3);
             var span4 = span1.Slice(start: 2, length: 4);
+            DisplaySpan("content of span3",span3);
+            DisplaySpan("content of span4",span4);
             return span2;
         }
 
