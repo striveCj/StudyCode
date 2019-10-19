@@ -80,7 +80,7 @@ namespace ProfessionalCSharp7
             };
             if (people1!=people2)
             {
-                Console.WriteLine("not same content");
+                Console.WriteLine("not same content");；
             }
 
         }
