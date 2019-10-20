@@ -124,6 +124,23 @@ namespace ProfessionalCSharp7
             }
             Console.WriteLine();
         }
+
+        private static void ChangeValues(Span<int> span1,Span<int> span2)
+        {
+            Console.WriteLine(nameof(ChangeValues));
+            Span<int> span4 = span1.Slice(start: 4);
+            span4.Clear();
+            DisplaySpan("content of span1",span1);
+            Span<int> span5 = span2.Slice(start: 3, length: 3);
+            span5.Fill(42);
+            DisplaySpan("content of span2",span2);
+            if (!span1.TryCopyTo(span4))
+            {
+                Console.WriteLine("Couldn't copy span1 to span4 because span4 is too small");
+                Console.WriteLine($"length of span4:{span4.Length},length of span1:{span1.Length}");
+            }
+            Console.WriteLine();
+        }
     
     }
 
