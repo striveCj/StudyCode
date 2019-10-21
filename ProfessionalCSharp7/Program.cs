@@ -141,8 +141,20 @@ namespace ProfessionalCSharp7
             }
             Console.WriteLine();
         }
-    
+
+        private static void ReadonlySpan(Span<int> span1)
+        {
+            Console.WriteLine(nameof(ReadonlySpan));
+            int[] arr = span1.ToArray();
+            ReadOnlySpan<int> readOnlySpan1=new ReadOnlySpan<int>(arr);
+            DisplaySpan("readOnlySpan1",readOnlySpan1);
+            ReadOnlySpan<int> readOnlyspan3 = arr;
+            DisplaySpan("readOnlySpan3",readOnlyspan3);
+            Console.WriteLine();
+
+        }
     }
+
 
 
 
