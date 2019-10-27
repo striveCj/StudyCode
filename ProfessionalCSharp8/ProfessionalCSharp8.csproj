@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BubbleSorter.cs" />
     <Compile Include="Currency.cs" />
     <Compile Include="MathOperations.cs" />
     <Compile Include="Program.cs" />
