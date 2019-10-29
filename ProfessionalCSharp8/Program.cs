@@ -23,18 +23,31 @@ namespace ProfessionalCSharp8
             //firstStringMethod=new GetAString(Currency.GetCurrencyUnit);
             //Console.WriteLine($"{firstStringMethod}");
 
-            DoubleOp[] operations =
+            //DoubleOp[] operations =
+            //{
+            //    MathOperations.MultiplyByTwo,
+            //    MathOperations.Square
+            //};
+            //for (int i = 0; i < operations.Length; i++)
+            //{
+            //    Console.WriteLine($"Using operations[{i}]");
+            //    ProcessAndDisplayNumber(operations[i], 2.0);
+            //    ProcessAndDisplayNumber(operations[i], 7.94);
+            //    ProcessAndDisplayNumber(operations[i],1.414);
+            //    Console.WriteLine();
+            //}
+
+            Employee[] employees =
             {
-                MathOperations.MultiplyByTwo,
-                MathOperations.Square
+                new Employee("a", 20000),
+                new Employee("b",20000),
+                new Employee("c",20000),
+                new Employee("d",20000),
+                new Employee("e",20000),
             };
-            for (int i = 0; i < operations.Length; i++)
-            {
-                Console.WriteLine($"Using operations[{i}]");
-                ProcessAndDisplayNumber(operations[i], 2.0);
-                ProcessAndDisplayNumber(operations[i], 7.94);
-                ProcessAndDisplayNumber(operations[i],1.414);
-                Console.WriteLine();
+            BubbleSorter.Sort(employees,Employee.CompareSalary);
+            foreach (var employee in employees)       {
+                Console.WriteLine(employee);
             }
         }
 
