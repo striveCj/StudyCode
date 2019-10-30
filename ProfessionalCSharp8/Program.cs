@@ -51,6 +51,13 @@ namespace ProfessionalCSharp8
             }
         }
 
+        static void ProcessAndDisplayNumber(Action<double> action, double value)
+        {
+            Console.WriteLine();
+            Console.WriteLine(value);
+            action(value);
+        }
+
         static void ProcessAndDisplayNumber(DoubleOp action, double value)
         {
             double result = action(value);

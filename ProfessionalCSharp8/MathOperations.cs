@@ -8,7 +8,17 @@ namespace ProfessionalCSharp8
 {
     class MathOperations
     {
-        public static double MultiplyByTwo(double value) => value * 2;
-        public static double Square(double value) => value * value;
+        public static void MultiplyByTwo(double value)
+        {
+         var res=   value * 2;
+            Console.WriteLine(res);
+        }
+
+        public static void Square(double value)
+        {
+            var res = value * value;
+            Console.WriteLine(res);
+
+        }
     }
 }
