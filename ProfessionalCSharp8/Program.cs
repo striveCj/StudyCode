@@ -37,18 +37,25 @@ namespace ProfessionalCSharp8
             //    Console.WriteLine();
             //}
 
-            Employee[] employees =
-            {
-                new Employee("a", 20000),
-                new Employee("b",20000),
-                new Employee("c",20000),
-                new Employee("d",20000),
-                new Employee("e",20000),
-            };
-            BubbleSorter.Sort(employees,Employee.CompareSalary);
-            foreach (var employee in employees)       {
-                Console.WriteLine(employee);
-            }
+            //Employee[] employees =
+            //{
+            //    new Employee("a", 20000),
+            //    new Employee("b",20000),
+            //    new Employee("c",20000),
+            //    new Employee("d",20000),
+            //    new Employee("e",20000),
+            //};
+            //BubbleSorter.Sort(employees,Employee.CompareSalary);
+            //foreach (var employee in employees)       {
+            //    Console.WriteLine(employee);
+            //}
+            Action<double> operation = MathOperations.MultiplyByTwo;
+            operation += MathOperations.Square;
+            ProcessAndDisplayNumber(operation,2.0);
+            ProcessAndDisplayNumber(operation, 7.94);
+            ProcessAndDisplayNumber(operation, 1.414);
+            Console.WriteLine();
+
         }
 
         static void ProcessAndDisplayNumber(Action<double> action, double value)
