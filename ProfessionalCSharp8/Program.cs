@@ -49,15 +49,34 @@ namespace ProfessionalCSharp8
             //foreach (var employee in employees)       {
             //    Console.WriteLine(employee);
             //}
-            Action<double> operation = MathOperations.MultiplyByTwo;
-            operation += MathOperations.Square;
-            ProcessAndDisplayNumber(operation,2.0);
-            ProcessAndDisplayNumber(operation, 7.94);
-            ProcessAndDisplayNumber(operation, 1.414);
-            Console.WriteLine(1);
-
+            //Action<double> operation = MathOperations.MultiplyByTwo;
+            //operation += MathOperations.Square;
+            //ProcessAndDisplayNumber(operation,2.0);
+            //ProcessAndDisplayNumber(operation, 7.94);
+            //ProcessAndDisplayNumber(operation, 1.414);
+            //Console.WriteLine(1);
+            Action d1 = One;
+            d1 += Two;
+            try
+            {
+                d1();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception caught");
+            }
         }
 
+        static void One()
+        {
+            Console.WriteLine("one");
+            throw new Exception("Error in one");
+        }
+
+        static void Two()
+        {
+            Console.WriteLine("Two");
+        }
         static void ProcessAndDisplayNumber(Action<double> action, double value)
         {
             Console.WriteLine();
