@@ -54,7 +54,7 @@ namespace ProfessionalCSharp8
             ProcessAndDisplayNumber(operation,2.0);
             ProcessAndDisplayNumber(operation, 7.94);
             ProcessAndDisplayNumber(operation, 1.414);
-            Console.WriteLine();
+            Console.WriteLine(1);
 
         }
 
