@@ -65,6 +65,15 @@ namespace ProfessionalCSharp8
             {
                 Console.WriteLine("Exception caught1");
             }
+
+            string mid = ",middle part,";
+            Func<string, string> lambda = param =>
+            {
+                param += mid;
+                param += " amd this was added to the string";
+                return param;
+            };
+            Console.WriteLine(lambda("Start of string"));
         }
 
         static void One()
