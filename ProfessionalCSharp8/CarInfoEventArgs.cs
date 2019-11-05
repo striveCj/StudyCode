@@ -11,6 +11,7 @@ namespace ProfessionalCSharp8
    {
        public CarInfoEventArgs(string car) => Car = car;
         public  string Car { get; set; }
+
    }
 
     public class CarDealer

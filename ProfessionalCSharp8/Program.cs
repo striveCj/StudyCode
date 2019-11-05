@@ -74,6 +74,17 @@ namespace ProfessionalCSharp8
                 return param;
             };
             Console.WriteLine(lambda("Start of string"));
+
+            var dealer=new CarDealer();
+            var valtteri=new Consumer("Valtteri");
+            dealer.NewCarInfo += valtteri.NewCarIsHere;
+            dealer.NewCar("Williams");
+
+            var max=new Consumer("Max");
+            dealer.NewCarInfo += max.NewCarIsHere;
+            dealer.NewCar("Mercedes");
+            dealer.NewCarInfo -= valtteri.NewCarIsHere;
+            dealer.NewCar("Ferrari");
         }
 
         static void One()
