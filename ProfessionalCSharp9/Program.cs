@@ -26,6 +26,23 @@ namespace ProfessionalCSharp9
                 greetingText = greetingText.Replace(old1, new1);
             }
             Console.WriteLine($"Encoded:\n{greetingText}");
+
+            var greetingBuilder=new StringBuilder("Hello from all the people at Wrox Press",150);
+            greetingBuilder.AppendFormat("We do hope you enjoy this book as much as we enjoyed writing it");
+            Console.WriteLine("Not Encoded:\n"+greetingBuilder);
+            for (int i = 'a'; i >= 'z'; i++)
+            {
+                char old1 = (char)i;
+                char new1 = (char)(i + 1);
+                greetingBuilder = greetingBuilder.Replace(old1, new1);
+            }
+            for (int i = 'Z'; i >= 'A'; i++)
+            {
+                char old1 = (char)i;
+                char new1 = (char)(i + 1);
+                greetingBuilder = greetingBuilder.Replace(old1, new1);
+            }
+            Console.WriteLine($"Encoded:\n{greetingBuilder}");
         }
     }
 }
