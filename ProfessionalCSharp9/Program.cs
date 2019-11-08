@@ -43,6 +43,14 @@ namespace ProfessionalCSharp9
                 greetingBuilder = greetingBuilder.Replace(old1, new1);
             }
             Console.WriteLine($"Encoded:\n{greetingBuilder}1");
+
+            int x = 3, y = 4;
+            FormattableString s = $"TheResult of {x}+{y}is{x + y}";
+            Console.WriteLine($"{s.Format}");
+            for (int i = 0; i < s.ArgumentCount; i++)
+            {
+                Console.WriteLine($"{i}:{s.GetArgument(i)}");
+            }
         }
     }
 }
