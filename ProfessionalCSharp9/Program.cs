@@ -42,7 +42,7 @@ namespace ProfessionalCSharp9
                 char new1 = (char)(i + 1);
                 greetingBuilder = greetingBuilder.Replace(old1, new1);
             }
-            Console.WriteLine($"Encoded:\n{greetingBuilder}");
+            Console.WriteLine($"Encoded:\n{greetingBuilder}1");
         }
     }
 }
