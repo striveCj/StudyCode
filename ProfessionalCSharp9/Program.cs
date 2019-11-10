@@ -51,6 +51,10 @@ namespace ProfessionalCSharp9
             {
                 Console.WriteLine($"{i}:{s.GetArgument(i)}");
             }
+
+            var p1=new Person{FirstName = "Stephanie",LastName = "Nage1"};
+            Console.WriteLine(p1.ToString("F"));
+            Console.WriteLine($"{p1:F}");
         }
     }
 }
