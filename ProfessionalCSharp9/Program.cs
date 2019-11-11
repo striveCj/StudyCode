@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ProfessionalCSharp9
@@ -55,6 +56,22 @@ namespace ProfessionalCSharp9
             var p1=new Person{FirstName = "Stephanie",LastName = "Nage1"};
             Console.WriteLine(p1.ToString("F"));
             Console.WriteLine($"{p1:F}");
+        }
+
+        public static void WriteMatches(string text, MatchCollection matches)
+        {
+            Console.WriteLine($"Original text was:\n\n{text}\n");
+            Console.WriteLine($"No. of matches:{matches.Count}");
+            foreach (Match nextMatch in matches)
+            {
+                int index = nextMatch.Index;
+                string result = nextMatch.ToString();
+                int charBefore = (index < 5) ? index : 5;
+                int fromEnd = text.Length - index - result.Length;
+                int charAfter = (fromEnd < 5) ? fromEnd : 5;
+                int charsToDisplay = charBefore + charAfter + result.Length;
+                Console.WriteLine($"Index:{index},\tString:{result},\t{text.Substring(index-charBefore,charsToDisplay)}");
+            }
         }
     }
 }
