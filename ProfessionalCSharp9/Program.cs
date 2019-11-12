@@ -73,5 +73,12 @@ namespace ProfessionalCSharp9
                 Console.WriteLine($"Index:{index},\tString:{result},\t{text.Substring(index-charBefore,charsToDisplay)}");
             }
         }
+
+        public static void Find2(string text)
+        {
+            string pattern = @"\ba\S*ure\b";
+            MatchCollection matches = Regex.Matches(text, pattern, RegexOptions.IgnoreCase);
+            Console.WriteLine(matches);
+        }
     }
 }
