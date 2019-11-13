@@ -56,6 +56,25 @@ namespace ProfessionalCSharp9
             var p1=new Person{FirstName = "Stephanie",LastName = "Nage1"};
             Console.WriteLine(p1.ToString("F"));
             Console.WriteLine($"{p1:F}");
+
+            string line = "Hey,I've just found this amazing URI at Http://what was it -oh yes https://www.wrox.com or http://www.wrox.com:80";
+            string pattern = @"\b(https?)(://)([.\w]+)([\s:]([\d]{2,4)?)\b";
+            var r=new Regex(pattern);
+            MatchCollection mc = r.Matches(line);
+            foreach (Match m in mc)
+            {
+                Console.WriteLine($"Match:{m}");
+                foreach (Group g in m.Groups)
+                {
+                    if (g.Success)
+                    {
+                        Console.WriteLine(g.Index);
+                        Console.WriteLine(g.Value);
+                        
+                    }
+                }
+                Console.ReadLine();
+            }
         }
 
         public static void WriteMatches(string text, MatchCollection matches)
