@@ -38,7 +38,25 @@ namespace ProfessionalCSharp10
 
         public string ToString(string format, IFormatProvider formatProvider)
         {
-            throw new NotImplementedException();
+            if (format==null)
+            {
+                format = "N";
+            }
+            switch (format.ToUpper())
+            {
+                case "N":
+                    return ToString();
+                case "F":
+                    return FirstName;
+                case "L":
+                    return LastName;
+                case "W":
+                    return $"{ToString()},Wins:{Wins}";
+                case "C":
+                    return $"{ToString()},Country:{Country}";
+                    default: 
+                    throw new FormatException(String.Format(formatProvider,$"Format{format} is not supported"));
+            }
         }
 
         public int CompareTo(Racer other)
