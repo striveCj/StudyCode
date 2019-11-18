@@ -28,7 +28,9 @@ namespace ProfessionalCSharp10
             var racers2 = new List<Racer>(20){ graham,emerson,mario};
             racers2.Add(new Racer(24,"a","b","c",25));
             racers2.Add(new Racer(21,"a","b","c",22));
-
+            racers2.Insert(3,new Racer(6,"Pjil","Hill","USA",3));
+            racers2.RemoveAt(3);
+            int index = racers2.IndexOf(mario);
 
         }
     }
