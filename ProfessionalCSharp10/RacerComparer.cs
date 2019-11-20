@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProfessionalCSharp10
 {
-    public class RacerComparer:IComparable<Racer>
+    public class RacerComparer:IComparer<Racer>
     {
         public enum  CompareType
         {
@@ -60,9 +60,6 @@ namespace ProfessionalCSharp10
             }
         }
 
-        public int CompareTo(Racer other)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

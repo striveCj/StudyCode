@@ -31,6 +31,8 @@ namespace ProfessionalCSharp10
             racers2.Insert(3,new Racer(6,"Pjil","Hill","USA",3));
             racers2.RemoveAt(3);
             int index = racers2.IndexOf(mario);
+            RacerComparer racerComparer = new RacerComparer(RacerComparer.CompareType.Country);
+            racers2.Sort(racerComparer);
 
         }
     }
