@@ -8,7 +8,7 @@ namespace ProfessionalCSharp10
 {
     class Program
     {
-        static void Main(string[] args)
+        static  async Task Main()
         {
             //var intList = new List<int>();
             var racers=new List<Racer>();
@@ -33,6 +33,21 @@ namespace ProfessionalCSharp10
             int index = racers2.IndexOf(mario);
             RacerComparer racerComparer = new RacerComparer(RacerComparer.CompareType.Country);
             racers2.Sort(racerComparer);
+
+
+            var dm=new DocumentManager();
+            Task processDocuments = ProcessDocuments.Start(dm);
+            for (int i = 0; i < 1000; i++)
+            {
+                var doc=new Document($"Doc{i.ToString()}","content");
+                dm.AddDocument(doc);
+                Console.WriteLine(doc.Title);
+                await Task.Delay(new Random().Next(20));
+
+            }
+            await processDocuments;
+            Console.ReadLine();
+
 
         }
     }
