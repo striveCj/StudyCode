@@ -23,8 +23,12 @@ namespace ProfessionalCSharp10
                     Document doc = _documentManager.GetDocument();
                     Console.WriteLine(doc.Title);
                 }
-                await  Task.Delay(new Random().Next(20))；
+                await Task.Delay(new Random().Next(20));
             }
         }
+
+      
+
+
     }
 }

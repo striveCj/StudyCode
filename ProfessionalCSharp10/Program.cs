@@ -48,7 +48,15 @@ namespace ProfessionalCSharp10
             await processDocuments;
             Console.ReadLine();
 
-
+            var alphabet = new Stack<char>();
+            alphabet.Push('A');
+            alphabet.Push('B');
+            alphabet.Push('C');
+            foreach (char item in alphabet)
+            {
+                Console.WriteLine(item);
+            }
+            Console.WriteLine();
         }
     }
 
