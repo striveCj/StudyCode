@@ -57,6 +57,12 @@ namespace ProfessionalCSharp10
                 Console.WriteLine(item);
             }
             Console.WriteLine();
+
+            while (alphabet.Count>0)
+            {
+                Console.WriteLine(alphabet.Pop());
+            }
+            Console.WriteLine();
         }
     }
 
