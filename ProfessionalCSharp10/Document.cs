@@ -11,10 +11,13 @@ namespace ProfessionalCSharp10
         public string Title { get; }
         public string Content { get; }
 
-        public Document(string title, string content)
+        public  byte Priority { get; }
+
+        public Document(string title, string content,byte priority)
         {
             Title = title;
             Content = content;
+            Priority = priority;
         }
     }
 }
