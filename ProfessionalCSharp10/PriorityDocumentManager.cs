@@ -32,7 +32,45 @@ namespace ProfessionalCSharp10
 
         public void AddDocmentToPriorityNode(Document doc, int priority)
         {
-            
+            if (priority>9||priority<0)
+            {
+                throw new ArgumentException("Priority must be between 0 and 9");
+            }
+            if (_priorityNodes[priority].Value==null)
+            {
+                --priority;
+                if (priority<=0)
+                {
+                    AddDocmentToPriorityNode(doc,priority);
+                }
+                else
+                {
+                    _documentList.AddLast(doc);
+                    _priorityNodes[doc.Priority] = _documentList.Last;
+                }
+                return;
+            }
+            else
+            {
+                LinkedListNode<Document> prioNode = _priorityNodes[priority];
+                if (priority==doc.Priority)
+                {
+                    _documentList.AddAfter(prioNode, doc);
+                    _priorityNodes[doc.Priority] = prioNode.Next;
+                }
+                else
+                {
+                    LinkedListNode<Document> firstPriNode = prioNode;
+                    while (firstPriNode.Previous!=null&&firstPriNode.Previous.Value.Priority==prioNode.Value.Priority)
+                    {
+                        firstPriNode = prioNode.Previous;
+                        prioNode = firstPriNode;
+                    }
+                    _documentList.AddBefore(firstPriNode, doc);
+                    _priorityNodes[doc.Priority] = firstPriNode.Previous;
+                }
+            }
+
         }
     }
 }
