@@ -72,5 +72,21 @@ namespace ProfessionalCSharp10
             }
 
         }
+
+        public void DisplayAllNodes()
+        {
+            foreach (var  doc in _documentList)
+            {
+                Console.WriteLine(doc.Priority);
+                Console.WriteLine(doc.Title);
+            }
+        }
+
+        public Document GetDocument()
+        {
+            Document doc = _documentList.First.Value;
+            _documentList.RemoveFirst();
+            return doc;
+        }
     }
 }
