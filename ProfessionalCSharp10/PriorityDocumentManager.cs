@@ -47,6 +47,7 @@ namespace ProfessionalCSharp10
                 {
                     _documentList.AddLast(doc);
                     _priorityNodes[doc.Priority] = _documentList.Last;
+                    ;
                 }
                 return;
             }
