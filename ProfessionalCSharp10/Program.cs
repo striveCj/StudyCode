@@ -63,6 +63,15 @@ namespace ProfessionalCSharp10
                 Console.WriteLine(alphabet.Pop());
             }
             Console.WriteLine();
+
+            var pdm=new PriorityDocumentManager();
+            pdm.AddDocument(new Document("a","b",1));
+
+            pdm.AddDocument(new Document("a", "b", 2));
+            pdm.AddDocument(new Document("a", "b", 3));
+            pdm.AddDocument(new Document("a", "b", 4));
+            pdm.AddDocument(new Document("a", "b", 5));
+            pdm.DisplayAllNodes();
         }
     }
 
