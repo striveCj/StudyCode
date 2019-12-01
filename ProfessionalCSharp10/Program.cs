@@ -72,6 +72,24 @@ namespace ProfessionalCSharp10
             pdm.AddDocument(new Document("a", "b", 4));
             pdm.AddDocument(new Document("a", "b", 5));
             pdm.DisplayAllNodes();
+
+            #region 有序列表
+            var books=new SortedList<string, string>();
+            books.Add("a","1");
+            books.Add("b","2");
+            books.Add("c","3");
+            books["d"] = "4";
+            foreach (var book in books)
+            {
+                Console.WriteLine($"{book.Key},{book.Value}");
+            }
+            foreach (var title in books.Keys)
+            {
+                Console.WriteLine(title);
+            }
+
+
+            #endregion
         }
     }
 
