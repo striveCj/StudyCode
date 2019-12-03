@@ -38,13 +38,13 @@ namespace ProfessionalCSharp10
             return _prefix == other._prefix && _number == other._number;
         }
 
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            return obj is EmployeeId && Equals((EmployeeId) obj);
-        }
+        public override bool Equals(object obj) => Equals((EmployeeId) obj);
 
         public override int GetHashCode() => (_number ^ _number << 16) * 0x15051505;
-       
+
+        public static bool operator ==(EmployeeId left, EmployeeId right) => left.Equals(right);
+
+        public static bool operator !=(EmployeeId left, EmployeeId right) => !(left == right);
+
     }
 }
