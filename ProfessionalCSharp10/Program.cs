@@ -109,6 +109,35 @@ namespace ProfessionalCSharp10
             {
                 Console.WriteLine(employee);
             }
+
+            while (true)
+            {
+                Console.WriteLine("Enter employee id (X to exit)> ");
+                var userInput = Console.ReadLine();
+                userInput = userInput.ToUpper();
+                if (userInput=="X") break;
+                EmployeeId id;
+                try
+                {
+                    id=new EmployeeId(userInput);
+                    if (!employees.TryGetValue(id,out Employee employee))
+                    {
+                        Console.WriteLine($"{id} 不存在");
+                    }
+                    else
+                    {
+                        Console.WriteLine(employee);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    
+                }
+                {
+                    
+                }
+            }
         }
     }
 
