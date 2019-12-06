@@ -94,6 +94,22 @@ namespace ProfessionalCSharp10
 
         static void Main()
         {
+            var companyTeams=new HashSet<string>(){"A","b","c"};
+
+            var traditionalTeams=new HashSet<string>(){"a1","b1","c1"};
+
+            var privateTeams=new HashSet<string>(){"a2","b2","c2"};
+
+            if (privateTeams.Add("williams"))
+            {
+                Console.WriteLine("w add");   
+            }
+
+            if (!companyTeams.Add("McLaren"))
+            {
+                Console.WriteLine("mclaren set");                
+            }
+
             var idJimmie=new EmployeeId("C48");
             var jimmie=new Employee(idJimmie,"Jimmie Johnson",150926.00m);
 
@@ -134,9 +150,7 @@ namespace ProfessionalCSharp10
                     Console.WriteLine(e.Message);
                     
                 }
-                {
-                    
-                }
+
             }
         }
     }
