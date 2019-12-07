@@ -110,6 +110,23 @@ namespace ProfessionalCSharp10
                 Console.WriteLine("mclaren set");                
             }
 
+            if (traditionalTeams.IsSubsetOf(companyTeams))
+            {
+                Console.WriteLine("tarditionalTeams is subset of companyTeams");
+            }
+
+            if (companyTeams.IsSubsetOf(traditionalTeams))
+            {
+                Console.WriteLine("companyTeams is a superset of traditionalTeams");
+            }
+
+            traditionalTeams.Add("Williams");
+
+            if (privateTeams.Overlaps(traditionalTeams))
+            {
+                Console.WriteLine("At least one team is the same with traditional and private teams");   
+            }
+
             var idJimmie=new EmployeeId("C48");
             var jimmie=new Employee(idJimmie,"Jimmie Johnson",150926.00m);
 
