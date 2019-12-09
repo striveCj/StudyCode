@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProfessionalCSharp22
@@ -40,6 +41,13 @@ namespace ProfessionalCSharp22
         {
             Console.WriteLine($"file{e.OldName}{e.ChangeType}{e.Name}");
         }
+        #endregion
+
+        #region 22.8使用内存映射的文件
+        private ManualResetEventSlim _mapCreated=new ManualResetEventSlim(initialState:false);
+            private  ManualResetEventSlim _dataWrittenEvent=new ManualResetEventSlim(initialState:false);
+        private const string MapName = "SampleMap";
+
         #endregion
     }
 }
