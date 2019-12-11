@@ -81,6 +81,36 @@ namespace ProfessionalCSharp22
                 Console.WriteLine(e.Message);
             }
         }
+
+        private async Task ReaderUsingStreams()
+        {
+            try
+            {
+                Console.WriteLine("reader");
+                _mapCreated.Wait();
+                Console.WriteLine("reader starting");
+                using (MemoryMappedFile mappedFile=MemoryMappedFile.OpenExisting(MapName,MemoryMappedFileRights.Read))
+                {
+                    MemoryMappedViewStream stream = mappedFile.CreateViewStream(0, 10000, MemoryMappedFileAccess.Read);
+                    using (var reader=new StreamReader(stream))
+                    {
+                        _dataWrittenEvent.Wait();
+                        Console.WriteLine("reading can start now");
+                        for (int i = 0; i < 100; i++)
+                        {
+                            long pos = stream.Position;
+                            string s = await reader.ReadLineAsync();
+                            Console.WriteLine($"read {s} from {pos}");
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+               
+            }
+        }
         #endregion
     }
 }
