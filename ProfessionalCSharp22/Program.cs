@@ -82,6 +82,35 @@ namespace ProfessionalCSharp22
             }
         }
 
+
+        private void Reader()
+        {
+            try
+            {
+                Console.WriteLine("reader");
+                _mapCreated.Wait();
+                Console.WriteLine("reader starting");
+                using (MemoryMappedFile mappedFile=MemoryMappedFile.OpenExisting(MapName,MemoryMappedFileRights.Read))
+                {
+                    using (MemoryMappedViewAccessor accessor = mappedFile.CreateViewAccessor(0, 10000, MemoryMappedFileAccess.Read))
+                    {
+                        _dataWrittenEvent.Wait();
+                        Console.WriteLine("reading can start now");
+                        for (int i = 0; i < 400; i+=4)
+                        {
+                            int result = accessor.ReadInt32(i);
+                            Console.WriteLine($"reading {result} from position");
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                
+            }
+        }
+
         private async Task ReaderUsingStreams()
         {
             try
