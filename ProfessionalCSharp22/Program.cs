@@ -110,7 +110,35 @@ namespace ProfessionalCSharp22
                 
             }
         }
+        private async Task WriterUsingStreams()
+        {
+            try
+            {
+                using (MemoryMappedFile mappedFile = MemoryMappedFile.CreateOrOpen(MapName, 10000,MemoryMappedFileAccess.ReadWrite))
+                {
+                    _mapCreated.Set();
+                    Console.WriteLine("shared memory segment create");
+                    MemoryMappedViewStream stream = mappedFile.CreateViewStream(0, 10000, MemoryMappedFileAccess.Write);
+                    using (var writer = new StreamWriter(stream))
+                    {
+                        writer.AutoFlush = true;
+                        Console.WriteLine("reading can start now");
+                        for (int i = 0; i < 100; i++)
+                        {
+                           
+                            string s = $"some data {i}";
+                            Console.WriteLine($"writing{s} at {stream.Position}");
+                            await writer.WriteLineAsync(s);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
 
+            }
+        }
         private async Task ReaderUsingStreams()
         {
             try
