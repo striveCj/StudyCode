@@ -51,7 +51,10 @@ namespace ProfessionalCSharp22
 
         public void Run()
         {
-          
+            Task.Run(() => WriterAsync());
+            Task.Run(() => Reader());
+            Console.WriteLine("tasks started");
+            Console.ReadLine();
         }
 
         //使用访问器创建内存映射文件
