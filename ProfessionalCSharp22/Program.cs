@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.MemoryMappedFiles;
+using System.IO.Pipes;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -113,11 +114,15 @@ namespace ProfessionalCSharp22
                 
             }
         }
+
+
+        #region 使用流创建内存映射文件
+
         private async Task WriterUsingStreams()
         {
             try
             {
-                using (MemoryMappedFile mappedFile = MemoryMappedFile.CreateOrOpen(MapName, 10000,MemoryMappedFileAccess.ReadWrite))
+                using (MemoryMappedFile mappedFile = MemoryMappedFile.CreateOrOpen(MapName, 10000, MemoryMappedFileAccess.ReadWrite))
                 {
                     _mapCreated.Set();
                     Console.WriteLine("shared memory segment create");
@@ -128,7 +133,7 @@ namespace ProfessionalCSharp22
                         Console.WriteLine("reading can start now");
                         for (int i = 0; i < 100; i++)
                         {
-                           
+
                             string s = $"some data {i}";
                             Console.WriteLine($"writing{s} at {stream.Position}");
                             await writer.WriteLineAsync(s);
@@ -149,10 +154,10 @@ namespace ProfessionalCSharp22
                 Console.WriteLine("reader");
                 _mapCreated.Wait();
                 Console.WriteLine("reader starting");
-                using (MemoryMappedFile mappedFile=MemoryMappedFile.OpenExisting(MapName,MemoryMappedFileRights.Read))
+                using (MemoryMappedFile mappedFile = MemoryMappedFile.OpenExisting(MapName, MemoryMappedFileRights.Read))
                 {
                     MemoryMappedViewStream stream = mappedFile.CreateViewStream(0, 10000, MemoryMappedFileAccess.Read);
-                    using (var reader=new StreamReader(stream))
+                    using (var reader = new StreamReader(stream))
                     {
                         _dataWrittenEvent.Wait();
                         Console.WriteLine("reading can start now");
@@ -168,9 +173,50 @@ namespace ProfessionalCSharp22
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-               
+
             }
         }
         #endregion
+
+
+        #endregion
+
+        #region 22.9使用管道通性
+
+        private static void PipesReader(string pipeName)
+        {
+            try
+            {
+                using (var pipReader=new NamedPipeServerStream(pipeName,PipeDirection.In))
+                {
+                    pipReader.WaitForConnection();
+                    Console.WriteLine("reader connected");
+                    const int BUFFERSIZE = 256;
+                    bool completed = false;
+                    while (!completed)
+                    {
+                        byte[] buffer=new byte[BUFFERSIZE];
+                        int nRead = pipReader.Read(buffer,0,BUFFERSIZE);
+                        string line = Encoding.UTF8.GetString(buffer, 0, nRead);
+                        Console.WriteLine(line);
+                        if (line=="bye")
+                        {
+                            completed = true;
+                        }
+                    }
+                    Console.WriteLine("completed reading");
+                    Console.ReadLine();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+        
+
+        #endregion
+
     }
 }
