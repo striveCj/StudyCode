@@ -214,7 +214,26 @@ namespace ProfessionalCSharp22
                 throw;
             }
         }
-        
+
+        public static void PipesWriter(string serverName, string pipeName)
+        {
+            var pipeWriter = new NamedPipeClientStream(serverName, pipeName, PipeDirection.Out);
+            using (var writer=new StreamWriter(pipeWriter))
+            {
+                pipeWriter.Connect();
+                Console.WriteLine("writer connected");
+                bool completed = false;
+                while (!completed)
+                {
+                    string input = Console.ReadLine();
+                    if (input == "bye") completed = true;
+                    Console.WriteLine(input);
+                        writer.Flush();
+                    
+                }
+            }
+            Console.WriteLine("completed writing");
+        }
 
         #endregion
 
