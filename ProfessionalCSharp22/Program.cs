@@ -183,11 +183,13 @@ namespace ProfessionalCSharp22
 
         #region 22.9使用管道通性
 
+        #region 22.9.1创建命名管道服务器
+
         private static void PipesReader(string pipeName)
         {
             try
             {
-                using (var pipReader=new NamedPipeServerStream(pipeName,PipeDirection.In))
+                using (var pipReader = new NamedPipeServerStream(pipeName, PipeDirection.In))
                 {
                     pipReader.WaitForConnection();
                     Console.WriteLine("reader connected");
@@ -195,11 +197,11 @@ namespace ProfessionalCSharp22
                     bool completed = false;
                     while (!completed)
                     {
-                        byte[] buffer=new byte[BUFFERSIZE];
-                        int nRead = pipReader.Read(buffer,0,BUFFERSIZE);
+                        byte[] buffer = new byte[BUFFERSIZE];
+                        int nRead = pipReader.Read(buffer, 0, BUFFERSIZE);
                         string line = Encoding.UTF8.GetString(buffer, 0, nRead);
                         Console.WriteLine(line);
-                        if (line=="bye")
+                        if (line == "bye")
                         {
                             completed = true;
                         }
@@ -215,10 +217,15 @@ namespace ProfessionalCSharp22
             }
         }
 
+
+        #endregion
+
+        #region 22.9.2创建命名管道客户端
+
         public static void PipesWriter(string serverName, string pipeName)
         {
             var pipeWriter = new NamedPipeClientStream(serverName, pipeName, PipeDirection.Out);
-            using (var writer=new StreamWriter(pipeWriter))
+            using (var writer = new StreamWriter(pipeWriter))
             {
                 pipeWriter.Connect();
                 Console.WriteLine("writer connected");
@@ -228,12 +235,70 @@ namespace ProfessionalCSharp22
                     string input = Console.ReadLine();
                     if (input == "bye") completed = true;
                     Console.WriteLine(input);
-                        writer.Flush();
-                    
+                    writer.Flush();
+
                 }
             }
             Console.WriteLine("completed writing");
         }
+
+
+        #endregion
+
+        #region 22.9.3创建匿名管道
+
+        private string _pipeHandle;
+        private ManualResetEventSlim _pipeHandleSet;
+
+        private void Reader2()
+        {
+            try
+            {
+                var pipeReader=new AnonymousPipeServerStream(PipeDirection.In,HandleInheritability.None);
+                using (var reader=new StreamReader(pipeReader))
+                {
+                    _pipeHandle = pipeReader.GetClientHandleAsString();
+                    Console.WriteLine($"pipe handle:{_pipeHandle}");
+                    _pipeHandleSet.Set();
+                    bool end = false;
+                    while (!end)
+                    {
+                        string line = reader.ReadLine();
+                        Console.WriteLine(line);
+                        if (line=="end")
+                        {
+                            end = true;
+                        }
+                    }
+                    Console.WriteLine("finished reading");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+               
+            }
+        }
+
+
+        private void Writer2()
+        {
+            Console.WriteLine("anonymous pipe writer");
+            _pipeHandleSet.Wait();
+            var pipeWriter=new AnonymousPipeClientStream(PipeDirection.Out,_pipeHandle);
+            using (var writer=new StreamWriter(pipeWriter))
+            {
+                writer.AutoFlush = true;
+                Console.WriteLine("Starting writer");
+                for (int i = 0; i < 5; i++)
+                {
+                    writer.WriteLine($"Message{i}");
+                    Task.Delay(500).Wait();
+                }
+                Console.WriteLine("end");
+            }
+        }
+        #endregion
 
         #endregion
 
