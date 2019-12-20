@@ -37,5 +37,29 @@ namespace ProfessionalCSharp23
         }
 
         #endregion
+
+        #region 23.2.2 抛出异常
+
+        private async Task GetDataWithExceptionsAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await HttpClient.GetAsync(IncorrectUrl);
+                response.EnsureSuccessStatusCode();
+                Console.WriteLine($"Response Status Code{(int)response.StatusCode}{response.ReasonPhrase}");
+                string responseBodyAsText = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"{responseBodyAsText.Length}");
+                Console.WriteLine();
+                Console.WriteLine(responseBodyAsText);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+        
+
+        #endregion
     }
 }
