@@ -58,6 +58,12 @@ namespace ProfessionalCSharp23
                 throw;
             }
         }
+
+
+        #endregion
+
+        #region MyRegion
+
         
 
         #endregion
