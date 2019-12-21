@@ -62,8 +62,20 @@ namespace ProfessionalCSharp23
 
         #endregion
 
-        #region MyRegion
+        #region 传递标题
 
+        public Task GetDataWIthinHeadersAsync()
+        {
+            try
+            {
+                HttpClient.DefaultRequestHeaders.Add("Accept","application/json;odata=varbose");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
         
 
         #endregion
