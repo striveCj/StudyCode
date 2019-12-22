@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -62,21 +63,35 @@ namespace ProfessionalCSharp23
 
         #endregion
 
-        #region 传递标题
+        #region 23.2.1传递标题
 
-        public Task GetDataWIthinHeadersAsync()
-        {
-            try
-            {
-                HttpClient.DefaultRequestHeaders.Add("Accept","application/json;odata=varbose");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;；
-            }
-        }
-        
+        //public Task GetDataWIthinHeadersAsync()
+        //{
+        //    try
+        //    {
+        //        HttpClient.DefaultRequestHeaders.Add("Accept","application/json;odata=varbose");
+        //        ShowHeaders("Request Headers:", HttpClient.DefaultRequestHeaders);
+        //        HttpResponseMessage response = await HttpClient.GetAsync(NorthwindUrl);
+        //        HttpClient.EnsureSuccessStatusCode();
+        //        ShowHeaders("Request Headers:", HttpClient.DefaultRequestHeaders);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+   
+        //    }
+        //}
+
+        //public void ShowHeaders(string title, HttpHeaders headers)
+        //{
+        //    Console.WriteLine(title);
+        //    foreach (var header in headers)
+        //    {
+        //        string value = string.Join(" ", header.Value);
+        //        Console.WriteLine($"Header:{header.Key} Value:{value}");
+        //    }
+        //    Console.WriteLine();
+        //}
 
         #endregion
     }
