@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProfessionalCSharp23
@@ -78,7 +79,7 @@ namespace ProfessionalCSharp23
         //    catch (Exception e)
         //    {
         //        Console.WriteLine(e);
-   
+
         //    }
         //}
 
@@ -92,6 +93,23 @@ namespace ProfessionalCSharp23
         //    }
         //    Console.WriteLine();
         //}
+
+        #endregion
+
+        #region 用HttpMessageHandler自定义请求
+
+        public class SampleMessageHandler : HttpClientHandler
+        {
+            private string _message;
+            public SampleMessageHandler(string message) => _message = message;
+
+            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
+                CancellationToken cancellationToken)
+            {
+                Console.WriteLine(_message);
+            }
+        }
+        
 
         #endregion
     }
