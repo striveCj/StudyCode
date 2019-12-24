@@ -96,7 +96,7 @@ namespace ProfessionalCSharp23
 
         #endregion
 
-        #region 用HttpMessageHandler自定义请求
+        #region 23.2.5用HttpMessageHandler自定义请求
 
         public class SampleMessageHandler : HttpClientHandler
         {
