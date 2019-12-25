@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -107,6 +108,12 @@ namespace ProfessionalCSharp23
                 CancellationToken cancellationToken)
             {
                 Console.WriteLine(_message);
+                if (_message=="error")
+                {
+                    var response=new HttpResponseMessage(HttpStatusCode.BadRequest);
+                    return Task.FromResult<HttpResponseMessage>(response);
+                }
+                return base.SendAsync(request, cancellationToken);
             }
         }
         
