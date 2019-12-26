@@ -116,6 +116,16 @@ namespace ProfessionalCSharp23
                 return base.SendAsync(request, cancellationToken);
             }
         }
+
+
+        #endregion
+
+        #region 23.2.7 使用HttpClient和WindowsRuntime
+
+        public string Url
+        {
+            //get=>(string)
+        }
         
 
         #endregion
