@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web.Routing;
 
 namespace ProfessionalCSharp23
 {
@@ -120,14 +121,35 @@ namespace ProfessionalCSharp23
 
         #endregion
 
-        #region 23.2.7 使用HttpClient和WindowsRuntime
+        #region 23.3使用WebListener类
 
-        public string Url
+        public static async Task StartServerAsync(params string[] prefixes)
         {
-            //get=>(string)
+            try
+            {
+                Console.WriteLine($"server starting at");
+                var listener = new WebListener();
+                foreach (var prefix in prefixes)
+                {
+                    listener.UrlPrefixes.Add(prefix);
+                    Console.WriteLine($"\t{prefix}");
+                }
+                listener.Start();
+                do
+                {
+                    using (RequestContext context=await listener.GetContextAsync())
+                    {
+                        
+                    }
+                } while (true);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
-        
-
+  
         #endregion
     }
 }
