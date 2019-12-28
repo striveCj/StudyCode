@@ -139,7 +139,7 @@ namespace ProfessionalCSharp23
                 {
                     using (RequestContext context=await listener.GetContextAsync())
                     {
-                        .
+                        context.Response.Headers.Add("content-type", new string[] {"text/html"});
                     }
                 } while (true);
             }
