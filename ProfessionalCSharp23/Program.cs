@@ -123,33 +123,59 @@ namespace ProfessionalCSharp23
 
         #region 23.3使用WebListener类
 
-        public static async Task StartServerAsync(params string[] prefixes)
+        //public static async Task StartServerAsync(params string[] prefixes)
+        //{
+        //    try
+        //    {
+        //        Console.WriteLine($"server starting at");
+        //        var listener = new WebListener();
+        //        foreach (var prefix in prefixes)
+        //        {
+        //            listener.UrlPrefixes.Add(prefix);
+        //            Console.WriteLine($"\t{prefix}");
+        //        }
+        //        listener.Start();
+        //        do
+        //        {
+        //            using (RequestContext context=await listener.GetContextAsync())
+        //            {
+        //                context.Response.Headers.Add("content-type", new string[] {"text/html"});
+        //                new string[] {"text/html"};
+        //                context.Response.StatusCode = (int) HttpStatusCode.OK;
+        //                byte[] buffer = GetHtmlContent(context.Request);
+        //                await context.Response.Body.Writeasync(buffer, 0, buffer.Length);
+        //            }
+        //        } while (true);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //        throw;
+        //    }
+        //}
+
+        #endregion
+
+        #region 23.4.1 URI
+
+        public static void UriSample(string url)
         {
-            try
+            var page=new Uri(url);
+            Console.WriteLine(page.Scheme);
+            Console.WriteLine(page.Host);
+            Console.WriteLine(page.HostNameType);
+            Console.WriteLine(page.IdnHost);
+            Console.WriteLine(page.Port);
+            Console.WriteLine(page.AbsolutePath);
+            Console.WriteLine(page.Query);
+            foreach (var segments in page.Segments)
             {
-                Console.WriteLine($"server starting at");
-                var listener = new WebListener();
-                foreach (var prefix in prefixes)
-                {
-                    listener.UrlPrefixes.Add(prefix);
-                    Console.WriteLine($"\t{prefix}");
-                }
-                listener.Start();
-                do
-                {
-                    using (RequestContext context=await listener.GetContextAsync())
-                    {
-                        context.Response.Headers.Add("content-type", new string[] {"text/html"});
-                    }
-                } while (true);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
+                Console.WriteLine(segments);
             }
         }
-  
+        
+        
+
         #endregion
     }
 }
