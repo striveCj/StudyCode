@@ -173,8 +173,13 @@ namespace ProfessionalCSharp23
                 Console.WriteLine(segments);
             }
         }
+
+        #region IPAddress
+
         
-        
+
+        #endregion
+
 
         #endregion
     }
