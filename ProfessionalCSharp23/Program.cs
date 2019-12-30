@@ -176,6 +176,10 @@ namespace ProfessionalCSharp23
 
         #region IPAddress
 
+        public static void IPAddressSample()
+        {
+            
+        }
         
 
         #endregion
