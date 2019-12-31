@@ -176,9 +176,20 @@ namespace ProfessionalCSharp23
 
         #region IPAddress
 
-        public static void IPAddressSample()
+        public static void IPAddressSample(string ipAddressString)
         {
-            
+            IPAddress address;
+            if (!IPAddress.TryParse(ipAddressString,out address))
+            {
+                Console.WriteLine($"cannot parse{ipAddressString}");
+                return;
+            }
+            byte[] bytes = address.GetAddressBytes();
+            for (int i = 0; i < bytes.Length; i++)
+            {
+                Console.WriteLine($"byte{i}:{bytes[i]:X}");
+            }
+            Console.WriteLine($"family:{address.AddressFamily}{address.MapToIPv6()}{address.MapToIPv4()}");
         }
         
 
