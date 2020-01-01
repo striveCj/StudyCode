@@ -191,10 +191,33 @@ namespace ProfessionalCSharp23
             }
             Console.WriteLine($"family:{address.AddressFamily}{address.MapToIPv6()}{address.MapToIPv4()}");
         }
-        
+
 
         #endregion
 
+        #region Dns
+
+        public static async Task OnLookupAsync(string hostname)
+        {
+            try
+            {
+                IPHostEntry ipHost = await Dns.GetHostEntryAsync(hostname);
+                Console.WriteLine(ipHost.HostName);
+                foreach (IPAddress address in ipHost.AddressList)
+                {
+                    Console.WriteLine(address.AddressFamily);
+                    Console.WriteLine(address);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        
+
+        #endregion
 
         #endregion
     }
