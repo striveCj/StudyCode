@@ -23,6 +23,13 @@ namespace ProfessionalCSharp24
                 Console.WriteLine("not a windows identity");
                 return null;
             }
+            Console.WriteLine(identity);
+            Console.WriteLine(identity.Name);
+            Console.WriteLine(identity.IsAuthenticated);
+            Console.WriteLine(identity.AuthenticationType);
+            Console.WriteLine(identity.IsAnonymous);
+            Console.WriteLine(identity.AccessToken.DangerousGetHandle());
+            return identity;
         }
     }
 }
