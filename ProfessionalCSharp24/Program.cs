@@ -12,7 +12,9 @@ namespace ProfessionalCSharp24
     {
         static void Main(string[] args)
         {
-
+            WindowsIdentity identity = ShowIdentityInformation();
+            WindowsIdentity principal = ShowPrincipal(identity);
+            ShowClaims(principal.Claims);
         }
 
         public static WindowsIdentity ShowIdentityInformation()
