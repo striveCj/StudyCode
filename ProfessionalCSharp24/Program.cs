@@ -33,5 +33,19 @@ namespace ProfessionalCSharp24
             Console.WriteLine(identity.AccessToken.DangerousGetHandle());
             return identity;
         }
+
+        public static WindowsPrincipal ShowPrincipal(WindowsIdentity identity)
+        {
+            Console.WriteLine("Show principal information");
+            WindowsPrincipal principal=new WindowsPrincipal(identity);
+            if (principal==null)
+            {
+                Console.WriteLine("not a Windows Principal");
+                return null;
+            }
+            Console.WriteLine($"Users?{principal.IsInRole(WindowsBuiltInRole.User)}");
+            Console.WriteLine($"Administrator?{principal.IsInRole(WindowsBuiltInRole.Administrator)}");
+            return principal;
+        }
     }
 }
