@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.DesignerServices;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,18 +48,22 @@ namespace ProfessionalCSharp24
             Console.WriteLine($"Administrator?{principal.IsInRole(WindowsBuiltInRole.Administrator)}");
             return principal;
         }
-        public static WindowsPrincipal ShowClaims(WindowsIdentity identity)
+        public static void ShowClaims(IEnumerable<Claim> claims)
         {
-            Console.WriteLine("Show principal information");
-            WindowsPrincipal principal = new WindowsPrincipal(identity);
-            if (principal == null)
+            Console.WriteLine("Claims");
+            foreach (var claim in claims)
             {
-                Console.WriteLine("not a Windows Principal");
-                return null;
+                Console.WriteLine($"Subject:{claim.Subject}");
+                Console.WriteLine($"Subject:{claim.Issuer}");
+                Console.WriteLine($"Subject:{claim.Type}");
+                Console.WriteLine($"Subject:{claim.ValueType}");
+                Console.WriteLine($"Subject:{claim.Value}");
+                foreach (var prop in claim.Properties)            {
+                    Console.WriteLine(prop.Key);
+                    Console.WriteLine(prop.Value);
+                }
+                Console.WriteLine();
             }
-            Console.WriteLine($"Users?{principal.IsInRole(WindowsBuiltInRole.User)}");
-            Console.WriteLine($"Administrator?{principal.IsInRole(WindowsBuiltInRole.Administrator)}");
-            return principal;
         }
     }
 }
