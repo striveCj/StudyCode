@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.DesignerServices;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -64,6 +65,23 @@ namespace ProfessionalCSharp24
                 }
                 Console.WriteLine();
             }
+        }
+
+
+
+
+        private CngKey _aliceKeySignature;
+        private byte[] _alicePubKeyBlob;
+
+        public void Run()
+        {
+            
+        }
+
+        private void InitAliceKeys()
+        {
+            _aliceKeySignature=CngKey.Create(CngAlgorithm.Sha512);
+            _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);
         }
     }
 }
