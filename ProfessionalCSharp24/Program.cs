@@ -75,7 +75,7 @@ namespace ProfessionalCSharp24
 
         public void Run()
         {
-            
+            InitAliceKeys();
         }
 
         private void InitAliceKeys()
