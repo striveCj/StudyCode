@@ -76,6 +76,14 @@ namespace ProfessionalCSharp24
         public void Run()
         {
             InitAliceKeys();
+            byte[] aliceData = Encoding.UTF8.GetBytes("Alice");
+            byte[] aliceSignature = CreateSignature(aliceData, _aliceKeySignature);
+            Console.WriteLine(alicesSignature);
+            if (VerifySignature(aliceDatamaliceSignature,alicePubKeyBlob))
+            {
+                Console.WriteLine("successfully");
+                
+            }
         }
 
         private void InitAliceKeys()
