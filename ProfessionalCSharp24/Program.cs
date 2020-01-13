@@ -91,5 +91,19 @@ namespace ProfessionalCSharp24
             _aliceKeySignature=CngKey.Create(CngAlgorithm.Sha512);
             _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);
         }
+
+        public bool VerifySignature(byte[] data, byte[] signature, byte[] pubKeys)
+        {
+            bool retValue = false;
+            using (CngKey key=CngKey.Import(pubKeys,CngKeyBlobFormat.GenericPrivateBlob))
+            {
+                using (var signungAlg=new ECDsaCng(key))
+                {
+                    retValue = signungAlg.VerifyData(data, signature, HashAlgorithmName.SHA512);
+                    signungAlg.Clear();
+                }
+                return retValue;
+            }
+        }
     }
 }
