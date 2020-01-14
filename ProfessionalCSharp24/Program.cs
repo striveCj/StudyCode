@@ -78,8 +78,8 @@ namespace ProfessionalCSharp24
             InitAliceKeys();
             byte[] aliceData = Encoding.UTF8.GetBytes("Alice");
             byte[] aliceSignature = CreateSignature(aliceData, _aliceKeySignature);
-            Console.WriteLine(alicesSignature);
-            if (VerifySignature(aliceDatamaliceSignature,alicePubKeyBlob))
+            Console.WriteLine(aliceSignature);
+            if (VerifySignature(aliceData,aliceSignature, _alicePubKeyBlob))
             {
                 Console.WriteLine("successfully");
                 
@@ -92,6 +92,17 @@ namespace ProfessionalCSharp24
             _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);
         }
 
+
+        public byte[] CreateSignature(byte[] data,CngKey key)
+        {
+            byte[] signature;
+            using (var signingAlg=new ECDsaCng(key))
+            {
+                signature = signingAlg.SignData(data, HashAlgorithmName.SHA512);
+                signingAlg.Clear();
+            }
+            return signature;
+        }
         public bool VerifySignature(byte[] data, byte[] signature, byte[] pubKeys)
         {
             bool retValue = false;
