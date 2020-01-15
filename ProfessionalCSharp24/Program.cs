@@ -116,5 +116,20 @@ namespace ProfessionalCSharp24
                 return retValue;
             }
         }
+
+        public async Task<byte[]> AliceSendsDataAsync(string message)
+        {
+            Console.WriteLine($"Alice sends message:{message}");
+            byte[] rawData = Encoding.UTF8.GetBytes(message);
+            byte[] encryptedData = null;
+            using (var aliceAlgorithm=new ECDiffieHellmanCng(aliceKey))
+            {
+                using (CngKey bobPubKey=Cngkey.Import(bobPubKeyBlob,CngKeyBlobFormat.EccPublicBlob))
+                {
+                    byte[] symmKey = aliceAlgorithm.DeriveKeyMaterial(bobPubKey);
+                    Console.WriteLine($"Alice creates this symmetric key with{Convert.ToBase64String(symmKey)}");
+                }
+            }
+        }
     }
 }
