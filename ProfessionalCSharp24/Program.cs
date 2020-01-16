@@ -126,7 +126,7 @@ namespace ProfessionalCSharp24
             {
                 using (CngKey bobPubKey=Cngkey.Import(bobPubKeyBlob,CngKeyBlobFormat.EccPublicBlob))
                 {
-                    byte[] symmKey = aliceAlgorithm.DeriveKeyMaterial(bobPubKey);
+                    byte[] symmKey = aliceAlgorithm.DeriveKeyMaterial(bobPubKey);；
                     Console.WriteLine($"Alice creates this symmetric key with{Convert.ToBase64String(symmKey)}");
                 }
             }
