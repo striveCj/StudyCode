@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.DesignerServices;
 using System.Security.Claims;
@@ -124,12 +125,32 @@ namespace ProfessionalCSharp24
             byte[] encryptedData = null;
             using (var aliceAlgorithm=new ECDiffieHellmanCng(aliceKey))
             {
-                using (CngKey bobPubKey=Cngkey.Import(bobPubKeyBlob,CngKeyBlobFormat.EccPublicBlob))
+                using (CngKey bobPubKey=CngKey.Import(bobPubKeyBlob,CngKeyBlobFormat.EccPublicBlob))
                 {
-                    byte[] symmKey = aliceAlgorithm.DeriveKeyMaterial(bobPubKey);；
+                    byte[] symmKey = aliceAlgorithm.DeriveKeyMaterial(bobPubKey);
                     Console.WriteLine($"Alice creates this symmetric key with{Convert.ToBase64String(symmKey)}");
+                    using (var aes=new AesCryptoServiceProvider())
+                    {
+                        aes.Key = symmKey;
+                        aes.GenerateIV();
+                        using (ICryptoTransform encryptor=aes.CreateEncryptor)
+                        {
+                            using (var ms=new MemoryStream())
+                            {
+                                using (var cs=new CryptoStream(ms,encryptor,CryptoStreamMode.Write))
+                                {
+                                    await ms.WriteAsync(aes.IV, 0, aes.IV.Length);
+                                        cs.Write(rawData,0,rawData.Length);
+                                }
+                                encryptedData = ms.ToArray();
+                            }
+                            aes.Clear();
+                        }
+                    }
                 }
             }
+            Console.WriteLine(Convert.ToBase64String(encryptedData));
+            return encryptedData;
         }
     }
 }
