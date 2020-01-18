@@ -159,6 +159,18 @@ namespace ProfessionalCSharp24
             byte[] rawData = null;
             var aes=new AesCryptoServiceProvider();
             int nBytes=aes.BlockSize;
+            byte[] iv=new byte[nBytes];
+            for (int i = 0; i < iv.Length; i++)
+            {
+                iv[i] = encryptedData[i];
+            }
+            using (var bobAlgorithm=new ECDiffieHellmanCng(bobKey))
+            {
+                using (CngKey alicePubKey=CngKey.Import(_alicePubKeyBlob,CngKeyBlobFormat.EccFullPublicBlob))
+                {
+                    
+                }
+            }
 
         }
     }
