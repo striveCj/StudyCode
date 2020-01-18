@@ -152,5 +152,14 @@ namespace ProfessionalCSharp24
             Console.WriteLine(Convert.ToBase64String(encryptedData));
             return encryptedData;
         }
+
+        public async Task BobReceivesDataAsync(byte[] encryptedData)
+        {
+            Console.WriteLine("Bob receives encrypted data");
+            byte[] rawData = null;
+            var aes=new AesCryptoServiceProvider();
+            int nBytes=aes.BlockSize;
+
+        }
     }
 }
