@@ -168,7 +168,23 @@ namespace ProfessionalCSharp24
             {
                 using (CngKey alicePubKey=CngKey.Import(_alicePubKeyBlob,CngKeyBlobFormat.EccFullPublicBlob))
                 {
-                    
+                    byte[] symmKey = bobAlgorithm.DeriveKeyMaterial(alicePubKey);
+                    Console.WriteLine(Convert.ToBase64String(symmKey);
+                    aes.Key = symmKey;
+                    aes.IV = iv;
+                    using (ICryptoTransform decryptor=aes.CreateDecryptor())
+                    {
+                        using (MemoryStream ms=new MemoryStream())
+                        {
+                            using (var cs=new CryptoStream(ms,decryptor,CryptoStreamMode.Write))
+                            {
+                                await cs.WriteAsync(encryptedData, nBytes, encryptedData.Length - nBytes);
+                            }
+                            rawData = ms.ToArray();
+                            Console.WriteLine(Encoding.UTF8.GetString(rawData));
+                        }
+                        aes.Clear();
+                    }
                 }
             }
 
