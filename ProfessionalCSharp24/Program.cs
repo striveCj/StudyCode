@@ -118,6 +118,13 @@ namespace ProfessionalCSharp24
             }
         }
 
+
+        public void CreateKeys()
+        {
+            _aliceKeySignature = CngKey.Create(CngAlgorithm.ECDiffieHellmanP521);
+            bobkey = CngKey.Create(CngAlgorithm.ECDiffieHellmanP521);
+
+        }
         public async Task<byte[]> AliceSendsDataAsync(string message)
         {
             Console.WriteLine($"Alice sends message:{message}");
