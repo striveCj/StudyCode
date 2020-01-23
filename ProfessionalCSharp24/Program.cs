@@ -73,6 +73,8 @@ namespace ProfessionalCSharp24
 
         private CngKey _aliceKeySignature;
         private byte[] _alicePubKeyBlob;
+        private CngKey _aliceKey;
+     
 
         public void Run()
         {
@@ -93,6 +95,19 @@ namespace ProfessionalCSharp24
             _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);
         }
 
+        private void InitAliceKeysRsa()
+        {
+            _aliceKey = CngKey.Create(CngAlgorithm.Rsa);
+            _alicePubKeyBlob = _aliceKey.Export(CngKeyBlobFormat.GenericPrivateBlob);
+        }
+
+        private byte[] HashDocument(byte[] data)
+        {
+            using (var hashAlg=SHA384.Create())
+            {
+                return hashAlg.ComputeHash(data);
+            }
+        }
 
         public byte[] CreateSignature(byte[] data,CngKey key)
         {
@@ -200,5 +215,8 @@ namespace ProfessionalCSharp24
             }
 
         }
+
+
+
     }
 }
