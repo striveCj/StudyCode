@@ -92,7 +92,7 @@ namespace ProfessionalCSharp24
         private void InitAliceKeys()
         {
             _aliceKeySignature=CngKey.Create(CngAlgorithm.Sha512);
-            _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);
+            _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);；
         }
 
         private void InitAliceKeysRsa()
