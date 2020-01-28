@@ -98,7 +98,7 @@ namespace ProfessionalCSharp24
         private void InitAliceKeysRsa()
         {
             _aliceKey = CngKey.Create(CngAlgorithm.Rsa);
-            _alicePubKeyBlob = _aliceKey.Export(CngKeyBlobFormat.GenericPrivateBlob);；
+            _alicePubKeyBlob = _aliceKey.Export(CngKeyBlobFormat.GenericPrivateBlob);
         }
 
         private byte[] HashDocument(byte[] data)
