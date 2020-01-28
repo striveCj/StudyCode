@@ -100,6 +100,22 @@ namespace ProfessionalCSharp24
             _aliceKey = CngKey.Create(CngAlgorithm.Rsa);
             _alicePubKeyBlob = _aliceKey.Export(CngKeyBlobFormat.GenericPrivateBlob);
         }
+        private byte[] HashDocumentRsa(byte[] data)
+        {
+            using (var hashAlg=SHA384.Create())
+            {
+                return hashAlg.ComputeHash(data);
+            }
+        }
+
+        private byte[] AddSignatureToHashRsa(byte[] hash,CngKey key)
+        {
+            using (var signingAlg = new RSACng(key))
+            {
+                byte[] signed = signingAlg.SignHash(hash, HashAlgorithmName.SHA384, RSASignaturePadding.Pss);
+                return signed;
+            }
+        }
 
         private byte[] HashDocument(byte[] data)
         {
