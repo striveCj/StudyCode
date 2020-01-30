@@ -121,7 +121,7 @@ namespace ProfessionalCSharp24
         {
             using (var hashAlg=SHA384.Create())
             {
-                return hashAlg.ComputeHash(data);
+                return hashAlg.ComputeHash(data);；
             }
         }
 
