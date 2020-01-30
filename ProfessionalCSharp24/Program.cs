@@ -117,11 +117,32 @@ namespace ProfessionalCSharp24
             }
         }
 
+        public void BobTasks(byte[] data,byte[] hash,byte[] signature)
+        {
+            CngKey aliceKey = CngKey.Import(_alicePubKeyBlob, CngKeyBlobFormat.GenericPublicBlob);
+            if (IsSignatureValid(hash,signature,aliceKey))
+            {
+                Console.WriteLine("signature not valid");
+                return;
+            }
+            if (true)
+            {
+
+            }
+        }
+        private bool IsSignatureValid(byte[] hash,byte[] signature,CngKey key)
+        {
+            using (var signingAlg=new RSACng(key))
+            {
+                return signingAlg.VerifyHash(hash, signature, HashAlgorithmName.SHA384, RSASignaturePadding.Pss);
+            }
+        }
+
         private byte[] HashDocument(byte[] data)
         {
             using (var hashAlg=SHA384.Create())
             {
-                return hashAlg.ComputeHash(data);；
+                return hashAlg.ComputeHash(data);
             }
         }
 
