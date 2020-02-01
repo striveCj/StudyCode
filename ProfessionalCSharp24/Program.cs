@@ -125,10 +125,15 @@ namespace ProfessionalCSharp24
                 Console.WriteLine("signature not valid");
                 return;
             }
-            if (true)
-            {
-
+            if (!IsDocumentUnchanged(hash,data))
+            { 
+                Console.WriteLine("document was changed");
+                return;
             }
+
+            Console.WriteLine("signature valid , document unchanged");
+            Console.WriteLine(Encoding.UTF8.GetString(data));
+             
         }
         private bool IsSignatureValid(byte[] hash,byte[] signature,CngKey key)
         {
@@ -136,6 +141,11 @@ namespace ProfessionalCSharp24
             {
                 return signingAlg.VerifyHash(hash, signature, HashAlgorithmName.SHA384, RSASignaturePadding.Pss);
             }
+        }
+        private bool IsDocumentUnchanged(byte[] hash,byte[] data)
+        {
+            byte[] newHash = HashDocument(data);
+            return newHash.SequenceEqual(hash);
         }
 
         private byte[] HashDocument(byte[] data)
