@@ -22,8 +22,8 @@ namespace ProfessionalCSharp24
 
         public static WindowsIdentity ShowIdentityInformation()
         {
-            WindowsIdentity identity=WindowsIdentity.GetCurrent();
-            if (identity==null)
+            WindowsIdentity identity = WindowsIdentity.GetCurrent();
+            if (identity == null)
             {
                 Console.WriteLine("not a windows identity");
                 return null;
@@ -40,8 +40,8 @@ namespace ProfessionalCSharp24
         public static WindowsPrincipal ShowPrincipal(WindowsIdentity identity)
         {
             Console.WriteLine("Show principal information");
-            WindowsPrincipal principal=new WindowsPrincipal(identity);
-            if (principal==null)
+            WindowsPrincipal principal = new WindowsPrincipal(identity);
+            if (principal == null)
             {
                 Console.WriteLine("not a Windows Principal");
                 return null;
@@ -60,7 +60,7 @@ namespace ProfessionalCSharp24
                 Console.WriteLine($"Subject:{claim.Type}");
                 Console.WriteLine($"Subject:{claim.ValueType}");
                 Console.WriteLine($"Subject:{claim.Value}");
-                foreach (var prop in claim.Properties)            {
+                foreach (var prop in claim.Properties) {
                     Console.WriteLine(prop.Key);
                     Console.WriteLine(prop.Value);
                 }
@@ -74,7 +74,7 @@ namespace ProfessionalCSharp24
         private CngKey _aliceKeySignature;
         private byte[] _alicePubKeyBlob;
         private CngKey _aliceKey;
-     
+
 
         public void Run()
         {
@@ -82,16 +82,16 @@ namespace ProfessionalCSharp24
             byte[] aliceData = Encoding.UTF8.GetBytes("Alice");
             byte[] aliceSignature = CreateSignature(aliceData, _aliceKeySignature);
             Console.WriteLine(aliceSignature);
-            if (VerifySignature(aliceData,aliceSignature, _alicePubKeyBlob))
+            if (VerifySignature(aliceData, aliceSignature, _alicePubKeyBlob))
             {
                 Console.WriteLine("successfully");
-                
+
             }
         }
 
         private void InitAliceKeys()
         {
-            _aliceKeySignature=CngKey.Create(CngAlgorithm.Sha512);
+            _aliceKeySignature = CngKey.Create(CngAlgorithm.Sha512);
             _alicePubKeyBlob = _aliceKeySignature.Export(CngKeyBlobFormat.GenericPublicBlob);
         }
 
@@ -102,13 +102,13 @@ namespace ProfessionalCSharp24
         }
         private byte[] HashDocumentRsa(byte[] data)
         {
-            using (var hashAlg=SHA384.Create())
+            using (var hashAlg = SHA384.Create())
             {
                 return hashAlg.ComputeHash(data);
             }
         }
 
-        private byte[] AddSignatureToHashRsa(byte[] hash,CngKey key)
+        private byte[] AddSignatureToHashRsa(byte[] hash, CngKey key)
         {
             using (var signingAlg = new RSACng(key))
             {
@@ -117,32 +117,32 @@ namespace ProfessionalCSharp24
             }
         }
 
-        public void BobTasks(byte[] data,byte[] hash,byte[] signature)
+        public void BobTasks(byte[] data, byte[] hash, byte[] signature)
         {
             CngKey aliceKey = CngKey.Import(_alicePubKeyBlob, CngKeyBlobFormat.GenericPublicBlob);
-            if (IsSignatureValid(hash,signature,aliceKey))
+            if (IsSignatureValid(hash, signature, aliceKey))
             {
                 Console.WriteLine("signature not valid");
                 return;
             }
-            if (!IsDocumentUnchanged(hash,data))
-            { 
+            if (!IsDocumentUnchanged(hash, data))
+            {
                 Console.WriteLine("document was changed");
                 return;
             }
 
             Console.WriteLine("signature valid , document unchanged");
             Console.WriteLine(Encoding.UTF8.GetString(data));
-             
+
         }
-        private bool IsSignatureValid(byte[] hash,byte[] signature,CngKey key)
+        private bool IsSignatureValid(byte[] hash, byte[] signature, CngKey key)
         {
-            using (var signingAlg=new RSACng(key))
+            using (var signingAlg = new RSACng(key))
             {
                 return signingAlg.VerifyHash(hash, signature, HashAlgorithmName.SHA384, RSASignaturePadding.Pss);
             }
         }
-        private bool IsDocumentUnchanged(byte[] hash,byte[] data)
+        private bool IsDocumentUnchanged(byte[] hash, byte[] data)
         {
             byte[] newHash = HashDocument(data);
             return newHash.SequenceEqual(hash);
@@ -150,16 +150,16 @@ namespace ProfessionalCSharp24
 
         private byte[] HashDocument(byte[] data)
         {
-            using (var hashAlg=SHA384.Create())
+            using (var hashAlg = SHA384.Create())
             {
                 return hashAlg.ComputeHash(data);
             }
         }
 
-        public byte[] CreateSignature(byte[] data,CngKey key)
+        public byte[] CreateSignature(byte[] data, CngKey key)
         {
             byte[] signature;
-            using (var signingAlg=new ECDsaCng(key))
+            using (var signingAlg = new ECDsaCng(key))
             {
                 signature = signingAlg.SignData(data, HashAlgorithmName.SHA512);
                 signingAlg.Clear();
@@ -169,9 +169,9 @@ namespace ProfessionalCSharp24
         public bool VerifySignature(byte[] data, byte[] signature, byte[] pubKeys)
         {
             bool retValue = false;
-            using (CngKey key=CngKey.Import(pubKeys,CngKeyBlobFormat.GenericPrivateBlob))
+            using (CngKey key = CngKey.Import(pubKeys, CngKeyBlobFormat.GenericPrivateBlob))
             {
-                using (var signungAlg=new ECDsaCng(key))
+                using (var signungAlg = new ECDsaCng(key))
                 {
                     retValue = signungAlg.VerifyData(data, signature, HashAlgorithmName.SHA512);
                     signungAlg.Clear();
@@ -188,7 +188,7 @@ namespace ProfessionalCSharp24
             bobkey = CngKey.Create(CngAlgorithm.ECDiffieHellmanP521);
             alicePubKeyBlob = aliceKey.Export(CngKeyBlobFormat.EccPublicBlob);
             bobPubKeyBlob = bobKey.Export(CngKeyBlobFormat.EccPublicBlob);
-            
+
 
         }
         public async Task<byte[]> AliceSendsDataAsync(string message)
@@ -196,24 +196,24 @@ namespace ProfessionalCSharp24
             Console.WriteLine($"Alice sends message:{message}");
             byte[] rawData = Encoding.UTF8.GetBytes(message);
             byte[] encryptedData = null;
-            using (var aliceAlgorithm=new ECDiffieHellmanCng(aliceKey))
+            using (var aliceAlgorithm = new ECDiffieHellmanCng(aliceKey))
             {
-                using (CngKey bobPubKey=CngKey.Import(bobPubKeyBlob,CngKeyBlobFormat.EccPublicBlob))
+                using (CngKey bobPubKey = CngKey.Import(bobPubKeyBlob, CngKeyBlobFormat.EccPublicBlob))
                 {
                     byte[] symmKey = aliceAlgorithm.DeriveKeyMaterial(bobPubKey);
                     Console.WriteLine($"Alice creates this symmetric key with{Convert.ToBase64String(symmKey)}");
-                    using (var aes=new AesCryptoServiceProvider())
+                    using (var aes = new AesCryptoServiceProvider())
                     {
                         aes.Key = symmKey;
                         aes.GenerateIV();
-                        using (ICryptoTransform encryptor=aes.CreateEncryptor)
+                        using (ICryptoTransform encryptor = aes.CreateEncryptor)
                         {
-                            using (var ms=new MemoryStream())
+                            using (var ms = new MemoryStream())
                             {
-                                using (var cs=new CryptoStream(ms,encryptor,CryptoStreamMode.Write))
+                                using (var cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
                                 {
                                     await ms.WriteAsync(aes.IV, 0, aes.IV.Length);
-                                        cs.Write(rawData,0,rawData.Length);
+                                    cs.Write(rawData, 0, rawData.Length);
                                 }
                                 encryptedData = ms.ToArray();
                             }
@@ -230,26 +230,26 @@ namespace ProfessionalCSharp24
         {
             Console.WriteLine("Bob receives encrypted data");
             byte[] rawData = null;
-            var aes=new AesCryptoServiceProvider();
-            int nBytes=aes.BlockSize;
-            byte[] iv=new byte[nBytes];
+            var aes = new AesCryptoServiceProvider();
+            int nBytes = aes.BlockSize;
+            byte[] iv = new byte[nBytes];
             for (int i = 0; i < iv.Length; i++)
             {
                 iv[i] = encryptedData[i];
             }
-            using (var bobAlgorithm=new ECDiffieHellmanCng(bobKey))
+            using (var bobAlgorithm = new ECDiffieHellmanCng(bobKey))
             {
-                using (CngKey alicePubKey=CngKey.Import(_alicePubKeyBlob,CngKeyBlobFormat.EccFullPublicBlob))
+                using (CngKey alicePubKey = CngKey.Import(_alicePubKeyBlob, CngKeyBlobFormat.EccFullPublicBlob))
                 {
                     byte[] symmKey = bobAlgorithm.DeriveKeyMaterial(alicePubKey);
                     Console.WriteLine(Convert.ToBase64String(symmKey);
                     aes.Key = symmKey;
                     aes.IV = iv;
-                    using (ICryptoTransform decryptor=aes.CreateDecryptor())
+                    using (ICryptoTransform decryptor = aes.CreateDecryptor())
                     {
-                        using (MemoryStream ms=new MemoryStream())
+                        using (MemoryStream ms = new MemoryStream())
                         {
-                            using (var cs=new CryptoStream(ms,decryptor,CryptoStreamMode.Write))
+                            using (var cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Write))
                             {
                                 await cs.WriteAsync(encryptedData, nBytes, encryptedData.Length - nBytes);
                             }
@@ -262,7 +262,15 @@ namespace ProfessionalCSharp24
             }
 
         }
+        private const string readOption = "-r";
+        private const string writeOption = "-w";
+        private static readonly string[] options = { readOption, writeOption };
+        private static void dp(string[] args){
+            if (args.Length!=2||args.Intersect(options).Count()!=1)
+            {
 
+            }
+        }
 
 
     }
