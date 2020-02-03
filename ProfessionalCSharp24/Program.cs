@@ -242,7 +242,7 @@ namespace ProfessionalCSharp24
                 using (CngKey alicePubKey = CngKey.Import(_alicePubKeyBlob, CngKeyBlobFormat.EccFullPublicBlob))
                 {
                     byte[] symmKey = bobAlgorithm.DeriveKeyMaterial(alicePubKey);
-                    Console.WriteLine(Convert.ToBase64String(symmKey);
+                    Console.WriteLine(Convert.ToBase64String(symmKey));
                     aes.Key = symmKey;
                     aes.IV = iv;
                     using (ICryptoTransform decryptor = aes.CreateDecryptor())
@@ -268,7 +268,22 @@ namespace ProfessionalCSharp24
         private static void dp(string[] args){
             if (args.Length!=2||args.Intersect(options).Count()!=1)
             {
-
+                ShowUsage();
+                return;
+            }
+            string fileName = args[i];
+            Mysafe safe = SetupDataprotection();
+            switch (args[0])
+            {
+                case writeOption:
+                    Write(safe, flieName);
+                    break;
+                case readOption:
+                    Read(safe, fileName);
+                    break;
+                default:
+                    ShowUsage();
+                    break;
             }
         }
 
