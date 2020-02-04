@@ -287,6 +287,12 @@ namespace ProfessionalCSharp24
             }
         }
 
+        public class MySafe
+        {
+            private IDataProtector _protector;
+            public MySafe(IDataProtectionProvider provider) => _protector = provider.CreateProtector("MySafe.MyProtetion.v2");
+        }
+
 
     }
 }
