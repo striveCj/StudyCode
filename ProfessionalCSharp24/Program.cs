@@ -291,7 +291,17 @@ namespace ProfessionalCSharp24
         {
             private IDataProtector _protector;
             public MySafe(IDataProtectionProvider provider) => _protector = provider.CreateProtector("MySafe.MyProtetion.v2");
-            public string Encrypt(string input) => _protector.Protect(input);   
+            public string Encrypt(string input) => _protector.Protect(input);
+            public string Decrypt(string encrypted) => _protector.Unprotect(encrypted);
+        }
+
+        public static MySafe SetupDataProtection()
+        {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddDataProtection().persistKeysToFileSystem(new DirectoryInfo("."))
+                .SetDefaultKeyLifetime(TimeSpan.FromDays(20)).ProtectKeysWithDpapi();
+            IServiceProvider services = serviceCollection.BuikdServiceProvider();
+            return ActivatorUtilities.CreateInstance<MySafe>(services);
         }
 
 
