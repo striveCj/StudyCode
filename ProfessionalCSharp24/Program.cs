@@ -291,6 +291,7 @@ namespace ProfessionalCSharp24
         {
             private IDataProtector _protector;
             public MySafe(IDataProtectionProvider provider) => _protector = provider.CreateProtector("MySafe.MyProtetion.v2");
+            public string Encrypt(string input) => _protector.Protect(input);   
         }
 
 
