@@ -304,6 +304,21 @@ namespace ProfessionalCSharp24
             return ActivatorUtilities.CreateInstance<MySafe>(services);
         }
 
+        public static void Write(MySafe safe,string fileName)
+        {
+            Console.WriteLine("enter content to write:");
+            string content = Console.ReadLine();
+            string encrypted = safe.Encrypt(content);
+            File.WriteAllText(fileName, encrypted);
+            Console.WriteLine(fileName);
+        }
 
+        public static void Read(MySafe safe,string fileName)
+        {
+            string encrypted = File.ReadAllText(fileName);
+            string decrypted = safe.Decrypt(encrypted);
+            Console.WriteLine(decrypted);
+;
+        }
     }
 }
