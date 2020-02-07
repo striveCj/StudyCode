@@ -320,5 +320,29 @@ namespace ProfessionalCSharp24
             Console.WriteLine(decrypted);
 ;
         }
+
+        public IActionResult SqlSample(string id)
+        {
+            string connectionString = GetConnectionString();
+            var sqlConnection = new SqlConnection.CreateCommand();
+            command.CommandText = "SELECT * FROM Customers WHERE City=" + id;
+            sqlConnection.Open();
+            using (SqlDataReader reader=command.ExecuteReader(System.Data.CommandBehavior.CloseConnection))
+            {
+                var sb = new StringBuilder();
+                while (reader.Read())
+                {
+                    for (int i = 0; i < Reader.FieldCount; i++)
+                    {
+                        sb.Append(reader[i]);
+                    }
+                    sb.AppendLine();
+                }
+                ViewBag.Data = sb.ToString();
+
+            }
+            return View();
+       
+                }
     }
 }
