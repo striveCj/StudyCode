@@ -341,7 +341,7 @@ namespace ProfessionalCSharp24
                 ViewBag.Data = sb.ToString();
 
             }
-            return View();
+            return View();；
        
                 }
     }
