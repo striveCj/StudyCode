@@ -16,7 +16,7 @@ namespace ProfessionalCSharp12
 
         public int CompareTo(Racer other)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException();；
         }
     }
 }
