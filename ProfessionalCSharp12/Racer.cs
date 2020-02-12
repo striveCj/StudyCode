@@ -29,9 +29,30 @@ namespace ProfessionalCSharp12
         public IEnumerable<string> Cars { get; }
 
         public IEnumerable<int> Years { get; }
-        public int CompareTo(Racer other)
+
+        public override string ToString()
         {
-            throw new NotImplementedException();
+            return 
+                $"{LastName}{FirstName}";
+        }
+        public int CompareTo(Racer other) => LastName.CompareTo(other?.LastName);
+
+        public string ToString(string format) => ToString(format, null);
+
+        public string ToString(string format, IFormatProvider formatProvider)
+        {
+            switch (format)
+            {
+                case null:
+                case "N":
+                    return ToString();
+                case "F":
+                    return FirstName;
+                    
+                default:
+                    throw new NotImplementedException();
+            }
+            
         }
     }
 }
