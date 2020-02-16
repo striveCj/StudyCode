@@ -6,6 +6,7 @@ namespace ProfessionalCSharp12
 {
     public class Formulal
     {
+        private static List<Team> s_teams;
         private static List<Racer> s_racers;
         public static IList<Racer> GetChampions() => s_racers?? InitializeRacers();
 
@@ -18,6 +19,18 @@ namespace ProfessionalCSharp12
               new Racer("Nino2","Farina2","Italy2",33,5,new int[]{1950},new string[] {"Alfa Rome2" }),
         };
         }
-
+        public static List<Team> GetContructorChampions()
+        {
+            if (s_teams==null)
+            {
+                s_teams = new List<Team>()
+                {
+                    new Team("Matra",1966)
+                };
+            }
+            return s_teams;
+        }
     }
+
+   
 }
