@@ -30,6 +30,18 @@ namespace ProfessionalCSharp12
             }
             return s_teams;
         }
+
+        static void LinqQuery()
+        {
+            var query = from r in Formulal.GetChampions()
+                        where r.Country == "Brazil"
+                        orderby r.Wins descending
+                        select r;
+            foreach (var r in query)
+            {
+                Console.WriteLine($"{r:A}");
+            }
+        }
     }
 
    
