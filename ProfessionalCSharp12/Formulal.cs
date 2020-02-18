@@ -42,7 +42,16 @@ namespace ProfessionalCSharp12
                 Console.WriteLine($"{r:A}");
             }
         }
+
+
+    }
+    public static class StringExtension
+    {
+        public static void Foo(this string a)
+        {
+            Console.WriteLine($"Foo invoked for {a}");
+        }
     }
 
-   
+
 }
