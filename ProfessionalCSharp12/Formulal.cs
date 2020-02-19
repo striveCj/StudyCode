@@ -51,6 +51,11 @@ namespace ProfessionalCSharp12
         {
             Console.WriteLine($"Foo invoked for {a}");
         }
+
+        public static IEnumerable<TSource>where<Tsource>()
+        {
+
+        }
     }
 
 
