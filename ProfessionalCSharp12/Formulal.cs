@@ -52,10 +52,17 @@ namespace ProfessionalCSharp12
             Console.WriteLine($"Foo invoked for {a}");
         }
 
-        public static IEnumerable<TSource>where<Tsource>()
+        public static IEnumerable<TSource> Where<TSource>(this IEnumerable<TSource> source,Func<TSource, bool> predicate)
         {
-
+            foreach (TSource item in source)
+            {
+                if (predicate(item))
+                {
+                    yield return item;
+                }
+            }
         }
+     
     }
 
 
