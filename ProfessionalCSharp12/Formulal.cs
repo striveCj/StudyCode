@@ -62,6 +62,16 @@ namespace ProfessionalCSharp12
                 }
             }
         }
+
+        static void ExtensionMethods()
+        {
+            var champions = new List<Racer>(Formulal.GetChampions());
+            IEnumerable<Racer> brazilChampions = champions.Where(r => r.Country == "Brazil").OrderByDescending(r => r.Wins).Select(r => r);
+            foreach (var item in brazilChampions)
+            {
+                Console.WriteLine($"{item:A}");
+            }
+        }
      
     }
 
