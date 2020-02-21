@@ -71,6 +71,15 @@ namespace ProfessionalCSharp12
             {
                 Console.WriteLine($"{item:A}");
             }
+
+            var names = new List<string> { "a", "B", "C", "d" };
+            var namesWithJ = (from n in names where n.StartsWith("a") orderby n select n).ToList();
+            Console.WriteLine("First iteration");
+            foreach (string name in namesWithJ)
+            {
+                Console.WriteLine(name);
+            }
+
         }
      
     }
