@@ -77,7 +77,7 @@ namespace ProfessionalCSharp12
             Console.WriteLine("First iteration");
             foreach (string name in namesWithJ)
             {
-                Console.WriteLine(name);；
+                Console.WriteLine(name);
             }
 
         }
