@@ -13,8 +13,17 @@ namespace ProfessionalCSharp12
                          select r;
              foreach (var item in racers)
             {
-                Console.WriteLine(item);；
+                Console.WriteLine(item);
             }
+        }
+
+        static void CompoundFrom()
+        {
+            var ferrariDrivers = from r in Formulal.GetChampions()
+                                 from c in r.Cars
+                                 where c == "F"
+                                 orderby r.LastName
+                                 select r.FirstName + " " + LastName;
         }
   
     }
