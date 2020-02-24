@@ -13,7 +13,7 @@ namespace ProfessionalCSharp12
                          select r;
              foreach (var item in racers)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(item);；
             }
         }
   
