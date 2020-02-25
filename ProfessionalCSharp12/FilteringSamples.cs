@@ -26,5 +26,9 @@ namespace ProfessionalCSharp12
                                  select r.FirstName + " " + LastName;
         }
   
+        static void CompoundFromWithMethods()
+        {
+            var ferrariDrivers = Formulal.GetChampions().SelectMany(r => r.Cars, (r, c) => new { Racer = r, Car = c }).Where(r => r.Car = "F").OrderBy(r => r.Racer.LastName).Select(r => r.Racer.FirstName + " " + r.Racer.LastName);
+        }
     }
 }
