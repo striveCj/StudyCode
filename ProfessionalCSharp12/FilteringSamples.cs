@@ -30,5 +30,18 @@ namespace ProfessionalCSharp12
         {
             var ferrariDrivers = Formulal.GetChampions().SelectMany(r => r.Cars, (r, c) => new { Racer = r, Car = c }).Where(r => r.Car = "F").OrderBy(r => r.Racer.LastName).Select(r => r.Racer.FirstName + " " + r.Racer.LastName);
         }
+
+        static void Grouping()
+        {
+            var countries = from r in Formulal.GetChampions()
+                            group r by r.Country into g
+                            orderby g.Count() descending, g.key
+                            where g.Count() >= 2
+                            select new
+                            {
+                                Country = g.Key,
+                                Count = g.Count()
+                            };
+        }
     }
 }
