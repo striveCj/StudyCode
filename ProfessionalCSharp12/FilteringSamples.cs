@@ -43,5 +43,19 @@ namespace ProfessionalCSharp12
                                 Count = g.Count()
                             };
         }
+
+        static void GroupingWithMethods()
+        {
+            var countries = Formulal.GetChampions()
+                .GroupBy(r => r.Country)
+                .OrdertByDescending(g => g.Count())
+                .ThenBy(g => g.Key)
+                .Where(g => g.Count() >= 2)
+                .Select(g => new
+                {
+                    Country = g.Key,
+                    Count = g.Count
+                });
+        }
     }
 }
