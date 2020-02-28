@@ -55,7 +55,7 @@ namespace ProfessionalCSharp12
                 {
                     Country = g.Key,
                     Count = g.Count
-                });
+                });；
         }
     }
 }
