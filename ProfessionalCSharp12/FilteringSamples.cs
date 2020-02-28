@@ -55,7 +55,22 @@ namespace ProfessionalCSharp12
                 {
                     Country = g.Key,
                     Count = g.Count
-                });；
+                });
         }
+
+        static void GroupingWithVariables()
+        {
+            var countries = from r in Formulal.GetChampions()
+                            group r by r.Country into g
+                            let count = g.Count()
+                            orderby count descending, g.key
+                            where count >= 2
+                            select new
+                            {
+                                Country = g.Key,
+                                Count = count
+                            };
+        }
+
     }
 }
