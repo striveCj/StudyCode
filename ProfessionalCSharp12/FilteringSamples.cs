@@ -72,5 +72,19 @@ namespace ProfessionalCSharp12
                             };
         }
 
+        static void GroupingWithAnonymousTypes()
+        {
+            var countries = Formulal.GetChampions().GroupBy(r => r.Country)
+                            .Select(g => new { Group = g, Count = g.Count() })
+                            .OrderByDescending(g => g.Count)
+                            .ThenBy(g => g.Group.Key)
+                            .Where(g => g.Count >= 2)
+                            .Select(g => new
+                            {
+                                Country = g.Group.Key,
+                                Count = g.Count
+                            });
+        }
+
     }
 }
