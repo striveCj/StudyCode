@@ -86,5 +86,32 @@ namespace ProfessionalCSharp12
                             });
         }
 
+        static void GroupingAndNestedObjects()
+        {
+            var countries = from r in Formulal.GetChampions()
+                            group r by r.Country into g
+                            let count = g.Count()
+                            orderby count descending, g.Key
+                            where count >= 2
+                            select new
+                            {
+                                Country = g.Key,
+                                Count = coung,
+                                Racers = from r1 in g
+                                         orderby r1.LastName
+                                         select r1.FirstName + " " + r1.LastName
+
+                            };
+            foreach (var item in countries)
+            {
+                Console.WriteLine($"{item.Country,-10}{item.Count}");
+                foreach (var name in item.Racers)
+                {
+                    Console.WriteLine(name);
+                }
+                Console.WriteLine();
+            }
+        }
+
     }
 }
