@@ -113,5 +113,26 @@ namespace ProfessionalCSharp12
             }
         }
 
+        static void GroupingAndNestedObjectsWithMethods()
+        {
+            var countries = Formulal.GetChampions().GroupBy(r => r.Country)
+                .Select(g => new {
+                    Group = g,
+                    Key = g.Key,
+                    Count = g.Count()
+                })
+                .OrderByDescending(g => g.Count)
+                .ThenBy(g => g.Key)
+                .Where(g => g.Count >= 2)
+                .Select(g => new
+                {
+                    Country = g.Key,
+                    Count = g.Count,
+                    Racers = g.Group.OrderBy(r => r.LastName),
+                    .Select(r => r.FirstName + " " + r.LastName)
+                });
+
+        }
+
     }
 }
