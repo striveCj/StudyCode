@@ -11,7 +11,7 @@ namespace ProfessionalCSharp12
             var racers = from r in Formulal.GetChampions()
                          where r.Wins > 15 && (r.Country == "B" || r.Country == "A")
                          select r;
-             foreach (var item in racers)
+            foreach (var item in racers)
             {
                 Console.WriteLine(item);
             }
@@ -25,7 +25,7 @@ namespace ProfessionalCSharp12
                                  orderby r.LastName
                                  select r.FirstName + " " + LastName;
         }
-  
+
         static void CompoundFromWithMethods()
         {
             var ferrariDrivers = Formulal.GetChampions().SelectMany(r => r.Cars, (r, c) => new { Racer = r, Car = c }).Where(r => r.Car = "F").OrderBy(r => r.Racer.LastName).Select(r => r.Racer.FirstName + " " + r.Racer.LastName);
@@ -133,7 +133,23 @@ namespace ProfessionalCSharp12
                 });
 
         }
-        static
+        static void InnerJoin()
+        {
+            var racers = from r in Formulal.GetChampions()
+                         from y in r.Years
+                         select new
+                         {
+                             Year = y,
+                             Name = r.FirstName + " " + r.LastName
+                         };
+            var teams = from t in Formulal.GetContructorChampions()
+                        from y in t.Years
+                        select new
+                        {
+                            Year = y,
+                            Name = t.Name
+                        };
+        }
 
     }
 }
