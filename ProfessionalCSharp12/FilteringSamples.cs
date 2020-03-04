@@ -149,7 +149,22 @@ namespace ProfessionalCSharp12
                             Year = y,
                             Name = t.Name
                         };
+            var racersAndTeams=(from r in racers ioin
+                t in teams on r.Year equals t.Year
+                select new
+                {
+                    r.Year,
+                    Champion=racers.Name,
+                    Constructpr=t.Name
+                }).Take(10);
+            Console.WriteLine("t");
+            foreach (var item in racersAndTeams)
+            {
+                Console.WriteLine(item.Year);
+            }
         }
+
+        
 
     }
 }
