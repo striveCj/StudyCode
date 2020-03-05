@@ -163,7 +163,27 @@ namespace ProfessionalCSharp12
                 Console.WriteLine(item.Year);
             }
         }
+        static void InnerJoinWithMethods()
+        {
+            var racers = Formulal.GetChampions()
+                .SelectMany(r => r.Years, (r1, year) => new
+                {
+                    Year = year,
+                    Name = $"{r1.FirstName}{r1.LastName}"
+                });
+            var teams = Formulal.GetConstrutorChampions().SelectMany(t => t.Years, (t, year) => new
+            {
+                Year = year,
+                Name = t.name
+            });
 
+            var racersAndTeams = racers.Join(teams, r => r.Year, t => t.Year, (r, t) => new
+            {
+                Year = r.Year,
+                Champion = r.Name,
+                Constructor = t.Name
+            }).OrderBy(item => item.Year).Take(10);
+        }
         
 
     }
