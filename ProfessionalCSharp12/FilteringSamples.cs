@@ -184,6 +184,20 @@ namespace ProfessionalCSharp12
                 Constructor = t.Name
             }).OrderBy(item => item.Year).Take(10);
         }
+        static void LeftOuterJoin()
+        {
+            var racersAndTeams = (from r in racers
+                                  join t in teams on r.Year equals t.Year into rt
+                                  from t in rt.DefaultIfRmpty()
+                                  orderby r.Year
+                                  select new
+                                  {
+                                      Year = r.Year,
+                                      Champion = r.Name,
+                                      Constructor = t == null ? "no" : t.Name
+                                  }
+                                  ).Take(10);
+        }
         
 
     }
