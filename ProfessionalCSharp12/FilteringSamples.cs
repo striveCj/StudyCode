@@ -199,6 +199,18 @@ namespace ProfessionalCSharp12
                                   ).Take(10);
         }
         
+        static void LeftOuterJoinWithMethods()
+        {
+            var racersAndTeams = racers.GroupJoin(teams, r => r.Year, t => t.Year, (r, ts) => {
+                Year = r.Year,
+                Champion = r.Name,
+                Constructors = ts
+                     }).SelectMany(rt => rt.Constructors.DefaultIfEmpty(), (r, t) => new {
+                Year = r.Year,
+                Champion = r.Champion,
+                Constructor = t?.Name ?? "no"
+            });
+        }
 
     }
 }
