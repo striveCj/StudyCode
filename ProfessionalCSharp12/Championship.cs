@@ -18,7 +18,7 @@ namespace ProfessionalCSharp12
             Year = year;
             First = first;
             Second = second;
-            Third = third;
+            Third = third;；
         }
     }
 }
