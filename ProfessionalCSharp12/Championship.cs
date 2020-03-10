@@ -18,7 +18,20 @@ namespace ProfessionalCSharp12
             Year = year;
             First = first;
             Second = second;
-            Third = third;；
+            Third = third;
+        }
+
+        public static List<Championship> s_championships;
+        public static IEnumerable<Championship> GetChampionships()
+        {
+            if (s_championships==null)
+            {
+                s_championships = new List<Championship>
+                {
+                    new Championship(1950,"n","j","l")
+                };
+            }
+            return s_championships;
         }
     }
 }
