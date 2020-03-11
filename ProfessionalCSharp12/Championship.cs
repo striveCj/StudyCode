@@ -31,7 +31,7 @@ namespace ProfessionalCSharp12
                     new Championship(1950,"n","j","l")
                 };
             }
-            return s_championships;
+            return s_championships;；
         }
     }
 }
