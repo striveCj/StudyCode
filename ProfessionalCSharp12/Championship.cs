@@ -31,7 +31,17 @@ namespace ProfessionalCSharp12
                     new Championship(1950,"n","j","l")
                 };
             }
-            return s_championships;；
+            return s_championships;
+        }
+
+        static void GroupJoin()
+        {
+            var racers = from cs in Formulal.GetContructorChampions()
+                         from r in new List<(int Year, int Position, string FirstName, string LastName)>()
+                        {
+                            (cs.Year,1,cs.First.LastName())
+                        }
+                         select r;
         }
     }
 }
