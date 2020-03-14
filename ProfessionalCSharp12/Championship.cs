@@ -55,3 +55,20 @@ public static class StringExtensions
     public static string LastName(this string name) => name.Substring(0, name.LastIndexOf(' ')+1);
 
 }
+
+public void GroupJoin()
+{
+    var q = (from r in Formulal.GetChampions()
+             join r2 in racers on (r.FirstName, r.LastName)
+             equals (r2.FirstName, r2.LastName)
+             into yearResults
+             select (r.FirstName, r.LastName, r.Wins, r.Starts, Results: yearResults));
+    foreach (var r in q)
+    {
+        Console.WriteLine(r.FirstName);
+        foreach (var item in r.Results)
+        {
+            Console.WriteLine(item.Year);
+        }
+    }
+}
