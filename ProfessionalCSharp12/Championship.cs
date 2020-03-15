@@ -47,6 +47,28 @@ namespace ProfessionalCSharp12
  
        
     }
+    public void GroupJoin()
+    {
+        var q = (from r in Formulal.GetChampions()
+                 join r2 in racers on (r.FirstName, r.LastName)
+                 equals (r2.FirstName, r2.LastName)
+                 into yearResults
+                 select (r.FirstName, r.LastName, r.Wins, r.Starts, Results: yearResults));
+        foreach (var r in q)
+        {
+            Console.WriteLine(r.FirstName);
+            foreach (var item in r.Results)
+            {
+                Console.WriteLine(item.Year);
+            }
+        }
+    }
+
+    public void GroupJoinWithMethods()
+    {
+        var racers = Formulal.GetChampions().SelectMany(cs => new List<(int Year, int Position, string FirstName, string LastName)> {(cs.Year,Position:1,FirstName:cs.First.FirstName(),LastName:cs.First.LastName()) });
+        var q = Formulal.GetChampions().GroupJoin(racers,r1=>(r1.FirstName,r1.LastName),r2=>(r2.FirstName, r2.LastName)).(r1,r2s)=>(r1.FirstName, r1.LastName, r1.Wins, r1.Starts, Results: r2s);
+    }
 }
 public static class StringExtensions
 {
@@ -56,19 +78,3 @@ public static class StringExtensions
 
 }
 
-public void GroupJoin()
-{
-    var q = (from r in Formulal.GetChampions()
-             join r2 in racers on (r.FirstName, r.LastName)
-             equals (r2.FirstName, r2.LastName)
-             into yearResults
-             select (r.FirstName, r.LastName, r.Wins, r.Starts, Results: yearResults));
-    foreach (var r in q)
-    {
-        Console.WriteLine(r.FirstName);
-        foreach (var item in r.Results)
-        {
-            Console.WriteLine(item.Year);
-        }
-    }
-}
