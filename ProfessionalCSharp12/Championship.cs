@@ -67,7 +67,7 @@ namespace ProfessionalCSharp12
     public void GroupJoinWithMethods()
     {
         var racers = Formulal.GetChampions().SelectMany(cs => new List<(int Year, int Position, string FirstName, string LastName)> {(cs.Year,Position:1,FirstName:cs.First.FirstName(),LastName:cs.First.LastName()) });
-        var q = Formulal.GetChampions().GroupJoin(racers,r1=>(r1.FirstName,r1.LastName),r2=>(r2.FirstName, r2.LastName)).(r1,r2s)=>(r1.FirstName, r1.LastName, r1.Wins, r1.Starts, Results: r2s);；
+        var q = Formulal.GetChampions().GroupJoin(racers,r1=>(r1.FirstName,r1.LastName),r2=>(r2.FirstName, r2.LastName)).(r1,r2s)=>(r1.FirstName, r1.LastName, r1.Wins, r1.Starts, Results: r2s);
     }
 }
 public static class StringExtensions
