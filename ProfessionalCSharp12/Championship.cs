@@ -69,6 +69,20 @@ namespace ProfessionalCSharp12
         var racers = Formulal.GetChampions().SelectMany(cs => new List<(int Year, int Position, string FirstName, string LastName)> {(cs.Year,Position:1,FirstName:cs.First.FirstName(),LastName:cs.First.LastName()) });
         var q = Formulal.GetChampions().GroupJoin(racers,r1=>(r1.FirstName,r1.LastName),r2=>(r2.FirstName, r2.LastName)).(r1,r2s)=>(r1.FirstName, r1.LastName, r1.Wins, r1.Starts, Results: r2s);
     }
+
+
+    static void SetOperations()
+    {
+      
+        IEnumerable<Racer> racersByCar(string car)=>from r in Formulal.GetChampions() from c in r.Cars where c == "Ferrari" orderby r.LastName select r;
+        Console.WriteLine("World championn withs");
+        foreach (var item in racersByCar("Ferrari").Intersect(racersByCar("McLaren")))
+        {
+            Console.WriteLine(item);
+        }
+
+    }
+
 }
 public static class StringExtensions
 {
