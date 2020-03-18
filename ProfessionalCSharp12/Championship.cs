@@ -83,6 +83,31 @@ namespace ProfessionalCSharp12
 
     }
 
+    static void ZipOperation()
+    {
+        var racerNames = from r in Formulal.GetChampions()
+                         where r.Country == "Italy"
+                         orderby r.Wins descending
+                         select new
+                         {
+                             Name = r.FirstName + " " + r.LastName
+                         };
+        var racerNamesAndStarts = from r in Formulal.GetChampions()
+                                  where r.Country == "Italy"
+                                  orderby r.Wins descending
+                                  select new
+                                  {
+                                      r.LastName.
+                                      r.Starts
+                                  };
+        var racers = racerNames.Zip(racerNamesAndStarts, (first, second) => first.Name + ",starts:second.Starts");
+        foreach (var item in racers)
+        {
+            Console.WriteLine(item);
+        }
+        
+    }
+
 }
 public static class StringExtensions
 {
