@@ -38,5 +38,17 @@ namespace ProfessionalCSharp12
                 Console.WriteLine($"{item.Name}{item.TimeChampion}");
             }
         }
+
+        static void ToList()
+        {
+            List<Racer> racers = (from r in Formulal.GetChampions()
+                                  where r.Statrts > 200
+                                  orderby r.Starts descending
+                                  select r).ToList();
+            foreach (var item in racers)
+            {
+                Console.WriteLine(item);
+            }
+        }
     }
 }
