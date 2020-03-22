@@ -50,5 +50,18 @@ namespace ProfessionalCSharp12
                 Console.WriteLine(item);
             }
         }
+
+        static void ToLookup()
+        {
+            var racers = (from r in Formulal.GetChampions() from c in r.Cars select new { Car = c, Racer = r }).ToLookup(cr => cr.Car, cr => cr.Racer);
+            if (racers.Contains("Williams"))
+            {
+                foreach (var item in racers["Williams"])
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            
+        }
     }
 }
