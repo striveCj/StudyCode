@@ -58,10 +58,24 @@ namespace ProfessionalCSharp12
             {
                 foreach (var item in racers["Williams"])
                 {
-                    Console.WriteLine(item);；
+                    Console.WriteLine(item);
                 }
             }
             
+        }
+
+        static void ConverWithCast()
+        {
+            var list = new System.Conllections.ArrayList(Formulal.GetChampions() as System.Collections.ICollection);
+
+            var query = from r in list.Cast<Racer>()
+                        where r.Country == "USA"
+                        orderby r.Wins descending
+                        select r;
+            foreach (var item in query)
+            {
+                Console.WriteLine($"{item:A}");
+            }
         }
     }
 }
