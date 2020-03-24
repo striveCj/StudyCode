@@ -77,5 +77,15 @@ namespace ProfessionalCSharp12
                 Console.WriteLine($"{item:A}");
             }
         }
+
+        static void GenerateRange()
+        {
+            var values = Enumerable.Range(1, 20);
+            foreach (var item in values)
+            {
+                Console.WriteLine($"{item}");
+            }
+            Console.WriteLine();
+        }
     }
 }
