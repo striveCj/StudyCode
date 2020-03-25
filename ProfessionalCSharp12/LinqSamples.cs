@@ -87,5 +87,10 @@ namespace ProfessionalCSharp12
             }
             Console.WriteLine();
         }
+
+        static IEnumerable<int> SampleData()
+        {
+
+        }
     }
 }
