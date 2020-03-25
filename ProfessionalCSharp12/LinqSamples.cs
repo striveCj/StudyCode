@@ -90,7 +90,9 @@ namespace ProfessionalCSharp12
 
         static IEnumerable<int> SampleData()
         {
-
+            const int arraySize = 50000000;
+            var r = new Random();
+            return Enumerable.Range(0, arraySize).Select(x => r.Next(140)).ToList();
         }
     }
 }
