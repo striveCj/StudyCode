@@ -94,5 +94,10 @@ namespace ProfessionalCSharp12
             var r = new Random();
             return Enumerable.Range(0, arraySize).Select(x => r.Next(140)).ToList();
         }
+
+        static void LinqQuery(IEnumerable<int> data)
+        {
+            var res = (from x in data.AsParallel() where Math.Log(x) < 4 select x).Average();
+        }
     }
 }
