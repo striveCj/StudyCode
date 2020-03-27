@@ -99,5 +99,10 @@ namespace ProfessionalCSharp12
         {
             var res = (from x in data.AsParallel() where Math.Log(x) < 4 select x).Average();
         }
+
+        static void UseAPartitioner(IList<int> data)
+        {
+            var result = (from x in Partitioner.Create(data, true).AsParallel() where Math.Log(x) < 4 select x).Average();
+        }
     }
 }
