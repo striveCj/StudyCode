@@ -104,5 +104,31 @@ namespace ProfessionalCSharp12
         {
             var result = (from x in Partitioner.Create(data, true).AsParallel() where Math.Log(x) < 4 select x).Average();
         }
+
+        static void UseCancellation(IEnumerable<int> data)
+        {
+            var cts = new CancellatitonTokenSource();
+            Task.Run(() =>
+            {
+                try
+                {
+                    var res = (from x in data.AsParallel().WithCancellation(cts.Token) where Math.Log(x) < 4 select x).Average();
+                    Console.WriteLine(res);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    throw;
+                }
+            });
+            Console.WriteLine("query started");
+            Console.WriteLine("cancel?");
+            string input = Console.ReadLine();
+            if (input.ToLower().Equals("y"))
+            {
+                cts.Cancel();
+            }
+           
+        }
     }
 }
