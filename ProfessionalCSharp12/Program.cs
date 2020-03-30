@@ -45,6 +45,8 @@ namespace ProfessionalCSharp12
                 case ExpressionType.Conditional:
                     break;
                 case ExpressionType.Constant:
+                    ConstantExpression constExpr = (ConstantExpression)expression;
+                    Console.WriteLine($"{output} Const Value{constExpr.Value}");
                     break;
                 case ExpressionType.Convert:
                     break;
@@ -73,6 +75,17 @@ namespace ProfessionalCSharp12
                 case ExpressionType.Goto:
                     break;
                 case ExpressionType.GreaterThan:
+                    BinaryExpression binExpr = (BinaryExpression)expression;
+                    if (binExpr.Method!=null)
+                    {
+                        Console.WriteLine($"{output} Method:{binExpr.Method.Name}");
+                    }
+                    else
+                    {
+                        Console.WriteLine(output);
+                    }
+                    DisplayTree(indent, "Left", binExpr.Left);
+                    DisplayTree(indent, "Right", binExpr.Right);
                     break;
                 case ExpressionType.GreaterThanOrEqual:
                     break;
@@ -148,6 +161,8 @@ namespace ProfessionalCSharp12
                 case ExpressionType.OrElse:
                     break;
                 case ExpressionType.Parameter:
+                    ParameterExpression paramExpr = (ParameterExpression)expression;
+                    Console.WriteLine($"{output} Param Type:{paramExpr.Type.Name}");
                     break;
                 case ExpressionType.PostDecrementAssign:
                     break;
