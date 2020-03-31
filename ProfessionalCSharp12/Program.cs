@@ -123,6 +123,8 @@ namespace ProfessionalCSharp12
                 case ExpressionType.Loop:
                     break;
                 case ExpressionType.MemberAccess:
+                    MemberExpression memberExpr = (MemberExpression)expression;
+                    Console.WriteLine($"{output}Member Name{memberExpr.Member.Name}Type{memberExpr.Expression}");
                     break;
                 case ExpressionType.MemberInit:
                     break;
@@ -209,6 +211,8 @@ namespace ProfessionalCSharp12
                 case ExpressionType.Unbox:
                     break;
                 default:
+                    Console.WriteLine();
+                    Console.WriteLine($"{expression.NodeType}{expression.Type.Name}");
                     break;
             }
         }
