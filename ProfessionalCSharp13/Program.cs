@@ -15,5 +15,12 @@ namespace ProfessionalCSharp13
                 r.Foo();
             }
         }
+
+        private static void IntroWithLambadExpression()
+        {
+            Func<int, int, int> add = (x, y) => { return x + y; };
+            int result = add(37, 5);
+            Console.WriteLine(result);
+        }
     }
 }
