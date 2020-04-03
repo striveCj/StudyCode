@@ -22,5 +22,15 @@ namespace ProfessionalCSharp13
             int result = add(37, 5);
             Console.WriteLine(result);
         }
+
+        private static void IntroWithLocalFunctions()
+        {
+            int add(int x,int y)
+            {
+                return x + y;
+            }
+            int result = add(37, 5);
+            Console.WriteLine(result);
+        }
     }
 }
