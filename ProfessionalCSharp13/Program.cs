@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProfessionalCSharp13
 {
-    class Program
+   static class Program
     {
         static void Main(string[] args)
         {
@@ -16,6 +16,24 @@ namespace ProfessionalCSharp13
             }
         }
 
+        private static void YieldSampleSimple()
+        {
+            try
+            {
+                string[] names = { "James", "Niki", "John", "Grhard", "Jack" };
+                var q = names.Where1(null);
+                foreach (var item in q)
+                {
+                    Console.WriteLine(item);
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+            Console.WriteLine();
+        }
         private static void IntroWithLambadExpression()
         {
             Func<int, int, int> add = (x, y) => { return x + y; };
