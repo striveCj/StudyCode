@@ -79,5 +79,23 @@ namespace ProfessionalCSharp13
                 }
             }
         }
+
+        private static IEnumerable<T> Where2<T>(this IEnumerable<T> source,Func<T,bool> predicate)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+                if (predicate == null) throw new ArgumentNullException(nameof(predicate));
+            return Where2Impl(source, predicate);
+        }
+
+        private static IEnumerable<T> Where2Impl<T>(IEnumerable<T> source, Func<T,bool> predicate)
+        {
+            foreach (T item in source)
+            {
+                if (predicate(item))
+                {
+                    yield return item;
+                }
+            }
+        }
     }
 }
