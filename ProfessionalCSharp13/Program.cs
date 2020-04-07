@@ -97,5 +97,24 @@ namespace ProfessionalCSharp13
                 }
             }
         }
+
+        private static void YieldSampleWithPrivateMethod()
+        {
+            Console.WriteLine(nameof(YieldSampleWithPrivateMethod));
+            try
+            {
+                string[] names =["James", "Niki", "John", "Gerhard", "Jack"];
+                var q = names.Where2(null);
+                foreach (var n in q)
+                {
+                    Console.WriteLine(q);
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
     }
 }
