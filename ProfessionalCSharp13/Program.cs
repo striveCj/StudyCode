@@ -116,5 +116,31 @@ namespace ProfessionalCSharp13
                 throw;
             }
         }
+
+        private static IEnumerable<T> Where3<T>(this IEnumerable<T> source,Func<T,bool> predicate)
+        {
+            if (source==null)
+            {
+                throw new ArgumentNullException(nameof(source));
+
+            }
+            if (predicate==null)
+            {
+                throw new ArgumentNullException(nameof(predicate));
+            }
+
+            return Iterator();
+
+            IEnumerable<T> Iterator()
+            {
+                foreach (T item in source)
+                {
+                    if (predicate(item))
+                    {
+                        yield return item;
+                    }
+                }
+            }
+        }
     }
 }
