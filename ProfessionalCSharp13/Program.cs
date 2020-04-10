@@ -172,6 +172,16 @@ namespace ProfessionalCSharp13
                 }
             }
             Sort(0, elements.Length - 1);
+        } 
+        public static void WhenDoesItEnd()
+        {
+            Console.WriteLine(nameof(WhenDoesItEnd));
+            void InnerLoop(int x)
+            {
+                Console.WriteLine(x++);
+                InnerLoop(x);
+            }
+            InnerLoop(1);
         }
     }
 }
