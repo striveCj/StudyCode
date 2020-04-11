@@ -183,5 +183,12 @@ namespace ProfessionalCSharp13
             }
             InnerLoop(1);
         }
+
+        private static void IntroTuples()
+        {
+            (string s, int i, Person p) t = ("magic", 42, new Person("a", "b"));
+            Console.WriteLine($"{t.s},{t.i}{t.p}");
+        }
+
     }
 }
