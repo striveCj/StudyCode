@@ -190,5 +190,11 @@ namespace ProfessionalCSharp13
             Console.WriteLine($"{t.s},{t.i}{t.p}");
         }
 
+        private static void TupleDeconstruction()
+        {
+            (string s, int i, Person p) = ("magic", 42, new Person("Stephanie", "Nagel"));
+            Console.WriteLine($"{s}{i}{p}");
+        }
+
     }
 }
