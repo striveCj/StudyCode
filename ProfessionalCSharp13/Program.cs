@@ -196,5 +196,12 @@ namespace ProfessionalCSharp13
             Console.WriteLine($"{s}{i}{p}");
         }
 
+        static(int result,int remainder) Divide(int dividend,int divisor)
+        {
+            int result = dividend / divisor;
+            int remainder = dividend % divisor;
+            return (result, remainder);
+        }
+
     }
 }
