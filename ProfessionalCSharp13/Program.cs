@@ -203,5 +203,12 @@ namespace ProfessionalCSharp13
             return (result, remainder);
         }
 
+        private static void BehindTheScenes()
+        {
+            (string s, int i) t1 = ("magic", 42);
+            Console.WriteLine($"{t1.s}{t1.i}");
+            ValueTuple<string, int> t2 = ValueTuple.Create("magic", 42);
+            Console.WriteLine($"{t2.Item1},{t2.Item2}");
+        }
     }
 }
