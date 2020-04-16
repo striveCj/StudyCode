@@ -16,6 +16,10 @@ namespace ProfessionalCSharp13
             int remainder = dividend % divisor;
             return (result, remainder);
         }
-
+        private static void UseALibrary()
+        {
+            var t = SimpleMath.Divide(5, 3);
+            Console.WriteLine($"{t.result},{t.remainder}");
+        }
     }
 }
