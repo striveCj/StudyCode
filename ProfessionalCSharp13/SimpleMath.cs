@@ -19,7 +19,7 @@ namespace ProfessionalCSharp13
         private static void UseALibrary()
         {
             var t = SimpleMath.Divide(5, 3);
-            Console.WriteLine($"{t.result},{t.remainder}");
+            Console.WriteLine($"{t.result},{t.remainder}");；
         }
     }
 }
