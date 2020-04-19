@@ -46,5 +46,14 @@ namespace ProfessionalCSharp13
             } while (node != null);
             Console.WriteLine();
         }
+
+        static void UsingAnonymousTypes()
+        {
+            var racerNamesAndStarts = Formulal.GetChampions().Where(r => r.Country == "Italy").OrderByDescending(r => r.Wins).Select(r => new { r.LastName, r.Starts });
+            foreach (var r in racerNamesAndStarts)
+            {
+                Console.WriteLine($"{r.LastName},Starts:{r.Starts}");
+            }
+        }
     }
 }
