@@ -55,5 +55,17 @@ namespace ProfessionalCSharp13
                 Console.WriteLine($"{r.LastName},Starts:{r.Starts}");
             }
         }
+
+        static void UsingTuples()
+        {
+            var racerNamesAndStarts = Formulal.GetChampions().Where(r => r.Country == "Italy").OrderByDescending(r => r.Wins).Select(r => {
+                r.LastName,
+                r.Starts
+            });
+            foreach (var r in racerNamesAndStarts)
+            {
+                Console.WriteLine($"{r.LastName},{r.Starts}");
+            }
+        }
     }
 }
