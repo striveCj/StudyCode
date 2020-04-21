@@ -67,5 +67,13 @@ namespace ProfessionalCSharp13
                 Console.WriteLine($"{r.LastName},{r.Starts}");
             }
         }
+
+        private static void Deconstruct()
+        {
+            var p1 = new Person("katharina", "nage1");
+            (var first, var last) = p1;
+            Console.WriteLine($"{first}{last}");
+        }
+
     }
 }
