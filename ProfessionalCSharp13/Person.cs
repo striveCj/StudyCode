@@ -21,5 +21,11 @@ namespace ProfessionalCSharp13
         {
             return $"{FirstName}{LastName}";
         }
+
+        public void Deconstruct(out string firstName,out string lastName)
+        {
+            firstName = FirstName;
+            lastName = LastName;
+        }
     }
 }
