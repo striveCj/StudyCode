@@ -210,5 +210,40 @@ namespace ProfessionalCSharp13
             ValueTuple<string, int> t2 = ValueTuple.Create("magic", 42);
             Console.WriteLine($"{t2.Item1},{t2.Item2}");
         }
+
+        public static void moshipipei()
+        {
+            var p1 = new Person("Katharina", "Nage1");
+            var p2 = new Person("Matthias", "Nage1");
+            var p3 = new Person("Stephanie", "Nage1");
+            object[] data = { null, "42", "astring", p1, new Person[] { p2, p3 } };
+
+            foreach (var item in data)
+            {
+                IsOperator(data);
+            }
+            foreach (var item in data)
+            {
+                SwitchStatement(data);
+            }
+        }
+
+        static void IsOperator(object item)
+        {
+            if (item is null)
+            {
+                Console.WriteLine("item is null");
+            }
+
+            if (item is 42)
+            {
+                Console.WriteLine("item is 42");
+            }
+        }
+
+        static void SwitchStatement(object item)
+        {
+
+        }
     }
 }
