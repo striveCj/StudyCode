@@ -243,7 +243,30 @@ namespace ProfessionalCSharp13
 
         static void SwitchStatement(object item)
         {
+            switch (item)
+            {
+                case null:
+                case 42:
+                    Console.WriteLine("it's a const pattern");
+                    break;
+                case int i:
+                    Console.WriteLine("it's a const pattern");
+                    break;
+                case string s:
+                    Console.WriteLine("it's a const pattern");
+                    break;
+                case Person p when p.FirstName=="Katharina":
+                    Console.WriteLine("it's a const pattern");
+                    break;
+                case Person p:
+                    Console.WriteLine("it's a const pattern");
+                    break;
+                case var every:
+                    Console.WriteLine("it's a const pattern");
+                    break;
+                default:
 
+            }
         }
     }
 }
