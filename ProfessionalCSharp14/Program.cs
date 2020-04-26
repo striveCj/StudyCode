@@ -30,8 +30,25 @@ namespace ProfessionalCSharp14
             catch (OverflowException ex)
             {
                 Console.WriteLine(ex.Message);
-            }          
+            }
         }
+
+        static void NumberDemo2(string n)
+        {
+            if (n is null)
+            {
+                throw new ArgumentNullException(nameof(n));
+            }
+            if (int.TryParse(n,out int result))
+            {
+                Console.WriteLine(result);
+            }
+            else
+            {
+                Console.WriteLine("not a number");
+            }
+            
+         }
 
     }
 }
