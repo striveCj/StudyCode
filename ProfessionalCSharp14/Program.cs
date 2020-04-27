@@ -50,5 +50,42 @@ namespace ProfessionalCSharp14
             
          }
 
+
+        static void SimpleExceptions()
+        {
+            while (true)
+            {
+                try
+                {
+                    string userInput;
+                    Console.WriteLine("输入0-5之间");
+                    userInput = Console.ReadLine();
+                    if (string.IsNullOrEmpty(userInput))
+                    {
+                        break;
+                    }
+                    int index = Convert.ToInt32(userInput);
+                    if (index<0||index>5)
+                    {
+                        throw new IndexOutOfRangeException($"你输入的{userInput}");
+                    }
+                    Console.WriteLine($"你输入的是{index}");
+                }
+                catch (IndexOutOfRangeException ex)
+                {
+                    Console.WriteLine("Exception:"+$"{ex.Message}");
+                    throw;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }           
+                finally
+                {
+                    Console.WriteLine("谢谢");
+                }
+            }
+        }
+
     }
 }
