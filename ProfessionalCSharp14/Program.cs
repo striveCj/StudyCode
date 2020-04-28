@@ -85,6 +85,12 @@ namespace ProfessionalCSharp14
                     Console.WriteLine("谢谢");
                 }
             }
+
+        }
+
+        public static void ThrowWithErrorCode(int code)
+        {
+            throw new MyCustomException("Error in Foo") { ErrorCode = code };
         }
 
     }
