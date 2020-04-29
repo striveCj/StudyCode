@@ -93,5 +93,11 @@ namespace ProfessionalCSharp14
             throw new MyCustomException("Error in Foo") { ErrorCode = code };
         }
 
+
+        public static void HandleAll()
+        {
+
+        }
+
     }
 }
