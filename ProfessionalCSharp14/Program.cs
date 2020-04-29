@@ -96,7 +96,31 @@ namespace ProfessionalCSharp14
 
         public static void HandleAll()
         {
-
+            var methods = new Action[]
+            {
+                HandleAndThrowAgain,
+                HandleAndThrowWithInnerException,
+                HandleRethrow,
+                HandleWithFilter
+            };
+            foreach (var item in methods)
+            {
+                try
+                {
+                    item();
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine(ex.StackTrace);
+                    if (ex.InnerException!=null)
+                    {
+                        Console.WriteLine($"\tInner Exception{ex.Message}");
+                        Console.WriteLine(ex.InnerException.StackTrace);
+                    }
+                    Console.WriteLine();
+                }
+            }
         }
 
     }
