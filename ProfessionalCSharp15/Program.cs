@@ -45,5 +45,30 @@ namespace ProfessionalCSharp15
                 }
             }
         }
+
+        private static void EventBasedAsyncPattern()
+        {
+            Console.WriteLine(nameof(EventBasedAsyncPattern));
+            using (var client=new WebClient())
+            {
+                client.DownloadStringCompleted += (sender, e) =>
+                {
+                    Console.WriteLine(e.Result.Substring(0, 100));
+                };
+                client.DownloadStringAsync(new Uri(url));
+                Console.WriteLine();
+            }
+        }
+
+        private static async Task TaskBasedAsyncPatternAsync()
+        {
+            Console.WriteLine(nameof(TaskBasedAsyncPatternAsync));
+            using (var client=new WebClient())
+            {
+                string content = await client.DownloadStringTaskAsync(url);
+                Console.WriteLine(content.Substring(0,100));
+                Console.WriteLine();
+            }
+        }
     }
 }
