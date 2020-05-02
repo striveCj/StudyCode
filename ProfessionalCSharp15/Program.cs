@@ -10,10 +10,13 @@ namespace ProfessionalCSharp15
 {
     class Program
     {
-        static void Main(string[] args)
+        static  async Task Main(string[] args)
         {
             SynchronizedAPI();
             AsynchronousPattern();
+            EventBasedAsyncPattern();
+            await TaskBasedAsyncPatternAsync();
+            Console.ReadLine();
         }
 
         private const string url = "http://www.cninnovation.com";
@@ -70,5 +73,8 @@ namespace ProfessionalCSharp15
                 Console.WriteLine();
             }
         }
+
+
+
     }
 }
