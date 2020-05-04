@@ -81,10 +81,20 @@ namespace ProfessionalCSharp15
             Console.WriteLine($"{info} in thread {Thread.CurrentThread.ManagedThreadId} and {taskInfo}");
         }
 
+        static string Greeting(string name)
+        {
+            TraceThreadAndTask($"running{nameof(Greeting)}");
+            Task.Delay(3000).Wait();
+            return $"Hello,{name}";
+        }
+
         static Task<string> GreetingAsync(string name) => Task.Run<string>(() =>
         {
             TraceThreadAndTask($"Rruntime{nameof(GreetingAsync)}");
             return GreetingAsync(name);
         });
+
+
+
     }
 }
