@@ -94,7 +94,19 @@ namespace ProfessionalCSharp15
             return GreetingAsync(name);
         });
 
+        private async static void CallerWithAsync()
+        {
+            TraceThreadAndTask($"started{nameof(CallerWithAsync)}");
+            string result = await GreetingAsync("Stephanie");
+            Console.WriteLine(result);
+            TraceThreadAndTask($"ended{nameof(CallerWithAsync)}");
+        }
 
-
+        private async static void CallerWithAsync2()
+        {
+            TraceThreadAndTask($"started{nameof(CallerWithAsync2)}");
+            Console.WriteLine(await GreetingAsync("Stephanie"));
+            TraceThreadAndTask($"ended{nameof(CallerWithAsync2)}");
+        }
     }
 }
