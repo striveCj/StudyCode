@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -107,6 +108,18 @@ namespace ProfessionalCSharp15
             TraceThreadAndTask($"started{nameof(CallerWithAsync2)}");
             Console.WriteLine(await GreetingAsync("Stephanie"));
             TraceThreadAndTask($"ended{nameof(CallerWithAsync2)}");
+        }
+
+        private static void CallerWithAwaiter()
+        {
+            TraceThreadAndTask($"starting{nameof(CallerWithAwaiter)}");
+            TaskAwaiter<string> awaiter = GreetingAsync("Matthias").GetAwaiter();
+            awaiter.OnCompleted(OnCompleteAwaiter);
+            void OnCompleteAwaiter()
+            {
+                Console.WriteLine(awaiter.GetResult());
+                TraceThreadAndTask($"ended{nameof(CallerWithAwaiter)}");
+            }
         }
     }
 }
