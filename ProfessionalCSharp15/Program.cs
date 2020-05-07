@@ -121,5 +121,18 @@ namespace ProfessionalCSharp15
                 TraceThreadAndTask($"ended{nameof(CallerWithAwaiter)}");
             }
         }
+
+        private static void CallerWithContinuationTask()
+        {
+            TraceThreadAndTask($"starting CallerWithContinuationTask");
+            var t1 = GreetingAsync("Stephanie");
+            t1.ContinueWith(t =>
+            {
+                string result = t.Result;
+                Console.WriteLine(result);
+                TraceThreadAndTask("ended CallerWithContinuationTask");
+            });
+
+        }
     }
 }
