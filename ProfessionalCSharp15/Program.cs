@@ -134,5 +134,14 @@ namespace ProfessionalCSharp15
             });
 
         }
+
+        private async static void MultipleAsyncMethods()
+        {
+            string s1 = await GreetingAsync("Stephanie");
+            string s2 = await GreetingAsync("Mathias");
+            Console.WriteLine(Environment.NewLine);
+            Console.WriteLine(s1);
+            Console.WriteLine(s2);
+        }
     }
 }
