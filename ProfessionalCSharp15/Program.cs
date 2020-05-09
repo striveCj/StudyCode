@@ -143,5 +143,13 @@ namespace ProfessionalCSharp15
             Console.WriteLine(s1);
             Console.WriteLine(s2);
         }
+
+        private async static void MultipleAsyncMethodsWithCombinatorsl()
+        {
+            Task<string> t1 = GreetingAsync("stephanie");
+            Task<string> t2 = GreetingAsync("Matthias");
+            await Task.WhenAll(t1, t2);
+            Console.WriteLine($"{Environment.NewLine}t1{t1.Result}{Environment.NewLine}t2{t2.Result}");
+        }
     }
 }
