@@ -151,5 +151,29 @@ namespace ProfessionalCSharp15
             await Task.WhenAll(t1, t2);
             Console.WriteLine($"{Environment.NewLine}t1{t1.Result}{Environment.NewLine}t2{t2.Result}");
         }
+
+        private async static void MultipleAsyncMethodsWithCombinators2()
+        {
+            Task<string> t1 = GreetingAsync("stephanie");
+            Task<string> t2 = GreetingAsync("Matthias");
+           string[] result= await Task.WhenAll(t1, t2);
+            Console.WriteLine($"{Environment.NewLine}t1{result[0]}{Environment.NewLine}t2{result[1]}");
+        }
+
+        private readonly static Dictionary<string, string> names = new Dictionary<string, string>();
+
+        static async ValueTask<string> GreetingValueTaskAsync(string name)
+        {
+            if (names.TryGetValue(name,out string result))
+            {
+                return result;
+            }
+            else
+            {
+                result = await GreetingAsync(name);
+                names.Add(name, result);
+                return result;
+            }
+        }
     }
 }
