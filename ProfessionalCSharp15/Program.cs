@@ -162,7 +162,7 @@ namespace ProfessionalCSharp15
 
         private readonly static Dictionary<string, string> names = new Dictionary<string, string>();
 
-        static async ValueTask<string> GreetingValueTaskAsync(string name)
+        static async Task<string> GreetingValueTaskAsync(string name)
         {
             if (names.TryGetValue(name,out string result))
             {
@@ -173,6 +173,35 @@ namespace ProfessionalCSharp15
                 result = await GreetingAsync(name);
                 names.Add(name, result);
                 return result;
+            }
+        }
+
+        private static async void UseValueTask()
+        {
+            string result = await GreetingValueTaskAsync("Katharina");
+            Console.WriteLine(result);
+            string result2 = await GreetingValueTaskAsync("Katharina");
+            Console.WriteLine(result2);
+        }
+
+        static Task<string> GreetingValueTask2Async(string name)
+        {
+            if (names.TryGetValue(name,out string result))
+            {
+                return new Task<string>(result);
+            }
+            else
+            {
+                Task<string> t1 = GreetingAsync(name);
+                TaskAwaiter<string> awaiter = t1.GetAwaiter();
+                awaiter.OnCompleted(OnCompletion);
+                return new Task<string>(t1);
+
+
+                void OnCompletion()
+                {
+                    names.Add(name, awaiter.GetResult());
+                }
             }
         }
     }
