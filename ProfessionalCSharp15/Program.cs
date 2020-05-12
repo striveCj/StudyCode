@@ -204,5 +204,19 @@ namespace ProfessionalCSharp15
                 }
             }
         }
+
+        private static async void ConvertingAsyncPattern()
+        {
+            HttpWebRequest request = WebRequest.Create("http://www.microsoft.com") as HttpWebRequest;
+            using (WebResponse response = await Task.Factory.FromAsync<WebResponse>(request.BeginGetResponse(null, null), request.EndGetResponse))
+            {
+                Stream steam = response.GetResponseStream();
+                using (var reader = new StreamReader(steam))
+                {
+                    string content = reader.ReadToEnd();
+                    Console.WriteLine(content.Substring(0, 100));
+                }
+            }
+        }
     }
 }
