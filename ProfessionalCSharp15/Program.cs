@@ -218,5 +218,24 @@ namespace ProfessionalCSharp15
                 }
             }
         }
+
+        static async Task ThrowAfter(int ms,string message)
+        {
+            await Task.Delay(ms);
+            throw new Exception(message);
+        }
+
+        private static void DontHandle()
+        {
+            try
+            {
+                ThrowAfter(200, "first");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
     }
 }
