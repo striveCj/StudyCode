@@ -237,5 +237,17 @@ namespace ProfessionalCSharp15
             }
         }
 
+        private static async void HandleOneError()
+        {
+            try
+            {
+                await ThrowAfter(2000, "first");
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
