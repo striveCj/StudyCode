@@ -249,5 +249,36 @@ namespace ProfessionalCSharp15
                 Console.WriteLine(ex.Message);
             }
         }
+
+        private static async void StartTwoTasks()
+        {
+            try
+            {
+                await ThrowAfter(2000, "first");
+                await ThrowAfter(1000, "second");
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private async static void StartTwoTasksParallel()
+        {
+            try
+            {
+                Task t1 = ThrowAfter(2000, "first");
+                Task t2 = ThrowAfter(1000, "second");
+                await Task.WhenAll(t1, t2);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+            
     }
 }
