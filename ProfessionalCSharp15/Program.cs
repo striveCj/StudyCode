@@ -279,6 +279,11 @@ namespace ProfessionalCSharp15
                 throw;
             }
         }
+
+        private static async void ShowAggregatedException()
+        {
+
+        }
             
     }
 }
