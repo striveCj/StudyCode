@@ -282,7 +282,22 @@ namespace ProfessionalCSharp15
 
         private static async void ShowAggregatedException()
         {
-
+            Task taskResult = null;
+            try
+            {
+                Task t1 = ThrowAfter(2000, "first");
+                Task t2 = ThrowAfter(1000, "second");
+                await (taskResult = Task.WhenAll(t1, t2));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"handled{ex.Message}");
+                foreach (var item in taskResult.Exception.InnerExceptions)
+                {
+                    Console.WriteLine(item.Message);
+                }
+                throw;
+            }
         }
             
     }
