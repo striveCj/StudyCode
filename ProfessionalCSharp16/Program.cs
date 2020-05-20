@@ -10,8 +10,13 @@ namespace ProfessionalCSharp16
     class Program
     {
         private static StringBuilder OutputText = new StringBuilder();
+        private static DateTime backDateTo = new DateTime(2017, 2, 1);
+
+        //Attribute supportsAttribute=Attribute.GetCustomAttributes()
         static void Main(string[] args)
         {
+            Assembly assembly = Assembly.Load(new AssemblyName("VectorClass"));
+            Attribute supportsAttribute = assembly.GetCustomAttribute(typeof(SupportsAttribute));
         }
 
         static void AnalyzeType(Type t)
