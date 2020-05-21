@@ -40,5 +40,17 @@ namespace ProfessionalCSharp16
         }
 
         static void AddToOutput(string Text) => OutputText.Append("\n" + Text);
+
+        private const string CalculatorTypeName = "CalculatorLib.Calculator";
+        public static void ShowUsage()
+        {
+            Console.WriteLine(nameof(ClientApp));
+        }
+
+        public static object GetCalculator()
+        {
+            Assembly assembly = Assembly.LoadFile(CalculatorLibPath);
+            return assembly.CreateInstance(CalculatorTypeName);
+        }
     }
 }
