@@ -52,5 +52,14 @@ namespace ProfessionalCSharp16
             Assembly assembly = Assembly.LoadFile(CalculatorLibPath);
             return assembly.CreateInstance(CalculatorTypeName);
         }
+
+        private static void UsingReflection()
+        {
+            double x = 3;
+            double y = 4;
+            object calc = GetCalculator();
+            object result = calc.GetType().GetMethod("Add").Invoke(calc,new object[] { x,y});
+            Console.WriteLine($"{x}{y}{result}");
+        }
     }
 }
