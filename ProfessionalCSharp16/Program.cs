@@ -61,5 +61,14 @@ namespace ProfessionalCSharp16
             object result = calc.GetType().GetMethod("Add").Invoke(calc,new object[] { x,y});
             Console.WriteLine($"{x}{y}{result}");
         }
+
+        private static void ReflectionNew()
+        {
+            double x = 3;
+            double y = 4;
+            dynamic calc = GetCalculator();
+            double result = calc.Add(x, y);
+            Console.WriteLine($"{x}{y}{result}");
+        }
     }
 }
