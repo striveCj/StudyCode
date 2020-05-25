@@ -13,17 +13,31 @@ namespace ProfessionalCSharp16
 
         public override bool TryGetMember(GetMemberBinder binder, out object result)
         {
-            return base.TryGetMember(binder, out result);
+            bool success = false;
+            result = null;
+            if (_dynamicData.ContainsKey(binder.Name))
+            {
+                result = _dynamicData[binder.Name];
+                success = true;
+            }
+            else
+            {
+                result = "Property Not Found";
+            }
+            return success;
         }
 
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
-            return base.TrySetMember(binder, value);
+            _dynamicData[binder.Name] = value;
+            return true;
         }
 
         public override bool TryInvokeMember(InvokeMemberBinder binder, object[] args, out object result)
         {
-            return base.TryInvokeMember(binder, args, out result);
+            dynamic method = _dynamicData[binder.Name];
+            result = method((DateTime)args[0]);
+            return result!= null;
         }
     }
 }
