@@ -39,5 +39,27 @@ namespace ProfessionalCSharp16
             result = method((DateTime)args[0]);
             return result!= null;
         }
+
+        static void DoExpando()
+        {
+         
+            dynamic expObj = new ExpandoObject();
+            expObj.FirstName = "Daffy";
+            expObj.LastName = "Duck";
+            Console.WriteLine($"{expObj.FirstName}{expObj.LastName}");
+            Func<DateTime, string> GetTomorrow =today=> today.AddDays(1).ToShortDateString();
+
+            expObj.GetTomorrowDate = GetTomorrow;
+            Console.WriteLine($"Tomorrow is {expObj.GetTomorrowDate(DateTime.Now)}");
+            expObj.Friends = new List<Person>();
+            expObj.Friends.Add(new Person() { FirstName = "Bob", LastName = "Jones" });
+            expObj.Friends.Add(new Person() { FirstName = "Robert", LastName = "Jones" });
+            expObj.Friends.Add(new Person() { FirstName = "Bobby", LastName = "Jones" });
+
+            foreach (var item in expObj)
+            {
+                Console.WriteLine($"{item.FirstName}{item.LastName}");
+            }
+        }
     }
 }
