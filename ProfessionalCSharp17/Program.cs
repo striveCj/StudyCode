@@ -44,6 +44,17 @@ namespace ProfessionalCSharp17
             Console.WriteLine();
         }
 
+        static void UseReadonlyRefMember()
+        {
+            Console.WriteLine(nameof(UseReadonlyRefMember));
+            var d = new Data(11);
+            int n = d.GetReadonlyNumber();
+            n = 42;
+            d.Show();
+
+            ref readonly int n2 = ref d.GetReadonlyNumber();
+            Console.WriteLine();
+        }
 
         public class ResourceHolder : IDisposable
         {
