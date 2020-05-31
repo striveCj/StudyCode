@@ -89,6 +89,13 @@ namespace ProfessionalCSharp17
                 }
             }
         }
-        
+        private static void SpanOnTheHeap()
+        {
+            Console.WriteLine(nameof(SpanOnTheHeap));
+            Span<int> span1 = (new int[] { 1, 5, 11, 71, 22, 19, 21, 33 }).AsSpan();
+            span1.Slice(start: 4, length: 3).Fill(42);
+            Console.WriteLine(string.Join(",",span1.ToArray()));
+            Console.WriteLine();
+        }
     }
 }
