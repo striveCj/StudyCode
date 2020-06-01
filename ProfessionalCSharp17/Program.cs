@@ -97,5 +97,18 @@ namespace ProfessionalCSharp17
             Console.WriteLine(string.Join(",",span1.ToArray()));
             Console.WriteLine();
         }
+
+        private static unsafe void SpanOnTheStack()
+        {
+            Console.WriteLine(nameof(SpanOnTheStack));
+            long* lp = stackalloc long[20];
+            var span1 = new Span<long>(lp,20);
+            for (int i = 0; i < 20; i++)
+            {
+                span1[i] = i;
+            }
+            Console.WriteLine(string.Join(",",span1.ToArray()));
+            Console.WriteLine();
+        }
     }
 }
