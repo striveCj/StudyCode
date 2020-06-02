@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 namespace ProfessionalCSharp17
 {
@@ -108,6 +109,31 @@ namespace ProfessionalCSharp17
                 span1[i] = i;
             }
             Console.WriteLine(string.Join(",",span1.ToArray()));
+            Console.WriteLine();
+        }
+
+        private static unsafe void SpanOnNativeMemory()
+        {
+            Console.WriteLine(nameof(SpanOnNativeMemory));
+            const int nbyte = 100;
+            IntPtr p = Marshal.AllocHGlobal(nbyte);
+            try
+            {
+                int* p2 = (int*)p.ToPointer();
+                Span<int> span = new Span<int>(p2, nbyte >> 2);
+                span.Fill(42);
+
+                int max = nbyte >> 2;
+                for (int i = 0; i < max; i++)
+                {
+                    Console.WriteLine($"{span[i]}");
+                }
+                Console.WriteLine();
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(p);
+            }
             Console.WriteLine();
         }
     }
