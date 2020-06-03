@@ -136,5 +136,20 @@ namespace ProfessionalCSharp17
             }
             Console.WriteLine();
         }
+
+        private static void SpanExtensions()
+        {
+            Console.WriteLine(nameof(SpanExtensions));
+            Span<int> span1 = (new int[] { 1, 5, 11, 71, 22, 19, 21, 33 }).AsSpan();
+            Span<int> span2 = span1.Slice(3, 4);
+            bool overlaps = span1.Overlaps(span2);
+            Console.WriteLine($"{overlaps}");
+            span1.Reverse();
+            Console.WriteLine($"{string.Join(",",span1.ToArray())}");
+            Console.WriteLine($"{string.Join(",",span2.ToArray())}");
+            int index = span1.IndexOf(span2);
+            Console.WriteLine(index);
+            Console.WriteLine();
+        }
     }
 }
