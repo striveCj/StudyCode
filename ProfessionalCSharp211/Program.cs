@@ -21,5 +21,16 @@ namespace ProfessionalCSharp211
 
             Console.WriteLine($"Is completed{result.IsCompleted}");
         }
+
+        public static void ParallelForWithAsync()
+        {
+            ParallelLoopResult result = Parallel.For(0, 10, async i =>
+            {
+                Console.WriteLine($"S{i}");
+                await Task.Delay(10);
+                Console.WriteLine($"E{i}");
+            });
+            Console.WriteLine(result.IsCompleted);
+        }
     }
 }
