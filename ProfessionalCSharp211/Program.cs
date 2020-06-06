@@ -32,5 +32,22 @@ namespace ProfessionalCSharp211
             });
             Console.WriteLine(result.IsCompleted);
         }
+
+        public static void StopParallelForEarly()
+        {
+            ParallelLoopResult result = Parallel.For(0, 40, (int i, ParallelLoopState pls) =>
+                {
+                    Console.WriteLine();
+                    if (i>12)
+                    {
+                        pls.Break();
+                        Console.WriteLine(i);
+                    }
+                    Task.Delay(10).Wait();
+                    Console.WriteLine();
+                });
+            Console.WriteLine();
+            Console.WriteLine();
+        }
     }
 }
