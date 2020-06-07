@@ -49,5 +49,10 @@ namespace ProfessionalCSharp211
             Console.WriteLine();
             Console.WriteLine();
         }
+
+        public static void ParallerForEach()
+        {
+
+        }
     }
 }
