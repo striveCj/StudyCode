@@ -52,7 +52,11 @@ namespace ProfessionalCSharp211
 
         public static void ParallerForEach()
         {
-
+            string[] data = { "0", "1", "2" };
+            ParallelLoopResult result = Parallel.ForEach<string>(data, a =>
+            {
+                Console.WriteLine(a);
+            })
         }
     }
 }
