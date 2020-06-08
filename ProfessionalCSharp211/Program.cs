@@ -56,7 +56,21 @@ namespace ProfessionalCSharp211
             ParallelLoopResult result = Parallel.ForEach<string>(data, a =>
             {
                 Console.WriteLine(a);
-            })
+            });
+        }
+
+        public static void ParallelInvoke()
+        {
+            Parallel.Invoke(Foo,Bar);
+        }
+        public static void Foo()
+        {
+            Console.WriteLine("Foo");
+        }
+
+        public static void Bar()
+        {
+            Console.WriteLine("bar");
         }
     }
 }
