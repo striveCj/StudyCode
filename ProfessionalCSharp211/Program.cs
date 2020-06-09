@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProfessionalCSharp211
@@ -71,6 +72,26 @@ namespace ProfessionalCSharp211
         public static void Bar()
         {
             Console.WriteLine("bar");
+        }
+
+        public static void TaskMethod(object o)
+        {
+            Console.WriteLine(o?.ToString());
+        }
+
+        private static object s_loglock = new object();
+
+        public static void Log(string title)
+        {
+            lock (s_loglock)
+            {
+                Console.WriteLine(title);
+                Console.WriteLine(Task.CurrentId?.ToString());
+                Console.WriteLine(Thread.CurrentThread.ManagedThreadId);
+                Console.WriteLine(Thread.CurrentThread.IsThreadPoolThread);
+                Console.WriteLine(Thread.CurrentThread.IsBackground);
+                Console.WriteLine();
+            }
         }
     }
 }
