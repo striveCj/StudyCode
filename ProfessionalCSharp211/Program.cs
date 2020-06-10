@@ -99,7 +99,9 @@ namespace ProfessionalCSharp211
             var tf = new TaskFactory();
             Task t1 = tf.StartNew(TaskMethod, "using a task factory");
             Task t2 = Task.Factory.StartNew(TaskMethod, "factory via a task");
-            var t3=new Task(TaskMethod)
+            var t3 = new Task(TaskMethod, "using a Task constructor and Start");
+            t3.Start();
+            Task t4 = Task.Run(() => TaskMethod("using the Run method"));
         }
     }
 }
