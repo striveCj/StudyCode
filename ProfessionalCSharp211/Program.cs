@@ -103,5 +103,12 @@ namespace ProfessionalCSharp211
             t3.Start();
             Task t4 = Task.Run(() => TaskMethod("using the Run method"));
         }
+
+        private static void RunSynchronousTask()
+        {
+            TaskMethod("Just The Main thread");
+            var t1 = new Task(TaskMethod, "run sync");
+            t1.RunSynchronously();
+        }
     }
 }
