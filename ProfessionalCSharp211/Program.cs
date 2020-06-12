@@ -110,5 +110,11 @@ namespace ProfessionalCSharp211
             var t1 = new Task(TaskMethod, "run sync");
             t1.RunSynchronously();
         }
+
+        private static void LongRunningTask()
+        {
+            var t1 = new Task(TaskMethod, "long", TaskCreationOptions.LongRunning);
+            t1.Start();
+        }
     }
 }
