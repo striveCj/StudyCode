@@ -116,5 +116,23 @@ namespace ProfessionalCSharp211
             var t1 = new Task(TaskMethod, "long", TaskCreationOptions.LongRunning);
             t1.Start();
         }
+
+        public static (int Result,int Remainder) TaskWithResult(object division)
+        {
+            (int x, int y) = ((int x, int y))division;
+            int result = x / y;
+            int remainder = x % y;
+            Console.WriteLine();
+            return (result, remainder);
+        }
+
+        public static void TaskWithResultDemo()
+        {
+            var t1 = new Task<(int Result, int Remainder)>(TaskWithResult, (8, 3));
+            t1.Start();
+            Console.WriteLine(t1.Result);
+            t1.Wait();
+            Console.WriteLine(t1.Result.Result);
+        }
     }
 }
