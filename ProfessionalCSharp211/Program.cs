@@ -134,5 +134,27 @@ namespace ProfessionalCSharp211
             t1.Wait();
             Console.WriteLine(t1.Result.Result);
         }
+
+        private static void DoOnFirst()
+        {
+            Console.WriteLine(Task.CurrentId);
+            Task.Delay(3000).Wait();
+        }
+
+        private static void DoOnSecond(Task t)
+        {
+            Console.WriteLine(t.Id);
+            Console.WriteLine(Task.CurrentId);
+            Task.Delay(3000).Wait();
+        }
+
+        public static void ContinuationTasks()
+        {
+            Task t1 = new Task(DoOnFirst);
+            Task t2 = t1.ContinueWith(DoOnSecond);
+            Task t3 = t1.ContinueWith(DoOnSecond);
+            Task t4 = t2.ContinueWith(DoOnSecond);
+            t1.Start();
+        }
     }
 }
