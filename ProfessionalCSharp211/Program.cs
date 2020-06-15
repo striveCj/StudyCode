@@ -156,5 +156,30 @@ namespace ProfessionalCSharp211
             Task t4 = t2.ContinueWith(DoOnSecond);
             t1.Start();
         }
+        public static void ParentAndChild()
+        {
+            var parent = new Task(ParentTask);
+            parent.Start();
+            Task.Delay(4000).Wait();
+            Console.WriteLine(parent.Status);
+            Task.Delay(4000).Wait();
+            Console.WriteLine(parent.Status);
+        }
+
+        private static void ParentTask()
+        {
+            Console.WriteLine(Task.CurrentId);
+            var child = new Task(ChildTask);
+            child.Start();
+            Task.Delay(1000).Wait();
+            Console.WriteLine("parent started child");
+        }
+
+        private static void ChildTask()
+        {
+            Console.WriteLine("child");
+            Task.Delay(5000).Wait();
+            Console.WriteLine("child finished");
+        }
     }
 }
