@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -180,6 +182,22 @@ namespace ProfessionalCSharp211
             Console.WriteLine("child");
             Task.Delay(5000).Wait();
             Console.WriteLine("child finished");
+        }
+
+        public static Task<(IEnumerable<string> data, DateTime retrievedTime)> GetTheRealData() => Task.FromResult((Enumerable.Range(0, 10).Select(x => $"item{x}").AsEnumerable(), DateTime.Now));
+
+        private static DateTime _retrieved;
+        private static IEnumerable<string> _cachedDate;
+        public static async ValueTask<IEnumerable<string>> GetSomeDataAsync()
+        {
+            if (_retrieved>= DateTime.Now.AddSeconds(-5))
+            {
+                Console.WriteLine("data from the cache");
+                return await new ValueTask<IEnumerable<string>>(_cachedDate);
+            }
+            Console.WriteLine("data from the service");
+            (_cachedDate, _retrieved) = await GetTheRealData();
+            return _cachedDate;
         }
     }
 }
