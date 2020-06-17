@@ -199,5 +199,31 @@ namespace ProfessionalCSharp211
             (_cachedDate, _retrieved) = await GetTheRealData();
             return _cachedDate;
         }
+
+        public static void CancelParallelFor()
+        {
+            var cts = new CancellationTokenSource();
+            cts.Token.Register(() => Console.WriteLine("************ token cancelled"));
+            cts.CancelAfter(500);
+            try
+            {
+                ParallelLoopResult result = Parallel.For(0, 100, new ParallelOptions { CancellationToken = cts.Token, }, x =>
+                {
+                    Console.WriteLine(x);
+                    int sum = 0;
+                    for (int i = 0; i < 100; i++)
+                    {
+                        Task.Delay(2).Wait();
+                        sum += 1;
+                    }
+                    Console.WriteLine(x);
+                });
+
+            }
+            catch (OperationCanceledException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }
