@@ -222,7 +222,7 @@ namespace ProfessionalCSharp211
             }
             catch (OperationCanceledException ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.Message);；
             }
         }
     }
