@@ -222,7 +222,43 @@ namespace ProfessionalCSharp211
             }
             catch (OperationCanceledException ex)
             {
-                Console.WriteLine(ex.Message);；
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public void CancelTask()
+        {
+            var cts = new CancellationTokenSource();
+            cts.Token.Register(() => Console.WriteLine("********************************************************************"));
+            cts.CancelAfter(500);
+            Task t1 = Task.Run(() =>
+            {
+                Console.WriteLine("in task");
+                for (int i = 0; i < 20; i++)
+                {
+                    Task.Delay(100).Wait();
+                    CancellationToken token = cts.Token;
+                    if (token.IsCancellationRequested)
+                    {
+                        Console.WriteLine();
+                        token.ThrowIfCancellationRequested();
+                        break;
+                    }
+                }
+                Console.WriteLine();
+            }, cts.Token);
+            try
+            {
+                t1.Wait();
+            }
+            catch (AggregateException ex)
+            {
+                foreach (var item in ex.InnerExceptions)
+                {
+                    Console.WriteLine(item);
+
+                }
+                throw;
             }
         }
     }
