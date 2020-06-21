@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace ProfessionalCSharp211
 {
@@ -259,6 +260,27 @@ namespace ProfessionalCSharp211
 
                 }
                 throw;
+            }
+        }
+
+        public static void FileTest()
+        {
+            var processInput = new ActionBlock<string>(s =>
+              {
+                  Console.WriteLine(s);
+              });
+            bool exit = false;
+            while (!exit)
+            {
+                string input = Console.ReadLine();
+                if (string.Compare(input,"exit",ignoreCase:true)==0)
+                {
+                    exit = true;
+                }
+                else
+                {
+                    processInput.Post(input);
+                }
             }
         }
     }
