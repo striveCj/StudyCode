@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -280,6 +281,48 @@ namespace ProfessionalCSharp211
                 else
                 {
                     processInput.Post(input);
+                }
+            }
+        }
+
+        public static void Producer()
+        {
+            bool exit = false;
+            while (!exit)
+            {
+                string input = Console.ReadLine();
+                if (string.Compare(input,"exit",ignoreCase:true)==0)
+                {
+                    exit = true;
+                }
+                else
+                {
+                    s_buffer.Post(input);
+                }
+            }
+    
+        }
+
+        public static IEnumerable<string> GetFileNames(string path)
+        {
+            foreach (var item in Directory.EnumerateFiles(path,"*.cs"))
+            {
+                yield return item;
+            }
+        }
+
+        public static IEnumerable<string> LoadLines(IEnumerable<string> fileNames)
+        {
+            foreach (var item in fileNames)
+            {
+                using (FileStream stream=File.OpenRead(item))
+                {
+                    var reader = new StreamReader(stream);
+                    string line = null;
+                    while ((line=reader.ReadLine())!=null)
+                    {
+                        yield return line;
+                    }
                 }
             }
         }
