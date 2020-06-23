@@ -326,5 +326,20 @@ namespace ProfessionalCSharp211
                 }
             }
         }
+
+        public static IEnumerable<string> GetWords(IEnumerable<string> lines)
+        {
+            foreach (var item in lines)
+            {
+                string[] words = item.Split(' ', ';', '(', ')', '{', '}', '.', ',');
+                foreach (var word in words)
+                {
+                    if (!string.IsNullOrEmpty(word))
+                    {
+                        yield return word;
+                    }
+                }
+            }
+        }
     }
 }
