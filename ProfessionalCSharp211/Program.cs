@@ -341,5 +341,14 @@ namespace ProfessionalCSharp211
                 }
             }
         }
+
+        public static ITargetBlock<string> SetupPopeline()
+        {
+            var fileNamesForPath = new TransformBlock<string, IEnumerable<string>>(path => GetFileNames(path));
+
+            var lines = new TransformBlock<IEnumerable<string>, IEnumerable<string>>(fileNames => LodLines(fileNames));
+
+            var words = new TransformBlock<IEnumerable<string>, IEnumerable<string>>(lines2 => GetWords(lines2));
+        }
     }
 }
