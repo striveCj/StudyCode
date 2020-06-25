@@ -349,6 +349,18 @@ namespace ProfessionalCSharp211
             var lines = new TransformBlock<IEnumerable<string>, IEnumerable<string>>(fileNames => LodLines(fileNames));
 
             var words = new TransformBlock<IEnumerable<string>, IEnumerable<string>>(lines2 => GetWords(lines2));
+
+            var display = new ActionBlock<IEnumerable<string>>(coll =>
+            {
+                foreach (var s in coll)
+                {
+                    Console.WriteLine(s);
+                }
+            });
+
+            fileNamesForPath.LinkTo(lines);
+            words.LinkTo(display);
+            return fileNamesForPath;
         }
     }
 }
