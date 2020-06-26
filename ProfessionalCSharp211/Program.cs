@@ -362,5 +362,15 @@ namespace ProfessionalCSharp211
             words.LinkTo(display);
             return fileNamesForPath;
         }
+
+        private static void ThreadingTimer()
+        {
+            void TimeAction(object O)=>Console.WriteLine(DateTime.Now:T);
+
+            using (var t1=new Timer(TimeAction , null, TimeSpan.FromSeconds(2),TimeSpan.FromSeconds(3)))
+            {
+                Task.Delay(15000).Wait();
+            }
+        }
     }
 }
