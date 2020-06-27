@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -365,11 +366,43 @@ namespace ProfessionalCSharp211
 
         private static void ThreadingTimer()
         {
-            void TimeAction(object O)=>Console.WriteLine(DateTime.Now:T);
+            void TimeAction(object O)=>Console.WriteLine($"{DateTime.Now}:T");
 
             using (var t1=new Timer(TimeAction , null, TimeSpan.FromSeconds(2),TimeSpan.FromSeconds(3)))
             {
                 Task.Delay(15000).Wait();
+            }
+        }
+
+        public class StateObject
+        {
+            private int _state = 5;
+            public void ChangeState(int loop)
+            {
+                if (_state==5)
+                {
+                    _state++;
+                    if (_state!=6)
+                    {
+                        Console.WriteLine($"Race condition occured after{loop} loopd");
+                        Trace.Fail("race condition");
+                    }
+                }
+                _state = 5;
+            }
+        }
+
+        public class SampleTask
+        {
+            public void RaceCondition(object o)
+            {
+                Trace.Assert(o is StateObject, "o must be of type stateobject");
+                StateObject state = o as StateObject;
+                int i = 0;
+                while (true)
+                {
+                    state.ChangeState(i++);
+                }
             }
         }
     }
