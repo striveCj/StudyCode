@@ -405,5 +405,14 @@ namespace ProfessionalCSharp211
                 }
             }
         }
+
+        public void RaceConditions()
+        {
+            var state = new StateObject();
+            for (int i = 0; i < 2; i++)
+            {
+                Task.Run(() => new SampleTask().RaceCondition(state));
+            }
+        }
     }
 }
