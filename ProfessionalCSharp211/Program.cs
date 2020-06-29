@@ -401,7 +401,32 @@ namespace ProfessionalCSharp211
                 int i = 0;
                 while (true)
                 {
-                    state.ChangeState(i++);
+                    lock (state)
+                    {
+                        state.ChangeState(i++);
+                    }
+                }
+            }
+        }
+
+        public class StateObject1
+        {
+            private int _state = 5;
+            private object _sync = new object();
+            public void ChangeState(int loop)
+            {
+                lock (_sync)
+                {
+                    if (_state==5)
+                    {
+                        _state++;
+                        if (_state!=6)
+                        {
+                            Console.WriteLine(loop);
+                            Trace.Fail($"{loop}");
+                        }
+                        _state = 5;
+                    }
                 }
             }
         }
