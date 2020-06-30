@@ -439,5 +439,50 @@ namespace ProfessionalCSharp211
                 Task.Run(() => new SampleTask().RaceCondition(state));
             }
         }
+
+        public class SampleTask1
+        {
+            private StateObject _s1;
+            private StateObject _s2;
+            public SampleTask1(StateObject s1,StateObject s2)
+            {
+                _s1 = s1;
+                _s2 = s2;
+            }
+
+            public void Deadlock1()
+            {
+                int i = 0;
+                while (true)
+                {
+                    lock (_s1)
+                    {
+                        lock (_s2)
+                        {
+                            _s1.ChangeState(i);
+                            _s2.ChangeState(i++);
+                            Console.WriteLine(i);
+                        }
+                    }
+                }
+            }
+
+            public void Deadlock2()
+            {
+                int i = 0;
+                while (true)
+                {
+                    lock (_s2)
+                    {
+                        lock (_s1)
+                        {
+                            _s1.ChangeState(i);
+                            _s2.ChangeState(i++);
+                            Console.WriteLine(i);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
