@@ -478,7 +478,7 @@ namespace ProfessionalCSharp211
                         {
                             _s1.ChangeState(i);
                             _s2.ChangeState(i++);
-                            Console.WriteLine(i);
+                            Console.WriteLine(i);；
                         }
                     }
                 }
