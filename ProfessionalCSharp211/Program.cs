@@ -478,8 +478,30 @@ namespace ProfessionalCSharp211
                         {
                             _s1.ChangeState(i);
                             _s2.ChangeState(i++);
-                            Console.WriteLine(i);；
+                            Console.WriteLine(i);
                         }
+                    }
+                }
+            }
+
+            public class SharedState
+            {
+                public int State { get; set; }
+            }
+
+            public class Job
+            {
+                private SharedState _sharedState;
+                public Job(SharedState sharedState)
+                {
+                    _sharedState = sharedState;
+                }
+
+                public void DoTheJob()
+                {
+                    for (int i = 0; i < 50000; i++)
+                    {
+                        _sharedState.State += 1;
                     }
                 }
             }
