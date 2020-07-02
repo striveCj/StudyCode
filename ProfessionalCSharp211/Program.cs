@@ -506,5 +506,19 @@ namespace ProfessionalCSharp211
                 }
             }
         }
+
+        public class SharedState {
+            private int _state = 0;
+            private object _syncRoot = new object();
+            public int State => _state;
+            public int IncrementState()
+            {
+                lock (_syncRoot)
+                {
+                    return ++_state;
+                }
+            }
+        }
+
     }
 }
