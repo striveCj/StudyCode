@@ -515,7 +515,7 @@ namespace ProfessionalCSharp211
             {
                 lock (_syncRoot)
                 {
-                    return ++_state;
+                    return ++_state;；
                 }
             }
         }
