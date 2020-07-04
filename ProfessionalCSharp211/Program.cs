@@ -515,7 +515,24 @@ namespace ProfessionalCSharp211
             {
                 lock (_syncRoot)
                 {
-                    return ++_state;；
+                    return ++_state;
+                }
+            }
+        }
+
+        public class Job
+        {
+            private SharedState _sharedState;
+            public Job(SharedState sharedState)
+            {
+                _sharedState = sharedState;
+            }
+
+            public void DoTheJob()
+            {
+                for (int i = 0; i < 50000; i++)
+                {
+                    _sharedState.State += 2;
                 }
             }
         }
