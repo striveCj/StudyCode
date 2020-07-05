@@ -520,10 +520,15 @@ namespace ProfessionalCSharp211
             }
         }
 
+        public class SharedState1
+        {
+            public int State { get; set; }
+        }
+
         public class Job
         {
-            private SharedState _sharedState;
-            public Job(SharedState sharedState)
+            private SharedState1 _sharedState;
+            public Job(SharedState1 sharedState)
             {
                 _sharedState = sharedState;
             }
@@ -536,6 +541,42 @@ namespace ProfessionalCSharp211
                 }
             }
         }
+
+        public class Dome
+        {
+            public void DoThis()
+            {
+                lock (this)
+                {
+
+                }
+            }
+            public void DoThat()
+            {
+                lock (this)
+                {
+
+                }
+            }
+
+            private object _syncRoot = new object();
+
+            public void DoThis2()
+            {
+                lock (_syncRoot)
+                {
+
+                }
+            }
+            public void DoThat2()
+            {
+                lock (_syncRoot)
+                {
+
+                }
+            }
+        }
+
 
     }
 }
