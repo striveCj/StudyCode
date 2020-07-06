@@ -581,7 +581,21 @@ namespace ProfessionalCSharp211
 
         public class Demo
         {
-           public class SynchronizedDemo : Demo
+            public virtual bool IsSynchronized => false;
+
+            public static Demo Synchroized(Demo d)
+            {
+                if (!d.IsSynchronized)
+                {
+                    return new SynchronizedDemo(d);
+                }
+                return d;
+            }
+
+            public virtual void DoThis() { }
+
+            public virtual void DoThat() { }
+            public class SynchronizedDemo : Demo
             {
                 private object _synchRoot = new object();
                 private Demo _d;
@@ -607,7 +621,7 @@ namespace ProfessionalCSharp211
                     }
                 }
 
-                public virtual bool IsSynchronized => false;
+            
 
 
             }
