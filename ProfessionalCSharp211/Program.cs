@@ -575,8 +575,42 @@ namespace ProfessionalCSharp211
 
                 }
             }
+
+
         }
 
+        public class Demo
+        {
+           public class SynchronizedDemo : Demo
+            {
+                private object _synchRoot = new object();
+                private Demo _d;
+                public SynchronizedDemo(Demo d)
+                {
+                    _d = d;
+                }
+                public override bool IsSynchronized => true;
 
+                public override void DoThis()
+                {
+                    lock (_synchRoot)
+                    {
+                        _d.DoThis();
+                    }
+                }
+
+                public override void DoThat()
+                {
+                    lock (_synchRoot)
+                    {
+                        _d.DoThat();
+                    }
+                }
+
+                public virtual bool IsSynchronized => false;
+
+
+            }
+        }
     }
 }
