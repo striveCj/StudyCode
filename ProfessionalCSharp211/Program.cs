@@ -622,9 +622,20 @@ namespace ProfessionalCSharp211
                 }
 
             
-
+               
 
             }
         }
+        public void Mutex()
+        {
+            bool mutexCreated;
+            var mutex = new Mutex(false, "a", out mutexCreated);
+            if (!mutexCreated)
+            {
+                Console.WriteLine("You can only statrt one instace");
+                return;
+            }
+        }
     }
+
 }
