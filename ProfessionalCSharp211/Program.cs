@@ -650,6 +650,32 @@ namespace ProfessionalCSharp211
             Task.WaitAll(tasks);
             Console.WriteLine("All tasks finished");
         }
+
+        public static void TaskMain(SemaphoreSlim semaphore)
+        {
+            bool isCompleted = false;
+            while (!isCompleted)
+            {
+                if (semaphore.Wait(600))
+                {
+                    try
+                    {
+                        Console.WriteLine("!");
+                        Task.Delay(2000).Wait();
+                    }
+                    finally
+                    {
+                        Console.WriteLine("1");
+                        semaphore.Release();
+                        isCompleted = true;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(Task.CurrentId);
+                }
+            }
+        }
     }
 
 }
