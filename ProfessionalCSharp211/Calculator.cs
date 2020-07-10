@@ -24,5 +24,21 @@ namespace ProfessionalCSharp211
             Console.WriteLine(Task.CurrentId);
             _mEvent.Set();
         }
+
+        public void CalculatorMother()
+        {
+            const int taskCount = 4;
+            var mEvents = new ManualResetEventSlim[taskCount];
+            var waitHandles = new WaitHandle[taskCount];
+            var calcs = new Calculator[taskCount];
+            for (int i = 0; i < taskCount; i++)
+            {
+                int il = i;
+                mEvents[i] = new ManualResetEventSlim(false);
+                waitHandles[i] = mEvents[i].WaitHandle;
+                calcs[i] = new Calculator(mEvents[i]);
+                Task.Run(() => calcs[il].Calculation(il + 1, il + 3));
+            }
+        }
     }
 }
