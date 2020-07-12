@@ -57,5 +57,26 @@ namespace ProfessionalCSharp211
             }
             return sb.ToString();
         }
+
+        private static void LogBarrierInformation(string info,Barrier barrier) {
+            Console.WriteLine(Task.CurrentId);
+            Console.WriteLine(barrier.ParticipantCount);
+            Console.WriteLine(barrier.ParticipantsRemaining);
+            Console.WriteLine(barrier.CurrentPhaseNumber);
+        }
+
+        private static void CalculationInTask(int jobNumber,int partitionSize,Barrier barrier,IList<string>[] coll,int loops,int[][] results)
+        {
+            LogBarrierInformation("CalculationInTask", barrier);
+            for (int i = 0; i < loops; i++)
+            {
+                var data = new List<string>(coll[i]);
+                int start = jobNumber * partitionSize;
+                int end = start + partitionSize;
+                Console.WriteLine(Task.CurrentId);
+                Console.WriteLine(start);
+                Console.WriteLine(end);
+            }
+        }
     }
 }
