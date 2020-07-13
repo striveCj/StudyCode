@@ -76,7 +76,18 @@ namespace ProfessionalCSharp211
                 Console.WriteLine(Task.CurrentId);
                 Console.WriteLine(start);
                 Console.WriteLine(end);
+                for (int j = 0; j < end; j++)
+                {
+                    char c = data[j][0];
+                    results[i][c - 97]++;
+                }
+                Console.WriteLine(Task.CurrentId);
+                LogBarrierInformation("sending signal and wait", barrier);
+                barrier.SignalAndWait();
+                LogBarrierInformation("waiting completed", barrier);
             }
+            barrier.RemoveParticipant();
+            LogBarrierInformation("finished task removed", barrier);
         }
     }
 }
