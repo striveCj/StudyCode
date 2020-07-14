@@ -89,5 +89,31 @@ namespace ProfessionalCSharp211
             barrier.RemoveParticipant();
             LogBarrierInformation("finished task removed", barrier);
         }
+
+        public void mehtod()
+        {
+            const int numberTasks = 2;
+            const int partitionSize = 100000;
+            const int loops = 5;
+            var taskResults = new Dictionary<int, int[][]>();
+            var data = new List<string>[loops];
+            for (int i = 0; i < loops; i++)
+            {
+                data[i] = new List<string>(FillData(partitionSize * numberTasks));
+            }
+
+            var barrier = new Barrier(numberTasks + 1);
+            LogBarrierInformation("i", barrier);
+            for (int i = 0; i < numberTasks; i++)
+            {
+                barrier.AddParticipant();
+                int jobnumber = i;
+                taskResults.Add(i, new int[loops][]);
+                for (int  loop= 0; loop < loops; loop++)
+                {
+                 //   taskResults[i,loop]
+                }
+            }
+        }
     }
 }
