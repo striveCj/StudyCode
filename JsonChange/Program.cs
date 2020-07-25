@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace JsonChange
 {
@@ -9,6 +10,58 @@ namespace JsonChange
             Console.WriteLine("Hello World!");
         }
 
+        /// <summary>
+        /// 读取字符串
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引</param>
+        /// <returns>字符串值</returns>
+        private static string ReadString(string text, ref int index)
+        {
+            var value = new StringBuilder();
+            while (index < text.Length)
+            {
+                var c = text[index++];
+                //判断是否是转义字符
+                if (c == '\\')
+                {
+                    value.Append('\\');
+                    if (index >= text.Length)
+                        throw new Exception("未知的结尾！");
+                    c = text[index++];
+                    value.Append(c);
+                    if (c == 'u')
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            c = text[index++];
+                            if (IsHex(c))
+                            {
+                                value.Append(c);
+                            }
+                            else
+                            {
+                                throw new Exception("不是有效的Unicode字符！");
+                            }
+                        }
+                    }
+                }
+                else if (c == '"')
+                {
+                    break;
+                }
+                else if (c == '\r' || c == '\n')
+                {
+                    throw new Exception("传入的JSON字符串内容中不允许有换行！");
+                }
+                else
+                {
+                    value.Append(c);
+                }
+            }
+
+            return value.ToString();
+        }
 
 
         /// <summary>
