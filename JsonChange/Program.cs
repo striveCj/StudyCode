@@ -11,6 +11,80 @@ namespace JsonChange
         }
 
         /// <summary>
+        /// 读取值类型
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引</param>
+        /// <returns>JSON数值类型</returns>
+        private static decimal ReadJsonNumber(string text, ref int index)
+        {
+            var i = index;
+            while (i < text.Length && char.IsNumber(text[i]) || text[i] == '.') i++;
+            if (double.TryParse(text.Substring(index - 1, i - index + 1), out var value))
+            {
+                index = i;
+                return new decimal(value);
+            }
+
+            throw new Exception("不能识别的数字类型！");
+        }
+
+        /// <summary>
+        /// 读取NULL
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引</param>
+        /// <returns>读取NULL</returns>
+        private static string ReadJsonNull(string text, ref int index)
+        {
+            if (text[index++] == 'u' &&
+                text[index++] == 'l' &&
+                text[index++] == 'l')
+            {
+                return null;
+            }
+
+            throw new Exception("读取布尔值出错！");
+        }
+
+        /// <summary>
+        /// 读取TRUE
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引</param>
+        /// <returns>布尔值-真</returns>
+        private static bool ReadJsonTrue(string text, ref int index)
+        {
+            if (text[index++] == 'r' &&
+                text[index++] == 'u' &&
+                text[index++] == 'e')
+            {
+                return true;
+            }
+
+            throw new Exception("读取布尔值出错！");
+        }
+
+        /// <summary>
+        /// 读取FALSE
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引</param>
+        /// <returns>布尔值-假</returns>
+        private static bool ReadJsonFalse(string text, ref int index)
+        {
+            if (text[index++] == 'a' &&
+                text[index++] == 'l' &&
+                text[index++] == 's' &&
+                text[index++] == 'e')
+            {
+                return  false;
+            }
+
+            throw new Exception("读取布尔值出错！");
+        }
+
+        /// <summary>
         /// 读取字符串
         /// </summary>
         /// <param name="text">JSON字符串</param>
