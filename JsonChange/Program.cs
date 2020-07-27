@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Text;
 
 namespace JsonChange
@@ -9,6 +11,102 @@ namespace JsonChange
         {
             Console.WriteLine("Hello World!");
         }
+        /// <summary>
+        /// 读取JSONElement
+        /// </summary>
+        /// <param name="text">字符串</param>
+        /// <param name="index">开始下标</param>
+        /// <returns>下一个Element</returns>
+        private static JsonElement ReadElement(string text, ref int index)
+        {
+            switch (text[index++])
+            {
+                case '[':
+                    return AnalysisJsonArray(text, ref index);
+                case '{':
+                    return AnalysisJsonObject(text, ref index);
+               // case '"':
+                    //return new JsonString(ReadString(text, ref index));
+                case 't':
+                    return ReadJsonTrue(text, ref index);
+                case 'f':
+                    return ReadJsonFalse(text, ref index);
+                case 'n':
+                    return ReadJsonNull(text, ref index);
+                case '0':
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                    return ReadJsonNumber(text, ref index);
+                default:
+                    throw new Exception($"未知Element“{text[index - 1]}”应该为【[、{{、\"、true、false、null】"
+                        );
+            }
+        }
+
+        /// <summary>
+        /// 解析JSON对象
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引位置</param>
+        /// <returns>JSON对象</returns>
+        private static ArrayList AnalysisJsonObject(string text, ref int index)
+        {
+            var jsonArray = new ArrayList();
+            do
+            {
+                ReadToNonBlankIndex(text, ref index);
+                if (text[index] != '"') throw new Exception($"不能识别的字符“{text[index]}”！应为“\"”");
+                index++;
+                //读取字符串
+                var name = ReadString(text, ref index);
+                //if (jsonArray.ContainsKey(name)) throw new Exception($"已经添加键值：“{name}”");
+                ReadToNonBlankIndex(text, ref index);
+                if (text[index] != ':') throw new Exception($"不能识别的字符“{text[index]}”！");
+                index++;
+                ReadToNonBlankIndex(text, ref index);
+                //读取下一个Element
+                jsonArray.Add(name, ReadElement(text, ref index));
+                //读取到非空白字符
+                ReadToNonBlankIndex(text, ref index);
+                var ch = text[index++];
+                if (ch == '}') break;
+                if (ch != ',') throw new Exception($"不能识别的字符“{text[index - 1]}”！");
+            } while (true);
+
+            return jsonArray;
+        }
+
+        /// <summary>
+        /// 解析JSON数组
+        /// </summary>
+        /// <param name="text">JSON字符串</param>
+        /// <param name="index">开始索引位置</param>
+        /// <returns>JSON数组</returns>
+        private static ArrayList AnalysisJsonArray(string text, ref int index)
+        {
+            var jsonArray = new ArrayList();
+            do
+            {
+                ReadToNonBlankIndex(text, ref index);
+                //读取下一个Element
+                jsonArray.Add(ReadElement(text, ref index));
+                //读取到非空白字符
+                ReadToNonBlankIndex(text, ref index);
+                var ch = text[index++];
+                if (ch == ']') break;
+                if (ch != ',') throw new Exception($"不能识别的字符“{text[index - 1]}”！");
+            } while (true);
+
+            return jsonArray;
+        }
+
 
         /// <summary>
         /// 读取值类型
